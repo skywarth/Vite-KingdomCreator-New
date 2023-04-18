@@ -1,0 +1,69 @@
+<template>
+  <StaticCard
+    :class="cardSet"
+    :is-vertical="isVertical"
+    :card-image-url="cardImageUrl"
+  >
+    <CardOverlay :card="card" v-if="show_Overlay"/> 
+  </StaticCard>
+</template>
+
+<script lang="ts">
+import type { Card } from "../dominion/card";
+import { SupplyCard } from "../dominion/supply-card";
+import { defineComponent, PropType, computed, ref } from "vue";
+import { usei18nStore } from "../pinia/i18n-store";
+import { getCardImageUrl } from "../utils/resources";
+import { DominionSets } from "../dominion/dominion-sets";
+// import { Language } from "../i18n/language";
+import StaticCard from "./StaticCard.vue";
+import CardOverlay from "./CardOverlay.vue";
+
+export default defineComponent({
+  name: "StaticCardWithSet",
+  components: {
+    StaticCard,
+    CardOverlay
+  },
+  props: {
+    card: {
+      type: Object as PropType<Card>,
+      required: true,
+    },
+    showOverlay: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  setup(props) {
+    const i18nStore = usei18nStore();
+    const language = ref(i18nStore.language);
+
+    const show_Overlay = computed(() => {
+      if (!props.showOverlay) {
+        return false;
+      }
+      return true;
+    });
+
+    const isVertical = computed(() => {
+      return props.card instanceof SupplyCard;
+    });
+
+    const cardImageUrl = computed(() => {
+      return getCardImageUrl(props.card.id.replace("tohidesplitcard", ""), language.value);
+    });
+
+    const cardSet = computed(() => {
+      return DominionSets.getSetById(props.card.setId).name;
+    });
+
+    return {
+      show_Overlay,
+      isVertical,
+      cardImageUrl,
+      cardSet
+    };
+  },
+});
+</script>

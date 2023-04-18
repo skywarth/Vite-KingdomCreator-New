@@ -1,0 +1,33 @@
+<template>
+  <Page :subtitle="$t('rules_page_subtitle')" :selectedType="selectedType">
+    <div class="content main">
+      <Rulebooks />
+    </div>
+  </Page>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import useBase from "./base";
+import Page from "../components/Page.vue";
+import Rulebooks from "../components/Rulebooks.vue";
+import { MenuItemType } from "../components/Page.vue";
+
+
+export default defineComponent({
+  name: "Rules", 
+  components: {
+    Page,
+    Rulebooks
+  },
+  setup() {
+    useBase();
+    const selectedType = MenuItemType.RULES;
+
+  return {
+      selectedType,
+    };
+  }
+
+});
+</script>
