@@ -25,6 +25,7 @@ export const useSetsStore = defineStore(
     showFilterPlayGames: "PNP",
     needRefresh: 0
   }),
+  persist: true,
   actions: {
     updateSelectedSet (setId: SetId) {
       this.selectedSetId = setId;
@@ -35,7 +36,7 @@ export const useSetsStore = defineStore(
     updateShowFilterKingdom (showFilterKingdom: boolean) {
       this.showFilterKingdom = showFilterKingdom;
     },
-    updateFilterPlayedGames (showFilterPlayGames: string) {
+    updateShowFilterPlayedGames (showFilterPlayGames: string) {
       this.showFilterPlayGames = showFilterPlayGames;
     },
     updateNeedRefresh () {

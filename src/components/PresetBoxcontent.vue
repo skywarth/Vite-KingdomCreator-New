@@ -6,54 +6,51 @@
       </div>
 
       <!-- Supply Cards -->
-      <GenericLayout :items="getCards(set.supplyCards,OtherCards(set, 'Normal Supply Cards'), sortBoxesSet)"
-        :title="$t('Kingdoms Cards')" :shape="Shape.CARD" :showOverlay="false"
-        :generic-nb-columns="numberOfColumnsForSupplyCards" :is-vertical="true" />
+      <GenericLayout :items="getCards(set.supplyCards.concat(getOtherCards(set, 'Normal Supply Cards') as any []))" :title="$t('Kingdoms Cards')" 
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForSupplyCards" :is-vertical="true" />
       <!-- generic slot : Events -->
-      <!-- <GenericLayout :items="getCards(set.events.concat(OtherCards(set, 'Events')), sortBoxesSet)" :title="$t('Events')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.events.concat(getOtherCards(set, 'Events') as any []))" :title="$t('Events')" 
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Landmarks -->
-      <!-- <GenericLayout :items="getCards(set.landmarks.concat(OtherCards(set, 'Landmarks')), sortBoxesSet)"
-        :title="$t('Landmarks')" :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons"
-        :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.landmarks.concat(getOtherCards(set, 'Landmarks') as any []))" :title="$t('Landmarks')" 
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Projects -->
-      <!-- <GenericLayout :items="getCards(set.projects.concat(OtherCards(set, 'Projects')), sortBoxesSet)"
-        :title="$t('Projects')" :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons"
-        :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.projects.concat(getOtherCards(set, 'Projects') as any []))" :title="$t('Projects')" 
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Ways -->
-      <!-- <GenericLayout :items="getCards(set.ways.concat(OtherCards(set, 'Ways')), sortBoxesSet)" :title="$t('Ways')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.ways.concat(getOtherCards(set, 'Ways') as any []))" :title="$t('Ways')"
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Boons -->
-      <!-- <GenericLayout :items="getCards(set.boons.concat(OtherCards(set, 'Boons')), sortBoxesSet)" :title="$t('Boons')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> --> -->
+      <GenericLayout :items="getCards(set.boons.concat(getOtherCards(set, 'Boons') as any []))" :title="$t('Boons')"
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
       <!-- generic slot : Allies -->
-      <!-- <GenericLayout :items="getCards(set.allies.concat(OtherCards(set, 'Allies')), sortBoxesSet)" :title="$t('Allies')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.allies.concat(getOtherCards(set, 'Allies') as any []))" :title="$t('Allies')"
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Traits -->
-      <!-- <GenericLayout :items="getCards(set.traits.concat(OtherCards(set, 'Traits')), sortBoxesSet)" :title="$t('Traits')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
+      <GenericLayout :items="getCards(set.traits.concat(getOtherCards(set, 'Traits') as any []))" :title="$t('Traits')"
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
 
       <!-- otherCards : Basic Supply Cards, Ruins, Shelters, Non-Supply, Travellers, Artefacts, Hexes, -->
-      <!-- <GenericLayout v-for="card in GetOtherCardTypes('vertical')" :key="card.cardType"
-        :items="getCards(OtherCards(set, card.cardType), challenge_sortBoxesSet(card.cardType))" :title="$t(card.title)"
+      <GenericLayout v-for="card in GetOtherCardTypes('vertical')" :key="card.cardType"
+        :items="getCards(getOtherCards(set, card.cardType), challenge_sortBoxesSet(card.cardType))" :title="$t(card.title)"
         :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForSupplyCards"
         :is-vertical="true" />
 
       <GenericLayout v-for="card in GetOtherCardTypes('horizontal')" :key="card.cardType"
-        :items="getCards(OtherCards(set, card.cardType), sortBoxesSet)" :title="$t(card.title)" :shape="Shape.CARD"
+        :items="getCards(getOtherCards(set, card.cardType))" :title="$t(card.title)" :shape="Shape.CARD"
         :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
 
       <GenericLayout v-for="card in GetOtherCardTypes('verticalMat')" :key="card.cardType"
-        :items="getCards(OtherCards(set, card.cardType), sortBoxesSet)" :title="$t(card.title)" :shape="Shape.CARD"
-        :showOverlay="false" generic-nb-columns=3 :is-vertical="true" />
+        :items="getCards(getOtherCards(set, card.cardType))" :title="$t(card.title)" :shape="Shape.CARD"
+        :showOverlay="false" :generic-nb-columns=3 :is-vertical="true" />
 
       <GenericLayout v-for="card in GetOtherCardTypes('horizontalMat')" :key="card.cardType"
-        :items="getCards(OtherCards(set, card.cardType), sortBoxesSet)" :title="$t(card.title)" :shape="Shape.CARD"
-        :showOverlay="false" generic-nb-columns=2 :is-vertical="false" />
+        :items="getCards(getOtherCards(set, card.cardType))" :title="$t(card.title)" :shape="Shape.CARD"
+        :showOverlay="false" :generic-nb-columns=2 :is-vertical="false" />
 
       <GenericLayout v-for="card in GetOtherCardTypes('squareMat')" :key="card.cardType"
-        :items="getCards(OtherCards(set, card.cardType), sortBoxesSet)" :title="$t(card.title)"
-        :shape="getshapeofmat(card.cardType)" :showOverlay="false" generic-nb-columns=3 :is-vertical="false" /> -->
+        :items="getCards(getOtherCards(set, card.cardType))" :title="$t(card.title)"
+        :shape="getshapeofmat(card.cardType)" :showOverlay="false" :generic-nb-columns=3 :is-vertical="false" />
     </div>
   </div>
 </template>
@@ -131,35 +128,32 @@ export default defineComponent({
     const setsStore = useSetsStore();
     const { t } = useI18n();
 
-    // const state = reactive({
-    //   windowWidth: windowStore.width,
-    //   isEnlarged: windowStore.isEnlarged,
-    //   sortBoxesSet: setsStore.sortBoxesSet,
-    //   : setsStore.selectedBoxesSetId,
-    //   Shape,
-    // });
     const Shape = shapeFromGridLayout
-    const sortBoxesSet = ref(setsStore.sortBoxesSet)
     const sets = computed(() => {
       return [(DominionSets.sets[setsStore.selectedBoxesSetId] as DominionSet)];
     });
+
     const numberOfColumnsForSupplyCards = computed(() => {
       return windowStore.isEnlarged ? 2 : windowStore.width <= FOUR_COLUMN_SUPPLY_CARD_WIDTH ? 4 : 5;
     });
+
     const numberOfColumnsForAddons = computed(() => {
       return windowStore.isEnlarged ? 1 : windowStore.width <= TWO_COLUMN_ADDON_WIDTH ? 2 : 3;
     });
+
     const getshapeofmat = (mycardtype: string) => {
       if (mycardtype == 'advToken') return Shape.SMALLSQUARE
       return Shape.SQUARE
     };
-    const getCards = (cardIds: SupplyCard[], otherCardsIds: OtherCard[], sortOption = SortOption.ORDERSTRING, origine = "unset") => {
-      const allCards = (cardIds).concat(otherCardsIds);
-      return SupplyCardSorter.sort(allCards, sortOption, t);
+
+    const getCards = (cardIds: any[], origine = "unset") => {
+      return SupplyCardSorter.sort(cardIds as SupplyCard[], setsStore.sortBoxesSet, t);
     };
-    const OtherCards = (usingSet: DominionSet, typeRequested: string) => {
+
+    const getOtherCards = (usingSet: DominionSet, typeRequested: string) => {
       return usingSet.otherCards.filter((card) => ((card.type).includes(typeRequested)));
     };
+
     const OtherCardTypes = (isVertical: boolean) => {
       return isVertical ? OTHER_CARD_TYPES : OTHER_CARD_TYPES_HORIZONTAL;
     };
@@ -180,13 +174,12 @@ export default defineComponent({
 
     return {
       Shape,
-      sortBoxesSet,
       sets,
       numberOfColumnsForSupplyCards,
       numberOfColumnsForAddons,
       getshapeofmat,
       getCards,
-      OtherCards,
+      getOtherCards,
       OtherCardTypes,
       GetOtherCardTypes,
       challenge_sortBoxesSet,

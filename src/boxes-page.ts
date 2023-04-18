@@ -4,4 +4,4 @@ import { AppCreateRouter } from './router';
 
 import '../styles/sets.styl';
 
-initialize(AppCreateRouter(["/Boxes.html"], Boxes));
+initialize(AppCreateRouter(["/boxes.html"], Boxes));

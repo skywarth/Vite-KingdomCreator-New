@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import { i18n } from "./i18n/i18n";
 import type { Router } from "vue-router";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useWindowStore } from "./pinia/window-store";
 
 export function initialize<S>(router: Router) {
@@ -14,7 +15,7 @@ export function initialize<S>(router: Router) {
   });
   app.use(i18n);
   app.use(router);
-  app.use(createPinia());
+  app.use(createPinia().use(piniaPluginPersistedstate));
   initializeWindowListener();
   app.mount('#app');
 };

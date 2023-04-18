@@ -6,13 +6,14 @@
         <div class="sets" v-for="set in sets" :key="set.setId">
           <label class="checkbox">
             <input type="radio" v-model="selectedBoxesSetId" :id="set.setId" :value="set.setId"
-              @change="handleSelectionChange(set.setId)">
+              @change="handleSelectionChange(set.setId)" />
             <span>{{ $t(set.setId) }} <span v-if="findMultipleVersionSets(set.setId).length !== 0"> - 1st</span></span>
           </label>
           <span v-if="findMultipleVersionSets(set.setId).length !== 0">
             <label class="checkbox suboption-set">
               <input type="radio" v-model="selectedBoxesSetId" :id="findMultipleVersionSets(set.setId)[0].idv2"
-                :value="findMultipleVersionSets(set.setId)[0].idv2" @change="handleSelectionChange(set.setId)">
+                :value="findMultipleVersionSets(set.setId)[0].idv2" 
+                @change="handleSelectionChange(findMultipleVersionSets(set.setId)[0].idv2)" />
               <span>2nd</span>
             </label>
           </span>
@@ -23,7 +24,8 @@
       <div class="sidebar-content-title">{{ $t("Sort") }}</div>
       <div class="option" v-for="sortOption in sortOptions" :key="sortOption.value">
         <label class="checkbox">
-          <input type="radio" name="sortOption" :value="sortOption.value" v-model="sortBoxesSet" @change="handleSortChange(sortOption.value)">
+          <input type="radio" name="sortOption" :value="sortOption.value" v-model="sortBoxesSet"
+            @change="handleSortChange(sortOption.value)">
           <span>{{ $t(sortOption.display) }}</span>
         </label>
       </div>
@@ -33,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { DominionSets } from "../dominion/dominion-sets";
 import type { SetId } from "../dominion/set-id";
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
@@ -64,7 +66,7 @@ export default defineComponent({
       console.log(value);
       setsStore.updateSortBoxesSet(value);
     };
-    
+
     const findMultipleVersionSets = (setValue: string) => {
       return MultipleVersionSets.filter(set => {
         return (set.id === setValue)
@@ -72,7 +74,7 @@ export default defineComponent({
     };
 
     return {
-      selectedBoxesSetId,      
+      selectedBoxesSetId,
       sortBoxesSet,
 
       sortOptions,
