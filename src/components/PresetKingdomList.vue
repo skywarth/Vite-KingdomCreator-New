@@ -2,12 +2,12 @@
   <div>
     <div class="preset-set_title" >
       <div style="width:50%;">
-      <span> {{ $tc("Recommended Kingdoms Sets", nbKingdomRecommmendedSet) }} </span></div>
+      <span> {{ $tc("Recommended Kingdoms Sets", nbKingdomRecommendedSet) }} </span></div>
       <div>
-      <span class="preset-show-hide_filter" v-show="!this.ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("show Kingdoms list") }} ] </span>
-      <span class="preset-show-hide_filter" v-show= "this.ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("hide Kingdoms list") }} ] </span></div>
+      <span class="preset-show-hide_filter" v-show="!ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("show Kingdoms list") }} ] </span>
+      <span class="preset-show-hide_filter" v-show= "ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("hide Kingdoms list") }} ] </span></div>
     </div>
-    <div  class="preset-set_title" v-show= "this.ShowFilterKingdom">
+    <div  class="preset-set_title" v-show="ShowFilterKingdom">
       <div class="preset-kingdom_title_sets" v-for="kingdom in kingdoms" v-show="toshow(kingdom)&&isGameDisplayed(kingdom.name)">
         <a style="text-decoration: none"  :href="'#' + kingdom.name">
           <span class="preset-kingdom_set-name"  :class="kingdom.setIds[0]">{{kingdom.name}}</span>
@@ -19,84 +19,91 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
-//import { Vue, Component } from "vue-property-decorator";
+
 import PresetKingdom from "./PresetKingdom.vue";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
-import { DominionKingdom } from "../dominion/dominion-kingdom";
+import type { DominionKingdom } from "../dominion/dominion-kingdom";
 import { SetId } from "../dominion/set-id";
-import { State } from "../stores/sets-store";
-import { UPDATE_SHOW_FILTER_KINGDOM } from "../stores/sets-store-mutation-types";
+import { useSetsStore } from "@/pinia/sets-store";
+import { defineComponent, ref, computed, watch } from 'vue'
 
-@Component({
+export default defineComponent({
+  name: 'PresetKingdomList',
   components: {
     PresetKingdom
-  }
-})
+  },
+  props: {
+    RefreshKingdomList: {
+      type: Number,
+      required: true
+    }
+  },
+setup() {
+  const setsStore = useSetsStore()
+  const ListSet = ref<SetId[]>([]);
+  const ShowFilterKingdom = ref(false);
+  ShowFilterKingdom.value = setsStore.showFilterKingdom;
 
-export default class PresetKingdomList extends Vue {
-  @Prop() RefreshKingdomList!: number;
-  ListSet:SetId[]=[];
-  ShowFilterKingdom = false;
-
-  created() {
-    this.ShowFilterKingdom= (this.$store.state as State).showFilterKingdom;
-  }
-
-  get kingdoms() {
-    const setId:SetId = (this.$store.state as State).selectedSetId;
+  // get the selected set ID from the store and filter kingdoms accordingly
+  const kingdoms = computed(() => {
+    const setId:SetId = setsStore.selectedSetId;
     if (setId === SetId.ALL) {
       return DominionKingdoms.getAllKingdoms();
     }
     if (!(setId in DominionKingdoms.kingdoms)) { return []; }
-      return DominionKingdoms.kingdoms[setId] 
-    console.log ((this.$store.state as State).needRefresh)
-  }
+    return DominionKingdoms.kingdoms[setId] 
+  });
 
-  get nbKingdomRecommmendedSet() {
-    let nbking= 0 * (this.$store.state as State).needRefresh;
-    for (var king of this.kingdoms!) {
-      if (this.toshow(king) == true && this.isGameDisplayed(king.name) == true) {
+  // get the number of recommended kingdoms based on the current filter settings
+  const nbKingdomRecommendedSet = computed(() => {
+    let nbking= 0 * setsStore.needRefresh;
+    for (var king of kingdoms.value!) {
+      if (toshow(king) == true && isGameDisplayed(king.name) == true) {
         nbking +=1; 
       }
     }
     return nbking;
-  }
+  });
 
-  toshow(kingdom: DominionKingdom) {
-    let elm
-
-    this.ListSet.concat(kingdom.setIds as SetId[]);
+  // check if the kingdom should be displayed based on the selected sets
+  const toshow = (kingdom: DominionKingdom): boolean => {
+    ListSet.value.concat(kingdom.setIds as SetId[]);
     for (var set of kingdom.setIds) {
-      elm = document.getElementById(set)!;
+      const elm = document.getElementById(set)!;
       if (elm !== null && elm.getAttribute('class') !==null) {
         if (! elm.getAttribute('class')!.includes(set)) {
           return false;
     } } } 
     return true;
-  }
+  };
 
-  isGameDisplayed(kingdomName: string) {
-    //console.log((this.$store.state as State).showFilterPlayGames + (this.$store.state as State).needRefresh)
-    if ((this.$store.state as State).showFilterPlayGames == "PNP") { return true }
-    let PlayedGames = this.$storage.get("playedGames")
+  // check if the kingdom should be displayed based on the selected play filter
+  const isGameDisplayed = (kingdomName: string) => {
+    if (setsStore.showFilterPlayGames == "PNP") { return true }
+    let PlayedGames = setsStore.playedGames;
     let myIndex = PlayedGames.indexOf(kingdomName,0)
-    if ((this.$store.state as State).showFilterPlayGames == "P") {
+    if (setsStore.showFilterPlayGames == "P") {
       return (myIndex > -1) ? true : false;  }
-    if ((this.$store.state as State).showFilterPlayGames == "NP") {
+    if (setsStore.showFilterPlayGames == "NP") {
       return myIndex > -1 ? false : true; }
     return true
   }
 
-  showhidefilter() {
-    this.ShowFilterKingdom = !(this.ShowFilterKingdom);
-    this.$store.commit(UPDATE_SHOW_FILTER_KINGDOM, this.ShowFilterKingdom);
-    return this.ShowFilterKingdom;
+  const showhidefilter = () => {
+    ShowFilterKingdom.value = !(ShowFilterKingdom.value);
+    setsStore.updateShowFilterKingdom(ShowFilterKingdom.value);
+    return ShowFilterKingdom;
   }
 
+  return {
+    ListSet,
+      ShowFilterKingdom,
+      kingdoms,
+      nbKingdomRecommendedSet,
+      toshow,
+      isGameDisplayed,
+      showhidefilter
+    };
+  }
 } 
 </script>
-
-<style>
-
-</style>

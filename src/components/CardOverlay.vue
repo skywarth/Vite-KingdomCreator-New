@@ -26,18 +26,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { useStore } from 'vuex';
 import type { Card } from '../dominion/card';
 import { Language } from '../i18n/language';
-import StaticCard from './StaticCard.vue';
 import TextOverlay from './TextOverlay.vue';
+import { usei18nStore } from "../pinia/i18n-store";
+
 
 const LANGUAGES_WITH_TRANSLATED_CARDS = new Set([Language.ENGLISH, Language.FRENCH]);
 
 export default defineComponent({
   name: "CardOverlay",
   components: {
-    StaticCard,
     TextOverlay,
   },
   props: {
@@ -47,16 +46,14 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const store = useStore();
-    const language = computed(() => store.state.i18n.language);
+    const i18nStore = usei18nStore();
+    const language = i18nStore.language;
 
-    const hasCardName = computed(() => !LANGUAGES_WITH_TRANSLATED_CARDS.has(language.value));
-    const isVertical = computed(() => props.card.isSupplyCard);
+    const hasCardName = computed(() => !LANGUAGES_WITH_TRANSLATED_CARDS.has(language));
 
     return {
       language,
       hasCardName,
-      isVertical,
     };
   },
 });

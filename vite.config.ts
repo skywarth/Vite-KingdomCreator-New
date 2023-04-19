@@ -86,13 +86,27 @@ export default defineConfig(({ mode }) => {
           }
         ]
       }),
-      mode == "development" ? null
+      mode == "development" ? rollupDel({
+        targets: ['docs/*',
+          '!docs/rules',
+          '!docs/rules.fr',
+          '!docs/img',
+          '!docs/favicon.ico',
+          '!docs/dominion-content.js',
+          '!docs/normalize-v8.css',
+          '!docs/locales',
+          '!docs/locales/??.json',
+          '!docs/CNAME',
+          '!docs/ads.txt'],
+        verbose: false
+      })
         : rollupDel({
           targets: ['docs/*',
             '!docs/rules',
             '!docs/rules.fr',
             '!docs/img',
             '!docs/favicon.ico',
+            '!docs/dominion-content.js',
             '!docs/normalize-v8.css',
             '!docs/locales',
             '!docs/locales/??.json',

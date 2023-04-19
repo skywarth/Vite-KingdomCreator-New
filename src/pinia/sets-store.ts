@@ -23,6 +23,7 @@ export const useSetsStore = defineStore(
     sortBoxesSet: SortOption.ALPHABETICAL,
     showFilterKingdom: false,
     showFilterPlayGames: "PNP",
+    playedGames: [] as string[],
     needRefresh: 0
   }),
   persist: true,
@@ -30,8 +31,8 @@ export const useSetsStore = defineStore(
     updateSelectedSet (setId: SetId) {
       this.selectedSetId = setId;
     },
-    updateSelectedBoxesSet (setId: SetId) {
-      this.selectedBoxesSetId = setId;
+    updateSortSet (sortOption: SortOption) {
+      this.sortSet = sortOption;
     },
     updateShowFilterKingdom (showFilterKingdom: boolean) {
       this.showFilterKingdom = showFilterKingdom;
@@ -42,8 +43,11 @@ export const useSetsStore = defineStore(
     updateNeedRefresh () {
       this.needRefresh++;
     },
-    updateSortSet (sortOption: SortOption) {
-      this.sortSet = sortOption;
+    updatePlayedGames(GameList: string[]) {
+      this.playedGames = GameList;
+    },
+    updateSelectedBoxesSet (setId: SetId) {
+      this.selectedBoxesSetId = setId;
     },
     updateSortBoxesSet (sortOption: SortOption) {
       this.sortBoxesSet = sortOption;

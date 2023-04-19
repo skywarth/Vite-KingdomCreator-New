@@ -7,7 +7,7 @@
           $t("sets_page_description")
         }}</div>
         <div class="kingdoms">
-          <!-- <PresetKingdom v-for="kingdom in kingdoms" :key="kingdom.name" :kingdom="kingdom" /> -->
+          <PresetKingdom v-for="kingdom in kingdoms" :key="kingdom.name" :kingdom="kingdom" />
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
 import { computed, defineComponent } from 'vue';
 import useBase from "./base";
 import Page from "../components/Page.vue";
-// import PresetKingdom from "../components/PresetKingdom.vue";
+import PresetKingdom from "../components/PresetKingdom.vue";
 import SetsSidebar from "../components/SetsSidebar.vue";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
 import { MenuItemType } from "../components/Page.vue";
@@ -28,7 +28,7 @@ export default defineComponent({
   name: "Sets", 
   components: {
     Page,
-    // PresetKingdom,
+    PresetKingdom,
     SetsSidebar
   },
   setup() {

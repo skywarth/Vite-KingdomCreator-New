@@ -115,6 +115,18 @@ export default defineComponent({
   margin: 0 0.1% 4px 0.1%;
 }
 
+.five-columns .grid-layout_item--square {
+  flex-basis: 19.5%;;
+  padding-bottom: 19.5%;; /* 19.5 * (500 / 500) */
+  margin: 0.25%;
+}
+
+.four-columns .grid-layout_item--square {
+  flex-basis: 24.2%;
+  padding-bottom: 24.2%; /* 24.2 * (500 / 500) */
+  margin: 0.4%;
+}
+
 .three-columns .grid-layout_item--square {
   flex-basis: 31.73333%;
   padding-bottom: 31.73333%; /* 31.73333 * (500 / 500) */
