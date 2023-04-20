@@ -2,7 +2,8 @@
   <div>
     <div class="preset-set_title" >
       <div style="width:50%;">
-      <span> {{ $tc("Recommended Kingdoms Sets", nbKingdomRecommendedSet) }} </span></div>
+        <span> {{ $t("Recommended Kingdoms Sets", nbKingdomRecommendedSet) }} </span>
+      </div>
       <div>
       <span class="preset-show-hide_filter" v-show="!ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("show Kingdoms list") }} ] </span>
       <span class="preset-show-hide_filter" v-show= "ShowFilterKingdom" v-on:click="showhidefilter"> [ {{ $t("hide Kingdoms list") }} ] </span></div>
@@ -24,7 +25,7 @@ import PresetKingdom from "./PresetKingdom.vue";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
 import type { DominionKingdom } from "../dominion/dominion-kingdom";
 import { SetId } from "../dominion/set-id";
-import { useSetsStore } from "@/pinia/sets-store";
+import { useSetsStore } from "../pinia/sets-store";
 import { defineComponent, ref, computed, watch } from 'vue'
 
 export default defineComponent({
@@ -40,6 +41,7 @@ export default defineComponent({
   },
 setup() {
   const setsStore = useSetsStore()
+
   const ListSet = ref<SetId[]>([]);
   const ShowFilterKingdom = ref(false);
   ShowFilterKingdom.value = setsStore.showFilterKingdom;
@@ -105,5 +107,5 @@ setup() {
       showhidefilter
     };
   }
-} 
+});
 </script>

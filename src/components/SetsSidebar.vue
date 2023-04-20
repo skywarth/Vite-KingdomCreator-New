@@ -12,7 +12,7 @@
           </label>
           <span v-if="findMultipleVersionSets(set).length !== 0">
             <label class="checkbox suboption-set">
-              <input type="radio" v-model="selectedSetId" :id="findMultipleVersionSets(set)[0].idv2"
+              <input type="radio" v-model="selectedSetId" id="selectedSet"
                 :value="findMultipleVersionSets(set)[0].idv2" 
                 @change="handleSelectionChange(findMultipleVersionSets(set)[0].idv2)" />
               <span>2nd</span>
