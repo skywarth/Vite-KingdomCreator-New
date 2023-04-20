@@ -52,7 +52,7 @@ export default defineComponent({
     const hasCardName = computed(() => !LANGUAGES_WITH_TRANSLATED_CARDS.has(language));
 
     return {
-      language,
+      // language,
       hasCardName,
     };
   },

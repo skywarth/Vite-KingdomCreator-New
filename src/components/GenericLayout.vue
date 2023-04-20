@@ -58,15 +58,15 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const windowStore = useWindowStore();
+    // const windowStore = useWindowStore();
     
-    const windowWidth = computed(() => windowStore.width);
-    const isEnlarged = computed(() => windowStore.isEnlarged);
+    // const windowWidth = computed(() => windowStore.width);
+    // const isEnlarged = computed(() => windowStore.isEnlarged);
 
-    return {
-      windowWidth,
-      isEnlarged
-    }
+    // return {
+    //   // windowWidth,
+    //   // isEnlarged
+    // }
   }
 });
 </script>

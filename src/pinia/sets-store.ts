@@ -11,7 +11,8 @@ export interface State {
   sortBoxesSet: string;
   showFilterKingdom: boolean;
   showFilterPlayGames: string;
-  needRefresh: number
+  playedGames: string[];
+  needRefresh: number;
 };
 
 export const useSetsStore = defineStore(

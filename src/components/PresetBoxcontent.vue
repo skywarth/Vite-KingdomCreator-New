@@ -151,9 +151,9 @@ export default defineComponent({
       return usingSet.otherCards.filter((card) => ((card.type).includes(typeRequested)));
     };
 
-    const OtherCardTypes = (isVertical: boolean) => {
-      return isVertical ? OTHER_CARD_TYPES : OTHER_CARD_TYPES_HORIZONTAL;
-    };
+    // const OtherCardTypes = (isVertical: boolean) => {
+    //   return isVertical ? OTHER_CARD_TYPES : OTHER_CARD_TYPES_HORIZONTAL;
+    // };
     const GetOtherCardTypes = (typeRequested: string) => {
       if (typeRequested == 'horizontal') return OTHER_CARD_TYPES_HORIZONTAL;
       if (typeRequested == 'vertical') return OTHER_CARD_TYPES;
@@ -177,7 +177,7 @@ export default defineComponent({
       getshapeofmat,
       getCards,
       getOtherCards,
-      OtherCardTypes,
+      // OtherCardTypes,
       GetOtherCardTypes,
       challenge_sortBoxesSet,
     };

@@ -81,7 +81,7 @@ import { useSetsStore } from '../pinia/sets-store';
 
 import { DominionKingdom } from "../dominion/dominion-kingdom";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
-import { DominionSets } from '../dominion/dominion-sets';
+// import { DominionSets } from '../dominion/dominion-sets';
 
 declare function Yaml_Parsing(file_content: string): any;
 
@@ -153,7 +153,6 @@ export default defineComponent({
         { display: "Not played Games", value: "NP" }
       ];
    
-
     const sortOptions =  [
         { display: "Set", value: SortOption.SET },
         { display: "Alphabetical", value: SortOption.ALPHABETICAL },
@@ -169,7 +168,6 @@ export default defineComponent({
     };
 
     const handleSortChange = (value: SortOption) => {
-      console.log(value);
       setsStore.updateSortSet(value);
     };
 

@@ -56,7 +56,7 @@ export default defineComponent({
     return {
       handleClick,
       hasCopied,
-      clearTimer
+      // clearTimer
     }
   }
 });
