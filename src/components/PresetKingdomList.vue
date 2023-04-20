@@ -15,7 +15,7 @@
         </a>
       </div>
     </div>
-    <PresetKingdom v-for="kingdom in kingdoms" :key="RefreshKingdomList" :kingdom="kingdom" v-show="toshow(kingdom)&&isGameDisplayed(kingdom.name)"/>
+    <PresetKingdom v-for="kingdom in kingdoms" :kingdom="kingdom" v-show="toshow(kingdom)&&isGameDisplayed(kingdom.name)"/>
   </div>
 </template>
 
