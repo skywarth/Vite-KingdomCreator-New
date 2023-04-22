@@ -104,8 +104,9 @@
 import { DominionSets } from "../dominion/dominion-sets";
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
 import type { SetId } from "../dominion/set-id";
-import { SettingsParams, SortOption } from "../settings/settings";
-import type { RandomizerSettings, RandomizerSettingsParams } from "../settings/randomizer-settings";
+import type { SettingsParams } from "../settings/settings";
+import { SortOption } from "../settings/settings";
+import type { RandomizerSettingsParams, RandomizerSettingsParamsBoolean } from "../settings/randomizer-settings";
 import { useWindowStore } from "../pinia/window-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { defineComponent, ref, computed } from "vue";
@@ -119,7 +120,7 @@ export default defineComponent({
   name: "RandomizerSidebar",
   components: {
   },
-  setup( props, { emit } ) {
+  setup(props, { emit }) {
     const randomizerStore = useRandomizerStore()
     const windowStore = useWindowStore()
     const isCondensed = ref(windowStore.isCondensed);
@@ -153,21 +154,37 @@ export default defineComponent({
 
 
 
-// const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
+    // const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
 
-type SettingsObject = {
-  [key: string]: boolean;
-}
-    function createComputedSettingsObject(property: keyof RandomizerSettings) {
-      return computed({
-        get: () => randomizerSettings.value[property],
-        set: (value: boolean) => {
-          const updateObject: SettingsObject = {};
-          updateObject[property] = value;
-          updateRandomizerSettings(updateObject);
-        }
-      });
+    type SettingsObject = {
+      [key: string]: boolean;
     }
+    // function createComputedSettingsObject(property: keyof RandomizerSettings) {
+    //   return computed({
+    //     get: () => randomizerSettings.value[property],
+    //     set: (value: boolean) => {
+    //       // const updateObject: SettingsObject = {};
+    //       // updateObject[property] = value;
+    //       updateRandomizerSettings(updateObject);
+    //     }
+    //   });
+    // }
+
+    function createComputedSettingsObject(property: keyof RandomizerSettingsParamsBoolean) {
+  return computed<boolean>({
+    // Calcul de la propriété
+    get: (): boolean => randomizerSettings.value[property],
+    // Mise à jour de la propriété
+    set: (value: boolean) => {
+      const updateObject: SettingsObject = {};
+      updateObject[property] = value;
+      updateRandomizerSettings(updateObject);
+    }
+  });
+}
+
+
+
 
     const requireActionProvider = createComputedSettingsObject('requireActionProvider');
     const requireCardProvider = createComputedSettingsObject('requireCardProvider');
@@ -182,11 +199,11 @@ type SettingsObject = {
     const isAlchemyRecommendationEnabled = createComputedSettingsObject('isAlchemyRecommendationEnabled');
 
     const sortOptions = [
-        { display: "Set", value: SortOption.SET },
-        { display: "Alphabetical", value: SortOption.ALPHABETICAL },
-        { display: "Cost", value: SortOption.COST },
-      ];
-    
+      { display: "Set", value: SortOption.SET },
+      { display: "Alphabetical", value: SortOption.ALPHABETICAL },
+      { display: "Cost", value: SortOption.COST },
+    ];
+
     const selectedSortOption = computed({
       get: () => settings.value.sortOption,
       set: (sortOption: SortOption) => {
@@ -195,61 +212,61 @@ type SettingsObject = {
     })
 
     const prioritizeSet = computed({
-      get:()=> randomizerSettings.value.prioritizeSet,
-      set:(value: SetId | null) => {updateRandomizerSettings({prioritizeSet: value})}
+      get: () => randomizerSettings.value.prioritizeSet,
+      set: (value: SetId | null) => { updateRandomizerSettings({ prioritizeSet: value }) }
     })
 
     const isPrioritizeSetEnabled = computed({
-      get:()=> { return randomizerSettings.value.prioritizeSet != null},
+      get: () => { return randomizerSettings.value.prioritizeSet != null },
       set: (value: boolean) => {
-          const setId = value && selectedSetIds.value.length
-            ? DominionSets.convertToSetId(selectedSetIds.value.concat().sort()[0])
-            : null;
-          updateRandomizerSettings({ prioritizeSet: setId });
+        const setId = value && selectedSetIds.value.length
+          ? DominionSets.convertToSetId(selectedSetIds.value.concat().sort()[0])
+          : null;
+        updateRandomizerSettings({ prioritizeSet: setId });
       }
     })
-      
+
     const getSetName = (setId: SetId) => {
-        return DominionSets.getSetById(setId).name;
-      }
+      return DominionSets.getSetById(setId).name;
+    }
 
     const handleRandomize = () => {
-        emit("randomize")
-      }
+      emit("randomize")
+    }
 
     const updateRandomizerSettings = (params: RandomizerSettingsParams) => {
-        randomizerStore.UPDATE_SETTINGS({
-          randomizerSettings: params
-        } as SettingsParams);
-      }
+      randomizerStore.UPDATE_SETTINGS({
+        randomizerSettings: params
+      } as SettingsParams);
+    }
 
     return {
-        randomizeButtonText,
-        handleRandomize,
-        isCondensed,
-        sets,
-        selectedSetIds,
-        FindMultipleVersionSets,
-        requireActionProvider,
-        requireBuyProvider,
-        requireCardProvider,
-        requireReaction,
-        requireTrashing,
-        allowAttacks,
-        prioritizeSet,
-        isPrioritizeSetAllowed,
-        isPrioritizeSetEnabled,
-        selectedSortOption,
-        sortOptions,
-        distributeCost,
-        isDistributeCostAllowed,
-        isAlchemySelected,
-        isAlchemyRecommendationEnabled,
-        getSetName,
-        updateRandomizerSettings,
+      randomizeButtonText,
+      handleRandomize,
+      isCondensed,
+      sets,
+      selectedSetIds,
+      FindMultipleVersionSets,
+      requireActionProvider,
+      requireBuyProvider,
+      requireCardProvider,
+      requireReaction,
+      requireTrashing,
+      allowAttacks,
+      prioritizeSet,
+      isPrioritizeSetAllowed,
+      isPrioritizeSetEnabled,
+      selectedSortOption,
+      sortOptions,
+      distributeCost,
+      isDistributeCostAllowed,
+      isAlchemySelected,
+      isAlchemyRecommendationEnabled,
+      getSetName,
+      updateRandomizerSettings,
 
-      }
     }
+  }
 })
 </script>
 

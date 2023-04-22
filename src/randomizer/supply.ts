@@ -1,4 +1,4 @@
-import {SupplyCard} from "../dominion/supply-card";
+import type {SupplyCard} from "../dominion/supply-card";
 import { Cards } from "../utils/cards";
 
 export class Supply {

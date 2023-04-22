@@ -4,4 +4,4 @@ import { AppCreateRouter } from "./router";
 
 import '../styles/index.styl';
 
-initialize(AppCreateRouter(["/"], Index));
+initialize(AppCreateRouter(["/index.html"], Index));

@@ -25,14 +25,14 @@
 import Addons from "./Addons.vue";
 import AllySection from "./AllySection.vue";
 import Boons from "./Boons.vue";
-// import SortableSupplyCards from "./SortableSupplyCards.vue";
+import SortableSupplyCards from "./SortableSupplyCards.vue";
 import RandomizerSidebar from "./RandomizerSidebar.vue";
 
 import { deserializeKingdom, serializeKingdom } from "../randomizer/serializer";
-// import Modifiers from "./Modifiers.vue";
+import Modifiers from "./Modifiers.vue";
 import type { Card } from "../dominion/card";
 import CopyButton from "./CopyButton.vue";
-// import FullScreenButton from "./FullScreenButton.vue";
+import FullScreenButton from "./FullScreenButton.vue";
 
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";

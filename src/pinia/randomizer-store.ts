@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 
 import type { SettingsParams } from "../settings/settings";
 import { loadSettings, saveSettings } from "../settings/settings-manager";
-import { Selection, SelectionParams } from "./selection";
+import { Selection } from "./selection";
+import type { SelectionParams } from "./selection";
 import { CardType } from "../dominion/card-type";
 import { RandomizerOptionsBuilder } from "../randomizer/randomizer-options";
 import { Cards } from "../utils/cards";

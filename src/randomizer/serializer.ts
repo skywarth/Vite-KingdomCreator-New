@@ -1,7 +1,7 @@
-import {Card} from "../dominion/card";
+import type {Card} from "../dominion/card";
 import {DominionSets} from "../dominion/dominion-sets";
 import {Kingdom} from "./kingdom";
-import {SupplyCard} from "../dominion/supply-card";
+import type {SupplyCard} from "../dominion/supply-card";
 import {Metadata as KingdomMetadata} from "./kingdom";
 import {Supply, Replacements} from "../randomizer/supply";
 

@@ -33,10 +33,11 @@ export default defineComponent({
 
     const selectedType = MenuItemType.RANDOMIZER;
     const randomizerKingdomId = ref(randomizerStore.kingdom.id);
-
+    const showReplaceModal = ref(false);
   return {
       randomizerKingdomId,
       selectedType,
+      showReplaceModal
     };
   }
 
