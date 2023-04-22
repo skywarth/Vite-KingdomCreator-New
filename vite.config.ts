@@ -12,6 +12,7 @@ import rollupDel from 'rollup-plugin-delete';
 const languages = ['fr', 'de', 'es', 'nl', 'pl']; // Liste des langues à fusionner
 const languageSourceDir = './src/i18n/locales'
 const languageDestDir = './docs/locales'
+const devServerPort = 5173
 
 export default defineConfig(({ mode }) => {
   if (mode == "production") {
@@ -83,37 +84,46 @@ export default defineConfig(({ mode }) => {
               injectDominioncontent: `<script src="./dominion-content.js"></script>`,
               injectEntry: `<script type="module" src="./src/boxes-page.ts"></script>`,
             }
-          }
+          },
+          {
+            name: "cards",
+            filename: "cards.html",
+            template: "./views/layout.html",
+            data: {
+              injectDominioncontent: '<script src="./dominion-content.js"></script>',
+              injectEntry: '<script type="module" src="./src/cards-page.ts"></script>',
+            }
+          },
         ]
       }),
-      mode == "development" ? rollupDel({
-        targets: ['docs/*',
-          '!docs/rules',
-          '!docs/rules.fr',
-          '!docs/img',
-          '!docs/favicon.ico',
-          '!docs/dominion-content.js',
-          '!docs/normalize-v8.css',
-          '!docs/locales',
-          '!docs/locales/??.json',
-          '!docs/CNAME',
-          '!docs/ads.txt'],
-        verbose: false
-      })
-        : rollupDel({
-          targets: ['docs/*',
-            '!docs/rules',
-            '!docs/rules.fr',
-            '!docs/img',
-            '!docs/favicon.ico',
-            '!docs/dominion-content.js',
-            '!docs/normalize-v8.css',
-            '!docs/locales',
-            '!docs/locales/??.json',
-            '!docs/CNAME',
-            '!docs/ads.txt'],
-          verbose: false
-        })
+      // mode == "development" ? rollupDel({
+      //   targets: ['docs/*',
+      //     '!docs/rules',
+      //     '!docs/rules.fr',
+      //     '!docs/img',
+      //     '!docs/favicon.ico',
+      //     '!docs/dominion-content.js',
+      //     '!docs/normalize-v8.css',
+      //     '!docs/locales',
+      //     '!docs/locales/??.json',
+      //     '!docs/CNAME',
+      //     '!docs/ads.txt'],
+      //   verbose: false
+      // })
+      //   : rollupDel({
+      //     targets: ['docs/*',
+      //       '!docs/rules',
+      //       '!docs/rules.fr',
+      //       '!docs/img',
+      //       '!docs/favicon.ico',
+      //       '!docs/dominion-content.js',
+      //       '!docs/normalize-v8.css',
+      //       '!docs/locales',
+      //       '!docs/locales/??.json',
+      //       '!docs/CNAME',
+      //       '!docs/ads.txt'],
+      //     verbose: false
+      //   })
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
@@ -144,31 +154,35 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      port: 8090,
+      port: devServerPort,
       proxy: {
         '/dominion-content.js': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js'),
         },
         '/normalize': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/normalize/, '/docs/normalize'),
         },
         '/favicon.ico': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/favicon.ico/, '/docs/favicon.ico'),
         },
         '/img': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/img/, '/docs/img'),
         },
         '/rules': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/rules/, '/docs/rules'),
         },
         '/locales': {
-          target: 'http://localhost:8090',
+          target: 'http://localhost:' +devServerPort,
           rewrite: (path) => path.replace(/^\/locales/, '/docs/locales'),
+        },
+        '/?': {
+          target: 'http://localhost:' +devServerPort,
+          rewrite: (path) => path.replace(/^\/?/, '/docs/index.html?'),
         },
       },
     },

@@ -3,7 +3,7 @@
   <span v-else-if="addons.length == 1">
     {{ $t(addons[0]) }}
   </span>
-  <i18n-t v-else-if="addons.length >= 2" :keypath="addonFormat" tag="span">
+  <i18n-t scope="global" v-else-if="addons.length >= 2" :keypath="addonFormat" tag="span">
     <template v-slot:one>
       {{ $t(addons[0]) }}
     </template>

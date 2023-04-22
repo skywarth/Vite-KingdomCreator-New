@@ -9,6 +9,7 @@ export interface State {
   sortSet: string;
   selectedBoxesSetId: SetId;
   sortBoxesSet: string;
+  showFilterSets: boolean, 
   showFilterKingdom: boolean;
   showFilterPlayGames: string;
   playedGames: string[];
@@ -22,6 +23,7 @@ export const useSetsStore = defineStore(
     sortSet: SortOption.SET,
     selectedBoxesSetId: SetId.BASE_SET,
     sortBoxesSet: SortOption.ALPHABETICAL,
+    showFilterSets: false, 
     showFilterKingdom: false,
     showFilterPlayGames: "PNP",
     playedGames: [] as string[],
@@ -34,6 +36,9 @@ export const useSetsStore = defineStore(
     },
     updateSortSet (sortOption: SortOption) {
       this.sortSet = sortOption;
+    },
+    updateShowFilterSets (showFilterSets: boolean) {
+      this.showFilterSets = showFilterSets;
     },
     updateShowFilterKingdom (showFilterKingdom: boolean) {
       this.showFilterKingdom = showFilterKingdom;

@@ -1,15 +1,14 @@
 <template>
   <Page :subtitle="$t('sets_page_subtitle')" :selectedType="selectedType">
     <div class="content">
-     <BoxesSidebar />
-     <div class="main">
-       <card-online-page-component :set="set"  v-if="true"/>
-       <card-online-page-landscape-component :set="set"  v-if="true"/>
-       <card-online-page-othercard-component :set="set" v-if="true"/>
+      <BoxesSidebar />
+      <div class="main">
+        <card-online-page-component :set="set" v-if="true" />
+        <card-online-page-landscape-component :set="set" v-if="true" />
+        <card-online-page-othercard-component :set="set" v-if="true" />
       </div>
     </div>
   </Page>
-
 </template>
 
 <script lang="ts">
@@ -27,7 +26,7 @@ import type { DominionSet } from "../dominion/dominion-set";
 import { useSetsStore } from "../pinia/sets-store";
 
 export default defineComponent({
-  name: "Cards", 
+  name: "Cards",
   components: {
     Page,
     BoxesSidebar,
@@ -36,19 +35,20 @@ export default defineComponent({
     "card-online-page-othercard-component": CardOnlinePageOthercardComponent
   },
   setup() {
-  const setsStore = useSetsStore();
+    const setsStore = useSetsStore();
 
     useBase();
-    const selectedType =  MenuItemType.CARDS
-  
-  const set= computed(() =>{
-    const setId = setsStore.selectedBoxesSetId;
-    return (DominionSets.sets[setId] as DominionSet);
-  })
+    const selectedType = MenuItemType.CARDS
 
-  return {
+    const set = computed(() => {
+      const setId = setsStore.selectedBoxesSetId;
+      return (DominionSets.sets[setId] as DominionSet);
+    })
+
+    return {
       selectedType,
       set
     };
-}
+  }
+})
 </script>

@@ -39,11 +39,12 @@ export default defineComponent({
       required: true
     }
   },
-setup() {
+setup(props) {
   const setsStore = useSetsStore()
 
   const ListSet = ref<SetId[]>([]);
   const ShowFilterKingdom = ref(false);
+   
   ShowFilterKingdom.value = setsStore.showFilterKingdom;
 
   // get the selected set ID from the store and filter kingdoms accordingly
@@ -58,7 +59,7 @@ setup() {
 
   // get the number of recommended kingdoms based on the current filter settings
   const nbKingdomRecommendedSet = computed(() => {
-    let nbking= 0 * setsStore.needRefresh;
+    let nbking= 0 * props.RefreshKingdomList; // to force recompute
     for (var king of kingdoms.value!) {
       if (toshow(king) == true && isGameDisplayed(king.name) == true) {
         nbking +=1; 
@@ -89,7 +90,7 @@ setup() {
     if (setsStore.showFilterPlayGames == "NP") {
       return myIndex > -1 ? false : true; }
     return true
-  }
+  };
 
   const showhidefilter = () => {
     ShowFilterKingdom.value = !(ShowFilterKingdom.value);

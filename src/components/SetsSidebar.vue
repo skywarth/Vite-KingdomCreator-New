@@ -95,21 +95,6 @@ export default defineComponent({
     let file_name = "";
     let show_PersonalFileSelection_Input = false;
 
-    // beforeMount() {
-    //   if (this.$storage.has("selectedSetId")) {
-    //     if (!((this.$store.state as State).selectedSetId === this.$storage.get("selectedSetId")))  {
-    //       this.$store.commit(UPDATE_SELECTED_SET, this.$storage.get("selectedSetId"));
-    //     }
-    //   } else {
-    //     this.$storage.set("selectedSetId", (this.$store.state as State).selectedSetId);
-    //   }
-    //   if (!(this.$storage.has("playedGames"))) { this.$storage.set("playedGames", [ "played" ]) }
-    // }
-
-    /*  get sets() {
-       return DominionSets.getAllSets().filter((set) => !Set_To_Ignore_Kingdoms.has(set.setId));
-      }
-    */
     const kingdomsets = DominionKingdoms.getAllSets()
       .filter((set) => !((Set_To_Ignore_Kingdoms).has(set)))
       .filter(set => { return (HideMultipleVersionSets.indexOf(set) == -1) });

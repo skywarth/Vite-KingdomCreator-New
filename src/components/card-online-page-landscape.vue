@@ -96,23 +96,7 @@ export default defineComponent({
     set: {
       type: Object as PropType<DominionSet>,
       default: null,
-    },
-    items: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
-    numberOfColumns: {
-      type: Number,
-      required: true,
-    },
-    isVertical: {
-      type: Boolean,
-      default: false,
-    },
-    shape: {
-      type: String,
-      default: null,
-    },
+    }
   },
   setup(props) {
     const { t } = useI18n();

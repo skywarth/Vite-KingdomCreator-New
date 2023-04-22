@@ -10,7 +10,7 @@
         </div>
         <!-- Card Image -->
         <div class="full-card-art"
-          :style='"background-size: 287px 209px; background-image: url(" + Card.artwork + "); top:10%;"'>
+          :style='"background-size: 287px 209px; background-image: url(" + getCardArtwork(Card.artwork) + "); top:10%;"'>
           <div class="action-layer none-layer"> </div>
         </div>
 
@@ -92,7 +92,7 @@ import { CardType } from "../dominion/card-type";
 import type { Cost } from "../dominion/cost";
 import { SetId } from "../dominion/set-id";
 
-import type { DominionSet } from "../dominion/dominion-set";
+import { DominionSet } from "../dominion/dominion-set";
 
 import type { DigitalCard } from "../dominion/digital_cards/digital-cards-type"
 import { Cards_list } from "../dominion/digital_cards/digital-cards"
@@ -142,29 +142,15 @@ interface DisplayableCardType {
   readonly label: string
 }
 
+const BASEURL= /http:\/\/localhost:8080/
+
 export default defineComponent({
   name: "CardOnlinePageComponent",
   props: {
     set: {
-      type: Object as PropType<DominionSet>,
+      type: DominionSet,
       default: null,
-    },
-    items: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
-    numberOfColumns: {
-      type: Number,
-      required: true,
-    },
-    isVertical: {
-      type: Boolean,
-      default: false,
-    },
-    shape: {
-      type: String,
-      default: null,
-    },
+    }
   },
   setup(props) {
     const { t } = useI18n();
@@ -176,9 +162,8 @@ export default defineComponent({
 
     const Cards = computed(() => {
       let setName = props.set.setId
-
-      console.log(Cards_list.filter(card =>
-        props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); })));
+      // console.log(Cards_list.filter(card =>
+      //   props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); })));
       let LocalTemp_CardsList: DigitalCard[] = Cards_list;
       if (setName == getCardSetById(Work_Card)) {
         LocalTemp_CardsList = Cards_list.filter(card => card.id == Work_Card.id)
@@ -211,11 +196,12 @@ export default defineComponent({
         )
     })
 
-    const cardImageUrl = () => {
+    const cardImageUrl = computed(() => {
       return getCardImageUrl(getCardSetById(Work_Card) + "_" + Work_Card.id, "en" as any);
-    }
+    })
 
     const incaseoferror = (ev: any) => {
+      console.log(ev)
       incaseofImgerror(ev);
     }
 
@@ -536,6 +522,10 @@ export default defineComponent({
       }
       return (Year_set.find(elt => elt.id == CardSetid))!.year;
     }
+
+    const getCardArtwork = (cardArtwork:String) => {
+        return cardArtwork.replace(BASEURL,'');
+    }
     return {
       Cards,
       getClassCard,
@@ -553,6 +543,7 @@ export default defineComponent({
       getCardSetYear,
       cardImageUrl,
       incaseoferror,
+      getCardArtwork
     }
   }
 });

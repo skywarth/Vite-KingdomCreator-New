@@ -89,6 +89,8 @@ export default defineComponent({
     });
 
     const supplyCardsWithBane = computed(() => {
+      let x= kingdom.value.id
+      console.log("evaluate supplyCardsWithBane", x)
       //const cards =  SupplyCardSorter.sort(this.supplyCards.concat() as SupplyCard[], this.sortOption, this.$t.bind(this));
       const cards = supplyCards.value.concat();
       if (kingdom.value.supply.baneCard) {

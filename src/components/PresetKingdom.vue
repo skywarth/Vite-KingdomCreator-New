@@ -231,6 +231,7 @@ export default defineComponent({
   };
 
   return {
+      t,
       sets,
       numberOfColumnsForSupplyCards,
       numberOfColumnsForAddons,

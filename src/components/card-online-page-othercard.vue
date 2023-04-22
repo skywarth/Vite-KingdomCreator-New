@@ -10,7 +10,7 @@
         </div>
         <!-- Basic Card Image Treasure & Victory -->
         <div class="full-card-art"
-          :style='"background-size: 287px 374px; background-image: url(" + Card.artwork + "); top:12%;"'>
+          :style='"background-size: 287px 374px; background-image: url(" + getCardArtwork(Card.artwork) + "); top:12%;"'>
           <div class="action-layer none-layer"> </div>
         </div>
 
@@ -86,29 +86,15 @@ interface DisplayableCardType {
   readonly label: string
 }
 
+const BASEURL= /http:\/\/localhost:8080/
+
 export default defineComponent({
   name: "CardOnlineOthercardPageComponent",
   props: {
     set: {
       type: Object as PropType<DominionSet>,
       default: null,
-    },
-    items: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
-    numberOfColumns: {
-      type: Number,
-      required: true,
-    },
-    isVertical: {
-      type: Boolean,
-      default: false,
-    },
-    shape: {
-      type: String,
-      default: null,
-    },
+    }
   },
   setup(props) {
     const { t } = useI18n();
@@ -124,6 +110,9 @@ export default defineComponent({
 
     const getClassCard= (currentCard: DigitalCard) => {
       return "v-for card-theme-title-dark card-theme-text-dark";
+    }
+    const getCardArtwork = (cardArtwork:String) => {
+        return cardArtwork.replace(BASEURL,'');
     }
 
     const getCardTypeById= (currentCard: DigitalCard): DisplayableCardType => {
@@ -226,6 +215,7 @@ export default defineComponent({
       Cards,
       getClassCard,
       getHost,
+      getCardArtwork,
       getCardTypeById,
       getisTreasureCard,
       getValueforTreasureCard,
