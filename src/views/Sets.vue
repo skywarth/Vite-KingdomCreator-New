@@ -66,6 +66,7 @@ export default defineComponent({
     const selectedType = MenuItemType.SETS;
     const RefreshKingdomList = ref(3)
     const ShowFilter = ref(false);
+    ShowFilter.value = setsStore.showFilterSets
 
     const sets = DominionSets.getAllSets();
 
@@ -103,6 +104,7 @@ export default defineComponent({
 
     const showhidefilter = () => {
       ShowFilter.value = !(ShowFilter.value)
+      setsStore.updateShowFilterSets(ShowFilter.value);
       return ShowFilter.value;
     };
 

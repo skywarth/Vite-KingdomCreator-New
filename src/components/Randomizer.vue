@@ -7,15 +7,10 @@
       <Boons />
       <AllySection />
       <Modifiers />
-      <div style="margin-top: 4px;" >
-        <CopyButton
-          :text="supplyCardsCopyText"
-          class="randomizer-copy-button"
-        />
-        <FullScreenButton
-        :text="supplyCardsCopyText"
-        class="randomizer-copy-button"
-      /></div>
+      <div style="margin-top: 4px;">
+        <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
+        <FullScreenButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
+      </div>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -36,7 +31,7 @@ import FullScreenButton from "./FullScreenButton.vue";
 
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
-import { computed, defineComponent, watch} from 'vue';
+import { computed, defineComponent, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
@@ -102,13 +97,14 @@ export default defineComponent({
       }
     })
 
-    const kingdomFromUrl = deserializeKingdom(route.query, settings.selectedSets)
-    randomizerStore.LOAD_INITIAL_KINGDOM(kingdomFromUrl)
+    onMounted(() => {
+      const kingdomFromUrl = deserializeKingdom(route.query, settings.selectedSets)
+      randomizerStore.LOAD_INITIAL_KINGDOM(kingdomFromUrl)
+    })
 
     return {
       supplyCardsCopyText,
-      handleRandomize,
-      
+      handleRandomize
     }
   }
 });
