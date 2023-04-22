@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw  } from "vue-router";
 
 export function AppCreateRouter(paths: string[], component: any) {
 
@@ -10,5 +10,24 @@ export function AppCreateRouter(paths: string[], component: any) {
                     path : path,
                     component : component } }
     )
+  });
+};
+
+export function AppCreateRouterMultiple(routes: { paths: string[], component: any }[]) {
+
+console.log(routes.map(route => {
+  const paths = Array.isArray(route.paths) ? route.paths : [route.paths];
+  const routeRecords: RouteRecordRaw[] = paths.map(path => ({ path, name: route.component.name, component: route.component }));
+  return routeRecords;
+}).flat())
+
+
+  return createRouter({
+    history: createWebHistory(),
+    routes: routes.map(route => {
+      const paths = Array.isArray(route.paths) ? route.paths : [route.paths];
+      const routeRecords: RouteRecordRaw[] = paths.map(path => ({ path, name: route.component.name, component: route.component }));
+      return routeRecords;
+    }).flat()
   });
 };

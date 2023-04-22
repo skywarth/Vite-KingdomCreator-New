@@ -52,7 +52,7 @@ export default defineComponent({
       return isEnlarged.value ? 2 : windowWidth.value > 450 ? 5 : 4;
     });
 
-    const modifiers = () => {
+    const modifiers = computed(() => {
       const modifiers: Modifier[] = [];
       if (metadata.value.useColonies) {
         modifiers.push({
@@ -69,7 +69,7 @@ export default defineComponent({
         });
       }
       return modifiers;
-    }
+    });
 
     return {
       modifiers,

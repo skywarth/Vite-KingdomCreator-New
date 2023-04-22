@@ -36,7 +36,7 @@ import FullScreenButton from "./FullScreenButton.vue";
 
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
-import { defineComponent, watch} from 'vue';
+import { computed, defineComponent, watch} from 'vue';
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
@@ -60,7 +60,7 @@ export default defineComponent({
     const settings = randomizerStore.settings
     // const randomizerSettings = randomizerStore.settings.randomizerSettings
 
-    const supplyCardsCopyText = () => {
+    const supplyCardsCopyText = computed(() => {
       return (
         (kingdom.supply.supplyCards as Card[]).concat(
           kingdom.events,
@@ -72,7 +72,7 @@ export default defineComponent({
           kingdom.traits
         ).map((card) => card.id).join(', ')
       )
-    }
+    })
 
     const handleRandomize = () => {
       randomizerStore.RANDOMIZE()

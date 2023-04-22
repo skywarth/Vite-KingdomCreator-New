@@ -71,7 +71,7 @@ export default defineComponent({
 
     let elementIndexMapping = new Map<number, number>();
     let kingdomId: number = 0;
-    let supplyCards: SupplyCard[] = [];
+    const supplyCards = ref<SupplyCard[]>([])
     let numberOfSupplyCardsLoading = 0;
     let requiresSupplyCardSort = false;
     let activeAnimations: Set<TweenLite> = new Set();
@@ -79,16 +79,18 @@ export default defineComponent({
     let replacingCard: SupplyCard | null = null;
 
     onMounted(() => {
+      console.log("in onMounted")
       updateActiveSupplyCards();
+      console.log(supplyCardsWithBane)
     });
 
     const numberOfColumns = computed(() => {
       return isEnlarged.value ? 2 : windowWidth.value > 450 ? 5 : 4;
     });
 
-    const supplyCardsWithBane = () => {
+    const supplyCardsWithBane = computed(() => {
       //const cards =  SupplyCardSorter.sort(this.supplyCards.concat() as SupplyCard[], this.sortOption, this.$t.bind(this));
-      const cards = supplyCards.concat();
+      const cards = supplyCards.value.concat();
       if (kingdom.value.supply.baneCard) {
         cards.push(kingdom.value.supply.baneCard);
       }
@@ -96,7 +98,7 @@ export default defineComponent({
         cards.push(this.kingdom.supply.obeliskCardId);
       }*/
       return cards;
-    }
+    });
 
     const handleKingdomChanged = () => {
       updateActiveSupplyCards();
@@ -167,7 +169,7 @@ export default defineComponent({
     }
 
     const updateActiveSupplyCards = () => {
-      if (!kingdom) {
+      if (!kingdom.value) {
         return;
       }
       if (kingdomId == kingdom.value.id) {
@@ -183,13 +185,13 @@ export default defineComponent({
       for (let i = 0; i < sortedSupplyCards.length; i++) {
         mappedSupplyCards[getElementIndex(i)] = sortedSupplyCards[i];
       }
-      supplyCards = mappedSupplyCards;
+      supplyCards.value = mappedSupplyCards;
     }
 
     const updateSupplyCards = () => {
       requiresSupplyCardSort = true;
-      supplyCards = replaceSupplyCards(
-        supplyCards, kingdom.value.supply.supplyCards);
+      supplyCards.value = replaceSupplyCards(
+        supplyCards.value, kingdom.value.supply.supplyCards);
     }
 
     const attemptToAnimateSupplyCardSort = () => {
@@ -202,7 +204,7 @@ export default defineComponent({
     }
 
     const resetCardPositions = () => {
-      for (let visualIndex = 0; visualIndex < supplyCards.length; visualIndex++) {
+      for (let visualIndex = 0; visualIndex < supplyCards.value.length; visualIndex++) {
         const elementIndex = getElementIndex(visualIndex);
         const element = getSupplyCardElement(elementIndex);
         const startCoord = getPositionForElementIndex(elementIndex);
@@ -221,7 +223,7 @@ export default defineComponent({
     }
 
     const animateSupplyCardSort = () => {
-      const sortedCards = SupplyCardSorter.sort(supplyCards.concat(), sortOption.value, t);
+      const sortedCards = SupplyCardSorter.sort(supplyCards.value.concat(), sortOption.value, t);
       const descriptors = createMoveDescriptors(sortedCards);
       const newMapping: Map<number, number> = new Map();
 
@@ -250,7 +252,7 @@ export default defineComponent({
     }
 
     const createMoveDescriptors = (sortedSupplyCards: SupplyCard[]) => {
-      const cardIds = supplyCards.map((card) => card.id);
+      const cardIds = supplyCards.value.map((card) => card.id);
       const descriptors: MoveDescriptor[] = [];
       for (let newVisualIndex = 0; newVisualIndex < sortedSupplyCards.length; newVisualIndex++) {
         descriptors.push({

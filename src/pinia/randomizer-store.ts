@@ -42,9 +42,6 @@ export const useRandomizerStore = defineStore(
   }),
   persist: true,
   getters: {
-    isFullScreen: (state: randomizerStoreState) => {
-      return state.isFullScreen;
-    },
     isDistributeCostAllowed: (state: randomizerStoreState) => {
       const cardCount = state.settings.selectedSets
         .map(DominionSets.getSetById)
