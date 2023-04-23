@@ -16,9 +16,9 @@
             </div>
           </div>
           <div class="preset-set_title" v-show="ShowFilter">
-            <div class="preset-kingdom_title_sets" v-for="set in sets" :key="set.setId">
-              <span :id="set.setId" v-on:click="setfilter(set.setId)" :class="set.setId"
-                class="preset-kingdom_set-name filter-out"> {{ $t(set.setId) }} </span>
+            <div class="preset-kingdom_title_sets" v-for="setId in setIds" :key="setId">
+              <span :id="setId" v-on:click="setfilter(setId)" :class="setId"
+                class="preset-kingdom_set-name filter-out"> {{ $t(setId) }} </span>
             </div>
           </div>
           <!-- Kingdoms list  -->
@@ -68,7 +68,9 @@ export default defineComponent({
     const ShowFilter = ref(false);
     ShowFilter.value = setsStore.showFilterSets
 
-    const sets = DominionSets.getAllSets();
+    // const sets = DominionSets.getAllSets();
+    const setIds = DominionSets.getAllSetsIds();
+    // console.log(setIds)
 
     const kingdoms = computed(() => {
       const setId = setsStore.selectedSetId;
@@ -112,7 +114,8 @@ export default defineComponent({
       selectedType,
       RefreshKingdomList,
       ShowFilter,
-      sets,
+      // sets,
+      setIds,
       kingdoms,
       setfilter,
       resetfilter,

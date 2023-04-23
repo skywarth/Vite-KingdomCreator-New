@@ -7,8 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+/* import Vue, typescript */
+import { defineComponent, computed ,watch} from "vue";
 import type { PropType } from "vue";
+import { onBeforeUpdate } from "vue";
 
 export enum Shape {
   CARD = "grid-layout_item--card",
@@ -43,12 +45,14 @@ export default defineComponent({
       return [columnClasses[props.numberOfColumns], directionClass];
     });
   
+onBeforeUpdate(()=> {console.log("changing props");
+console.log(props.items)});
+
     return {
       columnClasses
     };
   }
 });
-
 </script>
 
 <style>

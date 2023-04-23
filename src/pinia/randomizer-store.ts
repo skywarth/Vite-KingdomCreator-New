@@ -201,12 +201,14 @@ export const useRandomizerStore = defineStore(
       }
 
       // Do a full randomize since we failed to retrieve a kingdom from the URL.
+      EventTracker.trackEvent(EventType.RANDOMIZE_KINGDOM);
       this.RANDOMIZE();
     },
     RANDOMIZE() {
       console.log('RANDOMIZE')
-      console.log(this)
+      console.log(this.kingdom.id, this.kingdom.supply)
       if (this.selection.isEmpty()) {
+        EventTracker.trackEvent(EventType.RANDOMIZE_MULTIPLE);
         this.RANDOMIZE_FULL_KINGDOM();
         return;
       }
@@ -248,10 +250,14 @@ export const useRandomizerStore = defineStore(
       console.log('kingdom')
       console.log(kingdom)
       this.CLEAR_SELECTION();
+      EventTracker.trackEvent(EventType.UPDATE_KINGDOM);
       this.UPDATE_KINGDOM(kingdom);
     },
+
     RANDOMIZE_FULL_KINGDOM() {
       console.log('RANDOMIZE_FULL_KINGDOM')
+      EventTracker.trackEvent(EventType.RANDOMIZE_FULL_KINGDOM);
+
       const setIds = rA.getSelectedSetIds(this);
       if (!setIds.length) {
         console.log("no set selected")
@@ -269,12 +275,14 @@ export const useRandomizerStore = defineStore(
         const kingdom = Randomizer.createKingdom(options);
         console.log(kingdom)
         this.CLEAR_SELECTION();
+        EventTracker.trackEvent(EventType.UPDATE_KINGDOM);
         this.UPDATE_KINGDOM(kingdom);
-        EventTracker.trackEvent(EventType.RANDOMIZE_KINGDOM);
+        console.log(this.kingdom);
       } catch (e) {
-        EventTracker.trackError(EventType.RANDOMIZE_KINGDOM);
+        EventTracker.trackError(EventType.RANDOMIZE_FULL_KINGDOM);
       }
     },
+
     RANDOMIZE_SUPPLY_CARD(params: RandomizeSupplyCardParams) {
       console.log('RANDOMIZE_SUPPLY_CARD')
       const randomizerSettings = this.settings.randomizerSettings;

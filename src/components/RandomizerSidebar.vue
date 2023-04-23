@@ -7,15 +7,15 @@
     <div class="sidebar-content filters">
       <div class="sidebar-content-title">{{ $t("Sets") }}</div>
       <div class="sets">
-        <div class="set" v-for="set in sets" :key="set.setId">
+        <div class="set" v-for="setId in setIds" :key="setId">
           <label class="checkbox">
-            <input type="checkbox" v-model="selectedSetIds" :id="set.setId" :value="set.setId">
-            <span>{{ $t(set.setId) }} <span v-if="FindMultipleVersionSets(set.setId).length !== 0"> - 1st</span></span>
+            <input type="checkbox" v-model="selectedSetIds" :id="setId" :value="setId">
+            <span>{{ $t(setId) }} <span v-if="FindMultipleVersionSets(setId).length !== 0"> - 1st</span></span>
           </label>
-          <span v-if="FindMultipleVersionSets(set.setId).length !== 0">
+          <span v-if="FindMultipleVersionSets(setId).length !== 0">
             <label class="checkbox suboption-set">
-              <input type="checkbox" v-model="selectedSetIds" :id="(FindMultipleVersionSets(set.setId))[0].idv2"
-                :value="(FindMultipleVersionSets(set.setId))[0].idv2">
+              <input type="checkbox" v-model="selectedSetIds" :id="(FindMultipleVersionSets(setId))[0].idv2"
+                :value="(FindMultipleVersionSets(setId))[0].idv2">
               <span>2nd</span>
             </label>
           </span>
@@ -101,20 +101,24 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, ref, computed, watch } from "vue";
+
+/* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
 import type { SetId } from "../dominion/set-id";
+
+/* imoprt store  */
+import { useWindowStore } from "../pinia/window-store";
+import { useRandomizerStore } from "../pinia/randomizer-store";
+
 import type { SettingsParams } from "../settings/settings";
 import { SortOption } from "../settings/settings";
 import type { RandomizerSettingsParams, RandomizerSettingsParamsBoolean } from "../settings/randomizer-settings";
-import { useWindowStore } from "../pinia/window-store";
-import { useRandomizerStore } from "../pinia/randomizer-store";
-import { defineComponent, ref, computed } from "vue";
 
-// interface SortOptionParam {
-//   value: SortOption,
-//   display: string,
-// }
+/* import Components */
+
 
 export default defineComponent({
   name: "RandomizerSidebar",
@@ -131,60 +135,59 @@ export default defineComponent({
     const settings = ref(randomizerStore.settings);
     const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
 
-    const sets = computed(() => {
-      return DominionSets.getAllSets().filter(set => { return (HideMultipleVersionSets.indexOf(set.setId) == -1) });
-    });
+    const setIds = DominionSets.getAllSetsIds()
+      .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
 
-    const selectedSetIds = computed({
-      get: () => settings.value.selectedSets.concat().sort(),
-      set: (values: string[]) => {
+    // const selectedSetIds = computed({
+    //   get: () => {
+    //     console.log("selectedSetIds - get", settings.value.selectedSets)
+    //     return settings.value.selectedSets},
+    //   set: (values: string[]) => {
+    //     // Clear the prioritized set if it's no longer selected.
+    //     console.log("selectedSetIds - set", values)
+    //     if (!values.some(x => x == prioritizeSet.value)) {
+    //       updateRandomizerSettings({ prioritizeSet: null });
+    //     }
+    //     console.log({selectedSets: values.map(DominionSets.convertToSetId) } );
+    //     randomizerStore.UPDATE_SETTINGS({
+    //       selectedSets: values.map(DominionSets.convertToSetId)
+    //     } as SettingsParams);
+    //   },
+    // })
+
+const selectedSetIds = ref(settings.value.selectedSets);
+watch(selectedSetIds, (values: string[]) => {
         // Clear the prioritized set if it's no longer selected.
+        console.log("selectedSetIds - set", values)
         if (!values.some(x => x == prioritizeSet.value)) {
           updateRandomizerSettings({ prioritizeSet: null });
         }
+        console.log({selectedSets: values.map(DominionSets.convertToSetId) } );
         randomizerStore.UPDATE_SETTINGS({
           selectedSets: values.map(DominionSets.convertToSetId)
         } as SettingsParams);
-      },
-    })
+})
 
     const FindMultipleVersionSets = (setValue: string) => {
       return MultipleVersionSets.filter(set => { return (set.id === setValue) })
     }
 
-
-
-    // const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
-
     type SettingsObject = {
       [key: string]: boolean;
     }
-    // function createComputedSettingsObject(property: keyof RandomizerSettings) {
-    //   return computed({
-    //     get: () => randomizerSettings.value[property],
-    //     set: (value: boolean) => {
-    //       // const updateObject: SettingsObject = {};
-    //       // updateObject[property] = value;
-    //       updateRandomizerSettings(updateObject);
-    //     }
-    //   });
-    // }
 
     function createComputedSettingsObject(property: keyof RandomizerSettingsParamsBoolean) {
-  return computed<boolean>({
-    // Calcul de la propriété
-    get: (): boolean => randomizerSettings.value[property],
-    // Mise à jour de la propriété
-    set: (value: boolean) => {
-      const updateObject: SettingsObject = {};
-      updateObject[property] = value;
-      updateRandomizerSettings(updateObject);
+      return computed<boolean>({
+        // Calcul de la propriété
+        get: (): boolean => randomizerSettings.value[property],
+        // Mise à jour de la propriété
+        set: (value: boolean) => {
+          const updateObject: SettingsObject = {};
+          updateObject[property] = value;
+          updateRandomizerSettings(updateObject);
+        }
+      });
     }
-  });
-}
-
-
-
 
     const requireActionProvider = createComputedSettingsObject('requireActionProvider');
     const requireCardProvider = createComputedSettingsObject('requireCardProvider');
@@ -220,7 +223,7 @@ export default defineComponent({
       get: () => { return randomizerSettings.value.prioritizeSet != null },
       set: (value: boolean) => {
         const setId = value && selectedSetIds.value.length
-          ? DominionSets.convertToSetId(selectedSetIds.value.concat().sort()[0])
+          ? DominionSets.convertToSetId((selectedSetIds.value).concat().sort()[0])
           : null;
         updateRandomizerSettings({ prioritizeSet: setId });
       }
@@ -244,7 +247,7 @@ export default defineComponent({
       randomizeButtonText,
       handleRandomize,
       isCondensed,
-      sets,
+      setIds,
       selectedSetIds,
       FindMultipleVersionSets,
       requireActionProvider,

@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, onBeforeMount, ref } from 'vue';
 
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
 import { SetId, Set_To_Ignore_Kingdoms } from "../dominion/set-id";
@@ -91,6 +91,10 @@ export default defineComponent({
     const setsStore = useSetsStore()
     const selectedSetId = ref(setsStore.selectedSetId)
     const sortSet = ref(setsStore.sortSet);
+      console.log("Setup - SetSidebar")
+      setsStore.updateSortSet(sortSet.value)
+      console.log("Setup - SetSidebar - end")
+
     const selectedFilterOption = ref(setsStore.showFilterPlayGames); 
     let file_name = "";
     let show_PersonalFileSelection_Input = false;
@@ -144,8 +148,8 @@ export default defineComponent({
         { display: "Cost", value: SortOption.COST },
       ];
 
-
     const handleSelectionChange = (value: SetId) => {
+      console.log("handleSelectionChange", value);
       ((value as string).toLowerCase() == (SetId.PERSONAL as string))
         ? show_PersonalFileSelection_Input = true
         : show_PersonalFileSelection_Input = false;
@@ -165,6 +169,7 @@ export default defineComponent({
         return (set.id === setValue)
       });
     };
+
 
     return {
 

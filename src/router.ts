@@ -2,14 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 export function AppCreateRouter(paths: string[], component: any) {
 
-
-  console.log (paths)
-  console.log(paths.map(
-    path => { return { 
-                  name: component.name, 
-                  path : path,
-                  component : component } }
-  ))
   return createRouter({
     history: createWebHistory(),
     routes: paths.map(
@@ -28,7 +20,6 @@ console.log(routes.map(route => {
   const routeRecords = paths.map(path => ({ path, name: route.component.name, component: route.component }));
   return routeRecords;
 }).flat())
-
 
   return createRouter({
     history: createWebHistory(),

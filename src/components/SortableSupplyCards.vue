@@ -22,21 +22,30 @@
 </template>
 
 <script lang="ts">
-import FlippingCard from "./FlippingCard.vue";
-import BaneCardCover from "./BaneCardCover.vue";
-import type { Coordinate } from "../utils/coordinate";
-import type { SupplyCard } from "../dominion/supply-card";
-import type { SortOption } from "../settings/settings";
-import type { Kingdom } from "../randomizer/kingdom";
-import { SupplyCardSorter } from "../utils/supply-card-sorter";
+/* import Vue, typescript */
+import { defineComponent, ref, computed } from 'vue';
+import { onMounted, watch, nextTick } from 'vue';
+import { useI18n } from "vue-i18n";
 import { gsap, Sine } from "gsap";
-import GridLayout from "./GridLayout.vue";
-import { defineComponent, computed, ref, onMounted, watch, nextTick } from 'vue';
 
+/* import Dominion Objects and type*/
+import type { SupplyCard } from "../dominion/supply-card";
+
+import type { Coordinate } from "../utils/coordinate";
+import { SupplyCardSorter } from "../utils/supply-card-sorter";
+
+/* imoprt store  */
 import { usei18nStore } from "../pinia/i18n-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
-import { useI18n } from "vue-i18n";
+import type { Kingdom } from "../randomizer/kingdom";
+import { SortOption } from "../settings/settings";
+
+/* import Components */
+import BaneCardCover from "./BaneCardCover.vue";
+import FlippingCard from "./FlippingCard.vue";
+import GridLayout from "./GridLayout.vue";
+
 
 interface MoveDescriptor {
   elementIndex: number;
@@ -60,18 +69,20 @@ export default defineComponent({
     const randomizerStore = useRandomizerStore();
     const i18nStore = usei18nStore();
 
-    const kingdom = ref(randomizerStore.kingdom);
-    const sortOption = ref(randomizerStore.settings.sortOption);
-    const selection = ref(randomizerStore.selection);
-    const HasFullScreenRequested = ref(randomizerStore.isFullScreen);
-    const language = ref(i18nStore.language);
-    const windowWidth = ref(windowStore.width);
-    const isEnlarged = ref(windowStore.isEnlarged);
+    const kingdom = computed(() => randomizerStore.kingdom);
+    console.log("setup", kingdom.value)
+    const sortOption = computed(()=> randomizerStore.settings.sortOption);
+    const selection = computed(()=> randomizerStore.selection);
+    const HasFullScreenRequested = computed(()=> randomizerStore.isFullScreen);
+    const language = computed(()=> i18nStore.language);
+    const windowWidth = computed(()=> windowStore.width);
+    const isEnlarged = computed(()=> windowStore.isEnlarged);
 
 
     let elementIndexMapping = new Map<number, number>();
-    let kingdomId: number = 0;
+    let kingdomId: number = -1;
     const supplyCards = ref<SupplyCard[]>([])
+    
     let numberOfSupplyCardsLoading = 0;
     let requiresSupplyCardSort = false;
     let activeAnimations: Set<TweenLite> = new Set();
@@ -79,9 +90,13 @@ export default defineComponent({
     let replacingCard: SupplyCard | null = null;
 
     onMounted(() => {
-      console.log("in onMounted")
+      console.log("onMounted - sortablesuppyCards")
+      supplyCards.value = kingdom.value.supply.supplyCards;
+      console.log("in onMounted", kingdom.value)
       updateActiveSupplyCards();
-      console.log(supplyCardsWithBane)
+      console.log("in onMounted end ", kingdom.value)
+      console.log("onMounted - sortablesuppyCards - end")
+
     });
 
     const numberOfColumns = computed(() => {
@@ -89,8 +104,6 @@ export default defineComponent({
     });
 
     const supplyCardsWithBane = computed(() => {
-      let x= kingdom.value.id
-      console.log("evaluate supplyCardsWithBane", x)
       //const cards =  SupplyCardSorter.sort(this.supplyCards.concat() as SupplyCard[], this.sortOption, this.$t.bind(this));
       const cards = supplyCards.value.concat();
       if (kingdom.value.supply.baneCard) {
@@ -99,10 +112,12 @@ export default defineComponent({
       /*if (this.kingdom.supply.obeliskCardId) {
         cards.push(this.kingdom.supply.obeliskCardId);
       }*/
+      console.log("in supplyCardsWithBane")
       return cards;
     });
 
     const handleKingdomChanged = () => {
+      console.log("handleKingdomChanged")
       updateActiveSupplyCards();
     }
     watch(kingdom, handleKingdomChanged)
@@ -126,6 +141,8 @@ export default defineComponent({
     watch(HasFullScreenRequested, handleHasFullScreenRequested)
 
     const handleWindowWidthChanged = () => {
+
+      console.log("handleWindowWidthChanged")
       cancelActiveAnimations();
       resetCardPositions();
 
@@ -147,16 +164,13 @@ export default defineComponent({
       return kingdom.value.supply.baneCard &&
         kingdom.value.supply.baneCard.id == supplyCard.id;
     }
-
     const isObeliskCard = (supplyCard: SupplyCard) => {
       return kingdom.value.supply.obeliskCard &&
         kingdom.value.supply.obeliskCard.id == supplyCard.id;
     }
-
     const handleSpecify = (supplyCard: SupplyCard) => {
       randomizerStore.UPDATE_SPECIFYING_REPLACEMENT_SUPPLY_CARD(supplyCard);
     }
-
     const handleSupplyCardFlippingToBack = (supplyCard: SupplyCard) => {
       numberOfSupplyCardsLoading += 1;
     }
@@ -171,13 +185,18 @@ export default defineComponent({
     }
 
     const updateActiveSupplyCards = () => {
+      console.log("in updateActiveSupplyCards")
       if (!kingdom.value) {
+        console.log("is null")
         return;
       }
-      if (kingdomId == kingdom.value.id) {
+      if (kingdomId == kingdom.value.id && kingdomId!=0 ) {
+        console.log("is not changed -update card", kingdomId)
         updateSupplyCards();
         return;
       }
+      console.log("in updateActiveSupplyCards for kingdom", kingdom.value)
+
       kingdomId = kingdom.value.id;
       const sortedSupplyCards =
         SupplyCardSorter.sort(kingdom.value.supply.supplyCards.concat(), sortOption.value, t);
@@ -188,6 +207,10 @@ export default defineComponent({
         mappedSupplyCards[getElementIndex(i)] = sortedSupplyCards[i];
       }
       supplyCards.value = mappedSupplyCards;
+      console.log("has changed - find new card")
+      console.log(supplyCards.value)
+      console.log(kingdom.value)
+      console.log("end updateActiveSupplyCards")
     }
 
     const updateSupplyCards = () => {

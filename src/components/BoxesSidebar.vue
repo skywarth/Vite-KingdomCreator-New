@@ -3,17 +3,17 @@
     <div class="sidebar-content">
       <div class="sidebar-content-title">{{ $t("Sets content") }}</div>
       <div class="set">
-        <div class="sets" v-for="set in sets" :key="set.setId">
+        <div class="sets" v-for="setId in sets" :key="setId">
           <label class="checkbox">
-            <input type="radio" v-model="selectedBoxesSetId" :id="set.setId" :value="set.setId"
-              @change="handleSelectionChange(set.setId)" />
-            <span>{{ $t(set.setId) }} <span v-if="findMultipleVersionSets(set.setId).length !== 0"> - 1st</span></span>
+            <input type="radio" v-model="selectedBoxesSetId" :id="setId" :value="setId"
+              @change="handleSelectionChange(setId)" />
+            <span>{{ $t(setId) }} <span v-if="findMultipleVersionSets(setId).length !== 0"> - 1st</span></span>
           </label>
-          <span v-if="findMultipleVersionSets(set.setId).length !== 0">
+          <span v-if="findMultipleVersionSets(setId).length !== 0">
             <label class="checkbox suboption-set">
-              <input type="radio" v-model="selectedBoxesSetId" :id="findMultipleVersionSets(set.setId)[0].idv2"
-                :value="findMultipleVersionSets(set.setId)[0].idv2" 
-                @change="handleSelectionChange(findMultipleVersionSets(set.setId)[0].idv2)" />
+              <input type="radio" v-model="selectedBoxesSetId" :id="findMultipleVersionSets(setId)[0].idv2"
+                :value="findMultipleVersionSets(setId)[0].idv2" 
+                @change="handleSelectionChange(findMultipleVersionSets(setId)[0].idv2)" />
               <span>2nd</span>
             </label>
           </span>
@@ -55,8 +55,8 @@ export default defineComponent({
     const selectedBoxesSetId = ref(setsStore.selectedBoxesSetId)
     const sortBoxesSet = ref(setsStore.sortBoxesSet);
 
-    const sets = DominionSets.getAllSets()
-      .filter(set => { return (HideMultipleVersionSets.indexOf(set.setId) == -1) });
+    const sets = DominionSets.getAllSetsIds()
+      .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
 
     const handleSelectionChange = (value: SetId) => {
       setsStore.updateSelectedBoxesSet(value);

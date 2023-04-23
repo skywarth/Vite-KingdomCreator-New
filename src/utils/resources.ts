@@ -52,7 +52,7 @@ export function ChangeCss(selector:string, property: string, value:string) {
 
 export function incaseofImgerror(ev:any) {
   //console.log("starting incaseofImgerror")
-  console.log("ev.target.imgUrl: " + ev.target.imgUrl + " ## ev.target.src: " +ev.target.src)
+  // console.log("ev.target.imgUrl: " + ev.target.imgUrl + " ## ev.target.src: " +ev.target.src)
   const imgsrc = ev.target.src;
   //console.log('imgsrc: ' + imgsrc)
   //console.log('imgURL: ' + ev.target.imgUrl)
@@ -75,14 +75,16 @@ export function incaseofImgerror(ev:any) {
   if (ev.target.imgUrl == undefined) {
     First_try = true
     ev.target.imgUrl = ev.target.src
-	console.log("First_try undefined: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
+	// console.log("First_try undefined: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
 
   } else if (ev.target.imgUrl != ev.target.src) {
     First_try = false
     ev.target.imgUrl = ev.target.src
-    console.log("First_try equal: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
+    // console.log("First_try equal: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
 
-  } else console.log("First_try: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
+  } else {
+    // console.log("First_try: " + First_try + " ## lastletter: "+ lastletter + " ## last4letters: " + last4letters)
+  }
   let construct_URL=""
   
 /*
@@ -105,7 +107,7 @@ export function incaseofImgerror(ev:any) {
 
 
   if (last4letters=="2add") {
-    console.log('// last4letters == 2add switching to english need to add setname')
+    // console.log('// last4letters == 2add switching to english need to add setname')
     if (!isLangEN) {
       // switching to english need to add setname
       construct_URL = imgsrc.slice(0,indexLang-3)+ imgsrc.slice(indexLang,indextoInsert-4)
@@ -117,7 +119,7 @@ export function incaseofImgerror(ev:any) {
   } else if (lastletter == "2") {
     //console.log('// lastletter == 2')
     if (First_try) {
-      console.log('First try remove 2' + 'Lang is EN : ' + isLangEN)
+      // console.log('First try remove 2' + 'Lang is EN : ' + isLangEN)
       if (isLangEN) { // remove 2
         construct_URL = imgsrc.slice(0,indextoInsert-1) + imgsrc.slice(indexLang,indextoInsert-1) 
             +imgsrc.slice(indextoInsert+ indexforSetinCardName)
@@ -155,7 +157,7 @@ export function incaseofImgerror(ev:any) {
       ev.target.src = construct_URL
     }
   }
-  console.log("===============" + ev.target.src)
+  // console.log("===============" + ev.target.src)
 }
 
 

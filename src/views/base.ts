@@ -17,25 +17,46 @@ const useBase = () => {
   console.log("language Pinia ", i18nStore.language)
   
   const routeQueryLang = computed(() => route.query.lang);
-  // console.log("Base - languageStr = ",languageStateStr.value)
-  // console.log("Base - routeQueryLang = ",routeQueryLang.value)
+  console.log("Base - languageStr = ",languageStateStr.value)
+  console.log("Base - routeQueryLang = ",routeQueryLang.value)
 
   // function for onBeforeMount 
-  const updateLanguageForQueryParam = () => {
+  const loadLanguageForQueryParam = () => {
     console.log("updateLanguageForQueryParam", languageStateStr.value, route.query.lang)
     const langStr = Array.isArray(route.query.lang)
       ? route.query.lang[0]
       : route.query.lang;
     if (langStr && typeof langStr === 'string' && langStr !== languageStateStr.value) {
+      console.log("update i18nStore from ", languageStateStr.value, "to" , langStr)
       // loadLocaleMessages(i18n as I18n, getLanguage(langStr));
       // setI18nLanguage(i18n as I18n, langStr);
       i18nStore.UPDATE_LANGUAGE(getLanguage(langStr) as Language);
     }
   };
 
+  console.log("Setup - base.ts")
+  if (route.query.lang) {
+    loadLanguageForQueryParam();
+  } else {
+    console.log ("load i18nStore", i18nStore.language)
+    i18nStore.UPDATE_LANGUAGE(i18nStore.language);
+  }
+  console.log("Setup - base.ts- end")
+
+  // onBeforeMount(() => {
+  //   console.log("onBeforeMount - base.ts")
+  //   if (route.query.lang) {
+  //     updateLanguageForQueryParam();
+  //   } else {
+  //     console.log ("i18nStore", i18nStore.language)
+  //     i18nStore.UPDATE_LANGUAGE(i18nStore.language);
+  //   }
+  //   console.log("onBeforeMount - base.ts- end")
+  // });
+
   // for Watch function : languageStateStr
   const onLanguageChanged = () => {
-    console.log("onLanguageChanged", languageStateStr.value)
+    console.log("watch onLanguageChanged", languageStateStr.value)
     if (route.query.lang === languageStateStr.value) { return; }
     if (getLanguage(languageStateStr.value) === Language.ENGLISH) {
       const { lang, ...query } = route.query;
@@ -52,7 +73,7 @@ const useBase = () => {
 
   // for Watch function : $route.query.lang
   const onLanguageQueryParameterChanged = () => {
-    console.log("onLanguageQueryParameterChanged", route.query.lang)
+    console.log("watch onLanguageQueryParameterChanged", route.query.lang)
     if (route.query.lang !== languageStateStr.value) {
       //loadLocaleMessages(i18n as I18n, (route.query.lang as any) as Language);
       //setI18nLanguage(i18n as I18n, (route.query.lang as any) as Language);
@@ -63,14 +84,16 @@ const useBase = () => {
   watch(languageStateStr, onLanguageChanged);
   watch(routeQueryLang, onLanguageQueryParameterChanged);
 
-  onBeforeMount(() => {
-    if (route.query.lang) {
-      updateLanguageForQueryParam();
-    } else {
-      console.log ("i18nStore", i18nStore.language)
-      i18nStore.UPDATE_LANGUAGE(i18nStore.language);
-    }
-  });
+  // onBeforeMount(() => {
+  //   console.log("onBeforeMount - base.ts")
+  //   if (route.query.lang) {
+  //     updateLanguageForQueryParam();
+  //   } else {
+  //     console.log ("i18nStore", i18nStore.language)
+  //     i18nStore.UPDATE_LANGUAGE(i18nStore.language);
+  //   }
+  //   console.log("onBeforeMount - base.ts- end")
+  // });
 
   return {
     languageStateStr,

@@ -22,16 +22,25 @@
 </template>
 
 <script lang="ts">
-import { DominionSets } from "../dominion/dominion-sets";
-import { getCardImageUrl, incaseofImgerror } from "../utils/resources";
-import type { Card } from "../dominion/card";
+/* import Vue, typescript */
+import { defineComponent, PropType, watch, computed, ref, onMounted, onBeforeUpdate } from "vue";
+// import { Language } from "../i18n/language";
+
 import Tween, { TweenLite, Sine } from "gsap";
-import { Selection } from "../pinia/selection";
-import { Language } from "../i18n/language";
-import CardOverlay from "./CardOverlay.vue";
+/* import Dominion Objects and type*/
+import { DominionSets } from "../dominion/dominion-sets";
+import type { Card } from "../dominion/card";
+
+import { getCardImageUrl, incaseofImgerror } from "../utils/resources";
+
+/* imoprt store  */
 import { usei18nStore } from "../pinia/i18n-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
-import { defineComponent, PropType, watch, computed, ref, onMounted } from "vue";
+// import { Selection } from "../pinia/selection";
+
+/* import Components */
+import CardOverlay from "./CardOverlay.vue";
+
 
 enum CardState {
   FLIPPING_TO_BACK,
@@ -72,7 +81,7 @@ export default defineComponent({
     const selection = randomizerStore.selection;
     const language = i18nStore.language
 
-    const activeCard = ref<Card | null>(null);
+    const activeCard = ref(props.card);
     const cardState = ref(CardState.BACK_VISIBLE);
     const animationParams = ref<AnimationParams>({ rotation: 0});
     const isFrontLoaded = ref(false);
@@ -80,21 +89,23 @@ export default defineComponent({
     // const activeAnimation: Tween | null = null;
 
     const rotationDegrees = computed(() => 180 * (1 - animationParams.value.rotation));
-    const isFrontVisible = computed(() => cardState.value == CardState.FRONT_VISIBLE);
-    const setClassName = computed(() => activeCard.value ? activeCard.value.setId : "");
-    const setName = computed(() => activeCard.value ? DominionSets.getSetById(activeCard.value.setId).name : "");
+    // const isFrontVisible = computed(() => cardState.value == CardState.FRONT_VISIBLE);
+    // const setClassName = computed(() => activeCard.value ? activeCard.value.setId : "");
+    // const setName = computed(() => activeCard.value ? DominionSets.getSetById(activeCard.value.setId).name : "");
     const showHighlight = computed(() => cardState.value == CardState.FRONT_VISIBLE && activeCard.value && selection.contains(activeCard.value.id));
     const frontCardImageUrl = computed(() => activeCard.value ? getCardImageUrl(activeCard.value.id, language) : "");
     const backCardImageUrl = props.isVertical ? "/img/cards/backside_blue.jpg" : "/img/cards/backside_blue_horizontal.jpg";
 
 
     function handleCardChanged () {
+      console.log("updateCardState for", props.card.id);
       updateCardState();
     }
-    watch(props.card, handleCardChanged)
+    watch(activeCard, handleCardChanged)
 
 
     function handleCardStateChanged ()  {
+      console.log("handleCardStateChanged for", props.card.id);
       switch (cardState.value) {
         case CardState.FLIPPING_TO_BACK:
           emit("flipping-to-back", activeCard.value);
@@ -137,6 +148,8 @@ export default defineComponent({
     };
 
     function updateCardState() {
+      console.log("updateCardState", props.card);
+
       const ValueisActiveCardOutdated = isActiveCardOutdated();
       switch (cardState.value) {
         case CardState.BACK_VISIBLE:
@@ -156,9 +169,7 @@ export default defineComponent({
           break;
       }
     }
-
-
-
+    
     function updateActiveCard ()  {
       isFrontLoaded.value = false;
       activeCard.value = props.card;
@@ -207,6 +218,9 @@ export default defineComponent({
 
     onMounted(() => {
       updateCardState();
+    });
+    onBeforeUpdate(() => {
+      console.log("need update","props.card", props.card.id);
     });
 
     return {
