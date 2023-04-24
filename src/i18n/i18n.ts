@@ -3,19 +3,19 @@ import { createI18n } from 'vue-i18n'
 import type { Composer, VueI18n, I18nMode, I18n } from 'vue-i18n'
 
 import en from "./locales/en";
-import { Language } from "./language";
+import { Language, defaultLanguage} from "./language";
 
 export const i18n = createI18n({
   legacy: false,
-  locale: Language.ENGLISH,
-  fallbackLocale: Language.ENGLISH,
+  locale: defaultLanguage,
+  fallbackLocale: defaultLanguage,
   globalInjection: true,
   fallbackWarn: false,
   missingWarn: false,
   messages: { en }
 });
 
-setI18nLanguage(i18n as I18n, Language.ENGLISH);
+setI18nLanguage(i18n as I18n, defaultLanguage);
 
 function isComposer(
   instance: VueI18n | Composer,

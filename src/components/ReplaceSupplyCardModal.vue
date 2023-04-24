@@ -118,7 +118,7 @@ export default defineComponent({
   setup() {
     const randomizerStore = useRandomizerStore()
     // const settings = randomizerStore.settings;
-    const selectedSetIds = randomizerStore.settings.selectedSets;
+    const selectedSetIds = computed(() => randomizerStore.settings.selectedSets);
 
     const selectedSetId: SetId | null = null;
     const selectedType: CardType | null = null;
@@ -132,7 +132,7 @@ export default defineComponent({
       CostType.TREASURE_8_OR_MORE,
     ];
     const sets = computed(() => {
-      return selectedSetIds.map((setId) => DominionSets.getSetById(setId)).sort((a, b) => {
+      return selectedSetIds.value.map((setId) => DominionSets.getSetById(setId)).sort((a, b) => {
         return a.name == b.name ? 0 : a.name < b.name ? -1 : 1;
       });
     });
@@ -140,7 +140,7 @@ export default defineComponent({
     const visibleTypes = VISIBLE_CARD_TYPES;
     const visibleCosts = VISIBLE_COSTS;
 
-    const specifying = ref(randomizerStore.specifyingReplacementSupplyCard);
+    const specifying = computed(()=> {return randomizerStore.specifyingReplacementSupplyCard});
     const handleSpecifyingChanged = () => {
       // Focus the modal so that escape works properly.	
       setTimeout(() => {

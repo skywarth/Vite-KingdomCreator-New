@@ -45,9 +45,6 @@ export default defineComponent({
       return [columnClasses[props.numberOfColumns], directionClass];
     });
   
-onBeforeUpdate(()=> {console.log("changing props");
-console.log(props.items)});
-
     return {
       columnClasses
     };

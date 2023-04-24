@@ -23,10 +23,9 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, PropType, watch, computed, ref, onMounted, onBeforeUpdate } from "vue";
-// import { Language } from "../i18n/language";
+import { defineComponent, PropType, watch, computed, ref, onMounted, onBeforeUpdate, watchEffect, onUpdated, reactive } from "vue";
+import gsap, { Sine } from "gsap";
 
-import Tween, { TweenLite, Sine } from "gsap";
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import type { Card } from "../dominion/card";
@@ -36,11 +35,10 @@ import { getCardImageUrl, incaseofImgerror } from "../utils/resources";
 /* imoprt store  */
 import { usei18nStore } from "../pinia/i18n-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
-// import { Selection } from "../pinia/selection";
+import type { Selection } from "../pinia/selection";
 
 /* import Components */
 import CardOverlay from "./CardOverlay.vue";
-
 
 enum CardState {
   FLIPPING_TO_BACK,
@@ -54,7 +52,6 @@ interface AnimationParams {
 }
 
 const ANIMATION_DURATION_SEC = 0.4;
-
 
 export default defineComponent({
   name: "FlippingCard",
@@ -78,34 +75,34 @@ export default defineComponent({
   setup(props,  { emit }) {
     const randomizerStore = useRandomizerStore();
     const i18nStore = usei18nStore();
-    const selection = randomizerStore.selection;
-    const language = i18nStore.language
+    const selection = computed(():Selection =>{ return randomizerStore.selection});
+    const language = computed(()=>{return i18nStore.language});
 
-    const activeCard = ref(props.card);
+    const activeCard= ref<Card>(props.card);
     const cardState = ref(CardState.BACK_VISIBLE);
     const animationParams = ref<AnimationParams>({ rotation: 0});
     const isFrontLoaded = ref(false);
-    const activeAnimation = ref<TweenLite | null>(null);
-    // const activeAnimation: Tween | null = null;
+    let activeAnimation : any = null;
 
     const rotationDegrees = computed(() => 180 * (1 - animationParams.value.rotation));
     // const isFrontVisible = computed(() => cardState.value == CardState.FRONT_VISIBLE);
     // const setClassName = computed(() => activeCard.value ? activeCard.value.setId : "");
     // const setName = computed(() => activeCard.value ? DominionSets.getSetById(activeCard.value.setId).name : "");
-    const showHighlight = computed(() => cardState.value == CardState.FRONT_VISIBLE && activeCard.value && selection.contains(activeCard.value.id));
-    const frontCardImageUrl = computed(() => activeCard.value ? getCardImageUrl(activeCard.value.id, language) : "");
+    const showHighlight = computed(() => { 
+      return cardState.value == CardState.FRONT_VISIBLE && activeCard.value && (selection.value.contains(activeCard.value.id))
+    });
+    const frontCardImageUrl = computed(() => activeCard.value ? getCardImageUrl(activeCard.value.id, language.value) : "");
     const backCardImageUrl = props.isVertical ? "/img/cards/backside_blue.jpg" : "/img/cards/backside_blue_horizontal.jpg";
 
 
-    function handleCardChanged () {
-      console.log("updateCardState for", props.card.id);
+
+    const handleCardChanged = () =>{
       updateCardState();
     }
-    watch(activeCard, handleCardChanged)
+    watch(props, handleCardChanged)
+    // no watch on specific value of a props, but on all of it.
 
-
-    function handleCardStateChanged ()  {
-      console.log("handleCardStateChanged for", props.card.id);
+    const handleCardStateChanged = () =>{
       switch (cardState.value) {
         case CardState.FLIPPING_TO_BACK:
           emit("flipping-to-back", activeCard.value);
@@ -119,6 +116,11 @@ export default defineComponent({
       updateCardState();
     }
     watch(cardState, handleCardStateChanged)
+
+    onMounted(() => {
+      updateCardState();
+    });
+
 
     const handleFrontImageLoaded = () => {
       isFrontLoaded.value = true;
@@ -141,15 +143,13 @@ export default defineComponent({
       }
     }
 
-    function isActiveCardOutdated () {
+    const isActiveCardOutdated = () =>{
       const LocalcardId = props.card ? props.card.id : "";
       const LocalactiveCardId = activeCard.value ? activeCard.value.id : "";
       return LocalcardId != LocalactiveCardId;
     };
 
-    function updateCardState() {
-      console.log("updateCardState", props.card);
-
+    const updateCardState = () =>{
       const ValueisActiveCardOutdated = isActiveCardOutdated();
       switch (cardState.value) {
         case CardState.BACK_VISIBLE:
@@ -169,8 +169,8 @@ export default defineComponent({
           break;
       }
     }
-    
-    function updateActiveCard ()  {
+
+    const updateActiveCard = () => {
       isFrontLoaded.value = false;
       activeCard.value = props.card;
     };
@@ -186,45 +186,34 @@ export default defineComponent({
     }
 
     const animateToRotation = (rotation: number) => {
-      activeAnimation.value = TweenLite.to(animationParams.value, ANIMATION_DURATION_SEC, {
-        rotation: rotation,
-        ease: Sine.easeInOut,
-        onComplete: () => handleAnimationEnd(),
-      });
+      console.log(animationParams.value)
+      activeAnimation = gsap.to(animationParams.value, 
+                { duration: ANIMATION_DURATION_SEC, 
+                  rotation: rotation,
+                  ease: Sine.easeInOut,
+                  onComplete: () => handleAnimationEnd()
+                });
+
+
     }
 
-    function handleAnimationEnd  () {
-      activeAnimation.value = null;
+    const handleAnimationEnd = () => {
+      activeAnimation = null;
       cardState.value = cardState.value == CardState.FLIPPING_TO_BACK
         ? CardState.BACK_VISIBLE
         : CardState.FRONT_VISIBLE;
     }
 
-    function cancelAnimation ()  {
-      if (activeAnimation.value) {
-        activeAnimation.value.kill();
-        activeAnimation.value = null;
-      }
-    }
-
-    function forceCardState (PassedCardState: CardState) {
-      if (!(cardState.value == CardState.FRONT_VISIBLE || cardState.value == CardState.BACK_VISIBLE)) {
-        throw new Error(`Expected FRONT_VISIBLE or BACK_VISIBLE. Received: {$cardState.value}`);
-      }
-      cancelAnimation();
-      cardState.value = PassedCardState;
-      animationParams.value.rotation = cardState.value == CardState.FRONT_VISIBLE ? 1 : 0;
-    }
-
-    onMounted(() => {
-      updateCardState();
-    });
-    onBeforeUpdate(() => {
-      console.log("need update","props.card", props.card.id);
-    });
+    // const  cancelAnimation = () => {
+    //   if (activeAnimation) {
+    //     activeAnimation.kill();
+    //     activeAnimation = null;
+    //   }
+    // }
 
     return {
       activeCard,
+      
       rotationDegrees,
       showHighlight,
       frontCardImageUrl,

@@ -26,7 +26,7 @@
 import { defineComponent, ref, computed } from 'vue';
 import { onMounted, watch, nextTick } from 'vue';
 import { useI18n } from "vue-i18n";
-import { gsap, Sine } from "gsap";
+import gsap, { Sine } from "gsap";
 
 /* import Dominion Objects and type*/
 import type { SupplyCard } from "../dominion/supply-card";
@@ -70,19 +70,19 @@ export default defineComponent({
     const i18nStore = usei18nStore();
 
     const kingdom = computed(() => randomizerStore.kingdom);
-    console.log("setup", kingdom.value)
-    const sortOption = computed(()=> randomizerStore.settings.sortOption);
-    const selection = computed(()=> randomizerStore.selection);
-    const HasFullScreenRequested = computed(()=> randomizerStore.isFullScreen);
-    const language = computed(()=> i18nStore.language);
-    const windowWidth = computed(()=> windowStore.width);
-    const isEnlarged = computed(()=> windowStore.isEnlarged);
+    // console.log("setup", kingdom.value)
+    const sortOption = computed(() => randomizerStore.settings.sortOption);
+    const selection = computed(() => randomizerStore.selection);
+    const HasFullScreenRequested = computed(() => randomizerStore.isFullScreen);
+    const language = computed(() => i18nStore.language);
+    const windowWidth = computed(() => windowStore.width);
+    const isEnlarged = computed(() => windowStore.isEnlarged);
 
 
     let elementIndexMapping = new Map<number, number>();
     let kingdomId: number = -1;
     const supplyCards = ref<SupplyCard[]>([])
-    
+
     let numberOfSupplyCardsLoading = 0;
     let requiresSupplyCardSort = false;
     let activeAnimations: Set<TweenLite> = new Set();
@@ -90,12 +90,12 @@ export default defineComponent({
     let replacingCard: SupplyCard | null = null;
 
     onMounted(() => {
-      console.log("onMounted - sortablesuppyCards")
+      // console.log("onMounted - sortablesuppyCards")
       supplyCards.value = kingdom.value.supply.supplyCards;
-      console.log("in onMounted", kingdom.value)
+      // console.log("in onMounted", kingdom.value)
       updateActiveSupplyCards();
-      console.log("in onMounted end ", kingdom.value)
-      console.log("onMounted - sortablesuppyCards - end")
+      // console.log("in onMounted end ", kingdom.value)
+      // console.log("onMounted - sortablesuppyCards - end")
 
     });
 
@@ -112,12 +112,12 @@ export default defineComponent({
       /*if (this.kingdom.supply.obeliskCardId) {
         cards.push(this.kingdom.supply.obeliskCardId);
       }*/
-      console.log("in supplyCardsWithBane")
+      // console.log("in supplyCardsWithBane")
       return cards;
     });
 
     const handleKingdomChanged = () => {
-      console.log("handleKingdomChanged")
+      // console.log("handleKingdomChanged")
       updateActiveSupplyCards();
     }
     watch(kingdom, handleKingdomChanged)
@@ -142,7 +142,7 @@ export default defineComponent({
 
     const handleWindowWidthChanged = () => {
 
-      console.log("handleWindowWidthChanged")
+      // console.log("handleWindowWidthChanged")
       cancelActiveAnimations();
       resetCardPositions();
 
@@ -185,17 +185,17 @@ export default defineComponent({
     }
 
     const updateActiveSupplyCards = () => {
-      console.log("in updateActiveSupplyCards")
+      // console.log("in updateActiveSupplyCards")
       if (!kingdom.value) {
-        console.log("is null")
+        // console.log("is null")
         return;
       }
-      if (kingdomId == kingdom.value.id && kingdomId!=0 ) {
-        console.log("is not changed -update card", kingdomId)
+      if (kingdomId == kingdom.value.id && kingdomId != 0) {
+        // console.log("is not changed -update card", kingdomId)
         updateSupplyCards();
         return;
       }
-      console.log("in updateActiveSupplyCards for kingdom", kingdom.value)
+      // console.log("in updateActiveSupplyCards for kingdom", kingdom.value)
 
       kingdomId = kingdom.value.id;
       const sortedSupplyCards =
@@ -207,10 +207,10 @@ export default defineComponent({
         mappedSupplyCards[getElementIndex(i)] = sortedSupplyCards[i];
       }
       supplyCards.value = mappedSupplyCards;
-      console.log("has changed - find new card")
-      console.log(supplyCards.value)
-      console.log(kingdom.value)
-      console.log("end updateActiveSupplyCards")
+      // console.log("has changed - find new card")
+      // console.log(supplyCards.value)
+      // console.log(kingdom.value)
+      // console.log("end updateActiveSupplyCards")
     }
 
     const updateSupplyCards = () => {
@@ -241,36 +241,50 @@ export default defineComponent({
     }
 
     const cancelActiveAnimations = () => {
-      for (let animation of activeAnimations) {
+      for (const animation of activeAnimations) {
         animation.kill();
       }
       activeAnimations.clear();
     }
+
 
     const animateSupplyCardSort = () => {
       const sortedCards = SupplyCardSorter.sort(supplyCards.value.concat(), sortOption.value, t);
       const descriptors = createMoveDescriptors(sortedCards);
       const newMapping: Map<number, number> = new Map();
 
+      console.log(descriptors)
       for (let descriptor of descriptors) {
         const element = getSupplyCardElement(descriptor.elementIndex);
         const startCoord = getPositionForElementIndex(descriptor.elementIndex);
         const endCoord = getPositionForElementIndex(descriptor.newVisualIndex);
         const x = endCoord.x - startCoord.x;
         const y = endCoord.y - startCoord.y;
-        const tweenLite =
+        console.log(x, y)
+        let activeAnimation =
           gsap.to(element, {
-            duration: ANIMATION_DURATION_SEC,
-            transform: `translate(${x}px,${y}px)`,
+            duration: ANIMATION_DURATION_SEC*10,
             ease: Sine.easeInOut,
             onComplete: function () {
-              tweenLite.kill
+              activeAnimation.kill();
               return;
-            }
-          }
-          ) as TweenLite;
+            },
+            ...(x !== 0 && { x: x }),
+            ...(y !== 0 && { y: y }),
+          });
+          console.log("after gsap.to (x,y):(",x,",",y,") for element ",element.DOCUMENT_NODE)
+        // let activeAnimation =
+        //   gsap.to(element, {
+        //     duration: ANIMATION_DURATION_SEC,
+        //     transform: `translate(${x}px,${y}px)`,
+        //     ease: Sine.easeInOut,
+        //     onComplete: function () {
+        //       activeAnimation.kill
+        //       return;
+        //     }
+        //   });
 
-        activeAnimations.add(tweenLite);
+        activeAnimations.add(activeAnimation);
         newMapping.set(descriptor.newVisualIndex, descriptor.elementIndex);
       }
       elementIndexMapping = newMapping;
@@ -333,7 +347,7 @@ export default defineComponent({
       const newIds = new Set(newSupplyCards.map((card) => card.id));
       return new Set(oldSupplyCards.filter((card) => !newIds.has(card.id)).map((card) => card.id));
     }
-    return{
+    return {
       supplyCardsWithBane,
       numberOfColumns,
       isEnlarged,
@@ -355,5 +369,4 @@ export default defineComponent({
 .sortable-supply-card-copy-button {
   margin-top: 0px;
 }
-
 </style>

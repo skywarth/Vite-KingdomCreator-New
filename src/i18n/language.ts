@@ -7,6 +7,7 @@ export enum Language {
   POLISH ="pl"
 }
 
+export const defaultLanguage = Language.ENGLISH;
 
 export function getLanguage(value: string) :Language {
   const [prefix] = value.split("-");
@@ -15,5 +16,5 @@ export function getLanguage(value: string) :Language {
       return Language[key as keyof typeof Language];
     }
   }
-  return Language.ENGLISH;
+  return defaultLanguage;
 }

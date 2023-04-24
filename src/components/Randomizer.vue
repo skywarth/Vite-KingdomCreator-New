@@ -3,10 +3,10 @@
     <RandomizerSidebar @randomize="handleRandomize" />
     <div class="main">
       <SortableSupplyCards />
-      <!-- <Addons />
+      <Addons />
       <Boons />
       <AllySection />
-      <Modifiers /> -->
+      <Modifiers />
       <div style="margin-top: 4px;">
         <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
         <FullScreenButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
@@ -28,6 +28,7 @@ import type { Card } from "../dominion/card";
 /* imoprt store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
+import { usei18nStore } from '../pinia/i18n-store';
 import { deserializeKingdom, serializeKingdom } from "../randomizer/serializer";
 
 /* import Components */
@@ -53,14 +54,25 @@ export default defineComponent({
     SortableSupplyCards,
   },
   setup() {
-    const randomizerStore = useRandomizerStore()
-    const windowStore = useWindowStore()
-    const route = useRoute()
-    const router = useRouter()
-    const kingdom = ref(randomizerStore.kingdom)
-    const settings = ref(randomizerStore.settings)
+    const randomizerStore = useRandomizerStore();
+    const windowStore = useWindowStore();
+    const i18nStore = usei18nStore();
+    const route = useRoute();
+    const router = useRouter();
+    const kingdom = computed(()=>{return randomizerStore.kingdom});
+    const settings = ref(randomizerStore.settings);
 
-    const randomizerSettings = randomizerStore.settings.randomizerSettings
+    const randomizerSettings = randomizerStore.settings.randomizerSettings;
+
+    const onKingdomChanged= () => {
+      const query = {  lang: i18nStore.language,
+        ...serializeKingdom(kingdom.value)
+      }
+      if (!isEqual(route.query, query)) {
+        router.replace({ query })
+      }
+    }
+    watch(kingdom, onKingdomChanged)
 
     const supplyCardsCopyText = computed(() => {
       return (
@@ -76,31 +88,8 @@ export default defineComponent({
       )
     })
 
-    // const state = reactive({
-    //   kingdom: randomizerStore.kingdom,
-    //   settings: randomizerStore.settings,
-    // })
-    // console.log()
-    // const supplyCardsCopyText = computed(() => {
-    //   return (
-    //     (state.kingdom.supply.supplyCards as Card[]).concat(
-    //       state.kingdom.events,
-    //       state.kingdom.landmarks,
-    //       state.kingdom.projects,
-    //       state.kingdom.ways,
-    //       state.kingdom.boons,
-    //       state.kingdom.ally ? [state.kingdom.ally] : [],
-    //       state.kingdom.traits
-    //     ).map((card) => card.id).join(', ')
-    //   )
-    // })
-
     const handleRandomize = () => {
-      console.log("in handle randomize")
-      console.log(kingdom.value)
       randomizerStore.RANDOMIZE()
-      console.log("in handle randomize --- end")
-      console.log(kingdom.value)
     }
 
     const isEqual = (a: any, b: any) => {
@@ -117,22 +106,9 @@ export default defineComponent({
       return true
     }
 
-    watch(kingdom, () => {
-      console.log("change in kingdom")
-      const query = {
-        // ...route.query,
-        ...serializeKingdom(kingdom.value),
-      }
-      if (!isEqual(route.query, query)) {
-        router.replace({ query })
-      }
-    })
-
     onBeforeMount(() => {
-      console.log("onBeforeMount - randomizer")
       const kingdomFromUrl = deserializeKingdom(route.query, settings.value.selectedSets)
       randomizerStore.LOAD_INITIAL_KINGDOM(kingdomFromUrl)
-      console.log("onBeforeMount - randomizer - end")
     })
 
     return {

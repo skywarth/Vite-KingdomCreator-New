@@ -4,6 +4,7 @@ import type { Router } from "vue-router";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useWindowStore } from "./pinia/window-store";
+// import gsap from "gsap";
 
 export function initialize<S>(router: Router) {
   const app = createApp({
@@ -13,6 +14,8 @@ export function initialize<S>(router: Router) {
       </div>
     `
   });
+
+  // app.config.globalProperties.gsap = gsap;
   app.use(i18n);
   app.use(router);
   app.use(createPinia().use(piniaPluginPersistedstate));

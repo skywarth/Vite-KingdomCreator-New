@@ -141,6 +141,7 @@ export default defineConfig(({ mode }) => {
       minify: false,
       outDir: 'docs',
       emptyOutDir: false,
+      sourcemap: true,
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
