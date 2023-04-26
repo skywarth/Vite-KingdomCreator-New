@@ -26,7 +26,7 @@
 import { defineComponent, ref, computed } from 'vue';
 import { onMounted, watch, nextTick } from 'vue';
 import { useI18n } from "vue-i18n";
-import gsap, { Sine } from "gsap";
+import { gsap,  Sine } from "gsap";
 
 /* import Dominion Objects and type*/
 import type { SupplyCard } from "../dominion/supply-card";
@@ -85,7 +85,7 @@ export default defineComponent({
 
     let numberOfSupplyCardsLoading = 0;
     let requiresSupplyCardSort = false;
-    let activeAnimations: Set<TweenLite> = new Set();
+    let activeAnimations: Set<any> = new Set();
     let resizeTimerId: ReturnType<typeof setTimeout> | null = null;
     let replacingCard: SupplyCard | null = null;
 
@@ -236,7 +236,18 @@ export default defineComponent({
         const endCoord = getPositionForElementIndex(visualIndex);
         const x = endCoord.x - startCoord.x;
         const y = endCoord.y - startCoord.y;
-        element.style.transform = `translate(${x}px,${y}px)`;
+        console.log(element)
+        // element.style.transform = `translate(${x}px,${y}px)`;
+        let activeAnimation =
+          gsap.to(element, {
+            duration: ANIMATION_DURATION_SEC,
+            transform: `translate(${x}px,${y}px)`,
+            ease: Sine.easeInOut,
+            onComplete: function () {
+              activeAnimation.kill
+              return;
+            }
+          });
       }
     }
 
@@ -253,37 +264,22 @@ export default defineComponent({
       const descriptors = createMoveDescriptors(sortedCards);
       const newMapping: Map<number, number> = new Map();
 
-      console.log(descriptors)
       for (let descriptor of descriptors) {
         const element = getSupplyCardElement(descriptor.elementIndex);
         const startCoord = getPositionForElementIndex(descriptor.elementIndex);
         const endCoord = getPositionForElementIndex(descriptor.newVisualIndex);
         const x = endCoord.x - startCoord.x;
         const y = endCoord.y - startCoord.y;
-        console.log(x, y)
         let activeAnimation =
           gsap.to(element, {
-            duration: ANIMATION_DURATION_SEC*10,
+            duration: ANIMATION_DURATION_SEC,
+            transform: `translate(${x}px,${y}px)`,
             ease: Sine.easeInOut,
             onComplete: function () {
-              activeAnimation.kill();
+              activeAnimation.kill
               return;
-            },
-            ...(x !== 0 && { x: x }),
-            ...(y !== 0 && { y: y }),
+            }
           });
-          console.log("after gsap.to (x,y):(",x,",",y,") for element ",element.DOCUMENT_NODE)
-        // let activeAnimation =
-        //   gsap.to(element, {
-        //     duration: ANIMATION_DURATION_SEC,
-        //     transform: `translate(${x}px,${y}px)`,
-        //     ease: Sine.easeInOut,
-        //     onComplete: function () {
-        //       activeAnimation.kill
-        //       return;
-        //     }
-        //   });
-
         activeAnimations.add(activeAnimation);
         newMapping.set(descriptor.newVisualIndex, descriptor.elementIndex);
       }

@@ -131,7 +131,7 @@ export default defineComponent({
     const isDistributeCostAllowed = ref(randomizerStore.isDistributeCostAllowed);
     const isPrioritizeSetAllowed = ref(randomizerStore.isPrioritizeSetAllowed);
     const isAlchemySelected = ref(randomizerStore.isAlchemySelected);
-    const randomizeButtonText = ref(randomizerStore.randomizeButtonText);
+    const randomizeButtonText = computed(() =>  {return randomizerStore.randomizeButtonText});
     const settings = ref(randomizerStore.settings);
     const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
 

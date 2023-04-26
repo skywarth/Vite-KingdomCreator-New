@@ -24,7 +24,7 @@
 <script lang="ts">
 /* import Vue, typescript */
 import { defineComponent, PropType, watch, computed, ref, onMounted, onBeforeUpdate, watchEffect, onUpdated, reactive } from "vue";
-import gsap, { Sine } from "gsap";
+import { gsap, Sine } from "gsap";
 
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
@@ -93,8 +93,6 @@ export default defineComponent({
     });
     const frontCardImageUrl = computed(() => activeCard.value ? getCardImageUrl(activeCard.value.id, language.value) : "");
     const backCardImageUrl = props.isVertical ? "/img/cards/backside_blue.jpg" : "/img/cards/backside_blue_horizontal.jpg";
-
-
 
     const handleCardChanged = () =>{
       updateCardState();
@@ -186,15 +184,12 @@ export default defineComponent({
     }
 
     const animateToRotation = (rotation: number) => {
-      console.log(animationParams.value)
       activeAnimation = gsap.to(animationParams.value, 
                 { duration: ANIMATION_DURATION_SEC, 
                   rotation: rotation,
                   ease: Sine.easeInOut,
                   onComplete: () => handleAnimationEnd()
                 });
-
-
     }
 
     const handleAnimationEnd = () => {

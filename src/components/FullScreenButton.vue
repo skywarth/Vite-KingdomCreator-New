@@ -1,16 +1,12 @@
 <template>
-  <button
-    class="fullscreen-button"
-    :class="{ 'fullscreen-button--has-copied': isFullScreen }"
-    @click="handleClick"
-  >
+  <button class="fullscreen-button" :class="{ 'fullscreen-button--has-copied': isFullScreen }" @click="handleClick">
     <input ref="textInputfull" class="fullscreen-button__input" type="text" :value="textfull" readonly />
     <div class="fullscreen-button__icon">
-      <svg v-if="	isFullScreen" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M15 2h2v5h7v2h-9v-7zm9 13v2h-7v5h-2v-7h9zm-15 7h-2v-5h-7v-2h9v7zm-9-13v-2h7v-5h2v7h-9z"/>
+      <svg v-if="isFullScreen" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M15 2h2v5h7v2h-9v-7zm9 13v2h-7v5h-2v-7h9zm-15 7h-2v-5h-7v-2h9v7zm-9-13v-2h7v-5h2v7h-9z" />
       </svg>
       <svg v-else height="32" width="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M1 1v6h2V3h4V1H1zm2 12H1v6h6v-2H3v-4zm14 4h-4v2h6v-6h-2v4zm0-16h-4v2h4v4h2V1h-2z"/>
+        <path d="M1 1v6h2V3h4V1H1zm2 12H1v6h6v-2H3v-4zm14 4h-4v2h6v-6h-2v4zm0-16h-4v2h4v4h2V1h-2z" />
       </svg>
     </div>
     <transition name="fade-slide-in">
@@ -22,10 +18,18 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, computed } from "vue";
+
+/* import Dominion Objects and type*/
+
 import { ChangeCss } from "../utils/resources";
 
-import { defineComponent, ref } from 'vue';
-import { useRandomizerStore } from '../pinia/randomizer-store';
+/* imoprt store  */
+import { useRandomizerStore } from "../pinia/randomizer-store";
+
+/* import Components */
+
 
 export default defineComponent({
   name: "FullScreenButton",
@@ -39,30 +43,30 @@ export default defineComponent({
   },
   setup() {
     const randomizerStore = useRandomizerStore();
-const isFullScreen = ref(randomizerStore.isFullScreen);
-  
-  // const IsFullScreen= () => {
-  //   HasFullScreenRequested.value;
-  // }
+    const isFullScreen = computed(() => { return randomizerStore.isFullScreen });
 
-  const handleClick= () =>{
-      if (isFullScreen.value == false ) {
+    // const IsFullScreen= () => {
+    //   HasFullScreenRequested.value;
+    // }
+
+    const handleClick = () => {
+      if (isFullScreen.value == false) {
         randomizerStore.UPDATE_FULLSCREEN_RANDOMIZER(true);
-      ChangeCss('.content .sidebar', 'display', 'none');
-      ChangeCss('.content', 'max-width', 'unset');
-      ChangeCss('.content .main', 'margin-right', 'unset');
-    } else {
-      randomizerStore.UPDATE_FULLSCREEN_RANDOMIZER(false);
-      ChangeCss('.content .sidebar', 'display', 'unset');
-      ChangeCss('.content', 'max-width', '1450px');
-      ChangeCss('.content .main', 'margin-right', '255px');
+        ChangeCss('.content .sidebar', 'display', 'none');
+        ChangeCss('.content', 'max-width', 'unset');
+        ChangeCss('.content .main', 'margin-right', 'unset');
+      } else {
+        randomizerStore.UPDATE_FULLSCREEN_RANDOMIZER(false);
+        ChangeCss('.content .sidebar', 'display', 'unset');
+        ChangeCss('.content', 'max-width', '1450px');
+        ChangeCss('.content .main', 'margin-right', '255px');
+      }
     }
-  }
 
-  return {
-    isFullScreen,
-    handleClick,
-  }
+    return {
+      isFullScreen,
+      handleClick,
+    }
   }
 })
 </script>
@@ -78,7 +82,7 @@ const isFullScreen = ref(randomizerStore.isFullScreen);
   padding: 0;
   position: relative;
   width: 30px;
-  
+
 }
 
 .fullscreen-button__icon {
@@ -99,7 +103,7 @@ const isFullScreen = ref(randomizerStore.isFullScreen);
 }
 
 .fullscreen-button__icon {
-  background: #fff; 
+  background: #fff;
   box-sizing: border-box;
   padding: 3px;
   z-index: 1;

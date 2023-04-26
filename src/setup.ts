@@ -15,7 +15,7 @@ export function initialize<S>(router: Router) {
     `
   });
 
-  // app.config.globalProperties.gsap = gsap;
+
   app.use(i18n);
   app.use(router);
   app.use(createPinia().use(piniaPluginPersistedstate));

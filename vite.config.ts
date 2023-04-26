@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     mergeJSONLanguageFiles();
     const sourceFile = './styles/normalize-v8.css';
     const destinationFile = './docs/normalize-v8.css';
-    fs.copyFile('./styles/normalize-v8.css', './docs/normalize-v8.css',()=>{
+    fs.copyFile('./styles/normalize-v8.css', './docs/normalize-v8.css', () => {
       console.log(`Le fichier a été copié avec succès de ${sourceFile} vers ${destinationFile}`);
     })
   }
@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => {
         pages: [
           {
             name: "index",
-            filename:  "index.html",
+            filename: "index.html",
             template: "./views/layout.html",
             data: {
               injectDominioncontent: `<script src="./dominion-content.js"></script>`,
@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => {
           },
           {
             name: "sets",
-            filename:  "sets.html",
+            filename: "sets.html",
             template: "./views/layout.html",
             data: {
               injectDominioncontent: `<script src="./dominion-content.js"></script>`,
@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => {
           },
           {
             name: "boxes",
-            filename:  "boxes.html",
+            filename: "boxes.html",
             template: "./views/layout.html",
             data: {
               injectDominioncontent: `<script src="./dominion-content.js"></script>`,
@@ -96,40 +96,39 @@ export default defineConfig(({ mode }) => {
           },
         ]
       }),
-      // mode == "development" ? rollupDel({
-      //   targets: ['docs/*',
-      //     '!docs/rules',
-      //     '!docs/rules.fr',
-      //     '!docs/img',
-      //     '!docs/favicon.ico',
-      //     '!docs/dominion-content.js',
-      //     '!docs/normalize-v8.css',
-      //     '!docs/locales',
-      //     '!docs/locales/??.json',
-      //     '!docs/CNAME',
-      //     '!docs/ads.txt'],
-      //   verbose: false
-      // })
-      //   : rollupDel({
-      //     targets: ['docs/*',
-      //       '!docs/rules',
-      //       '!docs/rules.fr',
-      //       '!docs/img',
-      //       '!docs/favicon.ico',
-      //       '!docs/dominion-content.js',
-      //       '!docs/normalize-v8.css',
-      //       '!docs/locales',
-      //       '!docs/locales/??.json',
-      //       '!docs/CNAME',
-      //       '!docs/ads.txt'],
-      //     verbose: false
-      //   })
+      mode == "development" ? rollupDel({
+        targets: ['docs/*',
+          '!docs/rules',
+          '!docs/rules.fr',
+          '!docs/img',
+          '!docs/favicon.ico',
+          '!docs/dominion-content.js',
+          '!docs/normalize-v8.css',
+          '!docs/locales',
+          '!docs/locales/??.json',
+          '!docs/CNAME',
+          '!docs/ads.txt'],
+        verbose: false
+      })
+        : rollupDel({
+          targets: ['docs/*',
+            '!docs/rules',
+            '!docs/rules.fr',
+            '!docs/img',
+            '!docs/favicon.ico',
+            '!docs/dominion-content.js',
+            '!docs/normalize-v8.css',
+            '!docs/locales',
+            '!docs/locales/??.json',
+            '!docs/CNAME',
+            '!docs/ads.txt'],
+          verbose: false
+        })
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
     },
     resolve: {
-      //extensions: [".ts", ".vue", ".json"],
       extensions: ['.ts', '.vue'],
       alias: {
         // Alias pour les modules non-Esbuild compatibles avec Vite
@@ -141,57 +140,152 @@ export default defineConfig(({ mode }) => {
       minify: false,
       outDir: 'docs',
       emptyOutDir: false,
-      sourcemap: true,
+      sourcemap: false,
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           entryFileNames: '[name]-[hash].js',
-          chunkFileNames: 'chunk-[name]-[hash].js',
+          chunkFileNames: '[name]-[hash].js',
           assetFileNames: '[name]-[hash][extname]'
-        } /*,
-      external: [
-        'src/rules-pages.ts'
-      ]*/
+        }
       },
     },
     server: {
-      port: devServerPort,
+      base: '/docs',
       proxy: {
         '/dominion-content.js': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js'),
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => {
+            console.log("path requested ", path);
+            return path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js')
+          },
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('proxy error', err);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('Proxy Request to the Target:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+            });
+          }
         },
         '/normalize': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/normalize/, '/docs/normalize'),
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => {
+            console.log("path requested ", path);
+            return path.replace(/^\/normalize/, '/docs/normalize')
+          },
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('proxy error', err);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('Proxy Request to the Target:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+            });
+          }
         },
         '/favicon.ico': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/favicon.ico/, '/docs/favicon.ico'),
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => {
+            console.log("path requested ", path);
+            return path.replace(/^\/favicon.ico/, '/docs/favicon.ico')
+          },
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('proxy error', err);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('Proxy Request to the Target:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+            });
+          }
         },
         '/img': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/img/, '/docs/img'),
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => {
+            console.log("path requested ", path);
+            return path.replace(/^\/img/, '/docs/img')
+          },
+          configure: (proxy, _options) => {
+            proxy.on('error', (err, _req, _res) => {
+              console.log('proxy error', err);
+            });
+            proxy.on('proxyReq', (proxyReq, req, _res) => {
+              console.log('    Proxy Request to the Target:', req.method, req.url);
+            });
+            proxy.on('proxyRes', (proxyRes, req, _res) => {
+              console.log('        Received Response from the Target:', proxyRes.statusCode, req.url);
+            });
+          }
         },
         '/rules': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/rules/, '/docs/rules'),
-        },
-        '/locales': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/locales/, '/docs/locales'),
-        },
-        '/?': {
-          target: 'http://localhost:' +devServerPort,
-          rewrite: (path) => path.replace(/^\/?/, '/docs/index.html?'),
+            target: 'http://localhost:' + devServerPort,
+            rewrite: (path) => {
+              console.log("path requested ", path);
+              return path.replace(/^\/rules/, '/docs/rules')
+            },
+            configure: (proxy, _options) => {
+              proxy.on('error', (err, _req, _res) => {
+                console.log('proxy error', err);
+              });
+              proxy.on('proxyReq', (proxyReq, req, _res) => {
+                console.log('....Proxy Request to the Target:', req.method, req.url);
+              });
+              proxy.on('proxyRes', (proxyRes, req, _res) => {
+                console.log('......Received Response from the Target:', proxyRes.statusCode, req.url);
+              });
+            }
+          },
+          '/locales': {
+            target: 'http://localhost:' + devServerPort,
+            rewrite: (path) => {
+              console.log("path requested ", path);
+              return path.replace(/^\/locales/, '/docs/locales')
+            },
+            configure: (proxy, _options) => {
+              proxy.on('error', (err, _req, _res) => {
+                console.log('proxy error', err);
+              });
+              proxy.on('proxyReq', (proxyReq, req, _res) => {
+                console.log('Proxy Request to the Target:', req.method, req.url);
+              });
+              proxy.on('proxyRes', (proxyRes, req, _res) => {
+                console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+              });
+            }
+          },
+          '/?': {
+            target: 'http://localhost:' + devServerPort,
+            rewrite: (path) => {
+              console.log("path requested ", path);
+              return path.replace(/^\/?/, '/docs/index.html?')
+            },
+            configure: (proxy, _options) => {
+              proxy.on('error', (err, _req, _res) => {
+                console.log('proxy error', err);
+              });
+              proxy.on('proxyReq', (proxyReq, req, _res) => {
+                console.log('Proxy Request to the Target:', req.method, req.url);
+              });
+              proxy.on('proxyRes', (proxyRes, req, _res) => {
+                console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+              });
+            }
+          },
         },
       },
-    },
-    preview: {
-      proxy:{}
+      //preview: {
+      //  proxy:{}
+      //}
     }
-  }
-});
+  });
 
 
 // Fonction pour créer une struture de répertoire si elle n'existe pas
@@ -236,17 +330,17 @@ function mergeJSONLanguageFiles() {
       return { ...result, ...data };
     }, {});
     // Fusionne tous les fichiers JSON dans le répertoire cardsDir
-    let cards 
+    let cards
     if (fs.existsSync(cardsDir)) {
-    const cardsFiles = fs.readdirSync(cardsDir)
-      .filter(file => file.includes(`.${lang}.`) && file.endsWith('.json'))
-      .map(file => path.join(cardsDir, file));
+      const cardsFiles = fs.readdirSync(cardsDir)
+        .filter(file => file.includes(`.${lang}.`) && file.endsWith('.json'))
+        .map(file => path.join(cardsDir, file));
 
       cards = cardsFiles.reduce((result, file) => {
-      const data = readJsonFile(file);
-      return { ...result, ...data };
-    }, {});
-  }
+        const data = readJsonFile(file);
+        return { ...result, ...data };
+      }, {});
+    }
     // Fusionne les données et écrit le fichier de sortie
     const mergedData = { ...messages, ...cards };
     //console.log(outputFile)
