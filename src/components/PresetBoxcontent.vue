@@ -56,18 +56,24 @@
 </template>
  
 <script lang="ts">
-import GenericLayout from "./GenericLayout.vue";
+/* import Vue, typescript */
+import { defineComponent, computed } from 'vue';
+import { useI18n } from "vue-i18n";
+
+/* import Dominion Objects and type*/
 import type { DominionSet } from "../dominion/dominion-set";
 import { DominionSets } from "../dominion/dominion-sets";
-import { Shape as shapeFromGridLayout } from "./GridLayout.vue";
 import type { SupplyCard } from "../dominion/supply-card";
 import { SupplyCardSorter } from "../utils/supply-card-sorter";
 
+/* import store  */
 import { useWindowStore } from '../pinia/window-store';
 import { useSetsStore } from "../pinia/sets-store";
-import { defineComponent, computed } from 'vue';
 import { SortOption } from "../settings/settings";
-import { useI18n } from "vue-i18n";
+
+/* import Components */
+import GenericLayout from "./GenericLayout.vue";
+import { Shape as shapeFromGridLayout } from "./GridLayout.vue";
 
 const FOUR_COLUMN_SUPPLY_CARD_WIDTH = 450;
 const TWO_COLUMN_ADDON_WIDTH = 525;

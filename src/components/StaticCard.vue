@@ -6,8 +6,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+/* import Vue, typescript */
+import { defineComponent } from "vue";
+
+/* import Dominion Objects and type*/
 import { incaseofImgerror } from '../utils/resources';
+
+/* import store  */
+/* import Components */
 
 export default defineComponent({
   props: {

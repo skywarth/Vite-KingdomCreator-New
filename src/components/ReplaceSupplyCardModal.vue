@@ -77,14 +77,20 @@
 </template>	
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, computed, watch } from "vue";
+
+/* import Dominion Objects and type*/
 import type { SetId } from "../dominion/set-id";
 import { DominionSets } from "../dominion/dominion-sets";
 import { CardType } from "../dominion/card-type";
 import { CostType } from "../dominion/cost-type";
-import type { RandomizeSupplyCardParams } from "../pinia/randomizer-store";
+
+/* import store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
-import { defineComponent, computed, watch, ref } from "vue";
-import type { SupplyCard } from "@/dominion/supply-card";
+import type { RandomizeSupplyCardParams } from "../pinia/randomizer-store";
+
+/* import Components */
 
 interface VisibleType<T> {
   type: T;
@@ -111,15 +117,13 @@ const VISIBLE_COSTS: VisibleType<CostType>[] = [
   { type: CostType.TREASURE_6, name: "6" },
   { type: CostType.TREASURE_7, name: "7" },
   { type: CostType.TREASURE_8_OR_MORE, name: "8+" },
-]; 
+];
 
 export default defineComponent({
   name: "ReplaceSupplyCardModal",
   setup() {
     const randomizerStore = useRandomizerStore()
-    // const settings = randomizerStore.settings;
     const selectedSetIds = computed(() => randomizerStore.settings.selectedSets);
-
     const selectedSetId: SetId | null = null;
     const selectedType: CardType | null = null;
     const selectedCosts = [
@@ -140,7 +144,7 @@ export default defineComponent({
     const visibleTypes = VISIBLE_CARD_TYPES;
     const visibleCosts = VISIBLE_COSTS;
 
-    const specifying = computed(()=> {return randomizerStore.specifyingReplacementSupplyCard});
+    const specifying = computed(() => { return randomizerStore.specifyingReplacementSupplyCard });
     const handleSpecifyingChanged = () => {
       // Focus the modal so that escape works properly.	
       setTimeout(() => {
@@ -150,7 +154,7 @@ export default defineComponent({
       }, 0);
     }
     watch(specifying, handleSpecifyingChanged);
-    
+
     const handleEscapeKey = () => {
       randomizerStore.CLEAR_SPECIFYING_REPLACEMENT_SUPPLY_CARD();
     }
@@ -324,4 +328,5 @@ export default defineComponent({
 	  .modal__body__section--cost .modal__body__section__option {
 	    width: 33%;
 	  }
-	}</style>
+	}
+</style>

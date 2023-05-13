@@ -1,6 +1,6 @@
 <template>
-  <button class="copy-button" :class="{ 'copy-button--has-copied': hasCopied }" @click="handleClick()">
-    <input ref="textInput" class="copy-button__input" type="text" :value="text" readonly />
+  <button :aria-label="$t('copyButton')" class="copy-button" :class="{ 'copy-button--has-copied': hasCopied }" @click="handleClick()">
+    <input :aria-label="$t('copyButton')" ref="textInput" class="copy-button__input" type="text" :value="text" readonly />
     <div class="copy-button__icon">
       <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path
@@ -11,15 +11,19 @@
     </div>
     <transition name="fade-slide-in">
       <div v-if="hasCopied()" class="copy-button__copied">
-        Copied!
+        {{ $t("copied") }}
       </div>
     </transition>
   </button>
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
 import { defineComponent, ref } from "vue";
 
+/* import Dominion Objects and type*/
+/* import store  */
+/* import Components */
 
 const SHOW_COPIED_DURATION_MS = 2000;
 
@@ -104,6 +108,7 @@ export default defineComponent({
   position: absolute;
   top: 4px;
   z-index: 3;
+  width: 40px;;
 }
 
 .copy-button__copied::before {

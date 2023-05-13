@@ -77,7 +77,7 @@
           <span>{{ $t("Prioritize Set") }}</span>
         </label>
         <div class="suboption">
-          <select :disabled="!isPrioritizeSetEnabled" v-model="prioritizeSet">
+          <select aria-label="prioritizeSet" :disabled="!isPrioritizeSetEnabled" v-model="prioritizeSet">
             <option v-if="prioritizeSet == null" :value="null">{{ $t("Choose set") }}</option>
             <option v-for="setId in selectedSetIds" :value="setId" :key="setId">
               {{ getSetName(setId) }}
@@ -119,7 +119,6 @@ import type { RandomizerSettingsParams, RandomizerSettingsParamsBoolean } from "
 
 /* import Components */
 
-
 export default defineComponent({
   name: "RandomizerSidebar",
   components: {
@@ -127,46 +126,27 @@ export default defineComponent({
   setup(props, { emit }) {
     const randomizerStore = useRandomizerStore()
     const windowStore = useWindowStore()
-    const isCondensed = ref(windowStore.isCondensed);
-    const isDistributeCostAllowed = ref(randomizerStore.isDistributeCostAllowed);
-    const isPrioritizeSetAllowed = ref(randomizerStore.isPrioritizeSetAllowed);
-    const isAlchemySelected = ref(randomizerStore.isAlchemySelected);
-    const randomizeButtonText = computed(() =>  {return randomizerStore.randomizeButtonText});
-    const settings = ref(randomizerStore.settings);
-    const randomizerSettings = ref(randomizerStore.settings.randomizerSettings);
+    const isCondensed = computed(() => { return windowStore.isCondensed });
+    const isDistributeCostAllowed = computed(() => { return randomizerStore.isDistributeCostAllowed });
+    const isPrioritizeSetAllowed = computed(() => { return randomizerStore.isPrioritizeSetAllowed });
+    const isAlchemySelected = computed(() => { return randomizerStore.isAlchemySelected });
+    const randomizeButtonText = computed(() => { return randomizerStore.randomizeButtonText });
+    const settings = computed(() => { return randomizerStore.settings });
+    const randomizerSettings = computed(() => { return randomizerStore.settings.randomizerSettings });
 
     const setIds = DominionSets.getAllSetsIds()
       .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
 
-    // const selectedSetIds = computed({
-    //   get: () => {
-    //     console.log("selectedSetIds - get", settings.value.selectedSets)
-    //     return settings.value.selectedSets},
-    //   set: (values: string[]) => {
-    //     // Clear the prioritized set if it's no longer selected.
-    //     console.log("selectedSetIds - set", values)
-    //     if (!values.some(x => x == prioritizeSet.value)) {
-    //       updateRandomizerSettings({ prioritizeSet: null });
-    //     }
-    //     console.log({selectedSets: values.map(DominionSets.convertToSetId) } );
-    //     randomizerStore.UPDATE_SETTINGS({
-    //       selectedSets: values.map(DominionSets.convertToSetId)
-    //     } as SettingsParams);
-    //   },
-    // })
-
-const selectedSetIds = ref(settings.value.selectedSets);
-watch(selectedSetIds, (values: string[]) => {
-        // Clear the prioritized set if it's no longer selected.
-        console.log("selectedSetIds - set", values)
-        if (!values.some(x => x == prioritizeSet.value)) {
-          updateRandomizerSettings({ prioritizeSet: null });
-        }
-        console.log({selectedSets: values.map(DominionSets.convertToSetId) } );
-        randomizerStore.UPDATE_SETTINGS({
-          selectedSets: values.map(DominionSets.convertToSetId)
-        } as SettingsParams);
-})
+    const selectedSetIds = ref(settings.value.selectedSets);
+    watch(selectedSetIds, (values: string[]) => {
+      // Clear the prioritized set if it's no longer selected.
+      if (!values.some(x => x == prioritizeSet.value)) {
+        updateRandomizerSettings({ prioritizeSet: null });
+      }
+      randomizerStore.UPDATE_SETTINGS({
+        selectedSets: values.map(DominionSets.convertToSetId)
+      } as SettingsParams);
+    })
 
     const FindMultipleVersionSets = (setValue: string) => {
       return MultipleVersionSets.filter(set => { return (set.id === setValue) })

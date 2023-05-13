@@ -7,29 +7,29 @@ import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { createMpaPlugin } from 'vite-plugin-virtual-mpa';
 
 import UnPluginVueComponents from 'unplugin-vue-components/vite'; // On-demand components auto importing for Vue.
-import DominionContentPlugin from './plugins/dominion-content-plugin';
+import DominionContentPlugin from './plugins/vite-plugin-dominion-content';
 import rollupDel from 'rollup-plugin-delete';
+
+
 const languages = ['fr', 'de', 'es', 'nl', 'pl']; // Liste des langues à fusionner
 const languageSourceDir = './src/i18n/locales'
 const languageDestDir = './docs/locales'
 const devServerPort = 5173
 
 export default defineConfig(({ mode }) => {
-  if (mode == "production") {
+  if (mode == "production" || mode =="development") {
     mergeJSONLanguageFiles();
     const sourceFile = './styles/normalize-v8.css';
-    const destinationFile = './docs/normalize-v8.css';
-    fs.copyFile('./styles/normalize-v8.css', './docs/normalize-v8.css', () => {
+    const destinationFile = './docs/normalize.css';
+    fs.copyFile(sourceFile, destinationFile, () => {
       console.log(`Le fichier a été copié avec succès de ${sourceFile} vers ${destinationFile}`);
     })
   }
 
   return {
+    // appType: 'spa',
     plugins: [
-      {
-        ...DominionContentPlugin(),
-        enforce: "pre",
-      },
+      DominionContentPlugin(),
       UnPluginVueComponents({
         // Chemin vers le dossier qui contient les composants
         dirs: ['src/components'],
@@ -41,8 +41,10 @@ export default defineConfig(({ mode }) => {
       vue(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
-        compositionOnly: true, fullInstall: false,
-        allowDynamic: true
+        compositionOnly: true, 
+        fullInstall: false,
+        allowDynamic: true,
+        runtimeOnly: false
       }),
       /* import { createMpaPlugin } from 'vite-plugin-virtual-mpa'; */
       createMpaPlugin({
@@ -54,8 +56,8 @@ export default defineConfig(({ mode }) => {
             filename: "index.html",
             template: "./views/layout.html",
             data: {
-              injectDominioncontent: `<script src="./dominion-content.js"></script>`,
-              injectEntry: `<script type="module" src="./src/index-page.ts"></script>`,
+              injectDominioncontent: '<script src="./dominion-content.js"></script>',
+              injectEntry: '<script type="module" src="/src/index-page.ts"></script>',
             }
           },
           {
@@ -64,7 +66,9 @@ export default defineConfig(({ mode }) => {
             template: "./views/layout.html",
             data: {
               injectDominioncontent: `<script src="./dominion-content.js"></script>`,
-              injectEntry: `<script type="module" src="./src/sets-page.ts"></script>`,
+              injectEntry: `<script type="module" src="/src/sets-page.ts"></script>
+              <script src="./img/js-yaml-v4.js"></script>
+              <script src="./img/myfunctions.js"></script>`,
             }
           },
           {
@@ -72,8 +76,8 @@ export default defineConfig(({ mode }) => {
             filename: "rules.html",
             template: "./views/layout.html",
             data: {
-              injectDominioncontent: '<script src="./dominion-content.js"></script>',
-              injectEntry: '<script type="module" src="./src/rules-page.ts"></script>',
+              injectDominioncontent: '<script src="/dominion-content.js"></script>',
+              injectEntry: '<script type="module" src="/src/rules-page.ts"></script>',
             }
           },
           {
@@ -81,8 +85,8 @@ export default defineConfig(({ mode }) => {
             filename: "boxes.html",
             template: "./views/layout.html",
             data: {
-              injectDominioncontent: `<script src="./dominion-content.js"></script>`,
-              injectEntry: `<script type="module" src="./src/boxes-page.ts"></script>`,
+              injectDominioncontent: `<script src="/dominion-content.js"></script>`,
+              injectEntry: `<script type="module" src="/src/boxes-page.ts"></script>`,
             }
           },
           {
@@ -90,8 +94,8 @@ export default defineConfig(({ mode }) => {
             filename: "cards.html",
             template: "./views/layout.html",
             data: {
-              injectDominioncontent: '<script src="./dominion-content.js"></script>',
-              injectEntry: '<script type="module" src="./src/cards-page.ts"></script>',
+              injectDominioncontent: '<script src="/dominion-content.js"></script>',
+              injectEntry: '<script type="module" src="/src/cards-page.ts"></script>',
             }
           },
         ]
@@ -103,7 +107,7 @@ export default defineConfig(({ mode }) => {
           '!docs/img',
           '!docs/favicon.ico',
           '!docs/dominion-content.js',
-          '!docs/normalize-v8.css',
+          '!docs/normalize.css',
           '!docs/locales',
           '!docs/locales/??.json',
           '!docs/CNAME',
@@ -117,7 +121,7 @@ export default defineConfig(({ mode }) => {
             '!docs/img',
             '!docs/favicon.ico',
             '!docs/dominion-content.js',
-            '!docs/normalize-v8.css',
+            '!docs/normalize.css',
             '!docs/locales',
             '!docs/locales/??.json',
             '!docs/CNAME',
@@ -151,142 +155,59 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      base: '/docs',
+      open: 'index.html',
       proxy: {
-        '/dominion-content.js': {
+        '/dominion-content': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => {
-            console.log("path requested ", path);
-            return path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js')
-          },
-          configure: (proxy, _options) => {
-            proxy.on('error', (err, _req, _res) => {
-              console.log('proxy error', err);
-            });
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('Proxy Request to the Target:', req.method, req.url);
-            });
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-            });
-          }
+          rewrite: (path) => path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js'),
         },
         '/normalize': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => {
-            console.log("path requested ", path);
-            return path.replace(/^\/normalize/, '/docs/normalize')
-          },
-          configure: (proxy, _options) => {
-            proxy.on('error', (err, _req, _res) => {
-              console.log('proxy error', err);
-            });
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('Proxy Request to the Target:', req.method, req.url);
-            });
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-            });
-          }
+          rewrite: (path) => path.replace(/^\/normalize/, '/docs/normalize'),
         },
         '/favicon.ico': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => {
-            console.log("path requested ", path);
-            return path.replace(/^\/favicon.ico/, '/docs/favicon.ico')
-          },
+          rewrite: (path) => path.replace(/^\/favicon.ico/, '/docs/favicon.ico'),
+        },
+        '/img': {
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => path.replace(/^\/img/, '/docs/img'),
+        },
+        '/rules/': {
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => {console.log(path); return path.replace(/^\/rules/, '/docs/rules/')},
+        },
+        '/locales': {
+          target: 'http://localhost:' + devServerPort,
+          rewrite: (path) => path.replace(/^\/locales/, '/docs/locales'),
+        },
+        '/?': {
+          target: 'http://localhost:' + devServerPort,
+          // rewrite: (path) => path.replace(/^\/?/, '/docs/index.html?'),
+          rewrite: (path) => path.replace(/^\/?/, '/index.html?'),
           configure: (proxy, _options) => {
             proxy.on('error', (err, _req, _res) => {
               console.log('proxy error', err);
             });
             proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('Proxy Request to the Target:', req.method, req.url);
+              console.log('Sending Request to the Target:', req.method, req.url);
             });
             proxy.on('proxyRes', (proxyRes, req, _res) => {
               console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
             });
           }
         },
-        '/img': {
+        '^/$': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => {
-            console.log("path requested ", path);
-            return path.replace(/^\/img/, '/docs/img')
-          },
-          configure: (proxy, _options) => {
-            proxy.on('error', (err, _req, _res) => {
-              console.log('proxy error', err);
-            });
-            proxy.on('proxyReq', (proxyReq, req, _res) => {
-              console.log('    Proxy Request to the Target:', req.method, req.url);
-            });
-            proxy.on('proxyRes', (proxyRes, req, _res) => {
-              console.log('        Received Response from the Target:', proxyRes.statusCode, req.url);
-            });
-          }
-        },
-        '/rules': {
-            target: 'http://localhost:' + devServerPort,
-            rewrite: (path) => {
-              console.log("path requested ", path);
-              return path.replace(/^\/rules/, '/docs/rules')
-            },
-            configure: (proxy, _options) => {
-              proxy.on('error', (err, _req, _res) => {
-                console.log('proxy error', err);
-              });
-              proxy.on('proxyReq', (proxyReq, req, _res) => {
-                console.log('....Proxy Request to the Target:', req.method, req.url);
-              });
-              proxy.on('proxyRes', (proxyRes, req, _res) => {
-                console.log('......Received Response from the Target:', proxyRes.statusCode, req.url);
-              });
-            }
-          },
-          '/locales': {
-            target: 'http://localhost:' + devServerPort,
-            rewrite: (path) => {
-              console.log("path requested ", path);
-              return path.replace(/^\/locales/, '/docs/locales')
-            },
-            configure: (proxy, _options) => {
-              proxy.on('error', (err, _req, _res) => {
-                console.log('proxy error', err);
-              });
-              proxy.on('proxyReq', (proxyReq, req, _res) => {
-                console.log('Proxy Request to the Target:', req.method, req.url);
-              });
-              proxy.on('proxyRes', (proxyRes, req, _res) => {
-                console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-              });
-            }
-          },
-          '/?': {
-            target: 'http://localhost:' + devServerPort,
-            rewrite: (path) => {
-              console.log("path requested ", path);
-              return path.replace(/^\/?/, '/docs/index.html?')
-            },
-            configure: (proxy, _options) => {
-              proxy.on('error', (err, _req, _res) => {
-                console.log('proxy error', err);
-              });
-              proxy.on('proxyReq', (proxyReq, req, _res) => {
-                console.log('Proxy Request to the Target:', req.method, req.url);
-              });
-              proxy.on('proxyRes', (proxyRes, req, _res) => {
-                console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-              });
-            }
-          },
-        },
+          rewrite: (path) => '/index.html?',
+        }
       },
-      //preview: {
-      //  proxy:{}
-      //}
+    },
+    preview: {
+     proxy:{}
     }
-  });
-
+  }
+});
 
 // Fonction pour créer une struture de répertoire si elle n'existe pas
 function testExistAndCreateDir(dirPath: string) {

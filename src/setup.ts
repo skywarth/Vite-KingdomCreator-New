@@ -15,7 +15,6 @@ export function initialize<S>(router: Router) {
     `
   });
 
-
   app.use(i18n);
   app.use(router);
   app.use(createPinia().use(piniaPluginPersistedstate));

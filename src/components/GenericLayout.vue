@@ -20,10 +20,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+/* import Vue, typescript */
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+
+/* import Dominion Objects and type*/
+/* import store  */
+/* import Components */
 import GridLayout , { Shape }from "./GridLayout.vue";
 import StaticCardWithSet from "./StaticCardWithSet.vue";
-import { useWindowStore } from '../pinia/window-store';
 
 export default defineComponent({
   name: "GenericLayout",
@@ -57,16 +62,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
-    // const windowStore = useWindowStore();
-    
-    // const windowWidth = computed(() => windowStore.width);
-    // const isEnlarged = computed(() => windowStore.isEnlarged);
-
-    // return {
-    //   // windowWidth,
-    //   // isEnlarged
-    // }
+  setup() {
   }
 });
 </script>

@@ -7,10 +7,11 @@ const yaml = require('js-yaml');
 //console.log("in plugin DominionContentPlugin")
 
 export default function DominionContentPlugin() {
-  //console.log("in function DominionContentPlugin")
+  console.log("in function DominionContentPlugin")
   return {
     name: 'dominion-content-plugin',
     apply: 'build', // <-- spécifie que le plugin doit s'exécuter lors de la phase build
+    enforce: "post",
     async generateBundle(options, bundle) {
       const script = "window.DominionSets=" + JSON.stringify(loadSets()) +
           ";window.DominionKingdoms=" + JSON.stringify(loadKingdoms()) + ";";

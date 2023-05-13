@@ -1,6 +1,6 @@
 <template>
   <div :class="cardCover" class="card-cover">
-    <div class="card-cover-div">
+    <div :class="cardDiv" class="card-cover-div">
       <div :class="cardCoverText" class="card-cover-text">
         {{ $t(isType) }}
       </div>
@@ -9,8 +9,15 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
 import { defineComponent, computed } from "vue";
-import type { PropType } from "vue";
+
+/* import Dominion Objects and type*/
+/* import store  */
+/* import Components */
+
+const ANIMATION_DURATION_SEC = 0.6;
+const WINDOW_RESIZE_DELAY_MSEC = 300;
 
 export default defineComponent({
   name: "BaneCardCover",
@@ -21,6 +28,10 @@ export default defineComponent({
     },
   },
   setup(props: { isType: string; }) {
+    const cardDiv = computed(() => {
+      return props.isType.toLowerCase() + "-div"
+    });
+
     const cardCover = computed(() => {
       return props.isType.toLowerCase() + "-color"
     });
@@ -31,6 +42,7 @@ export default defineComponent({
 
     return {
       cardCover,
+      cardDiv,
       cardCoverText
     }
   }
@@ -38,52 +50,32 @@ export default defineComponent({
 </script>
 
 <style>
-.bane-card-cover {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  box-sizing: border-box;
-  border: 5px solid #b78eca
-    /* curse-color */
-  ;
-}
-
-.bane-card-cover-text {
-  transform: rotate(0.75turn);
-  color: white;
-  background: #b78eca
-    /* curse-color */
-  ;
-  position: absolute;
-  bottom: 9px;
-  right: -17px;
-  padding: 6px 12px;
-}
 
 .card-cover {
   width: 100%;
   height: 100%;
   position: absolute;
   box-sizing: border-box;
-}
-
-.bane-color {
-  border: 8px solid #b78eca
-    /* curse-color */
-  ;
-}
-
-.obelisk-color {
-  border: 8px solid #55AC6A
-    /* landmark-color */
-  ;
+  /* display: flex; */
 }
 
 .card-cover-div {
-  position: relative;
-  transform: rotate(0.75turn);
-  bottom: -70%;
-  right: -38%;
+  position:inherit;
+  display: flex;
+  transform: rotate(+0.75turn);
+  align-self: flex-end;
+  right: 0%;
+  flex-direction: column-reverse;
+  bottom:10%;
+}
+.bane-div{
+  bottom: 10%;
+}
+.obelisk-div{
+  bottom: 20%;
+}
+.mouseway-div{
+  bottom: 10%;
 }
 
 .card-cover-text {
@@ -91,20 +83,31 @@ export default defineComponent({
   padding: 6px 12px;
 }
 
+.bane-color {
+  border: 8px solid #b78eca   /* curse-color */;
+}
 .bane-color-text {
   color: white;
-  background: #b78eca
-    /* curse-color */
-  ;
+  background: #b78eca        /* curse-color */;
+}
 
+.obelisk-color {
+  border: 8px solid #7db68d /* landmark-color */;
 }
 
 .obelisk-color-text {
   color: black;
-  background: #55AC6A
-    /* curse-color */
-  ;
+  background: #7db68d       /* Landmark-color */;
 }
+
+.mouseway-color {
+  border: 8px solid #bad4eb /* mouseway-color */;
+}
+.mouseway-color-text {
+  color: black;
+  background: #bad4eb       /* mouseway-color */;
+}
+
 
 @media (max-width: 600px) {
   .card-cover {
@@ -115,4 +118,6 @@ export default defineComponent({
     font-size: 12px;
     right: -13px;
   }
-}</style>
+}
+
+</style>

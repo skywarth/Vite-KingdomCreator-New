@@ -41,7 +41,6 @@ export class SupplyDivision {
   public createDivisionByLockingCard(cardId: string, replacements: SupplyCard[] = []) {
     const newReplacements = Replacements.createReplacementByRemoveCards(this.replacements, [cardId]);
     newReplacements.set(cardId, replacements.concat());
-
     let lockedCard = Cards.findCardById(this.availableCards, cardId);
     if (lockedCard) {
       const cards = this.availableCards.filter(Cards.filterByExcludedIds([cardId]));
@@ -64,7 +63,6 @@ export class SupplyDivision {
   public createDivisionBySelectingCard(cardId: string, replacements: SupplyCard[] = []) {
     const newReplacements = Replacements.createReplacementByRemoveCards(this.replacements, [cardId]);
     newReplacements.set(cardId, replacements.concat());
-
     const selectedCard = Cards.findCardById(this.availableCards, cardId);
     if (!selectedCard) {
       throw Error(`Can't select card: ${cardId}. Not found in available cards.`);

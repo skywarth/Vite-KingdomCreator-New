@@ -1,9 +1,9 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue", "src/analytics/follow-activity.ts"],
   "compilerOptions": {
     //"importsNotUsedAsValues": "preserve",
-    "isolatedModules": false,
+    "isolatedModules": true,
     //"preserveValueImports": false,
     "resolveJsonModule": true,
     "baseUrl": ".",

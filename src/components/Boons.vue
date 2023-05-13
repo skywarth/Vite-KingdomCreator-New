@@ -15,13 +15,20 @@
 </template>
 
 <script lang="ts">
-import GridLayout from "./GridLayout.vue";
-import FlippingCard from "./FlippingCard.vue";
+/* import Vue, typescript */
+import { defineComponent, computed, ref, watch } from "vue";
+
+/* import Dominion Objects and type*/
 import type { Boon } from "../dominion/boon";
 import { Cards } from "../utils/cards";
+
+/* import store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
-import { defineComponent, computed, ref, watch } from "vue";
 import { useWindowStore } from "../pinia/window-store";
+
+/* import Components */
+import GridLayout from "./GridLayout.vue";
+import FlippingCard from "./FlippingCard.vue";
 
 export default defineComponent({
   name: 'Boons',

@@ -9,7 +9,7 @@
       <Modifiers />
       <div style="margin-top: 4px;">
         <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
-        <FullScreenButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
+        <FullScreenButton v-if="!isCondensed" :text="supplyCardsCopyText" class="randomizer-copy-button" />
       </div>
     </div>
     <div class="clearfix"></div>
@@ -25,7 +25,7 @@ import { useRoute, useRouter } from "vue-router";
 /* import Dominion Objects and type*/
 import type { Card } from "../dominion/card";
 
-/* imoprt store  */
+/* import store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
 import { usei18nStore } from '../pinia/i18n-store';
@@ -62,7 +62,8 @@ export default defineComponent({
     const kingdom = computed(()=>{return randomizerStore.kingdom});
     const settings = ref(randomizerStore.settings);
 
-    const randomizerSettings = randomizerStore.settings.randomizerSettings;
+    const isCondensed = computed(() =>{ return windowStore.isCondensed});
+    // const randomizerSettings = randomizerStore.settings.randomizerSettings;
 
     const onKingdomChanged= () => {
       const query = {  lang: i18nStore.language,
@@ -115,7 +116,8 @@ export default defineComponent({
       supplyCardsCopyText,
       handleRandomize,
       kingdom,
-      settings
+      settings,
+      isCondensed
     }
   }
 });

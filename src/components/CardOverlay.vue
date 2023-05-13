@@ -25,12 +25,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
-import type { Card } from '../dominion/card';
-import { Language } from '../i18n/language';
-import TextOverlay from './TextOverlay.vue';
-import { usei18nStore } from "../pinia/i18n-store";
+/* import Vue, typescript */
+import { defineComponent, computed } from 'vue';
+import type { PropType } from 'vue';
 
+/* import Dominion Objects and type*/
+import type { Card } from '../dominion/card';
+
+/* import store  */
+import { usei18nStore } from "../pinia/i18n-store";
+import { Language } from '../i18n/language';
+
+/* import Components */
+import TextOverlay from './TextOverlay.vue';
 
 const LANGUAGES_WITH_TRANSLATED_CARDS = new Set([Language.ENGLISH, Language.FRENCH]);
 

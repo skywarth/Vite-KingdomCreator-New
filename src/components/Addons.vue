@@ -15,13 +15,20 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, computed, ref, onMounted, watch } from "vue";
+
+/* import Dominion Objects and type*/
+import type { Addon } from "../dominion/addon";
+
+/* import store  */
+import { useWindowStore } from "../pinia/window-store";
+import { useRandomizerStore } from "../pinia/randomizer-store";
+
+/* import Components */
 import AddonTitle from "./AddonTitle.vue";
 import GridLayout from "./GridLayout.vue";
 import FlippingCard from "./FlippingCard.vue";
-import type { Addon } from "../dominion/addon";
-import { defineComponent, computed, ref, onMounted, watch } from "vue";
-import { useWindowStore } from "../pinia/window-store";
-import { useRandomizerStore } from "../pinia/randomizer-store";
 
 interface AddonContainer {
   addon: Addon | null,
@@ -56,6 +63,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
+      activeContainers.value = fillWithEmptyAddonContainers([]);
       updateAddonContainers();
     });
 

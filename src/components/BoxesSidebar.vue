@@ -35,12 +35,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+/* import Vue, typescript */
+import { defineComponent, ref } from "vue";
+
+/* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import type { SetId } from "../dominion/set-id";
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
 import { SortOption } from "../settings/settings";
+
+/* import store  */
 import { useSetsStore } from '../pinia/sets-store';
+
+/* import Components */
 
 const sortOptions = [
   { display: "Alphabetical", value: SortOption.ALPHABETICAL },

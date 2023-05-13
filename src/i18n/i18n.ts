@@ -69,7 +69,11 @@ export async function loadLocaleMessages(i18n: I18n, locale: Language): Promise<
     //console.log("locale already loaded")
     return Promise.resolve();
   }
-  // console.log("need to load locale", locale);
+  //console.log("need to load locale", locale);
+  
+  // const { messages } = await import( 
+  // 	/* webpackChunkName: "language-[request]" */ `./locales/${locale}.ts`); 
+
   const messages = await fetch(`./locales/${locale}.json`)
       .then((response) => { return response.json(); })
 

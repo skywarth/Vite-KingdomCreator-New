@@ -8,9 +8,14 @@
 </template>
 
 <script lang="ts">
-import { useWindowStore } from '../pinia/window-store';
-import { defineComponent, computed } from 'vue';
+/* import Vue, typescript */
+import { defineComponent, computed } from "vue";
 
+/* import Dominion Objects and type*/
+/* import store  */
+import { useWindowStore } from '../pinia/window-store';
+
+/* import Components */
 
 export default defineComponent({
   name: 'EnlargeButton',

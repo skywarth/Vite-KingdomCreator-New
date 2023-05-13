@@ -68,9 +68,7 @@ export default defineComponent({
     const ShowFilter = ref(false);
     ShowFilter.value = setsStore.showFilterSets
 
-    // const sets = DominionSets.getAllSets();
     const setIds = DominionSets.getAllSetsIds();
-    // console.log(setIds)
 
     const kingdoms = computed(() => {
       const setId = setsStore.selectedSetId;

@@ -25,7 +25,8 @@
       <div class="sets">
         <div class="set">
           <label class="checkbox">
-            <input type="radio" id="selectedKDSet" :value="valueForSetId_All" v-model="selectedSetId" />
+            <input type="radio" v-model="selectedSetId" id="selectedSet" :value="valueForSetId_All"
+              @change="handleSelectionChange(valueForSetId_All)"/>
             <span>All recommended sets</span>
           </label>
         </div>
@@ -34,7 +35,8 @@
       <div class="sets">
         <div class="set">
           <label class="checkbox">
-            <input type="radio" id="selectedKDSet" :value="valueForSetId_Personal" v-model="selectedSetId" />
+            <input type="radio" id="selectedKDSet" :value="valueForSetId_Personal" v-model="selectedSetId" 
+            @change="handleSelectionChange(valueForSetId_Personal)"/>
             <span>Personal sets</span>
           </label>
           <div class="js input-file-container" v-show="show_PersonalFileSelection_Div">
@@ -72,16 +74,21 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, ref } from 'vue';
+/* import Vue, typescript */
+import { defineComponent, ref, computed } from 'vue';
 
-import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
-import { SetId, Set_To_Ignore_Kingdoms } from "../dominion/set-id";
-import { SortOption } from "../settings/settings";
-import { useSetsStore } from '../pinia/sets-store';
-
+/* import Dominion Objects and type*/
 import { DominionKingdom } from "../dominion/dominion-kingdom";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
-// import { DominionSets } from '../dominion/dominion-sets';
+import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
+import { SetId, Set_To_Ignore_Kingdoms } from "../dominion/set-id";
+
+import { SortOption } from "../settings/settings";
+
+/* import store  */
+import { useSetsStore } from '../pinia/sets-store';
+
+/* import Components */
 
 declare function Yaml_Parsing(file_content: string): any;
 
@@ -91,30 +98,28 @@ export default defineComponent({
     const setsStore = useSetsStore()
     const selectedSetId = ref(setsStore.selectedSetId)
     const sortSet = ref(setsStore.sortSet);
-      console.log("Setup - SetSidebar")
-      setsStore.updateSortSet(sortSet.value)
-      console.log("Setup - SetSidebar - end")
+    setsStore.updateSortSet(sortSet.value)
 
     const selectedFilterOption = ref(setsStore.showFilterPlayGames); 
     let file_name = "";
-    let show_PersonalFileSelection_Input = false;
+    let show_PersonalFileSelection_Input = ref(false);
 
     const kingdomsets = DominionKingdoms.getAllSets()
       .filter((set) => !((Set_To_Ignore_Kingdoms).has(set)))
       .filter(set => { return (HideMultipleVersionSets.indexOf(set) == -1) });
 
-    const valueForSetId_All = () => { return (SetId.ALL as string); }
-    const valueForSetId_Personal = () => { return (SetId.PERSONAL as string); }
+    const valueForSetId_All = SetId.ALL;
+    const valueForSetId_Personal = SetId.PERSONAL;
 
-    const show_PersonalFileSelection_Div = () => {
+    const show_PersonalFileSelection_Div = computed(() => {
       if (((setsStore.selectedSetId as string) == (SetId.PERSONAL as string)) && (file_name == "")) {
-        show_PersonalFileSelection_Input = true;
+        show_PersonalFileSelection_Input.value = true;
         return true;
       }
-      if (show_PersonalFileSelection_Input) { return true; }
+      if (show_PersonalFileSelection_Input.value) { return true; }
       if (file_name != "") { return true; }
       return false;
-    };
+    });
 
     const SelectFile = (ev: any) => {
       let file = ev.target.files[0];
@@ -149,10 +154,10 @@ export default defineComponent({
       ];
 
     const handleSelectionChange = (value: SetId) => {
-      console.log("handleSelectionChange", value);
+      // console.log("handleSelectionChange", value);
       ((value as string).toLowerCase() == (SetId.PERSONAL as string))
-        ? show_PersonalFileSelection_Input = true
-        : show_PersonalFileSelection_Input = false;
+        ? show_PersonalFileSelection_Input.value = true
+        : show_PersonalFileSelection_Input.value = false;
       setsStore.updateSelectedSet(value);
     };
 

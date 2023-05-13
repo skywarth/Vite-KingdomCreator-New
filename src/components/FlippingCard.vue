@@ -23,8 +23,9 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, PropType, watch, computed, ref, onMounted, onBeforeUpdate, watchEffect, onUpdated, reactive } from "vue";
-import { gsap, Sine } from "gsap";
+import { defineComponent, watch, computed, ref, onMounted } from "vue";
+import type { PropType } from "vue";
+import gsap, { Sine } from "gsap";
 
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
@@ -85,14 +86,13 @@ export default defineComponent({
     let activeAnimation : any = null;
 
     const rotationDegrees = computed(() => 180 * (1 - animationParams.value.rotation));
-    // const isFrontVisible = computed(() => cardState.value == CardState.FRONT_VISIBLE);
-    // const setClassName = computed(() => activeCard.value ? activeCard.value.setId : "");
-    // const setName = computed(() => activeCard.value ? DominionSets.getSetById(activeCard.value.setId).name : "");
     const showHighlight = computed(() => { 
       return cardState.value == CardState.FRONT_VISIBLE && activeCard.value && (selection.value.contains(activeCard.value.id))
     });
     const frontCardImageUrl = computed(() => activeCard.value ? getCardImageUrl(activeCard.value.id, language.value) : "");
     const backCardImageUrl = props.isVertical ? "/img/cards/backside_blue.jpg" : "/img/cards/backside_blue_horizontal.jpg";
+
+
 
     const handleCardChanged = () =>{
       updateCardState();
@@ -199,16 +199,8 @@ export default defineComponent({
         : CardState.FRONT_VISIBLE;
     }
 
-    // const  cancelAnimation = () => {
-    //   if (activeAnimation) {
-    //     activeAnimation.kill();
-    //     activeAnimation = null;
-    //   }
-    // }
-
     return {
       activeCard,
-      
       rotationDegrees,
       showHighlight,
       frontCardImageUrl,

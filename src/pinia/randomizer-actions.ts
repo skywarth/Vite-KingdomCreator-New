@@ -1,5 +1,5 @@
-import { EventTracker } from "../analytics/event-tracker";
-import { EventType } from "../analytics/event-tracker";
+import { EventTracker } from "../analytics/follow-activity";
+import { EventType } from "../analytics/follow-activity";
 import type { Settings } from "../settings/settings";
 import { CardType } from "../dominion/card-type";
 import { RandomizerOptionsBuilder } from "../randomizer/randomizer-options";

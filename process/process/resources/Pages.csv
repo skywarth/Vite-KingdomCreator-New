@@ -1,0 +1,969 @@
+sep=	
+PageName	id	en	nl	de	fr	es	pl
+languages	de	German	Duits	Deutsch	Allemand	Alemán	Niemiecki
+languages	en	English	Engels	Englisch	Anglais	Inglés	Angielski
+languages	fr	French	Frans	Französisch	Français	Francés	Francuski
+languages	nl	Dutch	Nederlands	Niederländisch	Néerlandais	Holandés	Niderlandzki
+languages	es	Spanish	Spaans	Spanisch	Espagnol	Español	Hiszpański
+languages	pl	Polish	Pools	Polnisch	Polonais	Polaco	Polski
+common	addon_description_format_2	{one} & {two}	{one} & {two}	{one} & {two}	{one} & {two}	{one} & {two}	{one} & {two}
+common	addon_description_format_3	{one}, {two} & {three}	{one}, {two} & {three}	{one}, {two} & {three}	{one}, {two} & {three}	{one}, {two} & {three}	{one}, {two} & {three}
+common	addon_description_format_4	{one}, {two}, {three} & {four}	{one}, {two}, {three} & {four}	{one}, {two}, {three} & {four}	{one}, {two}, {three} & {four}	{one}, {two}, {three} & {four}	{one}, {two}, {three} & {four}
+common	addon_description_format_5	{one}, {two}, {three}, {four} & {five}	{one}, {two}, {three}, {four} & {five}	{one}, {two}, {three}, {four} & {five}	{one}, {two}, {three}, {four} & {five}	{one}, {two}, {three}, {four} & {five}	{one}, {two}, {three}, {four} & {five}
+common	addon_events	Events		Ereignisse	Evénements	Eventos	
+common	addon_landmarks	Landmarks		Landmarke	Repères	Hitos	
+common	addon_projects	Projects		Projekte	Projets	Proyectos	
+common	addon_ways	Ways		Wege	Voies	Sendas	
+common	addon_allies	Allies			Alliés		
+common	addon_traits	Traits			Comportement		
+common	github_info	Source is on {source}. Feature requests and complaints go {issues}!	Source is on {source}. Feature requests and complaints go {issues}!	Quellcode ist auf {source}. Funktionsanfragen und Beschwerden bitte {issues}!	Le code source est disponible sur {source}. Pour une demande de fonctionnalité ou un problème, s’adresser {issues} !	Código fuente:  {source}. Solictudes, dudas y errores {issues}!	Kod źródłowy znajduje się w repozytorium {source}. Propozycje zmian oraz uwagi można zgłaszać {issues}!
+common	github_info_source	Github	Github	Github	Github	Github	Github
+common	github_info_issues	here	here	hier	ici	aquí	tu
+common	disclaimers_and_credits	Dominion is by Donald X. Vaccarino and published by Rio Grande Games. This site has no affiliation with either party. Card images are provided by {wiki}. Icons made by {smashicons} from {flaticon} and is licensed by {creativecommons}.	Dominion is by Donald X. Vaccarino and published by Rio Grande Games. This site has no affiliation with either party. Card images are provided by {wiki}. Icons made by {smashicons} from {flaticon} and is licensed by {creativecommons}.	Dominion is by Donald X. Vaccarino and published by Rio Grande Games. This site has no affiliation with either party. Card images are provided by {wiki}. Icons made by {smashicons} from {flaticon} and is licensed by {creativecommons}.	Dominion est un jeu de Donald X. Vaccarino, publié par Rio Grande Games. Ce site n’est affilié avec aucun des deux. Les visuels des cartes sont fournis par {wiki}. Les icones sont faits par {smashicons} de {flaticon}, sous licence {creativecommons}.	Dominion, creado por Donald X. Vaccarino y publicado por Rio Grande Games. Esta página no tiene relación con ninguna de las partes. Ls imágenes de las cartas provienen de {wiki}. Los iconos han sido creador por {smashicons} de {flaticon} y están licenciados por {creativecommons}.	Autorem gry Dominion jest Donald X. Vaccarino a wydawcą Rio Grande Games. Ta strona nie ma relacji z autorem ani wydawcą. Obrazy kart są dostarczone z {wiki}. Ikony dostarczył {smashicons} od {flaticon} na licencji {creativecommons}.
+common	disclaimers_and_credits_wiki	Dominion Strategy Wiki	Dominion Strategy Wiki	Dominion Strategy Wiki	Dominion Strategy Wiki	Dominion Strategy Wiki	Dominion Strategy Wiki
+common	disclaimers_and_credits_smashicons	Smashicons	Smashicons	Smashicons	Smashicons	Smashicons	Smashicons
+common	disclaimers_and_credits_creative_commons	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY
+common							
+page-boxes	boxes_page_subtitle	Content of Dominion boxes	Content of Dominion boxes	Content of Dominion boxes	Contenu des boites Dominion	Contenu des boites Dominion	Content of Dominion boxes
+page-boxes	boxes_page_description	All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...			Toutes les cartes présentés dans les boites de Dominion. Les types de cartes sont 		All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...
+page-boxes	Sets content	Sets content			Boîtes		
+page-boxes	Kingdoms Cards	Kingdoms Cards			Cartes Royaume		
+page-boxes	Events	Events			Events		
+page-boxes	Landmarks	Landmarks			Landmarks		
+page-boxes	Projects	Projects			Projects		
+page-boxes	Boons	Boons			Boons		
+page-boxes	Ways	Ways			Ways		
+page-boxes	Allies	Allies			Alliés		
+page-boxes	Traits	Traits			Comportements		
+page-boxes	States	States			States		
+page-boxes	Hexes	Hexes			Hexes		
+page-boxes	Artifacts	Artifacts			Artifacts		
+page-boxes	Non-Supply Cards - Heirlooms	Non-Supply Cards - Heirlooms			Non-Supply Cards - Heirlooms		
+page-boxes	Non-Supply Cards	Non-Supply Cards			Non-Supply Cards		
+page-boxes	Supply Cards - Travellers - Peasant Progression	Supply Cards - Travellers - Peasant Progression			Supply Cards - Travellers - Peasant Progression		
+page-boxes	Supply Cards - Travellers - Page Progression	Supply Cards - Travellers - Page Progression			Supply Cards - Travellers - Page Progression		
+page-boxes	Supply Cards Split Piles	Supply Cards Split Piles			Supply Cards Split Piles		
+page-boxes	Basic Cards - Shelters	Basic Cards - Shelters			Basic Cards - Shelters		
+page-boxes	Basic Cards - Ruins	Basic Cards - Ruins 			Basic Cards - Ruins 		
+page-boxes	Basic Cards	Basic Cards			Basic Cards		
+page-boxes	Supply Cards - Castles	Supply Cards - Castles			Supply Cards - Castles		
+page-boxes	Supply Cards - Knights	Supply Cards - Knights			Supply Cards - Knights		
+page-boxes	Loot Cards	Loot Cards			Loot Cards		
+page-boxes							
+page-boxes	Cost	Cost			coût		
+page-boxes	Tokens included in box	Tokens included in box			Pièces incluses dans la boite		
+page-boxes	Randomizer	Randomizer			Randomizer		
+page-boxes	Mat included in box	Mat included in box			Plateaux incluses dans la boite		
+page-boxes	Tokens	Tokens			Pièces		
+page-boxes	Cards	Cards			Cartes		
+page-boxes	Rules	Rules			régles		
+page-boxes							
+page-boxes	Randomizer	Randomizer			Randomizer		
+page-boxes	Recommended Kingdoms	Recommended Kingdoms			Recommended Kingdoms		
+page-boxes	Box content 	Box content			Box content		
+page-boxes							
+page-index	index_page_subtitle	Dominion card picker for desktop and mobile	Dominion card picker for desktop and mobile	Zufällige Kartenauswahl aus gewählten Erweiterungs-Sets	Tirage de cartes de Dominion pour desktop et mobile	Generador de cartas alatorias de Dominion versión escritorio y móvil	Losowanie kart dla gry Dominion - wersja na urządzenia dektopowe i mobilne
+page-index	colonies_and_platinums	Colonies & Platinums	Kolonie & Platina	Kolonie & Platin	Colonies & Platines	Colonias y Platinos	Kolonia i platyna
+page-index	shelters	Shelters	Onderdak	Unterschlupf	Refuges	Refugios	Shelters (schronienia)
+page-index	3Plus_Alchemy_Cards	3+ Alchemy Cards		3+ Alchemy Cards	3+ Cartes Alchimie		
+page-index	Randomizer	Randomizer		Randomizer	jeux au hasard		
+page-index	Recommended Kingdoms	Recommended Kingdoms		Recommended Kingdoms	jeux définis		
+page-index	Box content	Box content		Box content	contenu des boites		
+page-index	Rules	Rules		Rules	Régles		
+page-index	Sets	Sets		Sets	Sets		
+page-index	Require +2 Action	Require +2 Action		Mit +2 Aktionen	Require +2 Action		
+page-index	Require Drawer	Require Drawer		Mit Kartenziehen	Require Drawer		
+page-index	Require Buy	Require Buy		Mit Kauf	Require Buy		
+page-index	Allow Attacks	Allow Attacks		Attacken Erlauben	Allow Attacks		
+page-index	Require Reaction	Require Reaction		Mit Reaktion	Require Reaction		
+page-index	Require Trashing	Require Trashing		Mit Entsorgung	Require Trashing		
+page-index	Distribute Cost	Distribute Cost		Kosten Verteilen	Distribute Cost		
+page-index	Prioritize Set	Prioritize Set  		"Priorisiere Set	Prioritize Sets		
+page-index	Set	Set		Nach Set	par Set		
+page-index	Alphabetical	Alphabetical		Alphabetisch	Alphabétique		
+page-index	Cost	Cost		Nach Kosten	par Coût		
+page-index	Choose set	Choose set...		Wähle Set...	Choose set...		
+page-index	Options	Options		Optionen	Options		
+page-index	Replace	Replace!		Ersetzen!	Replace!		
+page-index	Randomize	Randomize!		Randomisieren!	Randomize!		
+page-index	Sort	Sort		Sortieren	Tri		
+page-index							
+page-index							
+page-index							
+page-rules	rules_page_subtitle	Original rule books of Dominion Sets	Original rule books of Dominion Sets	Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
+page-rules	rules_page_description	Below are the rulebooks published with each set of dominion. Rulebooks contain descriptions of kingdom card and how they interact with other kingdom cards.		Nachfolgend die Spielanleitungen der Erweiterungen zu Dominion auf englisch. Darin enthalten sind auch detailierte Erklärungen der einzelnen Karten.	Ci-dessous, les livrets de règles publiés avec chaque boîte de Dominion. Les livrets contiennent une description de chaque carte royaume, qui explicite leurs interactions avec les autres cartes.	A continuación se encuentran los libros de reglas (en inglés) publicados con cada juego de Dominion. Los libros de reglas conienen las descripciones de las cartas de reino y como interactúan con otras cartas de reino.	Poniżej znajdują się podręczniki opublikowane z każdym zestawem gry Dominium. Instrukcje zawierają opisy kart królestwa oraz ich interakcje z innymi kartami królestw.
+page-rules							
+page-sets	sets_page_subtitle	Recommended Sets of 10	Recommended Sets of 10	Empfohlene Königreiche / Kartensätze	Ensembles de 10 cartes Royaume recommandés,	Ideas de Partidas	Rekomendowane zestawy po 10
+page-sets	sets_page_description	Players can play Dominion with any set of 10 Kingdom cards, but these sets have been specially picked out to be entertaining and show off card interactions and strategies.		Diese Kartensätze wurden händisch zusammengestellt, um ein besonders unterhaltsames Spielerlebnis zu bieten und verschiedene Karten-Interaktionen und Strategien vorzustellen.	Vous pouvez jouer à Dominion avec n’importe quelle combinaison de 10 cartes Royaume. Les ensembles suivants mettent en valeur certaines combinaisons de cartes et différentes stratégies.	Se puede jugar a Dominion con cualquier grupo de 10 cartas de Reino, pero estos grupos están pensados para resaltar ciertas combinaciones interesantes de cartas y estrategias de juego.	Gracze Dominion mogą brać z dowolnym zestawem 10 kart królestwa, jednak poniższe zestawy zostały przygotowane z myślą o rozrywce oraz demonstracji interakcji pomiędzy kartami i strategii użycia kart.
+page-sets	sets_page Sets	Sets			Extensions		
+page-sets	Use Platinums/Colonies	Use Platinums/Colonies			Utiliser Platines/Colonies		
+page-sets	Use Shelters	Use Shelters			Utiliser les Refuges		
+page-sets	To Filter Sets	To Filter Sets			Filter par extensions		
+page-sets	Recommended Kingdoms Sets	{n} Recommended Kingdoms Set|{n} Recommended Kingdoms Set|{n} Recommended Kingdoms Sets			{n} Ensemble de Royaumes recommandé|{n} Ensemble de Royaumes recommandé|{n} Ensembles de Royaumes recommandés		
+page-sets	Recommended Kingdom Set	Recommended Kingdoms Set			Ensemble de Royaumes recommandés		
+page-sets	show filter	show filter			afficher le filtre		
+page-sets	hide filter	hide filter			masquer le filtre		
+page-sets	reset filter	reset filter			reset filter		
+page-sets	show Kingdoms list	show Kingdoms list			afficher la liste des noms de jeux		
+page-sets	hide Kingdoms list	hide Kingdoms list			masquer la liste des noms de jeux		
+page-sets	mykingdoms	mykingdoms			mykingdoms		
+page-sets	All recommended sets	All recommended sets			All recommended sets		
+page-sets	Personal sets	Personal sets			Personal sets		
+page-sets	Sets	Sets			Sets		
+page-sets	Bane	Bane			Fléau		
+page-sets	Filter Games	Filter Games			Filtrer les jeux		
+page-sets	All Games	All Games			tous les jeux		
+page-sets	Played Games	Played Games			Déjà joués		
+page-sets	Not played Games	Not played Games			Pas encore joués		
+page-sets							
+							
+sets	adventures	adventures	Avonturen	Abenteuer	Aventures	Aventuras	Adventures
+sets	alchemy	alchemy	De Alchemisten	Die Alchemisten	Alchimie	Alquimia	Alchemy
+sets	allies	allies		Verbündete	Alliés		Allies
+sets	baseset2add	baseset2add			Dominion updatepack		Dominion updatepack
+sets	baseset2	baseset2	Dominion II	Dominion II	Dominion (2nd ed)	Dominion 2ª Ed.	Dominion II
+sets	baseset	baseset	Dominion	Dominion	Dominion	Dominion	Dominion
+sets	cornucopia	cornucopia	Overvloed	Reiche Ernte	Abondance	Cornucopia	Róg obfitości
+sets	darkages	darkages	Middeleeuwen	Dark Ages	L'âge des ténèbres	Edad Oscura	Dark Ages
+sets	empires	empires	Keizerrijken	Empires	Empires	Imperios	Imperium
+sets	guilds	guilds	De Gilden	Die Gilden	Guildes	Gremios	Guilds
+sets	hinterlands	hinterlands	Het Achterland	Hinterland	L'Arrière-Pays	Comarcas	Hinterlands
+sets	hinterlands2	hinterlands2	Het Achterland II	Hinterland II	L'Arrière-Pays (2nd ed)	Comarcas 2ª Ed.	Hinterlands II
+sets	hinterlands2add	hinterlands2add			L'Arrière-Pays updatepack		Hinterlands updatepack
+sets	intrigue2add	intrigue2add			Intrigue updatepack		Intryga updatepack
+sets	intrigue2	intrigue2	Intrige II	Die Intrige II	L'Intrigue (2nd ed)	Intriga 2ª Ed.	Intryga II
+sets	intrigue	intrigue	Intrige	Die Intrige	L'Intrigue	Intriga	Intryga
+sets	menagerie	menagerie	Menagerie	Menagerie	Ménagerie	Bestiario	Menagerie
+sets	nocturne	nocturne	Nocturne	Nocturne	Nocturne	Nocturno	Pieśń nocy
+sets	promos	promos	Promos	Promos	Promos	Promos	Promos
+sets	prosperity	prosperity	Welvaart	Blütezeit	Prospérité	Prosperidad	Złoty wiek
+sets	prosperity2add	prosperity2add	Welvaart updatepack	Blütezeit updatepack	Prospérité updatepack	Prosperidad updatepack	Złoty wiek updatepack
+sets	prosperity2	prosperity2		Blütezeit II	Prospérité (2nd ed)	Prosperidad 2ª Ed.	Złoty wiek II
+sets	renaissance	renaissance	Renaissance	Renaissance	Renaissance	Renacimiento	Renaissance
+sets	seaside	seaside	Hijs de Zeilen	Seaside	Rivages	Terramar	Przystań
+sets	seaside2	seaside2	Hijs de Zeilen II	Seaside II	Rivages (2nd ed)	Terramar 2ª Ed.	Przystań II
+sets	seaside2add	seaside2add			Rivages updatepack		Przystań updatepack
+sets	plunder	plunder			Pillage		
+							
+cards.baseset	baseset2_harbinger	Harbinger	Voorbode	Vorbotin	Présage	Emisario	
+cards.baseset	baseset2_merchant	Merchant	Koopman	Händlerin	Marchand	Tendera	
+cards.baseset	baseset2_vassal	Vassal	Vazal	Vasall	Vassal	Vasallo	
+cards.baseset	baseset2_poacher	Poacher	Wilddief	Wilddiebin	Braconnier	Cazadora	
+cards.baseset	baseset2_bandit	Bandit	Bandiet	Banditin	Brigand	Bandida	
+cards.baseset	baseset2_sentry	Sentry	Cipier	Torwächterin	Sentinelle	Protectora	
+cards.baseset	baseset2_artisan	Artisan	Ambachtsman	Töpferei	Artisan	Artesana	
+cards.baseset	baseset_adventurer	Adventurer	Avonturier	Abenteurer	Aventurier	Aventurero	Odkrywca
+cards.baseset	baseset_bureaucrat	Bureaucrat	Bureaucraat	Bürokrat	Bureaucrate	Burócrata	Urzędnik
+cards.baseset	baseset_cellar	Cellar	Kelder	Keller	Cave	Sótano	Piwnica
+cards.baseset	baseset_chancellor	Chancellor	Raadsheer	Kanzler	Chancelier	Canciller	Capilla
+cards.baseset	baseset_chapel	Chapel	Kapel	Kapelle	Chapelle	Kaplica	
+cards.baseset	baseset_councilroom	Council Room	Raadszaal	Ratsversammlung	Chambre du conseil	Sala del Consejo	Sala obrad
+cards.baseset	baseset_feast	Feast	Feest	Festmahl	Festin	Banquete	Uczta
+cards.baseset	baseset_festival	Festival	Festival	Jahrmarkt	Festival	Festival	Festyn
+cards.baseset	baseset_gardens	Gardens	Tuinen	Gärten	Jardins	Jardines	Ogrody
+cards.baseset	baseset_laboratory	Laboratory	Laboratorium	Laboratorium	Laboratoire	Laboratorio	Laboratorium
+cards.baseset	baseset_library	Library	Bibliotheek	Bibliothek	Bibliothèque	Biblioteca	Biblioteka
+cards.baseset	baseset_market	Market	Markt	Markt	Marché	Mercado	Targowisko
+cards.baseset	baseset_militia	Militia	Militie	Miliz	Milice	Milicia	Milicja
+cards.baseset	baseset_mine	Mine	Mijn	Mine	Mine	Mina	Kopalnia
+cards.baseset	baseset_moat	Moat	Slotgracht	Burggraben	Douves	Foso	Fosa
+cards.baseset	baseset_moneylender	Moneylender	Geldschieter	Geldverleiher	Prêteur sur gages	Prestamista	Lichwiarz
+cards.baseset	baseset_remodel	Remodel	Verbouwing	Umbau	Rénovation	Remodelar	Przebudowa
+cards.baseset	baseset_smithy	Smithy	Smidse	Schmiede	Forgeron	Herrería	Kuźnia
+cards.baseset	baseset_spy	Spy	Spion	Spion	Espion	Espía	
+cards.baseset	baseset_thief	Thief	Dief	Dieb	Voleur	Ladrón	Złodziej
+cards.baseset	baseset_throneroom	Throne Room	Troonzaal	Thronsaal	Salle du trône	Salón del Trono	Sala tronowa
+cards.baseset	baseset_village	Village	Dorp	Dorf	Village	Aldea	Wioska
+cards.baseset	baseset_witch	Witch	Heks	Hexe	Sorcière	Bruja	Wiedźma
+cards.baseset	baseset_woodcutter	Woodcutter	Houthakker	Holzfäller	Bûcheron	Leñadores	Drwal
+cards.baseset	baseset_workshop	Workshop	Werkplaats	Werkstatt	Atelier	Taller	Warsztat
+							
+cards.intrigue	intrigue2_nobles	Nobles	Adel	Adelige	Nobles	Nobles	
+cards.intrigue	intrigue2_conspirator	Conspirator	Samenzweerder	Verschwörer	Conspirateur	Conspirador	
+cards.intrigue	intrigue2_miningvillage	Mining Village	Mijndorp	Bergwerk	Village minier	Aldea Minera	
+cards.intrigue	intrigue2_pawn	Pawn	Pion	Handlanger	Pion	Peón	
+cards.intrigue	intrigue2_courtyard	Courtyard	Binnenplaats	Burghof	Cour	Patio	
+cards.intrigue	intrigue2_tradingpost	Trading Post	Handelspost	Handelsposten	Comptoir	Puesto Comercial	
+cards.intrigue	intrigue2_duke	Duke	Hertog	Herzog	Duc	Duque	
+cards.intrigue	intrigue2_baron	Baron	Baron	Baron	Baron	Barón	
+cards.intrigue	intrigue2_swindler	Swindler	Oplichter	Trickser	Escroc	Embaucador	
+cards.intrigue	intrigue2_bridge	Bridge	Brug	Brücke	Pont	Puente	
+cards.intrigue	intrigue2_torturer	Torturer	Folteraar	Kerkermeister	Bourreau	Torturador	
+cards.intrigue	intrigue2_wishingwell	Wishing Well	Wensput	Wunschbrunnen	Puits aux souhaits	Pozo de los Deseos	
+cards.intrigue	intrigue2_masquerade	Masquerade	Maskerade	Maskerade	Mascarade	Mascarada	
+cards.intrigue	intrigue2_ironworks	Ironworks	IJzergieterij	Eisenhütte	Fonderie	Fundición	
+cards.intrigue	intrigue2_steward	Steward	Lakei	Verwalter	Intendant	Mayordomo	
+cards.intrigue	intrigue2_harem	Harem	Harem	Harem	Harem	Harén	
+cards.intrigue	intrigue2_minion	Minion	Dienaar	Lakai	Larbin	Esbirro	
+cards.intrigue	intrigue2_upgrade	Upgrade	Opwaardering	Anbau	Mise à niveau	Mejora	
+cards.intrigue	intrigue2_shantytown	Shanty Town	Sloppenwijk	Armenviertel	Taudis	Chabolas	
+cards.intrigue	intrigue2_lurker	Lurker	Voyeur	Herumtreiberin	Rôdeur	Acechador	
+cards.intrigue	intrigue2_diplomat	Diplomat	Diplomaat	Diplomatin	Diplomate	Diplomática	
+cards.intrigue	intrigue2_mill	Mill	Molen	Mühle	Moulin	Molino	
+cards.intrigue	intrigue2_secretpassage	Secret Passage	Geheime Doorgang	Geheimgang	Passage secret	Pasadizo Secreto	
+cards.intrigue	intrigue2_patrol	Patrol	Patrouille	Patrouille	Patrouille	Patrulla	
+cards.intrigue	intrigue2_courtier	Courtier	Makelaar	Höflinge	Courtisan	Cortesano	
+cards.intrigue	intrigue2_replace	Replace	Vervanging	Austausch	Remplacement	Reemplazar	
+cards.intrigue	intrigue_nobles	Nobles	Adel	Adelige	Nobles	Nobles	Szlachta
+cards.intrigue	intrigue_conspirator	Conspirator	Samenzweerder	Verschwörer	Conspirateur	Conspirador	Spiskowiec
+cards.intrigue	intrigue_miningvillage	Mining Village	Mijndorp	Bergwerk	Village minier	Aldea Minera	Osada górnicza
+cards.intrigue	intrigue_secretchamber	Secret Chamber	Geheime Kamer	Geheimkammer	Chambre secrète	Cámara Secreta	Tajna komnata
+cards.intrigue	intrigue_coppersmith	Coppersmith	Kopersmid	Kupferschmied	Chaudronnier	Artesano del Cobre	Mennica
+cards.intrigue	intrigue_pawn	Pawn	Pion	Handlanger	Pion	Peón	Giermek
+cards.intrigue	intrigue_courtyard	Courtyard	Binnenplaats	Burghof	Cour	Patio	Dziedziniec
+cards.intrigue	intrigue_tradingpost	Trading Post	Handelspost	Handelsposten	Comptoir	Puesto Comercial	Faktoria
+cards.intrigue	intrigue_scout	Scout	Verkenner	Späher	Éclaireur	Explorador	Zwiadowca
+cards.intrigue	intrigue_duke	Duke	Hertog	Herzog	Duc	Duque	Starosta
+cards.intrigue	intrigue_baron	Baron	Baron	Baron	Baron	Barón	Baron
+cards.intrigue	intrigue_swindler	Swindler	Oplichter	Trickser	Escroc	Embaucador	Kanciarz
+cards.intrigue	intrigue_bridge	Bridge	Brug	Brücke	Pont	Puente	Most
+cards.intrigue	intrigue_torturer	Torturer	Folteraar	Kerkermeister	Bourreau	Torturador	Oprawca
+cards.intrigue	intrigue_wishingwell	Wishing Well	Wensput	Wunschbrunnen	Puits aux souhaits	Pozo de los Deseos	Studnia życzeń
+cards.intrigue	intrigue_masquerade	Masquerade	Maskerade	Maskerade	Mascarade	Mascarada	Maskarada
+cards.intrigue	intrigue_ironworks	Ironworks	IJzergieterij	Eisenhütte	Fonderie	Fundición	Huta żelaza
+cards.intrigue	intrigue_steward	Steward	Lakei	Verwalter	Intendant	Mayordomo	Zarządca
+cards.intrigue	intrigue_harem	Harem	Harem	Harem	Harem	Harén	Harem
+cards.intrigue	intrigue_minion	Minion	Dienaar	Lakai	Larbin	Esbirro	Sługus
+cards.intrigue	intrigue_saboteur	Saboteur	Saboteur	Saboteur	Saboteur	Saboteador	Sabotażysta
+cards.intrigue	intrigue_upgrade	Upgrade	Opwaardering	Anbau	Mise à niveau	Mejora	Rozbudowa
+cards.intrigue	intrigue_tribute	Tribute	Tolheffing	Tribut	Hommage	Tributo	Danina
+cards.intrigue	intrigue_greathall	Great Hall	Grote Zaal	Grosse Halle	Grand hall	Gran Sala	Westybul
+cards.intrigue	intrigue_shantytown	Shanty Town	Sloppenwijk	Armenviertel	Taudis	Chabolas	Rudera"
+							
+cards.seaside	seaside_ghostship	Ghost Ship	De Vliegende Hollander	Geisterschiff	Vaisseau fantôme	Barco Fantasma	Okręt widmo
+cards.seaside	seaside_smugglers	Smugglers	Smokkelaar	Schmuggler	Contrebandiers	Contrabandistas	Przemytnicy
+cards.seaside	seaside_salvager	Salvager	Afvalverwerker	Müllverwerter	Sauveteur	Rescatador	Wyławiacz
+cards.seaside	seaside_haven	Haven	Haven	Hafen	Havre	Puerto	Przystań
+cards.seaside	seaside_ambassador	Ambassador	Boodschapper	Botschafter	Ambassadeur	Embajador	Ambasador
+cards.seaside	seaside_seahag	Sea Hag	Zeeheks	Seehexe	Sorcière de mer	Bruja del Mar	Morska wiedźma
+cards.seaside	seaside_nativevillage	Native Village	Inheems Dorp	Eingeborenendorf	Village indigène	Poblado Indígena	Wioska tubylców
+cards.seaside	seaside_navigator	Navigator	Navigator	Navigator	Navigateur	Navegante	Nawigator
+cards.seaside	seaside_tactician	Tactician	Strateeg	Taktiker	Tacticien	Estratega	Strateg
+cards.seaside	seaside_fishingvillage	Fishing Village	Vissersdorp	Fischerdorf	Village de pêcheurs	Pueblo de Pescadores	Wioska rybacka
+cards.seaside	seaside_island	Island	Eiland	Insel	Île	Isla	Wyspa
+cards.seaside	seaside_wharf	Wharf	Scheepswerf	Werft	Quai	Muelle	Nabrzeże
+cards.seaside	seaside_bazaar	Bazaar	Bazaar	Bazar	Bazar	Bazar	Bazar
+cards.seaside	seaside_treasuremap	Treasure Map	Schatkaart	Schatzkarte	Carte aux trésors	Mapa del Tesoro	Mapa skarbu
+cards.seaside	seaside_explorer	Explorer	Ontdekkingsreiziger	Entdecker	Explorateur	Explordora	Zdobywca
+cards.seaside	seaside_lookout	Lookout	Uitkijk	Ausguck	Vigie	Vigía	Bocianie gniazdo
+cards.seaside	seaside_treasury	Treasury	Schatkamer	Schatzkammer	Trésorerie	Tesorería	Skarbiec
+cards.seaside	seaside_cutpurse	Cutpurse	Beurzensnijder	Beutelschneider	Coupeur de bourse	Ratero	Kieszonkowiec
+cards.seaside	seaside_caravan	Caravan	Karavaan	Karawane	Caravane	Caravana	Karawana
+cards.seaside	seaside_warehouse	Warehouse	Pakhuis	Lagerhaus	Entrepôt	Almacén	Magazyn
+cards.seaside	seaside_lighthouse	Lighthouse	Vuurtoren	Leuchtturm	Phare	Faro	Latarnia morska
+cards.seaside	seaside_pirateship	Pirate Ship	Piratenschip	Piratenschiff	Bateau pirate	Barco Pirata	Okręt piracki
+cards.seaside	seaside_pearldiver	Pearl Diver	Parelduiker	Perlentaucher	Plongeur de perles	Pescador de Perlas	Poławiacz pereł
+cards.seaside	seaside_merchantship	Merchant Ship	Handelsschip	Handelsschiff	Navire marchand	Barco Mercante	Okręt kupiecki
+cards.seaside	seaside_embargo	Embargo	Embargo	Embargo	Embargo	Embargo	Embargo
+cards.seaside	seaside_outpost	Outpost	Voorpost	Aussenposten	Avant-poste	Puesto Avanzado	Przyczółek"
+cards.seaside	seaside2_astrolabe	Astrolabe		Astrolabium	Astrolabe		
+cards.seaside	seaside2_monkey	Monkey		Affe	Singe		
+cards.seaside	seaside2_seachart	Sea Chart		Seekarte	Carte Maritime		
+cards.seaside	seaside2_blockade	Blockade		Blockade	Blocus		
+cards.seaside	seaside2_sailor	Sailor		Seefahrerin	Navigatrice		
+cards.seaside	seaside2_tidepools	Tide Pools		Gezeitenbecken	Marée		
+cards.seaside	seaside2_corsair	Corsair		Korsarenschiff	Corsaire		
+cards.seaside	seaside2_pirate	Pirate		Piratin	Pirate		
+cards.seaside	seaside2_seawitch	Sea Witch		Meerhexe	Sorcière Marine		
+							
+cards.alchemy	alchemy_alchemist	Alchemist	Alchemist	Alchemist	Alchimiste	Alquimista	
+cards.alchemy	alchemy_apothecary	Apothecary	Apotheker	Apotheker	Apothicaire	Boticario	
+cards.alchemy	alchemy_apprentice	Apprentice	Leerling	Lehrling	Apprenti	Aprendiz	
+cards.alchemy	alchemy_familiar	Familiar	Oude bekende	Vertrauter	Familier	Familiar	
+cards.alchemy	alchemy_golem	Golem	Golem	Golem	Golem	Gólem	
+cards.alchemy	alchemy_herbalist	Herbalist	Kruidenexpert	Kräuterkundiger	Herboriste	Herbalista	
+cards.alchemy	alchemy_philosophersstone	Philosopher's Stone	Steen der wijzen	Stein der Weisen	Pierre philosophale	Piedra Filosofal	
+cards.alchemy	alchemy_possession	Possession	Bezeten	Besessenheit	Possession	Posesión	
+cards.alchemy	alchemy_scryingpool	Scrying Pool	Visioen	Vision	Bassin divinatoire	Hidromancia	
+cards.alchemy	alchemy_transmute	Transmute	Transformatie	Verwandlung	Transmutation	Transmutar	
+cards.alchemy	alchemy_university	University	Universiteit	Universität	Université	Universidad	
+cards.alchemy	alchemy_vineyard	Vineyard	Wijnberg	Weinberg	Vignoble	Viñedo	
+							
+cards.prosperity	prosperity_bank	Bank	Bank	Bank	Banque	Banco	Bank
+cards.prosperity	prosperity_city	City	Stad	Stadt	Ville	Ciudad	Miasto
+cards.prosperity	prosperity_contraband	Contraband	Smokkelwaar	Schmuggelware	Contrebande	Contrabando	Kontrabanda
+cards.prosperity	prosperity_countinghouse	Counting House	Boekhouding	Leihhaus	Bureau de comptabilité	Casa de Cuentas	Rachuba
+cards.prosperity	prosperity_bishop	Bishop	Bisschop	Bischof	Évêque	Obispo	Biskup
+cards.prosperity	prosperity_grandmarket	Grand Market	Grote markt	Grosser Markt	Grand marché	Gran Mercado	Wielki targ
+cards.prosperity	prosperity_goons	Goons	Domkoppen	Halsabschneider	Fiers-à-bras	Matones	Naciągacze
+cards.prosperity	prosperity_watchtower	Watchtower	Uitkijktoren	Wachturm	Mirador	Atalaya	Strażnica
+cards.prosperity	prosperity_expand	Expand	Uitbreiden	Ausbau	Agrandissement	Expansión	Modernizacja
+cards.prosperity	prosperity_kingscourt	King's Court	Koningshof	Königshof	Cour du roi	Corte Real	Rada królewska
+cards.prosperity	prosperity_hoard	Hoard	Spaargeld	Hort	Magot	Tesoro Escondido	Krocie
+cards.prosperity	prosperity_peddler	Peddler	Venter	Hausierer	Colporteur	Buhonero	Domokrążca
+cards.prosperity	prosperity_monument	Monument	Monument	Denkmal	Monument	Monumento	Monument
+cards.prosperity	prosperity_forge	Forge	Vervalsen	Kunstschmiede	Forge	Forja	Płatnerz
+cards.prosperity	prosperity_rabble	Rabble	Gespuis	Gesindel	Foule	Chusma	Motłoch
+cards.prosperity	prosperity_talisman	Talisman	Talisman	Talisman	Talisman	Talismán	Talizman
+cards.prosperity	prosperity_mint	Mint	Aanmunten	Münzer	Hôtel de la monnaie	Acuñador	Mincerz
+cards.prosperity	prosperity_loan	Loan	Lening	Lohn	Prêt	Préstamo	Kredyt
+cards.prosperity	prosperity_traderoute	Trade Route	Handelsroute	Handelsroute	Route commerciale	Ruta Comercial	Szlak Handlowy
+cards.prosperity	prosperity_quarry	Quarry	Steengroeve	Steinbruch	Carrière	Cantera	Kamieniołom
+cards.prosperity	prosperity_royalseal	Royal Seal	Koninklijk zegel	Königliches Siegel	Sceau royal	Sello Real	Królewska Pieczęć
+cards.prosperity	prosperity_mountebank	Mountebank	Charlatan	Quacksalber	Charlatan	Charlatán	Szarlatan
+cards.prosperity	prosperity_workersvillage	Worker's Village	Arbeidersdorp	Arbeiterdorf	Village ouvrier	Pueblo de Trabajadores	Wioska robotnicza
+cards.prosperity	prosperity_vault	Vault	Schatkelder	Gewölbe	Chambre forte	Bóveda	Składnica
+cards.prosperity	prosperity_venture	Venture	Waagstuk	Abenteuer	Entreprise risquée	Especulación	Złoty interes"
+cards.prosperity	prosperity2_anvil	Anvil		Amboss	Enclume		
+cards.prosperity	prosperity2_clerk	Clerk		Buchhalterin	Compatble		
+cards.prosperity	prosperity2_investment	Investment		Geldanlage	Placement		
+cards.prosperity	prosperity2_tiara	Tiara		Brautkrone	Couronne de Mariée		
+cards.prosperity	prosperity2_charlatan	Charlatan		Wunderheilerin	Charlatane		
+cards.prosperity	prosperity2_collection	Collection		Sammelsurium	Collection		
+cards.prosperity	prosperity2_crystalball	Crystal Ball		Kristallkugel	Boule de Cristal		
+cards.prosperity	prosperity2_magnate	Magnate		Magnatin	Magnat		
+cards.prosperity	prosperity2_warchest	War Chest		Waffenkiste	Trésor de Guerre		
+							
+cards.cornucopia	cornucopia_harvest	Harvest	Oogst	Ernte	Récolte	Cosecha	Żniwa
+cards.cornucopia	cornucopia_youngwitch	Young Witch	Jonge heks	Junge Hexe	Jeune sorcière	Bruja Joven	Młoda wiedźma
+cards.cornucopia	cornucopia_horsetraders	Horse Traders	Paardenhandelaars	Pferdehändler	Maquignons	Tratantes de Caballos	Banda koniokradów
+cards.cornucopia	cornucopia_tournament	Tournament	Toernooi	Turnier	Tournoi	Torneo	Tournament
+cards.cornucopia	cornucopia_hamlet	Hamlet	Gehucht	Weiler	Hameau	Caserío	Folwark
+cards.cornucopia	cornucopia_jester	Jester	Nar	Harlekin	Bouffon	Bufón	Błazen
+cards.cornucopia	cornucopia_fortuneteller	Fortune Teller	Waarzegster	Wahrsagerin	Diseuse de bonne aventure	Adivinadora	Cyganka
+cards.cornucopia	cornucopia_fairgrounds	Fairgrounds	Kermisterrein	Festplatz	Champ de foire	Recinto Ferial	Odpust
+cards.cornucopia	cornucopia_hornofplenty	Horn of Plenty	Hoorn des overvloeds	Füllhorn	Corne d'abondance	Cornucopia	Róg obfitości
+cards.cornucopia	cornucopia_huntingparty	Hunting Party	Jachtgezelschap	Treibjagd	Chasseurs	Cacería	Polowanie
+cards.cornucopia	cornucopia_menagerie	Menagerie	Menagerie	Menagerie	Ménagerie	Colección de Animales	Menażeria
+cards.cornucopia	cornucopia_farmingvillage	Farming Village	Boerendorp	Bauerndorf	Village agricole	Poblado Agrícola	Farma
+cards.cornucopia	cornucopia_remake	Remake	Nieuwe versie	Nachbau	Renouvellement	Reconstrucción	Rozbiórka"
+cards.cornucopia	cornucopia_bagofgold	Bag of Gold			Sac d'Or		
+cards.cornucopia	cornucopia_diadem	Diadem			Diadème		
+cards.cornucopia	cornucopia_followers	Followers			Partisans		
+cards.cornucopia	cornucopia_princess	Princess			Princesse		
+cards.cornucopia	cornucopia_trustysteed	Trusty Steed			Fidèle Destrier		
+							
+cards.hinterlands	hinterlands_bordervillage	Border Village	Grensdorp	Grenzdorf	Village frontalier	Pueblo Fronterizo	
+cards.hinterlands	hinterlands_foolsgold	Fool's Gold	Klatergoud	Katzengold	Or des fous	Oro Falso	
+cards.hinterlands	hinterlands_trader	Trader	Handelaar	Fahrender Händler	Troqueuse	Comerciante	
+cards.hinterlands	hinterlands_highway	Highway	Hoofdweg	Fernstrasse	Route	Carretera	
+cards.hinterlands	hinterlands_silkroad	Silk Road	Zijderoute	Seidenstrasse	Route de la soie	Ruta de la Seda	
+cards.hinterlands	hinterlands_illgottengains	Ill-Gotten Gains	Gestolen goed	Blutzoll	Argent noir	Dinero Sucio	
+cards.hinterlands	hinterlands_embassy	Embassy	Ambassade	Botschaft	Ambassade	Embajada	
+cards.hinterlands	hinterlands_nomadcamp	Nomad Camp	Nomadenkamp	Nomadencamp	Campement nomade	Campamento Nómada	
+cards.hinterlands	hinterlands_spicemerchant	Spice Merchant	Specerijenkoopman	Gewürzhändler	Marchand d'épices	Mercader de Especias	
+cards.hinterlands	hinterlands_oracle	Oracle	Orakel	Orakel	Oracle	Oráculo	
+cards.hinterlands	hinterlands_cartographer	Cartographer	Cartograaf	Kartograph	Cartographe	Cartógrafo	
+cards.hinterlands	hinterlands_farmland	Farmland	Landbouwgrond	Fruchtbares Land	Terre agricole	Tierra de Labranza	
+cards.hinterlands	hinterlands_noblebrigand	Noble Brigand	Nobele bandiet	Edler Räuber	Noble brigand	Bandido Honrado	
+cards.hinterlands	hinterlands_margrave	Margrave	Markgraaf	Markgraf	Margrave	Margrave	
+cards.hinterlands	hinterlands_haggler	Haggler	Sjacheraar	Feilscher	Marchandeur	Regateador	
+cards.hinterlands	hinterlands_scheme	Scheme	Gekonkel	Komplott	Complot	Confabulación	
+cards.hinterlands	hinterlands_inn	Inn	Herberg	Gasthaus	Auberge	Posada	
+cards.hinterlands	hinterlands_tunnel	Tunnel	Tunnel	Tunnel	Tunnel	Túnel	
+cards.hinterlands	hinterlands_crossroads	Crossroads	Splitsing	Wegkreuzung	Carrefour	Encrucijada	
+cards.hinterlands	hinterlands_develop	Develop	Ontwikkelen	Aufbau	Développement	Desarrollo	
+cards.hinterlands	hinterlands_oasis	Oasis	Oase	Oase	Oasis	Oasis	
+cards.hinterlands	hinterlands_mandarin	Mandarin	Mandarijn	Mandarin	Mandarin	Mandarín	
+cards.hinterlands	hinterlands_cache	Cache	Bewaarplaats	Schatztruhe	Cache	Hallazgo	
+cards.hinterlands	hinterlands_duchess	Duchess	Hertogin	Herzogin	Duchesse	Duquesa	
+cards.hinterlands	hinterlands_stables	Stables	Stallen	Stallungen	Écuries	Caballerizas	
+cards.hinterlands	hinterlands_jackofalltrades	Jack of All Trades	Manusje-van-alles	Lebenskünstler	Touche-à-tout	Chico para Todo	
+cards.hinterlands	hinterlands2_trail	Trail		Pfad	Sentier		
+cards.hinterlands	hinterlands2_weaver	Weaver		Weberin	Tisserande		
+cards.hinterlands	hinterlands2_berserker	Berserker		Berserker	Berserker		
+cards.hinterlands	hinterlands2_cauldron	Cauldron		Hexenkessel	Chaudron		
+cards.hinterlands	hinterlands2_guarddog	Guard Dog		Wachhund	Chien de Garde		
+cards.hinterlands	hinterlands2_nomads	Nomads		Nomaden	Nomades		
+cards.hinterlands	hinterlands2_souk	Souk		Souk	Souk		
+cards.hinterlands	hinterlands2_wheelwright	Wheelwright		Radmacherin	Charronne		
+cards.hinterlands	hinterlands2_witchshut	Witch's Hut		Hexenhütte	Cabanne de Sorcière		
+							
+cards.promos	promos_avanto	Avanto	Avanto	Avanto	Trou Dans La Glace	Avanto	
+cards.promos	promos_blackmarket	Black Market	Zwarte Markt	Schwarzmarkt	Marché noir	Mercado Negro	
+cards.promos	promos_captain	Captain	Captain	Kapitän Tobias	Capitaine	Captain	
+cards.promos	promos_church	Church	Church	Schweriner Dom	Église	Church	
+cards.promos	promos_dismantle	Dismantle	Ontmantelen	Abbruch	Démantelement	Dismantle	
+cards.promos	promos_envoy	Envoy	Gezant	Gesandter	Délégué	Enviado	
+cards.promos	promos_event_summon	Summon	Summon	Einladung	Convocation	Summon	
+cards.promos	promos_governor	Governor	Gouverneur	Gouverneur	Gouverneur	Gobernador	
+cards.promos	promos_prince	Prince	Prins	Prinz	Prince	Príncipe	
+cards.promos	promos_sauna	Sauna	Sauna	Sauna	Sauna	Sauna	
+cards.promos	promos_saunaavanto	Sauna / Avanto	Sauna / Avanto	Sauna / Avanto	Sauna / Avanto	Sauna / Avanto	
+cards.promos	promos_stash	Stash	Geldbuidel	Geldversteck	Cachette	Alijo	
+cards.promos	promos_walledvillage	Walled Village	Ommuurd Dorp	Befestigtes Dorf	Ville fortifiée	Aldea Amurallada	
+							
+cards.darkages	darkages_armory	Armory	Wapenkamer	Waffenkammer	Armurerie	Armría	
+cards.darkages	darkages_vagrant	Vagrant	Landloper	Landstreicher	Vagabond	Vagabundo	
+cards.darkages	darkages_catacombs	Catacombs	Gewelven	Katakomben	Catacombes	Catacumbas	
+cards.darkages	darkages_count	Count	Graaf	Graf	Comte	Conde	
+cards.darkages	darkages_knights	Knights	Ridders	Ritter	Chevaliers	Caballeros	
+cards.darkages	darkages_fortress	Fortress	Vesting	Festung	Forteresse	Fortaleza	
+cards.darkages	darkages_scavenger	Scavenger	Scharrelaar	Lumpensammler	Pilleur	Carroñero	
+cards.darkages	darkages_marketsquare	Market Square	Marktplein	Marktplatz	Place du marché	Plaza del Mercado	
+cards.darkages	darkages_urchin	Urchin	Straatjongen	Gassenjunge	Orphelin	Pillastre	
+cards.darkages	darkages_rats	Rats	Ratten	Ratten	Rats	Ratas	
+cards.darkages	darkages_sage	Sage	Wijsgeer	Weiser	Sage	Sabio	
+cards.darkages	darkages_forager	Forager	Jager-Verzamelaar	Mundraub	Cueilleur	Merodeador	
+cards.darkages	darkages_altar	Altar	Altaar	Altar	Autel	Altar	
+cards.darkages	darkages_procession	Procession	Optocht	Prozession	Procession	Procesión	
+cards.darkages	darkages_squire	Squire	Schildknaap	Knappe	Écuyer	Escudero	
+cards.darkages	darkages_beggar	Beggar	Bedelaar	Bettler	Mendiant	Mendigo	
+cards.darkages	darkages_poorhouse	Poor House	Armenhuis	Armenhaus	Hospice	Hospicio	
+cards.darkages	darkages_deathcart	Death Cart	Dodenkar	Leichenkarren	Charrette de cadavres	Carro de los Muertos	
+cards.darkages	darkages_wanderingminstrel	Wandering Minstrel	Reizende Minstreel	Barde	Ménestrel errant	Juglar	
+cards.darkages	darkages_ironmonger	Ironmonger	Metaalhandelaar	Eisenhändler	Ferronnier	Ferretero	
+cards.darkages	darkages_hermit	Hermit	Kluizenaar	Eremit	Ermite	Ermitaño	
+cards.darkages	darkages_pillage	Pillage	Plundering	Raubzug	Pillage	Pillaje	
+cards.darkages	darkages_mystic	Mystic	Toverfeeks	Medium	Mystique	Pitonisa	
+cards.darkages	darkages_storeroom	Storeroom	Berghok	Lagerraum	Salle d'entreposage	Depósito	
+cards.darkages	darkages_huntinggrounds	Hunting Grounds	Jachtvelden	Jagdgründe	Territoire de chasse	Coto de Caza	
+cards.darkages	darkages_graverobber	Graverobber	Grafrover	Grabräuber	Pilleur de tombes	Ladrón de Tumbas	
+cards.darkages	darkages_counterfeit	Counterfeit	Vals Geld	Falschgeld	Contrefaçon	Falsificación	
+cards.darkages	darkages_cultist	Cultist	Cultist	Kultist	Cultiste	Sectario	
+cards.darkages	darkages_rogue	Rogue	Schurk	Schurke	Bandit	Granuja	
+cards.darkages	darkages_marauder	Marauder	Stroper	Marodeur	Maraudeur	Salteador	
+cards.darkages	darkages_bandofmisfits	Band of Misfits	Groep Mislukkelingen	Vogelfreie	Malfaiteurs	Banda de Rufianes	
+cards.darkages	darkages_junkdealer	Junk Dealer	Opkoper	Schrotthändler	Brocanteur	Chatarrero	
+cards.darkages	darkages_feodum	Feodum	Feodum	Lehen	Fief	Feudo	
+cards.darkages	darkages_rebuild	Rebuild	Wederopbouw	Neubau	Reconstruction	Reconstruir	
+cards.darkages	darkages_banditcamp	Bandit Camp	Bandietenkamp	Banditenlager	Camp de bandits	Campamento de Bandidos	
+cards.darkages	darkages_abandonedmine	Abandoned Mine			Mine abandonnée		
+cards.darkages	darkages_ruinedlibrary	Ruined Library			Bibliothèque en ruines		
+cards.darkages	darkages_ruinedmarket	Ruined Market			Marché en ruines		
+cards.darkages	darkages_ruinedvillage	Ruined Village			Village en ruines		
+cards.darkages	darkages_survivors	Survivors			rescapés		
+cards.darkages	darkages_madman	Madman			Fou		
+cards.darkages	darkages_mercenary	Mercenary			Mercenaire		
+cards.darkages	darkages_spoils	Spoils			Butin		
+cards.darkages	darkages_hovel	Hovel			Cabane		
+cards.darkages	darkages_necropolis	Necropolis			Nécropole		
+cards.darkages	darkages_overgrownestate	Overgrown Estate			Domaine luxuriant		
+cards.darkages	darkages_dameanna	Dame Anna			Dame Anna		
+cards.darkages	darkages_damejosephine	Dame Josephine			Dame Josephine		
+cards.darkages	darkages_damemolly	Dame Molly			Dame Molly		
+cards.darkages	darkages_damenatalie	Dame Natalie			Dame Natalie		
+cards.darkages	darkages_damesylvia	Dame Sylvia			Dame Sylvia		
+cards.darkages	darkages_sirbailey	Sir Bailey			Sir Bailey		
+cards.darkages	darkages_sirdestry	Sir Destry			Sir Destry		
+cards.darkages	darkages_sirmartin	Sir Martin			Sir Martin		
+cards.darkages	darkages_sirmichael	Sir Michael			Sir Michael		
+cards.darkages	darkages_sirvander	Sir Vander			Sir Vander		
+							
+cards.guilds	guilds_advisor	Advisor	Adviseur	Berater	Conseiller	Asesor	
+cards.guilds	guilds_baker	Baker	Bakker	Bäcker	Boulanger	Panadero	
+cards.guilds	guilds_butcher	Butcher	Slager	Metzger	Boucher	Carnicero	
+cards.guilds	guilds_candlestickmaker	Candlestick Maker	Kandelaarmaker	Leuchtenmacher	Cirier	Fabricante de Velas	
+cards.guilds	guilds_doctor	Doctor	Arts	Arzt	Médecin	Doctor	
+cards.guilds	guilds_herald	Herald	Heraut	Herold	Héraut	Heraldo	
+cards.guilds	guilds_journeyman	Journeyman	Gezel	Wandergeselle	Compagnon	Oficial	
+cards.guilds	guilds_masterpiece	Masterpiece	Meesterwerk	Meisterstück	Chef-d'œuvre	Obra Maestra	
+cards.guilds	guilds_merchantguild	Merchant Guild	Koopmansgilde	Kaufmannsgilde	Guilde des marchands	Gremio Mercantil	
+cards.guilds	guilds_plaza	Plaza	Plaza	Platz	Place du village	Plaza	
+cards.guilds	guilds_soothsayer	Soothsayer	Helderziende	Hellseherin	Devin	Vidente	
+cards.guilds	guilds_stonemason	Stonemason	Steenhouwer	Steinmetz	Tailleur de pierre	Cantero	
+cards.guilds	guilds_taxman	Taxman	Belastinginner	Steuereintreiber	Percepteur	Recaudador	
+							
+cards.adventures	adventures_amulet	Amulet	Amulet	Amulett	Amulette	Amuleto	
+cards.adventures	adventures_artificer	Artificer	Kanonnengieter	Kunsthandwerker	Maître artisan	Vidriero	
+cards.adventures	adventures_bridgetroll	Bridge Troll	Brugtrol	Brückentroll	Pont aux trolls	Puente del Trol	
+cards.adventures	adventures_caravanguard	Caravan Guard	Karavaanescorte	Karawanenwächter	Escorte	Escolta	
+cards.adventures	adventures_distantlands	Distant Lands	Verre landen	Ferne Lande	Terres lointaines	Tierras Lejanas	
+cards.adventures	adventures_dungeon	Dungeon	Kerker	Verlies	Donjon	Mazmorra	
+cards.adventures	adventures_duplicate	Duplicate	Duplicaat	Duplikat	Copie	Réplica	
+cards.adventures	adventures_gear	Gear	Uitrusting	Ausrüstung	Équipement	Equipamiento	
+cards.adventures	adventures_giant	Giant	Reus	Riese	Géant	Gigante	
+cards.adventures	adventures_guide	Guide	Gids	Kundschafter	Guide	Guía	
+cards.adventures	adventures_hauntedwoods	Haunted Woods	Spookbos	Geisterwald	Bois hantés	Bosque Encantado	
+cards.adventures	adventures_hireling	Hireling	Huursoldaat	Gefolgsmann	Recrue	Recluta	
+cards.adventures	adventures_lostcity	Lost City	Verloren stad	Verlorene Stadt	Cité perdue	Ciudad Perdida	
+cards.adventures	adventures_magpie	Magpie	Ekster	Elster	Pie voleuse	Urraca	
+cards.adventures	adventures_messenger	Messenger	Koerier	Kurier	Courrier	Mensajero	
+cards.adventures	adventures_miser	Miser	Vrek	Geizhals	Miséreux	Avaro	
+cards.adventures	adventures_page	Page	Wapenknecht	Page	Page	Paje	
+cards.adventures	adventures_peasant	Peasant	Boer	Kleinbauer	Paysan	Campesino	
+cards.adventures	adventures_port	Port	Zeehaven	Hafenstadt	Ville portuaire	Aldea Portuaria	
+cards.adventures	adventures_ranger	Ranger	Woudloper	Wildhüter	Forestier	Guarda Forestal	
+cards.adventures	adventures_ratcatcher	Ratcatcher	Rattenvanger	Rattenfänger	Chasseur de rats	Cazador de Ratas	
+cards.adventures	adventures_raze	Raze	Afbraak	Zerstörung	Démolition	Arrasar	
+cards.adventures	adventures_relic	Relic	Relikwie	Relikt	Relique	Reliquia	
+cards.adventures	adventures_royalcarriage	Royal Carriage	Koninklijke koets	Königliche Kutsche	Cortège royal	Carruaje Real	
+cards.adventures	adventures_storyteller	Storyteller	Verteller	Geschichtenerzähler	Conteuse	Cuentacuentos	
+cards.adventures	adventures_swamphag	Swamp Hag	Heks uit het moeras	Sumpfhexe	Sorcière des marais	Bruja del Pantano	
+cards.adventures	adventures_transmogrify	Transmogrify	Metamorfose	Transformation	Transfiguration	Transfigurar	
+cards.adventures	adventures_treasuretrove	Treasure Trove	Verborgen schat	Schatz	Pierres précieuses	Piedras Preciosas	
+cards.adventures	adventures_winemerchant	Wine Merchant	Wijnhandelaar	Weinhändler	Marchand de vin	Comerciante de Vino	
+cards.adventures	adventures_coinoftherealm	Coin of the Realm	Koninklijke munt	Königliche Münzen	Monnaie royale	Moneda Real	
+cards.adventures	adventures_event_mission	Mission	Missie	Mission	Mission	Misión	
+cards.adventures	adventures_event_scoutingparty	Scouting Party	Verkennerseenheid	Spähtrupp	Pistage	Avanzadilla	
+cards.adventures	adventures_event_pathfinding	Pathfinding	Woudlopen	Wegsuche	Reconnaissance	Rastreo	
+cards.adventures	adventures_event_bonfire	Bonfire	Vreugdevuur	Freudenfeuer	Feu de joie	Hoguera	
+cards.adventures	adventures_event_pilgrimage	Pilgrimage	Bedevaart	Pilgerfahrt	Pèlerinage	Peregrinaje	
+cards.adventures	adventures_event_training	Training	Training	Training	Entraînement	Entrenamiento	
+cards.adventures	adventures_event_ball	Ball	Bal	Ball	Bal	Baile	
+cards.adventures	adventures_event_travellingfair	Travelling Fair	Kermis	Wanderzirkus	Forains	Feria Ambulante	
+cards.adventures	adventures_event_save	Save	Sparen	Zuflucht	Resserre	Reserva	
+cards.adventures	adventures_event_borrow	Borrow	Lenen	Leihgabe	Emprunt	Crédito	
+cards.adventures	adventures_event_lostarts	Lost Arts	Verloren Kunst	Verlorene Kunst	Arts anciens	Artes Perdidas	
+cards.adventures	adventures_event_trade	Trade	Handel	Handel	Commerce	Intercambio	
+cards.adventures	adventures_event_raid	Raid	Overval	Überfall	Raid	Asalto	
+cards.adventures	adventures_event_quest	Quest	Queeste	Quest	Quête	Búsqueda	
+cards.adventures	adventures_event_expedition	Expedition	Expeditie	Expedition	Expédition	Expedición	
+cards.adventures	adventures_event_alms	Alms	Aalmoes	Almosen	Aumône	Limosna	
+cards.adventures	adventures_event_inheritance	Inheritance	Erfenis	Erbschaft	Héritage	Herencia	
+cards.adventures	adventures_event_ferry	Ferry	Veerboot	Überfahrt	Bac	Barca	
+cards.adventures	adventures_event_plan	Plan	Plan	Planung	Plan de bataille	Estrategia	
+cards.adventures	adventures_event_seaway	Seaway	Zeeroute	Seeweg	Route maritime	Vía Marítima	
+cards.adventures	adventures_treasurehunter	Treasure Hunter			Chasseuse de Trésor		
+cards.adventures	adventures_warrior	Warrior			Guerrière		
+cards.adventures	adventures_hero	Hero			Héroïne		
+cards.adventures	adventures_champion	Champion			Championne		
+cards.adventures	adventures_soldier	Soldier			Soldat		
+cards.adventures	adventures_fugitive	Fugitive			Fugitif		
+cards.adventures	adventures_disciple	Disciple			Disciple		
+cards.adventures	adventures_teacher	Teacher			Maître		
+							
+cards.empires	empires_engineer	Engineer	Ingenieur	Ingenieurin	Ingénieur	Ingeniero	Inżynier
+cards.empires	empires_cityquarter	City Quarter	Stadswijk	Stadtviertel	Faubourg	Suburbios	Dzielnica
+cards.empires	empires_overlord	Overlord	Despoot	Lehnsherr	Seigneur	Déspota	Władca
+cards.empires	empires_royalblacksmith	Royal Blacksmith	Koninklijke smid	Königlicher Schmied	Forgeron royal	Herrero Real	Królewski kowal
+cards.empires	empires_encampmentplunder	Encampment / Plunder	Kampement / Plunderen	Feldlager / Diebesgut	Camp / Saccage	Campamento / Saqueo	Encampment / Plunder
+cards.empires	empires_patricianemporium	Patrician / Emporium	Patriciër / Emporium	Patrizier / Handelsplatz	Patricien / Emporium	Patricio / Emporio	Patrician / Emporium
+cards.empires	empires_settlersbustlingvillage	Settlers / Bustling Village	Kolonisten / Levendig dorp	Siedler / Emsiges Dorf	Colons / Village en effervescence	Colonos / Aldea Bulliciosa	Settlers / Bustling Village
+cards.empires	empires_castles	Castles	Kastelen	Schlösser	Châteaux	Castillos	Zamki
+cards.empires	empires_catapultrocks	Catapult / Rocks	Katapult / Rotsblokken	Katapult / Felsen	Catapulte / Rocher	Catapulta / Rocas	Catapult / Rocks
+cards.empires	empires_chariotrace	Chariot Race	Strijdwagenrace	Wagenrennen	Course de chars	Carrera de Cuádrigas	Wyścig rydwanów
+cards.empires	empires_enchantress	Enchantress	Tovenares	Zauberin	Magicienne	Hechicera	Czarodziejka
+cards.empires	empires_farmersmarket	Farmers Market	Boerenmarkt	Bauernmarkt	Marché agricole	Mercado Agrícola	Farmers Market
+cards.empires	empires_gladiatorfortune	Gladiator / Fortune	Gladiator / Fortuin	Gladiator / Reichtum	Gladiateur / Fortune	Gladiador / Fortuna	Gladiator / Fortune
+cards.empires	empires_sacrifice	Sacrifice	Offer	Opfer	Sacrifice	Sacrificio	Ofiara
+cards.empires	empires_temple	Temple	Tempel	Tempel	Temple	Templo	Świątynia
+cards.empires	empires_villa	Villa	Villa	Villa	Villa	Villa	Willa
+cards.empires	empires_archive	Archive	Archief	Archiv	Archives	Archivo	Archiwum
+cards.empires	empires_capital	Capital	Kapitaal	Vermögen	Capital	Capital	Kapitał
+cards.empires	empires_charm	Charm	Geluksbrenger	Zauber	Sort	Fetiche	Klejnot
+cards.empires	empires_crown	Crown	Kroon	Krone	Couronne	Corona	Korona
+cards.empires	empires_forum	Forum	Forum	Forum	Forum	Foro	Forum
+cards.empires	empires_groundskeeper	Groundskeeper	Kasteelhovenier	Gärtnerin	Jardinière	Jardinero	Ogrodnik
+cards.empires	empires_legionary	Legionary	Legioensoldaat	Legionär	Légionnaire	Legionario	Legionista
+cards.empires	empires_wildhunt	Wild Hunt	Wilde jacht	Wilde Jagd	Chasse fantastique	Cacería Salvaje	Dziki gon
+cards.empires	empires_event_triumph	Triumph	Triomf	Siegeszug	Triomphe	Triunfo	Triumph
+cards.empires	empires_event_annex	Annex	Overname	Schlacht	Annexion	Anexión	Annex
+cards.empires	empires_event_donate	Donate	Donatie	Spende	Donation	Donación	Donate
+cards.empires	empires_event_advance	Advance	Promotie	Aufstieg	Adoubement	Promoción	Advance
+cards.empires	empires_event_delve	Delve	Delven	Erforschen	Trouée	Excavación	Delve
+cards.empires	empires_event_tax	Tax	Belasting	Steuer	Taxe	Impuesto	Tax
+cards.empires	empires_event_banquet	Banquet	Banket	Bankett	Banquet	Banquete	Banquet
+cards.empires	empires_event_ritual	Ritual	Ritueel	Ritual	Rituel	Ritual	Ritual
+cards.empires	empires_event_salttheearth	Salt the Earth	Zout der aarde	Versalztes Land	Épandage de sel	Salar la Tierra	Salt the Earth
+cards.empires	empires_event_wedding	Wedding	Bruiloft	Hochzeit	Mariage	Boda	Wedding
+cards.empires	empires_event_windfall	Windfall	Meevaller	Glüksfall	Manne	Golpe de Suerte	Windfall
+cards.empires	empires_event_conquest	Conquest	Verovering	Eroberung	Conquête	Conquista	Conquest
+cards.empires	empires_event_dominate	Dominate	Overheersing	Beherrschen	Domination	Dominación	Dominate
+cards.empires	empires_landmark_aqueduct	Aqueduct	Aquaduct	Aquädukt	Aqueduc	Acueducto	Aqueduct
+cards.empires	empires_landmark_arena	Arena	Arena	Arena	Arène	Arena	Arena
+cards.empires	empires_landmark_banditfort	Bandit Fort	Bandietenfort	Räuberfestung	Fort des bandits	Fuerte Bandido	Bandit Fort
+cards.empires	empires_landmark_basilica	Basilica	Basiliek	Basilika	Basilique	Basílica	Basilica
+cards.empires	empires_landmark_baths	Baths	Baden	Badehaus	Bains	Baños	Baths
+cards.empires	empires_landmark_battlefield	Battlefield	Slagveld	Schlachtfeld	Champ de bataille	Campo de Batalla	Battlefield
+cards.empires	empires_landmark_colonnade	Colonnade	Zuilengalerij	Kolonnaden	Colonnade	Columnata	Colonnade
+cards.empires	empires_landmark_defiledshrine	Defiled Shrine	Geschonden altaar	Entweihter Schrein	Profanation	Santuario Profanado	Defiled Shrine
+cards.empires	empires_landmark_fountain	Fountain	Fontein	Brunnen	Fontaine	Fuente	Fountain
+cards.empires	empires_landmark_keep	Keep	Hoofdtoren	Bollwerk	Fort	Fuerte	Keep
+cards.empires	empires_landmark_labyrinth	Labyrinth	Labyrint	Labyrinth	Labyrinthe	Laberinto	Labyrinth
+cards.empires	empires_landmark_mountainpass	Mountain Pass	Bergpas	Gebirgspass	Col	Desfiladero	Mountain Pass
+cards.empires	empires_landmark_museum	Museum	Museum	Museum	Musée	Museo	Museum
+cards.empires	empires_landmark_obelisk	Obelisk	Obelisk	Obelisk	Obélisque	Obelisco	Obelisk
+cards.empires	empires_landmark_orchard	Orchard	Boomgaard	Obstgarten	Verger	Vergel	Orchard
+cards.empires	empires_landmark_palace	Palace	Paleis	Palast	Palais	Palacio	Palace
+cards.empires	empires_landmark_tomb	Tomb	Tombe	Grabmal	Tombe	Tumba	Tomb
+cards.empires	empires_landmark_tower	Tower	Toren	Turm	Tour	Torre	Tower
+cards.empires	empires_landmark_triumphalarch	Triumphal Arch	Triomfboog	Triumphbogen	Arc de triomphe	Arco del Triunfo	Triumphal Arch
+cards.empires	empires_landmark_wall	Wall	Muur	Mauer	Remparts	Muro	Wall
+cards.empires	empires_landmark_wolfden	Wolf Den	Wolvenhol	Wolfsbau	Tanière des loups	Guarida de Lobos	Wolf Den
+cards.empires	empires_castlestohidesplitcard	Castles - to hide split card			Châteaux		
+cards.empires	empires_humblecastle	Humble Castle			Château modeste		
+cards.empires	empires_crumblingcastle	Crumbling Castle			Château délabré		
+cards.empires	empires_smallcastle	Small Castle			Petit château		
+cards.empires	empires_hauntedcastle	Haunted Castle			Château hanté		
+cards.empires	empires_opulentcastle	Opulent Castle			Somptueux château		
+cards.empires	empires_sprawlingcastle	Sprawling Castle			Château prospère		
+cards.empires	empires_grandcastle	Grand Castle			Grand château		
+cards.empires	empires_kingscastle	Kings Castle			Château royal		
+cards.empires	empires_catapultrockstohidesplitcard	Catapult / Rocks - to hide split card			Catapulte/Rocher		
+cards.empires	empires_catapult	Catapult			Catapulte		
+cards.empires	empires_rocks	Rocks			Rocher		
+cards.empires	empires_encampmentplundertohidesplitcard	Encampment / Plunder - to hide split card			Camp/Saccage		
+cards.empires	empires_encampment	Encampment			Camp		
+cards.empires	empires_plunder	Plunder			Saccage		
+cards.empires	empires_patricianemporiumtohidesplitcard	Patrician / Emporium - to hide split card			Patricien/Emporium		
+cards.empires	empires_patrician	Patrician			Patricien		
+cards.empires	empires_emporium	Emporium			Emporium		
+cards.empires	empires_settlersbustlingvillagetohidesplitcard	Settlers / Bustling Village - to hide split card			Colons/Village en effervescence		
+cards.empires	empires_settlers	Settlers			Colons		
+cards.empires	empires_bustlingvillage	Bustling Village			Village en effervescence		
+cards.empires	empires_gladiatorfortunetohidesplitcard	Gladiator / Fortune - to hide split card			Gladiateur/Fortune		
+cards.empires	empires_gladiator	Gladiator			Gladiateur		
+cards.empires	empires_fortune	Fortune			Fortune		
+							
+cards.nocturne	nocturne_druid	Druid	Druïde	Druidin	Druide	Druida	Druid
+cards.nocturne	nocturne_faithfulhound	Faithful Hound	Trouwe hond	Getreuer Hund	Chien fidèle	Perro Leal	Wierny Pies
+cards.nocturne	nocturne_guardian	Guardian	Beschermer	Wächterin	Gardienne	Guardián	Obrońca
+cards.nocturne	nocturne_monastery	Monastery	Klooster	Kloster	Monastère	Monasterio	Klasztor
+cards.nocturne	nocturne_pixie	Pixie	Elfje	Fee	Pixie	Hada	Wróżka
+cards.nocturne	nocturne_tracker	Tracker	Spoorzoeker	Fährtensucher	Traqueur	Rastreador	Tropiciel
+cards.nocturne	nocturne_changeling	Changeling	Wisselkind	Wechselbalg	Changelin	Intercambio	Odmieniec
+cards.nocturne	nocturne_fool	Fool	Dwaas	Narr	Benêt	Necio	Głupiec
+cards.nocturne	nocturne_ghosttown	Ghost Town	Spookstad	Geisterstadt	Ville fantôme	Pueblo Fantasma	Miasto duchów
+cards.nocturne	nocturne_leprechaun	Leprechaun	Leprechaun	Kobold	Leprechaun	Duende	Leprechaun
+cards.nocturne	nocturne_nightwatchman	Night Watchman	Nachtwaker	Nachtwache	Veilleur de nuit	Vigilante	Nocny stróż
+cards.nocturne	nocturne_secretcave	Secret Cave	Geheime grot	Geheime Höhle	Grotte secrète	Cueva Secreta	Sekretna jaskinia
+cards.nocturne	nocturne_bard	Bard	Bard	Minnesängerin	Barde	Bardo	Bard
+cards.nocturne	nocturne_blessedvillage	Blessed Village	Gezegend dorp	Seliges Dorf	Village béni	Aldea Bendita	Błogosławiona wioska
+cards.nocturne	nocturne_cemetery	Cemetery	Kerkhof	Friedhof	Cimetière	Cementerio	Cmentarz
+cards.nocturne	nocturne_conclave	Conclave	Conclaaf	Konklave	Conclave	Cónclave	Tajne zebranie
+cards.nocturne	nocturne_devilsworkshop	Devil's Workshop	Atelier van de duivel	Teufelswerkstatt	Atelier du diable	Taller del Diablo	Diabelski warsztat
+cards.nocturne	nocturne_exorcist	Exorcist	Exorcist	Exorzistin	Exorciste	Exorcista	Egzorcysta
+cards.nocturne	nocturne_necromancer	Necromancer	Dodenbezweerder	Totenbeschwörer	Nécromancien	Nigromante	Nekromanta
+cards.nocturne	nocturne_shepherd	Shepherd	Schaapsherder	Schäferin	Berger	Pastor	Pasterz
+cards.nocturne	nocturne_skulk	Skulk	Skulk	Attentäter	Malandrin	Ladrón Sigiloso	Zasadzka
+cards.nocturne	nocturne_cobbler	Cobbler	Schoenmaker	Schuster	Cordonnier	Zapatero	Szewc
+cards.nocturne	nocturne_crypt	Crypt	Crypte	Krypta	Crypte	Cripta	Krypta
+cards.nocturne	nocturne_cursedvillage	Cursed Village	Vervloekt dorp	Verfluchtes Dorf	Village maudit	Aldea Maldita	Przeklęta wioska
+cards.nocturne	nocturne_denofsin	Den of Sin	Huis der zonden	Sündenpfuhl	Antre du péché	Casa del Pecado	Grzeszny przybytek
+cards.nocturne	nocturne_idol	Idol	Idool	Götze	Idole	Ídolo	Bożek
+cards.nocturne	nocturne_pooka	Pooka	Pooka	Puka	Pooka	Pooka	Puk
+cards.nocturne	nocturne_sacredgrove	Sacred Grove	Heilig kreupelbos	Heiliger Hain	Bois sacré	Bosque Sagrado	Święty gaj
+cards.nocturne	nocturne_tormentor	Tormentor	Kwelgeest	Folterknecht	Persécuteur	Verdugo	Gnębiciel
+cards.nocturne	nocturne_tragichero	Tragic Hero	Tragische held	Tragischer Held	Héros de tragédie	Héroe Trágico	Tragiczny bohater
+cards.nocturne	nocturne_vampire	Vampire	Vampier	Vampirin	Vampire	Vampiro	Wampir
+cards.nocturne	nocturne_werewolf	Werewolf	Weerwolf	Werwolf	Loup-garou	Hombre Lobo	Wilkołak
+cards.nocturne	nocturne_raider	Raider	Plunderaar	Plünderer	Razzia	Saqueador	Najeźdzca
+cards.nocturne	nocturne_boon_theearthsgift	The Earth's Gift	Gift van de aarde	Geschenk der Erde	Don de la terre	Don de la Tierra	Dar ziemi
+cards.nocturne	nocturne_boon_thefieldsgift	The Field's Gift	Gift van de akker	Geschenk des Feldes	Don des champs	Don del Campo	Dar pól
+cards.nocturne	nocturne_boon_theflamesgift	The Flame's Gift	Gift van het vuur	Geschenk des Feuers	Don des flammes	Don de la Llama	Dar płomieni
+cards.nocturne	nocturne_boon_theforestsgift	The Forest's Gift	Gift van het bos	Geschenk des Waldes	Don des forêts	Don del Bosque	Dar lasu
+cards.nocturne	nocturne_boon_themoonsgift	The Moon's Gift	Gift van de maan	Geschenk des Mondes	Don de la lune	Don de la Luna	Dar księżyca
+cards.nocturne	nocturne_boon_themountainsgift	The Mountain's Gift	Gift van de bergen	Geschenk des Berges	Don des montagnes	Don de la Montaña	Dar gór
+cards.nocturne	nocturne_boon_theriversgift	The River's Gift	Gift van de rivier	Geschenk des Flusses	Don de la rivière	Don del Río	Dar rzeki
+cards.nocturne	nocturne_boon_theseasgift	The Sea's Gift	Gift van de zee	Geschenk des Meeres	Don de la mer	Don del Mar	Dar morza
+cards.nocturne	nocturne_boon_theskysgift	The Sky's Gift	Gift van de hemel	Geschenk des Himmels	Don du ciel	Don del Cielo	Dar nieba
+cards.nocturne	nocturne_boon_thesunsgift	The Sun's Gift	Gift van de zon	Geschenk der Sonne	Don du soleil	Don del Sol	Dar słońca
+cards.nocturne	nocturne_boon_theswampsgift	The Swamp's Gift	Gift van het moeras	Geschenk des Sumpfes	Don des marais	Don del Pantano	Dar mokradeł
+cards.nocturne	nocturne_boon_thewindsgift	The Wind's Gift	Gift van de wind	Geschenk des Windes	Don du vent	Don del Viento	Dar wiatru
+cards.nocturne	nocturne_hauntedmirror	Haunted Mirror			Mirroir hanté		
+cards.nocturne	nocturne_magiclamp	Magic Lamp			Lampe magique		
+cards.nocturne	nocturne_goat	Goat			Chèvre		
+cards.nocturne	nocturne_pasture	Pasture			Pâturage		
+cards.nocturne	nocturne_pouch	Pouch			Pochette		
+cards.nocturne	nocturne_cursedgold	Cursed Gold			Or maudit		
+cards.nocturne	nocturne_luckycoin	Lucky Coin			Porte-bonheur		
+cards.nocturne	nocturne_willowisp	Will-O'Wisp			Feux follet		
+cards.nocturne	nocturne_wish	Wish			Vœu		
+cards.nocturne	nocturne_bat	Bat			Chauve-souris		
+cards.nocturne	nocturne_imp	Imp			Farfadet		
+cards.nocturne	nocturne_zombieapprentice	Zombie Apprentice			Zombie apprenti		
+cards.nocturne	nocturne_zombiemason	Zombie Mason			Zombie maçon		
+cards.nocturne	nocturne_zombiespy	Zombie Spy			Zombie espion		
+cards.nocturne	nocturne_ghost	Ghost			Fantôme		
+cards.nocturne	nocturne_badomens	Bad Omens			Mauvais augure		
+cards.nocturne	nocturne_delusion	Delusion			Envoûtement		
+cards.nocturne	nocturne_envy	Envy			Jalousie		
+cards.nocturne	nocturne_famine	Famine			Famine		
+cards.nocturne	nocturne_fear	Fear			Peur		
+cards.nocturne	nocturne_greed	Greed			Avidité		
+cards.nocturne	nocturne_haunting	Haunting			Obsession		
+cards.nocturne	nocturne_locusts	Locusts			Sauterelles		
+cards.nocturne	nocturne_misery	Misery			Détresse		
+cards.nocturne	nocturne_plague	Plague			Peste		
+cards.nocturne	nocturne_poverty	Poverty			Pauvreté		
+cards.nocturne	nocturne_war	War			Guerre		
+cards.nocturne	nocturne_deluded	Deluded			Envoûté		
+cards.nocturne	nocturne_envious	Envious			Jalous		
+cards.nocturne	nocturne_miserable	Miserable			En détresse		
+cards.nocturne	nocturne_twicemiserable	Twice Miserable			En grande détresse		
+cards.nocturne	nocturne_lostinthewoods	Lost in the Woods			Perdu dans les bois		
+							
+cards.renaissance	renaissance_borderguard	Border Guard	Grenswacht	Grenzposten	Garde-frontière	Guarda Fronterizo	
+cards.renaissance	renaissance_ducat	Ducat	Dukaat	Goldmünze	Ducat	Florín	
+cards.renaissance	renaissance_lackeys	Lackeys	Kamerbedienden	Diener	Laquais	Lacayos	
+cards.renaissance	renaissance_actingtroupe	Acting Troupe	Toneelgezelschap	Schauspieltruppe	Troupe de théâtre	Compañía de Teatro	
+cards.renaissance	renaissance_cargoship	Cargo Ship	Vrachtschip	Frachtschiff	Cargo	Buque de Carga	
+cards.renaissance	renaissance_experiment	Experiment	Experiment	Experiment	Expérience	Experimento	
+cards.renaissance	renaissance_improve	Improve	Verbetering	Fortschritt	Amélioration	Perfeccionar	
+cards.renaissance	renaissance_flagbearer	Flag Bearer	Vaandeldrager	Fahnenträger	Porte-drapeau	Abanderado	
+cards.renaissance	renaissance_hideout	Hideout	Schuilplaats	Versteck	Planque	Guarida	
+cards.renaissance	renaissance_inventor	Inventor	Uitvinder	Erfinder	Inventeur	Inventor	
+cards.renaissance	renaissance_mountainvillage	Mountain Village	Bergdorp	Bergdorf	Village de montagne	Aldea de Montaña	
+cards.renaissance	renaissance_patron	Patron	Beschermheer	Patron	Mécène	Mecenas	
+cards.renaissance	renaissance_priest	Priest	Priester	Priester	Prêtre	Sacerdote	
+cards.renaissance	renaissance_research	Research	Onderzoek	Forscherin	Recherche	Investigación	
+cards.renaissance	renaissance_silkmerchant	Silk Merchant	Zijdekoopman	Seidenhändlerin	Marchande de soie	Vendedor de Seda	
+cards.renaissance	renaissance_oldwitch	Old Witch	Oude heks	Alte Hexe	Vieille sorcière	Bruja Anciana	
+cards.renaissance	renaissance_recruiter	Recruiter	Ronselaar	Anwerber	Recruteur	Reclutador	
+cards.renaissance	renaissance_scepter	Scepter	Scepter	Zepter	Sceptre	Cetro	
+cards.renaissance	renaissance_scholar	Scholar	Geleerde	Gelehrte	Érudite	Erudita	
+cards.renaissance	renaissance_sculptor	Sculptor	Beeldhouwer	Bildhauerin	Sculptrice	Escultora	
+cards.renaissance	renaissance_seer	Seer	Ziener	Seher	Prophète	Profeta	
+cards.renaissance	renaissance_spices	Spices	Specerijen	Gewürze	Épices	Especias	
+cards.renaissance	renaissance_swashbuckler	Swashbuckler	Ijzervreter	Freibeuterin	Bretteuse	Espadachina	
+cards.renaissance	renaissance_treasurer	Treasurer	Schatbewaarder	Schatzmeisterin	Trésorière	Tesorera	
+cards.renaissance	renaissance_villain	Villain	Slechterik	Schwarzer Meister	Scélérat	Villano	
+cards.renaissance	renaissance_project_cathedral	Cathedral	Kathedraal	Kathedrale	Cathédrale	Catedral	
+cards.renaissance	renaissance_project_citygate	City Gate	Stadspoort	Stadttor	Porte	Portón	
+cards.renaissance	renaissance_project_pageant	Pageant	Spektakel	Festzug	Spectacle	Espectáculo	
+cards.renaissance	renaissance_project_sewers	Sewers	Riolen	Abwasserkanal	Égouts	Alcantarillas	
+cards.renaissance	renaissance_project_starchart	Star Chart	Sterrenkaart	Sternenkarte	Carte céleste	Carta Estelar	
+cards.renaissance	renaissance_project_exploration	Exploration	Ontdekkingsreis	Erkundung	Exploration	Exploración	
+cards.renaissance	renaissance_project_fair	Fair	Braderie	Kleiner Markt	Foire	Feria	
+cards.renaissance	renaissance_project_silos	Silos	Silo's	Speicher	Silos	Silos	
+cards.renaissance	renaissance_project_sinisterplot	Sinister Plot	Duistere samenzwering	Finsterer Plan	Machination	Confabulación	
+cards.renaissance	renaissance_project_academy	Academy	Academie	Akademie	Académie	Academia	
+cards.renaissance	renaissance_project_capitalism	Capitalism	Kapitalisme	Kapitalismus	Capitalisme	Capitalismo	
+cards.renaissance	renaissance_project_fleet	Fleet	Vloot	Flotte	Flotte	Flota	
+cards.renaissance	renaissance_project_guildhall	Guildhall	Gildehuis	Gildenhaus	Hôtel de ville	Ayuntamiento	
+cards.renaissance	renaissance_project_piazza	Piazza	Plein	Piazza	Piazza	Pórtico	
+cards.renaissance	renaissance_project_roadnetwork	Road Network	Wegennet	Strassennetz	Réseau routier	Red de Caminos	
+cards.renaissance	renaissance_project_barracks	Barracks	Kazerne	Kaserne	Caserne	Cuartel	
+cards.renaissance	renaissance_project_croprotation	Crop Rotation	Wisselbouw	Fruchtwechsel	Assolement	Barbecho	
+cards.renaissance	renaissance_project_innovation	Innovation	Vernieuwing	Innovation	Innovation	Innovación	
+cards.renaissance	renaissance_project_canal	Canal	Kanaal	Kanal	Canal	Canal	
+cards.renaissance	renaissance_project_citadel	Citadel	Burcht	Zitdelle	Citadelle	Ciudadela	
+cards.renaissance	renaissance_flag	Flag	Vaandel	Fahne	Drapeau		
+cards.renaissance	renaissance_horn	Horn	Hoorn	Horn	Corne		
+cards.renaissance	renaissance_key	Key	Sleutel	Schlüssel	Clé		
+cards.renaissance	renaissance_lantern	Lantern	Lantaarn	Laterne	Lanterne		
+cards.renaissance	renaissance_treasurechest	Treasure Chest	Schatkist	Schatzkiste	Coffre		
+							
+cards.menagerie	menagerie_animalfair	Animal Fair	Dierenmarkt	Viehmarkt	Foire aux bestiaux	Feria de Ganado	
+cards.menagerie	menagerie_barge	Barge	Aak	Lastkahn	Chaland	Gabarra	
+cards.menagerie	menagerie_blackcat	Black Cat	Zwarte kat	Schwarze Katze	Chat noir	Gato Negro	
+cards.menagerie	menagerie_bountyhunter	Bounty Hunter	Premiejager	Kopfgeldjägerin	Chasseur de prime	Cazarrecompensas	
+cards.menagerie	menagerie_cameltrain	Camel Train	Kamelenkaravaan	Kamelzug	Caravane de chameaux	Recua de Camellos	
+cards.menagerie	menagerie_cardinal	Cardinal	Kardinaal	Kardinal	Cardinal	Cardenal	
+cards.menagerie	menagerie_cavalry	Cavalry	Cavalerie	Kavallerie	Cavalière	Caballería	
+cards.menagerie	menagerie_coven	Coven	Heksenkring	Hexenzirkel	Clan de sorciers	Aquelarre	
+cards.menagerie	menagerie_destrier	Destrier	Krijgsros	Schlachtross	Destrier	Destrero	
+cards.menagerie	menagerie_displace	Displace	Verplaatsing	Vertreibung	Déplacement	Migración	
+cards.menagerie	menagerie_falconer	Falconer	Valkenier	Falknerin	Fauconnière	Halconera	
+cards.menagerie	menagerie_fisherman	Fisherman	Visser	Fischer	Pêcheur	Pescador	
+cards.menagerie	menagerie_gatekeeper	Gatekeeper	Poortwachter	Wache	Garde	Centinela	
+cards.menagerie	menagerie_goatherd	Goatherd	Geitenhoeder	Ziegenhirtin	Chevrière	Cabrera	
+cards.menagerie	menagerie_groom	Groom	Rijknecht	Stallbursche	Palefrenier	Caballerizo	
+cards.menagerie	menagerie_hostelry	Hostelry	Pension	Herberge	Hôtel	Hostal	
+cards.menagerie	menagerie_huntinglodge	Hunting Lodge	Jachthuis	Jagdhütte	Pavillon de chasse	Refugio de Caza	
+cards.menagerie	menagerie_kiln	Kiln	Oven	Brennofen	Four	Horno	
+cards.menagerie	menagerie_livery	Livery	Stalhouderij	Pferdestall	Pension	Librea	
+cards.menagerie	menagerie_mastermind	Mastermind	Meesterbrein	Drahtzieher	Génie	Cerebro	
+cards.menagerie	menagerie_paddock	Paddock	Omheind veld	Koppel	Enclos	Establo	
+cards.menagerie	menagerie_sanctuary	Sanctuary	Gewijde plek	Zufluchtsort	Sanctuaire	Santuario	
+cards.menagerie	menagerie_scrap	Scrap	Schroot	Schrott	Ferraille	Chatarra	
+cards.menagerie	menagerie_sheepdog	Sheepdog	Herdershond	Hirtenhund	Chien de berger	Perro Pastor	
+cards.menagerie	menagerie_sleigh	Sleigh	Slede	Schlitten	Traîneau	Trineo	
+cards.menagerie	menagerie_snowyvillage	Snowy Village	Besneeuwd dorp	Verschneites Dorf	Village enneigé	Aldea Nevada	
+cards.menagerie	menagerie_stockpile	Stockpile	Reserve	Depot	Stocks	Reservas	
+cards.menagerie	menagerie_supplies	Supplies	Voorraden	Nachschub	Réserves	Suministros	
+cards.menagerie	menagerie_villagegreen	Village Green	Dorpsweide	Dorfanger	Espace vert	Prado del Pueblo	
+cards.menagerie	menagerie_wayfarer	Wayfarer	Voetreiziger	Wanderin	Voyageuse	Caminante	
+cards.menagerie	menagerie_event_alliance	Alliance	Bondgenootschap	Bündnis	Alliance	Alianza	
+cards.menagerie	menagerie_event_banish	Banish	Verbannen	Verbannung	Bannissement	Destierro	
+cards.menagerie	menagerie_event_bargain	Bargain	Koopje	Gutes Geschäft	Affaire	Ganga	
+cards.menagerie	menagerie_event_commerce	Commerce	Commercie	Kommerz	Négoce	Comercio	
+cards.menagerie	menagerie_event_delay	Delay	Vertraging	Verzögerung	Retard	Retraso	
+cards.menagerie	menagerie_event_demand	Demand	Vraag	Forderung	Demande	Exigencia	
+cards.menagerie	menagerie_event_desperation	Desperation	Wanhoop	Verzweiflung	Désespoir	Desesperación	
+cards.menagerie	menagerie_event_enclave	Enclave	Enclave	Enklave	Enclave	Enclave	
+cards.menagerie	menagerie_event_enhance	Enhance	Verhoging	Verbesserung	Réhaussement	Reforma	
+cards.menagerie	menagerie_event_gamble	Gamble	Gokken	Wagnis	Pari	Apuesta	
+cards.menagerie	menagerie_event_invest	Invest	Investeren	Investition	Investissement	Inversión	
+cards.menagerie	menagerie_event_march	March	Mars	Fußmarsch	Marche	Marcha	
+cards.menagerie	menagerie_event_populate	Populate	Bevolken	Besiedlung	Peuplement	Repoblar	
+cards.menagerie	menagerie_event_pursue	Pursue	Nastreven	Verfolgung	Poursuite	Persecución	
+cards.menagerie	menagerie_event_reap	Reap	Maaien	Reiche Ernte	Moisson	Siega	
+cards.menagerie	menagerie_event_ride	Ride	Rit	Reiten	Chevauchée	Paseo	
+cards.menagerie	menagerie_event_seizetheday	Seize the Day	Pluk de Dag	Nutze den Tag	Carpe Diem	Aprovecha el Día	
+cards.menagerie	menagerie_event_stampede	Stampede	Stormloop	Stampede	Ruée	Estampida	
+cards.menagerie	menagerie_event_toil	Toil	Gezwoeg	Plackerei	Labeur	Labor	
+cards.menagerie	menagerie_event_transport	Transport	Transport	Transport	Transport	Transporte	
+cards.menagerie	menagerie_way_wayofthebutterfly	Way of the Butterfly	Spoor van de Vlinder	Weg des Schmetterlings	Voie du papillon	Senda de la Mariposa	
+cards.menagerie	menagerie_way_wayofthecamel	Way of the Camel	Spoor van de Kameel	Weg des Kamels	Voie du chameau	Senda del Camello	
+cards.menagerie	menagerie_way_wayofthechameleon	Way of the Chameleon	Spoor van de Kameleon	Weg des Chamäleons	Voie du caméléon	Senda del Camaleón	
+cards.menagerie	menagerie_way_wayofthefrog	Way of the Frog	Spoor van de Kikker	Weg des Frosches	Voie de la grenouille	Senda de la Rana	
+cards.menagerie	menagerie_way_wayofthegoat	Way of the Goat	Spoor van de Geit	Weg der Ziege	Voie de la chèvre	Senda de la Cabra	
+cards.menagerie	menagerie_way_wayofthehorse	Way of the Horse	Spoor van het Paard	Weg des Pferdes	Voie du cheval	Senda del Caballo	
+cards.menagerie	menagerie_way_wayofthemole	Way of the Mole	Spoor van de Mol	Weg des Maulwurfs	Voie de la taupe	Senda del Topo	
+cards.menagerie	menagerie_way_wayofthemonkey	Way of the Monkey	Spoor van de Aap	Weg des Affen	Voie du singe	Senda del Mono	
+cards.menagerie	menagerie_way_wayofthemouse	Way of the Mouse	Spoor van de Muis	Weg der Maus	Voie de la souirs	Senda del Ratón	
+cards.menagerie	menagerie_way_wayofthemule	Way of the Mule	Spoor van de Ezel	Weg des Maultiers	Voie de la mule	Senda de la Mula	
+cards.menagerie	menagerie_way_wayoftheotter	Way of the Otter	Spoor van de Otter	Weg des Otters	Voie de la loutre	Senda de la Nutria	
+cards.menagerie	menagerie_way_wayoftheowl	Way of the Owl	Spoor van de Uil	Weg der Eule	Voie du hibou	Senda del Búho	
+cards.menagerie	menagerie_way_wayoftheox	Way of the Ox	Spoor van de Os	Weg des Ochsen	Voie du bœuf	Senda del Buey	
+cards.menagerie	menagerie_way_wayofthepig	Way of the Pig	Spoor van het Varken	Weg des Schweins	Voie du porc	Senda del Cerdo	
+cards.menagerie	menagerie_way_wayoftherat	Way of the Rat	Spoor van de Rat	Weg der Ratte	Voie du rat	Senda de la Rata	
+cards.menagerie	menagerie_way_wayoftheseal	Way of the Seal	Spoor van de Zeehond	Weg der Robbe	Voie du phoque	Senda de la Foca	
+cards.menagerie	menagerie_way_wayofthesheep	Way of the Sheep	Spoor van het Schaap	Weg des Schafes	Voie du mouton	Senda de la Oveja	
+cards.menagerie	menagerie_way_wayofthesquirrel	Way of the Squirrel	Spoor van de Eekhoorn	Weg des Eichhörnchens	Voie de l'écureuil	Senda de la Ardilla	
+cards.menagerie	menagerie_way_wayoftheturtle	Way of the Turtle	Spoor van de Schildpad	Weg der Schildkröte	Voie de la tortue	Senda de la Tortuga	
+cards.menagerie	menagerie_way_wayoftheworm	Way of the Worm	Spoor van de Worm	Weg des Wurms	Voie du ver	Senda del Gusano	
+cards.menagerie	menagerie_horse	Horse	Paard	Pferd	Cheval		
+							
+cards.allies	allies_bauble	Bauble	Kerstbal	Tand	Babiole		
+cards.allies	allies_sycophant	Sycophant	Hielenlikker	Schmeichler	Sycophante		
+cards.allies	allies_townsfolk	Townsfolk	Stedelingen	Bürger	Citoyens		
+cards.allies	allies_augurs	Augurs	Voorspellers	Augurinnen	Augures		
+cards.allies	allies_clashes	Clashes	Conflicten	Konflikte	Affrontements		
+cards.allies	allies_forts	Forts	Forten	Bastionen	Fortifications		
+cards.allies	allies_importer	Importer	Importeur	Importeurin	importateur		
+cards.allies	allies_merchantcamp	Merchant Camp	Handelaarskamp	Händlerlager	Camp de Marchands		
+cards.allies	allies_odysseys	Odysseys	Zwerftochten	Irrfahrten	Odyssées		
+cards.allies	allies_sentinel	Sentinel	Schildwacht	Wächter	Guetteur		
+cards.allies	allies_underling	Underling	Ondergeschikte	Untergebener	Subalterne		
+cards.allies	allies_wizards	Wizards	Tovenaars	Zauberer	Magiciens		
+cards.allies	allies_broker	Broker	Zaakwaarnemer	Mittelsmann	Courtier		
+cards.allies	allies_carpenter	Carpenter	Houtwerker	Schreinerin	Charpentière		
+cards.allies	allies_courier	Courier	Renbode	Botin	Courrier Rapide		
+cards.allies	allies_innkeeper	Innkeeper	Waard	Wirtin	Aubergiste		
+cards.allies	allies_royalgalley	Royal Galley	Koninklijk Galeischip	Königliche Galeere	Galère Royale		
+cards.allies	allies_town	Town	Nederzetting	Ortschaft	Bourg		
+cards.allies	allies_barbarian	Barbarian	Barbaar	Barbar	Barbare		
+cards.allies	allies_capitalcity	Capital City	Hoofdstad	Hauptstadt	Capitale		
+cards.allies	allies_contract	Contract	Contract	Vertrag	Contrat		
+cards.allies	allies_emissary	Emissary	Afgezant	Unterhändlerin	Émissaire		
+cards.allies	allies_galleria	Galleria	Kunstmuseum	Markthalle	Marché Couvert		
+cards.allies	allies_guildmaster	Guildmaster	Gildenmeester	Gildemeisterin	Maître de Guilde		
+cards.allies	allies_highwayman	Highwayman	Struikrover	Wegelagerer	Bandit de Grand Chemin		
+cards.allies	allies_hunter	Hunter	Jager	Jägerin	Chasseuse		
+cards.allies	allies_modify	Modify	Bijwerken	Umgestaltung	Modification		
+cards.allies	allies_skirmisher	Skirmisher	Tirailleur	Aufwiegler	Tirailleur		
+cards.allies	allies_specialist	Specialist	Specialist	Spezialistin	Spécialiste		
+cards.allies	allies_swap	Swap	Ruilen	Tausch	Troc		
+cards.allies	allies_marquis	Marquis	Markies	Marquis	Marquis		
+cards.allies	allies_ally_architectsguild	Architects' Guild	Bouwmeestersgilde	Architektengilde	Guilde des Architectes		
+cards.allies	allies_ally_bandofnomads	Band of Nomads	Groep Nomaden	Nomadenstamm	Bande de Nomades		
+cards.allies	allies_ally_cavedwellers	Cave Dwellers	Holbewoners	Höhlenbewohner	Troglodytes		
+cards.allies	allies_ally_circleofwitches	Circle of Witches	Heksencirkel	Hexenbund	Cercle des Sorcières		
+cards.allies	allies_ally_citystate	City-state	Stadstaat	Stadtstaat	Cité-État		
+cards.allies	allies_ally_coastalhaven	Coastal Haven	Kusthaven	Höhlenhafen	Havre-Côtier		
+cards.allies	allies_ally_craftersguild	Crafters' Guild	Ambachtsgilde	Handwerkergilde	Guilde des Artisans		
+cards.allies	allies_ally_desertguides	Desert Guides	Woestijngidsen	Wüstenführer	Guides du Déserrt		
+cards.allies	allies_ally_familyofinventors	Family of Inventors	Uitvindersgezin	Erfinderfamilie	Famille d'Inventeurs		
+cards.allies	allies_ally_fellowshipofscribes	Fellowship of Scribes	Schrijversgenootschap	Gefolgschaft der Schreiber	Confrérie des Scribes		
+cards.allies	allies_ally_forestdwellers	Forest Dwellers	Bosbewoners	Waldbewohner	Habitants des Forêts		
+cards.allies	allies_ally_gangofpickpockets	Gang of Pickpockets	Bende Zakkenrollers	Taschendiebe	Détrousseurs		
+cards.allies	allies_ally_islandfolk	Island Folk	Eilandbewoners	Inselvolk	Peuple des Îles		
+cards.allies	allies_ally_leagueofbankers	League of Bankers	Bankiersverbond	Bankiersverbund	Ligue des Banquiers		
+cards.allies	allies_ally_leagueofshopkeepers	League of Shopkeepers	Winkeliersverbond	Bund der Ladenbesitzer	Ligue des Commerçants		
+cards.allies	allies_ally_markettowns	Market Towns	Marktsteden	Marktstädte	Villes Commerçantes		
+cards.allies	allies_ally_mountainfolk	Mountain Folk	Bergbewoners	Bergvolk	Montagnards		
+cards.allies	allies_ally_orderofastrologers	Order of Astrologers	Astrologenorde	Sterndeuterorden	Ordre des Astrologues		
+cards.allies	allies_ally_orderofmasons	Order of Masons	Metselaarsorde	Freimaurerloge	Ordre des Maçons		
+cards.allies	allies_ally_peacefulcult	Peaceful Cult	Vreemdzame Sekte	Friedlicher Kult	Culte Pacifiuqe		
+cards.allies	allies_ally_plateaushepherds	Plateau Shepherds	Hooglandherders	Schäfer der Hochebene	Bergers du Plateau		
+cards.allies	allies_ally_trapperslodge	Trappers' Lodge	Jagershut	Hütte der Fallensteller	Cabane de Trappeurs		
+cards.allies	allies_ally_woodworkersguild	Woodworkers' Guild	Timmermansgilde	Holzarbeitergilde	Guilde des Meunuisiers		
+cards.allies	allies_augurstohidesplitcard	Augurs - to hide split card			Augures		
+cards.allies	allies_herbgatherer	Herb Gatherer	Kruidenverzamelaar	Kräutersammlerin	Cueilleuse d'Herbes		
+cards.allies	allies_acolyte	Acolyte	Misdienaar	Altardienerin	Acolyte		
+cards.allies	allies_sorceress	Sorceress	Toverheks	Meisterhexe	Sorcière Maléfique		
+cards.allies	allies_sibyl	Sibyl	Sibille	Prophetin	Sibylle		
+cards.allies	allies_clashestohidesplitcard	Clashes - to hide split card			Affrontements		
+cards.allies	allies_battleplan	Battle Plan	Strijdplan	Schlachtplan	Tactique		
+cards.allies	allies_archer	Archer	Boogschutter	Bogenschützin	Archère		
+cards.allies	allies_warlord	Warlord	Krijgsheer	Kriegsherr	Seigneur de Guerre		
+cards.allies	allies_territory	Territory	Gebied	Territorium	Teritoire		
+cards.allies	allies_fortstohidesplitcard	Forts - to hide split card			Fortifications		
+cards.allies	allies_tent	Tent	Tent	Zelt	Tente		
+cards.allies	allies_garrison	Garrison	Garnizoen	Garnison	Garnison		
+cards.allies	allies_hillfort	Hill Fort	Heuvelfort	Hügelfort	Fort de la Colline		
+cards.allies	allies_stronghold	Stronghold	Ridderkasteel	Burg	Bastion		
+cards.allies	allies_odysseystohidesplitcard	Odysseys - to hide split card			Odyssées		
+cards.allies	allies_oldmap	Old Map	Oude Landkaart	Alte Landkarte	Vieille Carte		
+cards.allies	allies_voyage	Voyage	Reis	Seereise	Voyage		
+cards.allies	allies_sunkentreasure	Sunken Treasure	Verzonken Schat	Versunkener Schatz	Trésor Englouti		
+cards.allies	allies_distantshore	Distant Shore	Verre Kust	Ferne Küste	Rivage Lointain		
+cards.allies	allies_townsfolktohidesplitcard	Townsfolk - to hide split card			Citoyens		
+cards.allies	allies_towncrier	Town Crier	Omroeper	Ausruferin	Crieuse Publique		
+cards.allies	allies_blacksmith	Blacksmith	Kachelsmid	Eisenschmied	Forgeur		
+cards.allies	allies_miller	Miller	Molenaar	Müller	Meunier		
+cards.allies	allies_elder	Elder	Ouderling	Älteste	Aînée		
+cards.allies	allies_wizardstohidesplitcard	Wizards - to hide split card			Magiciens		
+cards.allies	allies_student	Student	Student	Zauberschüler	Apprenti Magicien		
+cards.allies	allies_conjurer	Conjurer	Illusionist	Beschwörer	Illusioniste		
+cards.allies	allies_sorcerer	Sorcerer	Heksenmeester	Hexenmeister	Sorcier		
+cards.allies	allies_lich	Lich	Zielenzuiger	Lich	Liche		
+							
+cards.plunder	plunder_abundance	Abundance		Überfluss	Abondance		
+cards.plunder	plunder_buriedtreasure	Buried Treasure		Vergrabener Schatz	Trésor enfoui		
+cards.plunder	plunder_cabinboy	Cabin Boy		Schiffsjunge	Mousse		
+cards.plunder	plunder_cage	Cage		Käfig	Cage		
+cards.plunder	plunder_crew	Crew		Mannschaft	Équipage		
+cards.plunder	plunder_crucible	Crucible		Schmelztiegel	Creuset		
+cards.plunder	plunder_cutthroat	Cutthroat		Meuchlerin	Coupe-gorge		
+cards.plunder	plunder_enlarge	Enlarge		Vergrößerung[ß]	Élargissement		
+cards.plunder	plunder_figurine	Figurine		Figurine	Figurine		
+cards.plunder	plunder_firstmate	First Mate		Erste Maatin	Seconde		
+cards.plunder	plunder_flagship	Flagship		Flaggschiff	Navire Amiral		
+cards.plunder	plunder_fortunehunter	Fortune Hunter		Abenteurerin	Aventurière		
+cards.plunder	plunder_frigate	Frigate		Fregatte	Frégate		
+cards.plunder	plunder_gondola	Gondola		Gondel	Gondole		
+cards.plunder	plunder_grotto	Grotto		Grotte	Grotte		
+cards.plunder	plunder_harborvillage	Harbor Village		Hafendorf	Village Portuaire		
+cards.plunder	plunder_jewelledegg	Jewelled Egg		Juwelen-Ei	Œuf précieux		
+cards.plunder	plunder_kingscache	King's Cache		Königstruhe	Cache du roi		
+cards.plunder	plunder_landingparty	Landing Party		Landungstrupp	Débarquement		
+cards.plunder	plunder_longship	Longship		Langschiff	Drakkar		
+cards.plunder	plunder_mapmaker	Mapmaker		Kartenzeichnerin	Cartographe Marine		
+cards.plunder	plunder_maroon	Maroon		Ausgesetzter	Abandon		
+cards.plunder	plunder_miningroad	Mining Road		Bergbaustraße[ß]	Chemin minier		
+cards.plunder	plunder_pendant	Pendant		Anhänger	Pendentif		
+cards.plunder	plunder_pickaxe	Pickaxe		Spitzhacke	Pioche		
+cards.plunder	plunder_pilgrim	Pilgrim		Pilger	Pèlerin		
+cards.plunder	plunder_quartermaster	Quartermaster		Quartiermeister	Quartier-maître		
+cards.plunder	plunder_rope	Rope		Seil	Corde		
+cards.plunder	plunder_sackofloot	Sack of Loot		Sack voll Kostbarkeiten	Sac à trophées		
+cards.plunder	plunder_search	Search		Suche	Chasse au trésor		
+cards.plunder	plunder_secludedshrine	Secluded Shrine		Einsamer Schrein	Sanctuaire Isolé		
+cards.plunder	plunder_shaman	Shaman		Schamanin	Chamane		
+cards.plunder	plunder_silvermine	Silver Mine		Silbermine	Mine d'argent		
+cards.plunder	plunder_siren	Siren		Sirene	Sirène		
+cards.plunder	plunder_stowaway	Stowaway		Blinder Passagier	Clandestine		
+cards.plunder	plunder_swampshacks	Swamp Shacks		Sumpfhütten	Cabane des marais		
+cards.plunder	plunder_taskmaster	Taskmaster		Vorarbeiter	Surveillant		
+cards.plunder	plunder_tools	Tools		Werkzeug	Outils		
+cards.plunder	plunder_trickster	Trickster		Gauner	Bonneteur		
+cards.plunder	plunder_wealthyvillage	Wealthy Village		Wohlhabendes Dorf	Village prospère		
+cards.plunder	plunder_amphora	Amphora		Amphore	Amphore		
+cards.plunder	plunder_doubloons	Doubloons		Dublonen	Doublons		
+cards.plunder	plunder_endlesschalice	Endless Chalice		Endloserr Kelch	Calice inépuisable		
+cards.plunder	plunder_figurehead	Figurehead		Galionsfigur	Figure de proue		
+cards.plunder	plunder_hammer	Hammer		Hammer	Marteau		
+cards.plunder	plunder_insignia	Insignia		Insignien	Insigne		
+cards.plunder	plunder_jewels	Jewels		Juwelen	Bijoux		
+cards.plunder	plunder_orb	Orb		Kugel	Orbe		
+cards.plunder	plunder_prizegoat	Prize Goat		Zuchtziege	Chèvre de race		
+cards.plunder	plunder_puzzlebox	Puzzle Box		Rätselschatulle	Boîte mystérieuse		
+cards.plunder	plunder_sextant	Sextant		Sextant	Sextant		
+cards.plunder	plunder_shield	Shield		Schild	Bouclier		
+cards.plunder	plunder_spellscroll	Spell Scroll		Zauberrolle	Manuscrit magique		
+cards.plunder	plunder_staff	Staff		Stab	Bâton		
+cards.plunder	plunder_sword	Sword		Schwert	Épée		
+cards.plunder	plunder_event_bury	Bury		Vergraben	Enterrement		
+cards.plunder	plunder_event_avoid	Avoid		Ausweichen	Évitement		
+cards.plunder	plunder_event_deliver	Deliver		Zustellung	Livraison		
+cards.plunder	plunder_event_peril	Peril		Riskieren	Péril		
+cards.plunder	plunder_event_rush	Rush		Beeilung	Précipitation		
+cards.plunder	plunder_event_foray	Foray		Brandschatzung	Incursion		
+cards.plunder	plunder_event_launch	Launch		In See stechen	Embarquement		
+cards.plunder	plunder_event_mirror	Mirror		Spiegeln	Imitation		
+cards.plunder	plunder_event_prepare	Prepare		Vorbereitung	Préparation		
+cards.plunder	plunder_event_scrounge	Scrounge		Herumsuchen	Maraude		
+cards.plunder	plunder_event_journey	Journey		Reise	Traversée		
+cards.plunder	plunder_event_maelstrom	Maelstrom		Mahlstrom	Maelstrom		
+cards.plunder	plunder_event_looting	Looting		Plünderung	Chasse aux trophées		
+cards.plunder	plunder_event_invasion	Invasion		Invasion	Invasion		
+cards.plunder	plunder_event_prosper	Prosper		Aufblühen	Prospérité		
+cards.plunder	plunder_trait_cheap	Cheap		Billig	Abordable		
+cards.plunder	plunder_trait_cursed	Cursed		Verflucht	Maudit		
+cards.plunder	plunder_trait_fated	Fated		Vorherbestimmt	Destiné		
+cards.plunder	plunder_trait_fawning	Fawning		Anbiedernd	Servile		
+cards.plunder	plunder_trait_friendly	Friendly		Freundlich	Amical		
+cards.plunder	plunder_trait_hasty	Hasty		Eilig	Impatient		
+cards.plunder	plunder_trait_inherited	Inherited		Geerbt	Hérité		
+cards.plunder	plunder_trait_inspiring	Inspiring		Inspirierend	Exaltant		
+cards.plunder	plunder_trait_nearby	Nearby		Benachbart	Proche		
+cards.plunder	plunder_trait_patient	Patient		Geduldig	Patient		
+cards.plunder	plunder_trait_pious	Pious		Fromm	Pieux		
+cards.plunder	plunder_trait_reckless	Reckless		Waghalsig	Téméraire		
+cards.plunder	plunder_trait_rich	Rich		Reich	Riche		
+cards.plunder	plunder_trait_shy	Shy		Scheu	Timide		
+cards.plunder	plunder_trait_tireless	Tireless		Unermüdlich	Infatigable		

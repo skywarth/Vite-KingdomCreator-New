@@ -11,7 +11,6 @@ export const usei18nStore = defineStore({
   persist: true,
   actions: {
     async LOAD_DEFAULT_LANGUAGE() {
-      console.log("load default")
       return this.UPDATE_LANGUAGE(Language.ENGLISH);
     },
     async UPDATE_LANGUAGE(language: Language) {

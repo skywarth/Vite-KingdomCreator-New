@@ -6,6 +6,8 @@ export class Supply {
       readonly supplyCards: SupplyCard[],
       readonly baneCard: SupplyCard | null,
       readonly obeliskCard: SupplyCard | null,
+      readonly mouseWay: SupplyCard | null,
+      readonly traitsSupply: SupplyCard[],
       readonly replacements: Replacements) {
     if (supplyCards.length > 10) {
       throw new Error("Unable to create supply with more than 10 cards.");
@@ -21,7 +23,7 @@ export class Supply {
   }
 
   static empty() {
-    return new Supply([], null, null, Replacements.empty());
+    return new Supply([], null, null, null, [], Replacements.empty());
   }
 }
 
@@ -41,7 +43,6 @@ export class Replacements {
     const newReplacements: Map<string, SupplyCard[]> = new Map();
     for (const id of replacements.keys()) {
       newReplacements.set(id, replacements.get(id)?.filter(Cards.filterByExcludedIds(cardIds)) ?? []);
-      //console.log(replacements.get(id)!.filter(Cards.filterByExcludedIds(cardIds)))
     }
     return newReplacements;
   }

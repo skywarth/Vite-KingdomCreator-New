@@ -9,11 +9,9 @@ import type {SupplyRequirement} from "./supply-requirement";
 import {Supply, Replacements} from "./supply";
 import {getRandomInt, selectRandom} from "../utils/rand";
 import { SupplyDivisions } from "./supply-divisions";
+import { YOUNG_WITCH_ID, BANE_MIN_COST, BANE_MAX_COST } from "./special-need-cards";
 
 const NUM_CARDS_IN_KINGDOM = 10;
-const YOUNG_WITCH_ID = "cornucopia_youngwitch";
-const BANE_MIN_COST = 2;
-const BANE_MAX_COST = 3;
 
 export class SupplyBuilder {
   private dividers: SupplyDivider[] = [];
@@ -50,12 +48,16 @@ export class SupplyBuilder {
     division = SupplyDivisions.applyBans(division, this.bans);
     division = this.addExistingCardsAsAvailable(division, existingCards);
     let divisions = SupplyDivisions.applyDividers([division], this.dividers);
+
     divisions = this.applyExistingCards(divisions, existingCards);
+    console.log("in create supply- applyExistingCards" , divisions)
+
     return divisions;
   }
 
   createSupply(existingCards: SupplyCard[]) {
     let divisions = this.createUnfilledDivisions(existingCards);
+    console.log("in create supply" , divisions)
     divisions = this.applyRequirements(divisions);
     divisions = SupplyDivisions.applyCorrections(divisions, this.corrections);
     divisions = SupplyDivisions.fillDivisions(divisions);
@@ -143,7 +145,7 @@ export class SupplyBuilder {
         cardsForNewDivision.push(existingCard)
       } else {
         const division = divisions[divisionIndex];
-        divisions[divisionIndex] = division.createDivisionByLockingCard(existingCard.id);
+        divisions[divisionIndex] = division.createDivisionByLockingCard(existingCard.id,division.availableCards);
       }
     }
 
@@ -199,7 +201,7 @@ export class SupplyBuilder {
         replacements.set(card.id, division.getReplacements(card.id));
       }
     }
-    return new Supply(cards, baneCard, null, new Replacements(replacements));
+    return new Supply(cards, baneCard, null, null, [], new Replacements(replacements));
   }
 
   private orderRequirementsForDivisions(divisions: SupplyDivision[]): SupplyRequirement[] {

@@ -17,14 +17,19 @@
 </template>
 
 <script lang="ts">
-import StaticCard from "./StaticCard.vue";
-import CardTitleOverlay from "./CardTitleOverlay.vue";
-import type { Metadata } from "../randomizer/kingdom";
-import GridLayout from "./GridLayout.vue";
-import { useWindowStore } from '../pinia/window-store';
+/* import Vue, typescript */
 import { defineComponent, computed, ref } from 'vue';
 import { useI18n } from "vue-i18n";
+
+/* import Dominion Objects and type*/
+/* import store  */
+import { useWindowStore } from '../pinia/window-store';
 import { useRandomizerStore } from "../pinia/randomizer-store";
+
+/* import Components */
+import StaticCard from "./StaticCard.vue";
+import CardTitleOverlay from "./CardTitleOverlay.vue";
+import GridLayout from "./GridLayout.vue";
 
 interface Modifier {
   name: string;

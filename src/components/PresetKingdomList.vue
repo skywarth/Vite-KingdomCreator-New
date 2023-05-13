@@ -20,13 +20,19 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, ref, computed } from 'vue'
 
-import PresetKingdom from "./PresetKingdom.vue";
+/* import Dominion Objects and type*/
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
 import type { DominionKingdom } from "../dominion/dominion-kingdom";
 import { SetId } from "../dominion/set-id";
+
+/* import store  */
 import { useSetsStore } from "../pinia/sets-store";
-import { defineComponent, ref, computed, watch } from 'vue'
+
+/* import Components */
+import PresetKingdom from "./PresetKingdom.vue";
 
 export default defineComponent({
   name: 'PresetKingdomList',

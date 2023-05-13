@@ -9,13 +9,21 @@
 </template>
 
 <script lang="ts">
+/* import Vue, typescript */
+import { defineComponent, computed, ref } from "vue";
+import type { PropType } from "vue";
+
+/* import Dominion Objects and type*/
 import type { Card } from "../dominion/card";
 import { SupplyCard } from "../dominion/supply-card";
-import { defineComponent, PropType, computed, ref } from "vue";
-import { usei18nStore } from "../pinia/i18n-store";
-import { getCardImageUrl } from "../utils/resources";
 import { DominionSets } from "../dominion/dominion-sets";
-// import { Language } from "../i18n/language";
+
+import { getCardImageUrl } from "../utils/resources";
+
+/* import store  */
+import { usei18nStore } from "../pinia/i18n-store";
+
+/* import Components */
 import StaticCard from "./StaticCard.vue";
 import CardOverlay from "./CardOverlay.vue";
 

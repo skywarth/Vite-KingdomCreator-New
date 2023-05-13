@@ -86,23 +86,28 @@
 </template>
 
 <script lang="ts">
-import AddonTitle from "./AddonTitle.vue";
-import GridLayout from "./GridLayout.vue";
-import StaticCardWithSet from "./StaticCardWithSet.vue";
-import BaneCardCover from "./BaneCardCover.vue";
-import CopyButton from "./CopyButton.vue";
+/* import Vue, typescript */
+import { defineComponent, computed } from 'vue';
+import type { PropType } from "vue";
+import { useI18n } from "vue-i18n";
 
+/* import Dominion Objects and type*/
 import { DominionKingdom } from "../dominion/dominion-kingdom";
 import { DominionSets } from "../dominion/dominion-sets";
 import type { SupplyCard } from "../dominion/supply-card";
 import { SupplyCardSorter } from "../utils/supply-card-sorter";
 import type { SortOption } from "../settings/settings";
 
+/* import store  */
 import { useWindowStore } from '../pinia/window-store';
 import { useSetsStore } from "../pinia/sets-store";
-import { defineComponent, computed } from 'vue';
-import type { PropType } from "vue";
-import { useI18n } from "vue-i18n";
+
+/* import Components */
+import AddonTitle from "./AddonTitle.vue";
+import GridLayout from "./GridLayout.vue";
+import StaticCardWithSet from "./StaticCardWithSet.vue";
+import BaneCardCover from "./BaneCardCover.vue";
+import CopyButton from "./CopyButton.vue";
 
 const FOUR_COLUMN_SUPPLY_CARD_WIDTH = 450;
 const TWO_COLUMN_ADDON_WIDTH = 525;
@@ -139,10 +144,6 @@ export default defineComponent({
       return windowStore.isEnlarged ? 1 : windowStore.width <= TWO_COLUMN_ADDON_WIDTH ? 2 : 3;
     });
 
-
-// export default class PresetKingdom extends Vue {
-//   @Prop() readonly kingdom!: DominionKingdom;
-
   const addonIds = computed(() => {
     return props.kingdom.eventIds.concat(
       props.kingdom.landmarkIds, props.kingdom.projectIds, props.kingdom.wayIds, props.kingdom.allyIds, props.kingdom.traitIds);
@@ -162,11 +163,9 @@ export default defineComponent({
     if (props.kingdom.baneCardId) {
       Cards.push(getCards([props.kingdom.baneCardId])[0]);
     }
-    /*
-    if (this.kingdom.obeliskCardId) {
-      Cards.push(this.getCards([this.kingdom.obeliskCardId])[0]);
+    if (props.kingdom.wayofthemouseCardId) {
+      Cards.push(getCards([props.kingdom.wayofthemouseCardId])[0]);
     }
-    */
     return Cards;
   };
 

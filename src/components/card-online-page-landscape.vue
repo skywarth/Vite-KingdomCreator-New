@@ -61,9 +61,12 @@
 </template>
 
 <script lang="ts">
-import { PropType, computed, defineComponent } from 'vue';
+/* import Vue, typescript */
+import { defineComponent, computed } from 'vue';
+import type { PropType } from 'vue';
 import { useI18n } from 'vue-i18n'
 
+/* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import type { SupplyCard } from "../dominion/supply-card";
 import type { OtherCard } from "../dominion/other-card";
@@ -71,13 +74,15 @@ import { CardType } from "../dominion/card-type"
 import type { Addon } from "../dominion/addon"
 import type { Cost } from "../dominion/cost"
 import { SetId } from "../dominion/set-id"
-
 import type { DominionSet } from "../dominion/dominion-set";
 
 import type { DigitalCard } from "../dominion/digital_cards/digital-cards-type"
 import { Cards_list } from "../dominion/digital_cards/digital-cards-landscape"
 import type { IllustratorCard } from "../dominion/digital_cards/digital-cards-type"
 import { Cards_list_Illustrator, Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
+
+/* import store  */
+/* import Components */
 
 export const QuestionMarkVaue =
   new Set(["bank",

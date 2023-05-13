@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GridLayout :items="supplyCardsWithBane" :number-of-columns="numberOfColumns" :is-vertical="true"
+    <GridLayout :items="supplyCardsWithBaneMouseWay" :number-of-columns="numberOfColumns" :is-vertical="true"
       class="sortable-supply-cards" :class="{ 'kingdom-supply--is-enlarged': isEnlarged }">
       <template v-slot:default="slotProps">
         <FlippingCard :card="slotProps.item" :is-vertical="true" @front-visible="handleSupplyCardFrontVisible"
@@ -15,6 +15,9 @@
           <!--<BaneCardCover v-if="isBane(slotProps.item)" />-->
           <BaneCardCover isType="Bane" v-if="isBaneCard(slotProps.item)" />
           <BaneCardCover isType="Obelisk" v-if="isObeliskCard(slotProps.item)" />
+          <BaneCardCover isType="MouseWay" v-if="isMouseWayCard(slotProps.item)" />
+          <BaneCardCover :is-type="traitsTitle(0)" v-if="isTraitsCard(slotProps.item,0)" />
+          <BaneCardCover isType="Trait2" v-if="isTraitsCard(slotProps.item,1)" />
         </FlippingCard>
       </template>
     </GridLayout>
@@ -23,10 +26,9 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, ref, computed } from 'vue';
-import { onMounted, watch, nextTick } from 'vue';
+import { defineComponent, ref, computed, onMounted, watch, nextTick } from 'vue';
 import { useI18n } from "vue-i18n";
-import { gsap,  Sine } from "gsap";
+import gsap, { Sine } from "gsap";
 
 /* import Dominion Objects and type*/
 import type { SupplyCard } from "../dominion/supply-card";
@@ -38,14 +40,11 @@ import { SupplyCardSorter } from "../utils/supply-card-sorter";
 import { usei18nStore } from "../pinia/i18n-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
 import { useWindowStore } from "../pinia/window-store";
-import type { Kingdom } from "../randomizer/kingdom";
-import { SortOption } from "../settings/settings";
 
 /* import Components */
 import BaneCardCover from "./BaneCardCover.vue";
 import FlippingCard from "./FlippingCard.vue";
 import GridLayout from "./GridLayout.vue";
-
 
 interface MoveDescriptor {
   elementIndex: number;
@@ -70,7 +69,6 @@ export default defineComponent({
     const i18nStore = usei18nStore();
 
     const kingdom = computed(() => randomizerStore.kingdom);
-    // console.log("setup", kingdom.value)
     const sortOption = computed(() => randomizerStore.settings.sortOption);
     const selection = computed(() => randomizerStore.selection);
     const HasFullScreenRequested = computed(() => randomizerStore.isFullScreen);
@@ -90,34 +88,27 @@ export default defineComponent({
     let replacingCard: SupplyCard | null = null;
 
     onMounted(() => {
-      // console.log("onMounted - sortablesuppyCards")
       supplyCards.value = kingdom.value.supply.supplyCards;
-      // console.log("in onMounted", kingdom.value)
       updateActiveSupplyCards();
-      // console.log("in onMounted end ", kingdom.value)
-      // console.log("onMounted - sortablesuppyCards - end")
-
     });
 
     const numberOfColumns = computed(() => {
       return isEnlarged.value ? 2 : windowWidth.value > 450 ? 5 : 4;
     });
 
-    const supplyCardsWithBane = computed(() => {
+    const supplyCardsWithBaneMouseWay = computed(() => {
       //const cards =  SupplyCardSorter.sort(this.supplyCards.concat() as SupplyCard[], this.sortOption, this.$t.bind(this));
       const cards = supplyCards.value.concat();
       if (kingdom.value.supply.baneCard) {
         cards.push(kingdom.value.supply.baneCard);
       }
-      /*if (this.kingdom.supply.obeliskCardId) {
-        cards.push(this.kingdom.supply.obeliskCardId);
-      }*/
-      // console.log("in supplyCardsWithBane")
+      if (kingdom.value.supply.mouseWay) {
+        cards.push(kingdom.value.supply.mouseWay);
+      }
       return cards;
     });
 
     const handleKingdomChanged = () => {
-      // console.log("handleKingdomChanged")
       updateActiveSupplyCards();
     }
     watch(kingdom, handleKingdomChanged)
@@ -141,11 +132,8 @@ export default defineComponent({
     watch(HasFullScreenRequested, handleHasFullScreenRequested)
 
     const handleWindowWidthChanged = () => {
-
-      // console.log("handleWindowWidthChanged")
       cancelActiveAnimations();
       resetCardPositions();
-
       // Schedule a reset to happen again after the user finishes resizing the window to catch
       // any cases where the reset happened before the elements were fully positioned.
       if (resizeTimerId) {
@@ -168,6 +156,18 @@ export default defineComponent({
       return kingdom.value.supply.obeliskCard &&
         kingdom.value.supply.obeliskCard.id == supplyCard.id;
     }
+    const isMouseWayCard = (supplyCard: SupplyCard) => {
+      return kingdom.value.supply.mouseWay &&
+        kingdom.value.supply.mouseWay.id == supplyCard.id;
+    }
+    const isTraitsCard = (supplyCard: SupplyCard,index : number) => {
+      return kingdom.value.supply.traitsSupply[index] &&
+        kingdom.value.supply.traitsSupply[index].id == supplyCard.id;
+    }
+    const traitsTitle = (index: number) => {
+      return kingdom.value.traits[index].name
+    }
+
     const handleSpecify = (supplyCard: SupplyCard) => {
       randomizerStore.UPDATE_SPECIFYING_REPLACEMENT_SUPPLY_CARD(supplyCard);
     }
@@ -185,18 +185,13 @@ export default defineComponent({
     }
 
     const updateActiveSupplyCards = () => {
-      // console.log("in updateActiveSupplyCards")
       if (!kingdom.value) {
-        // console.log("is null")
         return;
       }
       if (kingdomId == kingdom.value.id && kingdomId != 0) {
-        // console.log("is not changed -update card", kingdomId)
         updateSupplyCards();
         return;
       }
-      // console.log("in updateActiveSupplyCards for kingdom", kingdom.value)
-
       kingdomId = kingdom.value.id;
       const sortedSupplyCards =
         SupplyCardSorter.sort(kingdom.value.supply.supplyCards.concat(), sortOption.value, t);
@@ -207,10 +202,6 @@ export default defineComponent({
         mappedSupplyCards[getElementIndex(i)] = sortedSupplyCards[i];
       }
       supplyCards.value = mappedSupplyCards;
-      // console.log("has changed - find new card")
-      // console.log(supplyCards.value)
-      // console.log(kingdom.value)
-      // console.log("end updateActiveSupplyCards")
     }
 
     const updateSupplyCards = () => {
@@ -236,12 +227,13 @@ export default defineComponent({
         const endCoord = getPositionForElementIndex(visualIndex);
         const x = endCoord.x - startCoord.x;
         const y = endCoord.y - startCoord.y;
-        console.log(element)
         // element.style.transform = `translate(${x}px,${y}px)`;
-        let activeAnimation =
+        const activeAnimation =
           gsap.to(element, {
             duration: ANIMATION_DURATION_SEC,
-            transform: `translate(${x}px,${y}px)`,
+            // transform: `translate(${x}px,${y}px)`,
+            x: x, // just use x/y instead of transform because they're faster and more clear
+            y: y, // transform because they're faster and more clear
             ease: Sine.easeInOut,
             onComplete: function () {
               activeAnimation.kill
@@ -273,15 +265,19 @@ export default defineComponent({
         let activeAnimation =
           gsap.to(element, {
             duration: ANIMATION_DURATION_SEC,
-            transform: `translate(${x}px,${y}px)`,
+            // transform: `translate(${x}px,${y}px)`,
+            x: x, // just use x/y instead of transform because they're faster and more clear
+            y: y, // transform because they're faster and more clear
             ease: Sine.easeInOut,
             onComplete: function () {
               activeAnimation.kill
               return;
             }
           });
+
         activeAnimations.add(activeAnimation);
         newMapping.set(descriptor.newVisualIndex, descriptor.elementIndex);
+        
       }
       elementIndexMapping = newMapping;
     }
@@ -304,7 +300,7 @@ export default defineComponent({
     }
 
     const getSupplyCardElement = (index: number) => {
-      return getSupplyCardContainers()[index].firstChild! as HTMLElement;
+      return getSupplyCardContainers()[index].firstElementChild! as HTMLElement;
     }
 
     const getSupplyCardContainers = () => {
@@ -344,13 +340,16 @@ export default defineComponent({
       return new Set(oldSupplyCards.filter((card) => !newIds.has(card.id)).map((card) => card.id));
     }
     return {
-      supplyCardsWithBane,
+      supplyCardsWithBaneMouseWay,
       numberOfColumns,
       isEnlarged,
       handleSupplyCardFrontVisible,
       handleSupplyCardFlippingToBack,
       isBaneCard,
       isObeliskCard,
+      isMouseWayCard,
+      isTraitsCard,
+      traitsTitle,
       handleSpecify
     }
   }

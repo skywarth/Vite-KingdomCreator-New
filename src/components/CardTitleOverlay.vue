@@ -8,7 +8,12 @@
 
 
 <script lang="ts">
+/* import Vue, typescript */
 import { defineComponent } from "vue";
+
+/* import Dominion Objects and type*/
+/* import store  */
+/* import Components */
 import TextOverlay from './TextOverlay.vue';
 
 export default defineComponent({
