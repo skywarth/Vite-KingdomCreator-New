@@ -2,7 +2,7 @@
   <div :class="cardCover" class="card-cover">
     <div :class="cardDiv" class="card-cover-div">
       <div :class="cardCoverText" class="card-cover-text">
-        {{ $t(isType) }}
+        {{ $t(cardText) }}
       </div>
     </div>
   </div>
@@ -29,21 +29,26 @@ export default defineComponent({
   },
   setup(props: { isType: string; }) {
     const cardDiv = computed(() => {
-      return props.isType.toLowerCase() + "-div"
+      return props.isType.toLowerCase().replace(/#.*/,"") + "-div"
     });
 
     const cardCover = computed(() => {
-      return props.isType.toLowerCase() + "-color"
+      return props.isType.toLowerCase().replace(/#.*/,"") + "-color"
     });
 
     const cardCoverText = computed(() => {
-      return props.isType.toLowerCase() + "-color-text"
+      return props.isType.toLowerCase().replace(/#.*/,"") + "-color-text"
     });
+
+    const cardText = computed(() =>{
+      return props.isType.toLowerCase().replace("trait#","")
+    })
 
     return {
       cardCover,
       cardDiv,
-      cardCoverText
+      cardCoverText,
+      cardText,
     }
   }
 })
@@ -77,10 +82,13 @@ export default defineComponent({
 .mouseway-div{
   bottom: 10%;
 }
+.trait-div{
+  bottom: 10%;
+}
 
 .card-cover-text {
   position: absolute;
-  padding: 6px 12px;
+  padding: 5px 10px;
 }
 
 .bane-color {
@@ -94,7 +102,6 @@ export default defineComponent({
 .obelisk-color {
   border: 8px solid #7db68d /* landmark-color */;
 }
-
 .obelisk-color-text {
   color: black;
   background: #7db68d       /* Landmark-color */;
@@ -108,16 +115,51 @@ export default defineComponent({
   background: #bad4eb       /* mouseway-color */;
 }
 
+.trait-color {
+  border: 8px solid #343979 /* trait-color */;
+}
+.trait-color-text {
+  color: white;
+  background: #343979      /* trait-color */;
+}
 
 @media (max-width: 600px) {
   .card-cover {
-    border-width: 3px;
+    border-width: 4px;
   }
-
   .card-cover-text {
-    font-size: 12px;
+    font-size: 10px;
     right: -13px;
+  }
+  .card-cover-div {
+  bottom:30%;
   }
 }
 
+
+@media (600px <= width <= 650px) {
+  .card-cover {
+    border-width: 5px;
+  }
+
+  .card-cover-text {
+    font-size: 11px;
+    right: -10px;
+  }
+
+  .card-cover-div {
+  bottom:30%;
+  }
+}
+
+@media (650px <= width <= 750px) {
+  .card-cover-text {
+    font-size: 10px;
+    right: -13px;
+  }
+
+  .card-cover-div {
+  bottom:30%;
+  }
+}
 </style>

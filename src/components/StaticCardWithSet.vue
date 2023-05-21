@@ -45,7 +45,7 @@ export default defineComponent({
   },
   setup(props) {
     const i18nStore = usei18nStore();
-    const language = ref(i18nStore.language);
+    const language = computed(() => i18nStore.language);
 
     const show_Overlay = computed(() => {
       if (!props.showOverlay) {

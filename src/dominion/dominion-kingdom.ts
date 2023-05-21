@@ -15,6 +15,7 @@ export class DominionKingdom {
     readonly wayIds: string[],
     readonly allyIds: string[],
     readonly traitIds: string[],
+    readonly traitSupplyIds :string[],
     readonly metadata: Metadata) {
   }
 
@@ -33,7 +34,8 @@ export class DominionKingdom {
         json["ways"] || [],
         json["allies"] || [],
         json["traits"] || [],
-        Metadata.fromJson(json["metadata"]));
+        json["traitSupplies"] || [],
+         Metadata.fromJson(json["metadata"]));
   }
 }
 
