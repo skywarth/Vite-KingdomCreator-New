@@ -16,8 +16,8 @@
           <BaneCardCover isType="Bane" v-if="isBaneCard(slotProps.item)" />
           <BaneCardCover isType="Obelisk" v-if="isObeliskCard(slotProps.item)" />
           <BaneCardCover isType="MouseWay" v-if="isMouseWayCard(slotProps.item)" />
-          <BaneCardCover :is-type="traitsTitle(0)" v-if="isTraitsCard(slotProps.item,0)" />
-          <BaneCardCover isType="Trait2" v-if="isTraitsCard(slotProps.item,1)" />
+          <BaneCardCover :is-type="traitsTitle(0)" v-if="isTraitsCard(slotProps.item, 0)" />
+          <BaneCardCover :is-type="traitsTitle(1)" v-if="isTraitsCard(slotProps.item, 1)" />
         </FlippingCard>
       </template>
     </GridLayout>
@@ -160,12 +160,14 @@ export default defineComponent({
       return kingdom.value.supply.mouseWay &&
         kingdom.value.supply.mouseWay.id == supplyCard.id;
     }
-    const isTraitsCard = (supplyCard: SupplyCard,index : number) => {
-      return kingdom.value.supply.traitsSupply[index] &&
-        kingdom.value.supply.traitsSupply[index].id == supplyCard.id;
+
+    const isTraitsCard = (supplyCard: SupplyCard, index: number) => {
+      return kingdom.value.supply.traitsSupply[index]  &&
+      kingdom.value.supply.traitsSupply[index].id == supplyCard.id;
     }
+
     const traitsTitle = (index: number) => {
-      return kingdom.value.traits[index].name
+      return "trait#"+ kingdom.value.traits[index].id;
     }
 
     const handleSpecify = (supplyCard: SupplyCard) => {

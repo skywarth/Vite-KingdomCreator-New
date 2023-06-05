@@ -10,6 +10,7 @@
 
 <script lang="ts">
 /* import Vue, typescript */
+
 import { defineComponent, computed } from "vue";
 
 /* import Dominion Objects and type*/
@@ -28,6 +29,7 @@ export default defineComponent({
     },
   },
   setup(props: { isType: string; }) {
+
     const cardDiv = computed(() => {
       return props.isType.toLowerCase().replace(/#.*/,"") + "-div"
     });

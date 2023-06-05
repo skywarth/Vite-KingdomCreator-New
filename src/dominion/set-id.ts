@@ -82,3 +82,5 @@ export const HideMultipleVersionSets = [
     SetId.PROSPERITY_2,
     SetId.HINTERLANDS_2,
 ];
+
+export const ImgNotInFR =[ SetId.PLUNDER ]
