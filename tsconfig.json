@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.json",
   "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue", "src/analytics/follow-activity.ts"],
   "compilerOptions": {
     //"importsNotUsedAsValues": "preserve",
@@ -19,7 +19,7 @@
       // "ES2016",
       "DOM",
       "DOM.Iterable",
-      "ES2018"
+      "ES2020"
     ],
     "types": ["node"]
   },

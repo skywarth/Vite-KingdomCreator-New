@@ -79,7 +79,7 @@ export default defineComponent({
         case 5:
           return "addon_description_format_5";
         default:
-          return null;
+          return "null";
       }
     });
     return {
