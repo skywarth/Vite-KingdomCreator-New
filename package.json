@@ -28,8 +28,13 @@
     "@types/google.analytics": "0.0.45",
     "@types/js-cookie": "^2.2.7",
     "@types/js-yaml": "^4.0.9",
+<<<<<<< refs/remotes/origin/main
     "@types/node": "^20.10.4",
     "@vitejs/plugin-vue": "^4.5.2",
+=======
+    "@types/node": "^20.10.3",
+    "@vitejs/plugin-vue": "^4.5.1",
+>>>>>>> vite 5 + plugin pb
     "@vue/tsconfig": "^0.4.0",
     "js-yaml": "^4.1.0",
     "npm-run-all": "^4.1.5",
@@ -38,7 +43,11 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "unplugin-vue-components": "0.26.0",
+<<<<<<< refs/remotes/origin/main
     "vite": "^5.0.7",
+=======
+    "vite": "^5.0.5",
+>>>>>>> vite 5 + plugin pb
     "vite-plugin-static-copy": "^1.0.0",
     "vite-plugin-virtual-mpa": "^1.9.3",
     "vue-tsc": "^1.8.25"
