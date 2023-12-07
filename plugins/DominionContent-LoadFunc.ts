@@ -1,29 +1,20 @@
-/*
-*/
-const fs = require('fs');
-const path = require('path');
-const yaml = require('js-yaml');
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
 
-export default function DominionContentPlugin() {
-  return {
-    name: 'dominion-content-plugin',
-    apply: 'build', // <-- spécifie que le plugin doit s'exécuter lors de la phase build
-    enforce: "post",
-    async generateBundle(options, bundle) {
-      const script = "window.DominionSets=" + JSON.stringify(loadSets()) +
-          ";window.DominionKingdoms=" + JSON.stringify(loadKingdoms()) + ";";
 
-      bundle['dominion-content.js'] = {
-        fileName: 'dominion-content.js',
-        isAsset: true,
-        source: script,
-        type: 'asset'
-      };
-    }
-  };
+function loadFilesFromDirectory(directory : string) {
+  const values: any = {};
+  const files = fs.readdirSync(directory);
+  for (const filename of files) {
+    const filePath = path.join(directory, filename);
+    const id = tokenize(path.basename(filename, '.yaml'));
+    values[id] = yaml.load(fs.readFileSync(filePath, 'utf8'));
+  }
+  return values;
 }
 
-function loadSets() {
+export function loadSets() {
   const sets = loadFilesFromDirectory(path.join(__dirname, '../sets'));
   // Add the id for each set.
   for (var setId in sets) {
@@ -41,7 +32,7 @@ function loadSets() {
     if (set.events) {
       for (var i = 0; i < set.events.length; i++) {
         var card = set.events[i];
-        card.id = convertToEventId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name, 'event');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -49,7 +40,7 @@ function loadSets() {
     if (set.landmarks) {
       for (var i = 0; i < set.landmarks.length; i++) {
         var card = set.landmarks[i];
-        card.id = convertToLandmarkId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name, 'landmark');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -57,7 +48,7 @@ function loadSets() {
     if (set.projects) {
       for (var i = 0; i < set.projects.length; i++) {
         var card = set.projects[i];
-        card.id = convertToProjectId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name,'project');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -65,7 +56,7 @@ function loadSets() {
     if (set.boons) {
       for (var i = 0; i < set.boons.length; i++) {
         var card = set.boons[i];
-        card.id = convertToBoonId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name, 'boon');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -73,7 +64,7 @@ function loadSets() {
     if (set.ways) {
       for (var i = 0; i < set.ways.length; i++) {
         var card = set.ways[i];
-        card.id = convertToWayId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name, 'way');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -81,7 +72,7 @@ function loadSets() {
     if (set.allies) {
       for (var i = 0; i < set.allies.length; i++) {
         var card = set.allies[i];
-        card.id = convertToAllyId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name,'ally');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -89,7 +80,7 @@ function loadSets() {
     if (set.traits) {
       for (var i = 0; i < set.traits.length; i++) {
         var card = set.traits[i];
-        card.id = convertToTraitId(setId, card.name);
+        card.id = convertTo_XX_Id(setId, card.name, 'trait');
         card.shortId = tokenize(card.name);
         card.setId = setId;
       }
@@ -106,19 +97,19 @@ function loadSets() {
   return sets;
 }
 
-function loadKingdoms() {
+export function loadKingdoms() {
   const kingdoms = loadFilesFromDirectory(path.join(__dirname, '../kingdoms'));
   identifyTraitSuppliesForKingdoms(kingdoms);
   return kingdoms;
 }
 
-function identifyTraitSuppliesForKingdoms(kingdomsSets) {
-  Object.values(kingdomsSets).forEach((kingdomSet) => {
-    Object.values(kingdomSet).forEach((kingdoms) => {
-      Object.values(kingdoms).forEach((kingdom) => {
+function identifyTraitSuppliesForKingdoms(kingdomsSets:any) {
+  Object.values(kingdomsSets).forEach((kingdomSet:any) => {
+    Object.values(kingdomSet).forEach((kingdoms:any) => {
+      Object.values(kingdoms).forEach((kingdom:any) => {
         if (kingdom.traits) {
           kingdom.traitSupplies = [];
-          kingdom.traits.forEach((trait, index) => {
+          kingdom.traits.forEach((trait:any, index:number) => {
             if (typeof trait !== 'string') {
               console.error(`Trait at index ${index} is not a string:`, trait);
               return;
@@ -135,49 +126,15 @@ function identifyTraitSuppliesForKingdoms(kingdomsSets) {
   });
 }
 
-function loadFilesFromDirectory(directory) {
-  const values = {};
-  const files = fs.readdirSync(directory);
-  for (let i = 0; i < files.length; i++) {
-    const filename = path.join(directory, files[i]);
-    const id = tokenize(path.basename(files[i], '.yaml'));
-    values[id] = yaml.load(fs.readFileSync(filename, 'utf8'));
-  }
-  return values;
+function convertTo_XX_Id(setId:string , name:string ,type:string) {
+  return `${setId}_${type}_${tokenize(name)}`;
 }
 
-function convertToEventId(setId, name) {
-  return `${setId}_event_${tokenize(name)}`;
-}
 
-function convertToLandmarkId(setId, name) {
-  return `${setId}_landmark_${tokenize(name)}`;
-}
-
-function convertToProjectId(setId, name) {
-  return `${setId}_project_${tokenize(name)}`;
-}
-
-function convertToBoonId(setId, name) {
-  return `${setId}_boon_${tokenize(name)}`;
-}
-
-function convertToWayId(setId, name) {
-  return `${setId}_way_${tokenize(name)}`;
-}
-
-function convertToAllyId(setId, name) {
-  return `${setId}_ally_${tokenize(name)}`;
-}
-
-function convertToTraitId(setId, name) {
-  return `${setId}_trait_${tokenize(name)}`;
-}
-
-function convertToCardId(setId, name) {
+function convertToCardId(setId:string , name:string) {
   return `${setId}_${tokenize(name)}`;
 }
 
-function tokenize(str) {
+function tokenize(str:string) {
   return str.replace(/[\s'-\/]/g, '').toLowerCase();
 }

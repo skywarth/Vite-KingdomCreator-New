@@ -5,20 +5,21 @@ import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { createMpaPlugin } from 'vite-plugin-virtual-mpa';
-
-import UnPluginVueComponents from 'unplugin-vue-components/vite'; // On-demand components auto importing for Vue.
-import DominionContentPlugin from './plugins/vite-plugin-dominion-content';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import rollupDel from 'rollup-plugin-delete';
 
+// On-demand components auto importing for Vue.
+import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
 
-const languages = ['fr', 'de', 'es', 'nl', 'pl']; // Liste des langues à fusionner
-const languageSourceDir = './src/i18n/locales'
-const languageDestDir = './docs/locales'
+import { DominionContentGenerate, mergeJSONLanguageFiles } from './plugins/vite-dominion-content';
+
 const devServerPort = 5173
 
-export default defineConfig(({ mode }) => {
+export default defineConfig( ({ mode }) => {
+
   if (mode == "production" || mode =="development") {
     mergeJSONLanguageFiles();
+    DominionContentGenerate();
     const sourceFile = './styles/normalize-v8.css';
     const destinationFile = './docs/normalize.css';
     fs.copyFile(sourceFile, destinationFile, () => {
@@ -29,7 +30,6 @@ export default defineConfig(({ mode }) => {
   return {
     // appType: 'spa',
     plugins: [
-      DominionContentPlugin(),
       UnPluginVueComponents({
         // Chemin vers le dossier qui contient les composants
         dirs: ['src/components'],
@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      /* import { createMpaPlugin } from 'vite-plugin-virtual-mpa'; */
+      // import { createMpaPlugin } from 'vite-plugin-virtual-mpa'; //
       createMpaPlugin({
         htmlMinify: false,
         verbose: false,
@@ -127,7 +127,11 @@ export default defineConfig(({ mode }) => {
             '!docs/CNAME',
             '!docs/ads.txt'],
           verbose: false
-        })
+        }),
+        viteStaticCopy({
+          targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
+            { src: 'docs/normalize.css', dest: 'assets/' } ]
+        }),
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
@@ -137,7 +141,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         // Alias pour les modules non-Esbuild compatibles avec Vite
         'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-browser.js',
-        'vue': 'vue/dist/vue.cjs.js',
+        'vue': 'vue/dist/vue.esm-browser.js',
       },
     },
     build: {
@@ -148,9 +152,9 @@ export default defineConfig(({ mode }) => {
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
-          entryFileNames: '[name]-[hash].js',
-          chunkFileNames: '[name]-[hash].js',
-          assetFileNames: '[name]-[hash][extname]'
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash][extname]'
         }
       },
     },
@@ -209,63 +213,3 @@ export default defineConfig(({ mode }) => {
   }
 });
 
-// Fonction pour créer une struture de répertoire si elle n'existe pas
-function testExistAndCreateDir(dirPath: string) {
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-}
-
-// Fonction pour lire le contenu d'un fichier JSON
-function readJsonFile(filePath: string): any {
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(fileContents);
-}
-
-// Fonction pour écrire le contenu d'un objet dans un fichier JSON
-function writeJsonFile(filePath: string, data: any) {
-  const json = JSON.stringify(data, null, 2);
-  fs.writeFileSync(filePath, json, 'utf8');
-}
-
-// Fonction pour merger ds JSON dans un seul fichier JSON
-function mergeJSONLanguageFiles() {
-  for (const lang of languages) {
-    // Chemins vers les répertoires contenant les fichiers JSON à fusionner
-    const messagesDir = path.join(__dirname, languageSourceDir, 'messages', lang);
-    const cardsDir = path.join(__dirname, languageSourceDir, 'messages', lang, 'cards');
-    //console.log(messagesDir)
-
-    // Chemin vers le fichier de sortie
-    const outputFile = path.join(__dirname, languageDestDir, `${lang}.json`);
-    testExistAndCreateDir(path.join(__dirname, languageDestDir));
-
-
-    // Fusionne tous les fichiers JSON dans le répertoire messagesDir
-    const messagesFiles = fs.readdirSync(messagesDir)
-      .filter(file => file.includes(`.${lang}.`) && file.endsWith('.json'))
-      .map(file => path.join(messagesDir, file));
-    //console.log(messagesFiles)
-    const messages = messagesFiles.reduce((result, file) => {
-      const data = readJsonFile(file);
-      return { ...result, ...data };
-    }, {});
-    // Fusionne tous les fichiers JSON dans le répertoire cardsDir
-    let cards
-    if (fs.existsSync(cardsDir)) {
-      const cardsFiles = fs.readdirSync(cardsDir)
-        .filter(file => file.includes(`.${lang}.`) && file.endsWith('.json'))
-        .map(file => path.join(cardsDir, file));
-
-      cards = cardsFiles.reduce((result, file) => {
-        const data = readJsonFile(file);
-        return { ...result, ...data };
-      }, {});
-    }
-    // Fusionne les données et écrit le fichier de sortie
-    const mergedData = { ...messages, ...cards };
-    //console.log(outputFile)
-
-    writeJsonFile(outputFile, mergedData);
-  }
-}
