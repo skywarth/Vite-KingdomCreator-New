@@ -1,0 +1,31 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue", "plugins/*.ts"],
+  "compilerOptions": {
+    //"importsNotUsedAsValues": "preserve",
+    "isolatedModules": true,
+    //"preserveValueImports": false,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": [
+      // Should target at least ES2016 in Vue 3
+      // Support for newer versions of language built-ins are
+      // left for the users to include, because that would require:
+      //   - either the project doesn't need to support older versions of browsers;
+      //   - or the project has properly included the necessary polyfills.
+      // "ES2016",
+      "DOM",
+      "DOM.Iterable",
+      "ES2020"
+    ],
+    "types": ["node"]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
