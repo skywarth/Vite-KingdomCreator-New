@@ -13,7 +13,6 @@ cards:
     cost:
       treasure: 2
     isAction: true
-    isActionSupplier: true
     isDrawer: true
     isDuration: true
 
@@ -36,7 +35,6 @@ cards:
     cost:
       treasure: 2
     isAction: true
-    isActionSupplier: true
     isTrashing: true
 
   - name: Secluded Shrine
@@ -70,7 +68,6 @@ cards:
     cost:
       treasure: 3
     isAction: true
-    isActionSupplier: true
     isDuration: true
 
   - name: Abundance
@@ -84,7 +81,6 @@ cards:
     cost:
       treasure: 4
     isAction: true
-    isActionSupplier: true
     isDrawer: true
     isDuration: true
 
@@ -238,7 +234,6 @@ cards:
     cost:
       treasure: 5
     isAction: true
-    isActionSupplier: true
     isBuySupplier: true
       
   - name: Pendant
