@@ -3,6 +3,7 @@
   "include": ["vite.config.ts", "plugins/*.ts"],
   "compilerOptions": {
     "composite": true,
+    "noEmit": false,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": ["node"]

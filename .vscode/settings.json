@@ -1,6 +1,0 @@
-{
-    "terminal.integrated.env.windows": {
-        "PATH": "E:\\Users\\Gilles\\Carte 32 Go\\# Portable App\\node-v20-win-x64"
-    },
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-}
