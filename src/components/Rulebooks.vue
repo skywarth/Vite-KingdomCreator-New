@@ -57,10 +57,10 @@ export default defineComponent({
             name: t(s.setId),
           } as RulebookInterface
         })
-        .concat({
+/*        .concat({
           id: SetId.GUILDSCONUCOPIA as string,
           name: t(SetId.GUILDS) + " / " + t(SetId.CORNUCOPIA),
-        })
+        }) */
         .filter((set) => !(
             language.value == Language.FRENCH  
             ? Set_To_Ignore_Rules_FR.has(set.id as SetId) 

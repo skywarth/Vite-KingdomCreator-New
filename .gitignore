@@ -30,3 +30,6 @@ coverage
 
 package-lock.json
 components.d.ts
+docs/dominion-content.js
+docs/normalize.css
+docs/locales/
