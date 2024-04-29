@@ -17,7 +17,7 @@ const devServerPort = 5173
 
 export default defineConfig( ({ mode }) => {
 
-  if (mode == "production" || mode =="development") {
+  if (mode === "production" || mode === "development") {
     mergeJSONLanguageFiles();
     DominionContentGenerate();
     const sourceFile = './styles/normalize-v8.css';

@@ -1,53 +1,30 @@
-const path = require('path');
-const fs = require('fs');
-const yaml = require('js-yaml');
+import path from 'path';
+import fs from 'fs';
+import yaml from 'js-yaml';
+import { fileURLToPath } from 'url';
 
-const tokenize = function(str) {
-   return str.replace(/[\s'-\/]/g, '').toLowerCase();
-};
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const convertToCardId = function(setId, name) {
-   return setId + '_' + tokenize(name);
-};
-
-const convertToEventId = function(setId, name) {
-   return setId + '_event_' + tokenize(name);
-};
-
-const convertToLandmarkId = function(setId, name) {
-   return setId + '_landmark_' + tokenize(name);
-};
-
-const convertToProjectId = function(setId, name) {
-   return setId + '_project_' + tokenize(name);
-};
-
-const convertToBoonId = function(setId, name) {
-   return setId + '_boon_' + tokenize(name);
-};
-
-const convertToWayId = function(setId, name) {
-   return setId + '_way_' + tokenize(name);
-};
-
-const convertToAllyId = function(setId, name) {
-   return setId + '_ally_' + tokenize(name);
-};
-
-const convertToTraitId = function(setId, name) {
-   return setId + '_trait_' + tokenize(name);
-};
+const tokenize = (str) => str.replace(/[\s'-\/]/g, '').toLowerCase();
+const convertToCardId = (setId, name) => setId + '_' + tokenize(name);
+const convertToEventId = (setId, name) => setId + '_event_' + tokenize(name);
+const convertToLandmarkId = (setId, name) => setId + '_landmark_' + tokenize(name);
+const convertToProjectId = (setId, name) => setId + '_project_' + tokenize(name);
+const convertToBoonId = (setId, name) => setId + '_boon_' + tokenize(name);
+const convertToWayId = (setId, name) => setId + '_way_' + tokenize(name);
+const convertToAllyId = (setId, name) => setId + '_ally_' + tokenize(name);
+const convertToTraitId = (setId, name) => setId + '_trait_' + tokenize(name);
 
 const loadFilesFromDirectory = function(directory) {
    const values = {};
    const files = fs.readdirSync(directory);
-   for (let i = 0; i < files.length; i++) {
-	  if (files[i].includes("2-add")) continue
-      const filename = path.join(directory, files[i]);
-      const id = tokenize(path.basename(files[i], '.yaml'));
-      values[id] = yaml.load(fs.readFileSync(filename, 'utf8'));
-
-   }
+   for (const filename of files) {
+      if (filename.includes("2-add")) continue;
+      const filePath = path.join(directory, filename);
+      const id = tokenize(path.basename(filePath, '.yaml'));
+      values[id] = yaml.load(fs.readFileSync(filePath, 'utf8'));
+    }
    return values;
 };
 
@@ -55,24 +32,23 @@ const loadSets = function() {
    const sets = loadFilesFromDirectory(path.join(__dirname, '../sets'));
 
    // Add the id for each set.
-   for (var setId in sets) {
+   for (const setId in sets) {
       sets[setId].id = setId;
    }
 
    // Create an id for each card.
-   for (var setId in sets) {
-      var set = sets[setId];
-      for (var i = 0; i < set.cards.length; i++) {
-         var card = set.cards[i];
-         card.id = convertToCardId(setId, card.name);
-         card.shortId = tokenize(card.name);
-         card.setId = setId;
-         card.cardType="0 // supplies"
+   for (const setId in sets) {
+      const set = sets[setId];
+      for (let i = 0; i < set.cards.length; i++) {
+        const card = set.cards[i];
+        card.id = convertToCardId(setId, card.name);
+        card.shortId = tokenize(card.name);
+        card.setId = setId;
+        card.cardType = "0 // supplies"; // Assuming default card type
       }
-
       if (set.events) {
-         for (var i = 0; i < set.events.length; i++) {
-            var card = set.events[i];
+         for (let i = 0; i < set.events.length; i++) {
+            const card = set.events[i];
             card.id = convertToEventId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -80,8 +56,8 @@ const loadSets = function() {
          }
       }
       if (set.landmarks) {
-         for (var i = 0; i < set.landmarks.length; i++) {
-            var card = set.landmarks[i];
+         for (let i = 0; i < set.landmarks.length; i++) {
+            const card = set.landmarks[i];
             card.id = convertToLandmarkId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -89,8 +65,8 @@ const loadSets = function() {
          }
       }
       if (set.projects) {
-         for (var i = 0; i < set.projects.length; i++) {
-            var card = set.projects[i];
+         for (let i = 0; i < set.projects.length; i++) {
+            const card = set.projects[i];
             card.id = convertToProjectId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -98,8 +74,8 @@ const loadSets = function() {
          }
       }
       if (set.boons) {
-         for (var i = 0; i < set.boons.length; i++) {
-            var card = set.boons[i];
+         for (let i = 0; i < set.boons.length; i++) {
+            const card = set.boons[i];
             card.id = convertToBoonId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -107,8 +83,8 @@ const loadSets = function() {
          }
       }
       if (set.ways) {
-         for (var i = 0; i < set.ways.length; i++) {
-            var card = set.ways[i];
+         for (let i = 0; i < set.ways.length; i++) {
+            const card = set.ways[i];
             card.id = convertToWayId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -116,8 +92,8 @@ const loadSets = function() {
          }
       }
       if (set.allies) {
-         for (var i = 0; i < set.allies.length; i++) {
-            var card = set.allies[i];
+         for (let i = 0; i < set.allies.length; i++) {
+            const card = set.allies[i];
             card.id = convertToAllyId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -125,8 +101,8 @@ const loadSets = function() {
          }
       }
       if (set.othercards) {
-         for (var i = 0; i < set.othercards.length; i++) {
-            var card = set.othercards[i];
+         for (let i = 0; i < set.othercards.length; i++) {
+            const card = set.othercards[i];
             card.id = convertToCardId(setId, card.name);
             card.shortId = tokenize(card.name);
             card.setId = setId;
@@ -142,15 +118,15 @@ const loadKingdoms = function() {
 };
 
 
-module.exports = {
-   tokenize: tokenize,
-   convertToCardId: convertToCardId,
-   convertToEventId: convertToEventId,
-   convertToLandmarkId: convertToLandmarkId,
-   convertToBoonId: convertToBoonId,
-   convertToWayId: convertToWayId,
-   convertToAllyId: convertToAllyId,
-   convertToTraitId: convertToTraitId,
-   loadSets: loadSets,
-   loadKingdoms: loadKingdoms,
+export default  {
+   tokenize,
+   convertToCardId,
+   convertToEventId,
+   convertToLandmarkId,
+   convertToBoonId,
+   convertToWayId,
+   convertToAllyId,
+   convertToTraitId,
+   loadSets,
+   loadKingdoms
 };

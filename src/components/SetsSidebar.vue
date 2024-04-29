@@ -44,7 +44,7 @@
               @change="SelectFile($event)" accept=".yaml" v-show="show_PersonalFileSelection_Input" />
             <label id="my-file-label-trigger" for="fileInput" class="input-file-trigger"
               v-show="show_PersonalFileSelection_Input" tabindex="0">Select a file...</label>
-            <div id="div-file-return" class="file-return" style="background-color=blue">{{ file_name }}</div>
+            <div id="div-file-return" class="file-return" style="background-color:'blue'">{{ file_name }}</div>
           </div>
         </div>
       </div><!-- sets Personal -->

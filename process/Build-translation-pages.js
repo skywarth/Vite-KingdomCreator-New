@@ -1,7 +1,6 @@
-fs = require("fs");
-path = require('path');
-
-Loader = require('./loader');
+import fs from "fs";
+import path from "path";
+//import Loader from "./loader.js";
 
 function transformName(name) {
   return name.toLowerCase().replace(/'/g, "");
@@ -17,15 +16,16 @@ function TestAndCreateDir(Path) {
   'languages',         'common',
   'page-boxes',        'page-index',
   'page-rules',        'page-sets',
-  'sets',              '',
+  'sets',               
   'cards.baseset2',    'cards.baseset',
   'cards.intrigue2',   'cards.intrigue',
   'cards.seaside',     'cards.seaside2',
-  'cards.alchemy',     'cards.prosperity',
-  'cards.prosperity2', 'cards.cornucopia',
+  'cards.alchemy',     'cards.promos',
+  'cards.prosperity',  'cards.prosperity2'
+  'cards.guilds',      'cards.cornucopia',
+  'cards.guildscornucopia2',
   'cards.hinterlands', 'cards.hinterlands2',
-  'cards.promos',      'cards.darkages',
-  'cards.guilds',      'cards.adventures',
+  'cards.darkages',    'cards.adventures',
   'cards.empires',     'cards.nocturne',
   'cards.renaissance', 'cards.menagerie',
   'cards.allies'     , 'cards.plunder',
@@ -52,11 +52,12 @@ console.log("  'sets',               ")
 console.log("  'cards.baseset2',    'cards.baseset',")
 console.log("  'cards.intrigue2',   'cards.intrigue',")
 console.log("  'cards.seaside',     'cards.seaside2',")
-console.log("  'cards.alchemy',     'cards.prosperity',")
-console.log("  'cards.prosperity2', 'cards.cornucopia',")
+console.log("  'cards.alchemy',     'cards.promos',")
+console.log("  'cards.prosperity',  'cards.prosperity2'")
+console.log("  'cards.guilds',      'cards.cornucopia',")
+console.log("  'cards.guildscornucopia2',")
 console.log("  'cards.hinterlands', 'cards.hinterlands2',")
-console.log("  'cards.promos',      'cards.darkages',")
-console.log("  'cards.guilds',      'cards.adventures',")
+console.log("  'cards.darkages',    'cards.adventures',")
 console.log("  'cards.empires',     'cards.nocturne',")
 console.log("  'cards.renaissance', 'cards.menagerie',")
 console.log("  'cards.allies'     , 'cards.plunder',")
@@ -85,6 +86,9 @@ const lines = csv.replace(/"/g, "").split(/\r?\n/);
 const names = {};
 let separator=";"
 let start_line=0
+let languages=[]
+let lang=""
+let filename=""
 console.log(lines[start_line])
 if (lines[start_line].includes("sep=")) {
   console.log("sep found")
@@ -138,7 +142,7 @@ for (let i = 0; i < resultPages.length; i++) {
           if (filenamesplitted[0] == "cards") {
             TestAndCreateDir(`./src/i18n/locales/messages/${lang}/cards`)
             filename = `./src/i18n/locales/messages/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-          } else filename = `./src/i18n/mlocales/essages/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+          } else filename = `./src/i18n/locales/messages/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
         } else filename = `./src/i18n/locales/messages/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
         console.log(filename)
         fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
