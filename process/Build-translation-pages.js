@@ -1,13 +1,18 @@
 import fs from "fs";
 import path from "path";
-//import Loader from "./loader.js";
+import Loader from "./loader.js";
+
+const sets = Loader.loadSets(); // Assuming loadSets is async function
+
+const TRANSLATION_CSV = "./resources/pages.csv"
+const PROCESSING_DIR = "./processed/src/i18n/locales/messages"
 
 function transformName(name) {
   return name.toLowerCase().replace(/'/g, "");
 }
 
 function TestAndCreateDir(Path) {
-  if (!fs.existsSync(Path)) fs.mkdirSync(Path);
+  if (!fs.existsSync(Path)) fs.mkdirSync(Path, { recursive: true });
 }
 // Read text file "UTF8" containing format
 //sep=	
@@ -35,7 +40,7 @@ function usage() {
 console.log("")
 console.log("")
 console.log("To run properly 'Build-translation-pages.js' you need to have a translation file")
-console.log ("located and named './process/resources/pages.csv'.")
+console.log ("located and named '" + TRANSLATION_CSV + "'.")
 console.log("")
 console.log("The format of this file is a comma separated value type file")
 console.log("with the first line defining the separator character with the following syntax 'sep=(tab)'or 'sep=,'.")
@@ -62,11 +67,11 @@ console.log("  'cards.empires',     'cards.nocturne',")
 console.log("  'cards.renaissance', 'cards.menagerie',")
 console.log("  'cards.allies'     , 'cards.plunder',")
 console.log("")
-console.log("The output are multiple files located at './src/i18n/locales/messages/${lang}'")
+console.log("The output are multiple files located at '"+ PROCESSING_DIR + "/${lang}'")
 console.log("depending on the languages found in the CSV file.")
 console.log("One file for each PageName that do not start with 'cards'.")
 console.log("")
-console.log("At the location './src/i18n/locales/messages/${lang}/cards',")
+console.log("At the location '"+ PROCESSING_DIR + "/${lang}/cards',")
 console.log("one file for each PageName that do start with 'cards' named 'cards.${lang}.${setname}.json'")
 console.log("and 'cards.missing.json' file containing card name that miss a translation.")
 console.log("")
@@ -81,7 +86,7 @@ console.log("")
 }
 
 usage()
-const csv = fs.readFileSync("./process/resources/pages.csv", "utf8");
+const csv = fs.readFileSync(TRANSLATION_CSV, "utf8");
 const lines = csv.replace(/"/g, "").split(/\r?\n/);
 const names = {};
 let separator=";"
@@ -106,10 +111,7 @@ for (let i = start_line + 1; i < lines.length; i++) {
 const resultPages = Object.keys(names);
 console.log(resultPages)
 
-TestAndCreateDir('./src');
-TestAndCreateDir('./src/i18n');
-TestAndCreateDir('./src/i18n/locales');
-TestAndCreateDir('./src/i18n/locales/messages');
+TestAndCreateDir(PROCESSING_DIR);
 
 
 
@@ -127,6 +129,7 @@ for (let i = 0; i < resultPages.length; i++) {
         for (let j = 2 ; j < Line_splittted.length; j++) {
           //names[languages[j]][Line_splittted[1]]= Line_splittted[2]
           if (Line_splittted[j] != '') names[languages[j]][Line_splittted[1]]= Line_splittted[j]
+          console.log(Line_splittted[1])
         }
       }
     }
@@ -137,13 +140,13 @@ for (let i = 0; i < resultPages.length; i++) {
         lang=languages[j]
         if (lang=="en" && resultPages[i]=="sets") continue
         // if (lang=="en") lang =""
-        TestAndCreateDir(`./src/i18n/locales/messages/${lang}`)
+        TestAndCreateDir(`${PROCESSING_DIR}/${lang}`)
         if (filenamesplitted.length > 1 ) {
           if (filenamesplitted[0] == "cards") {
-            TestAndCreateDir(`./src/i18n/locales/messages/${lang}/cards`)
-            filename = `./src/i18n/locales/messages/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-          } else filename = `./src/i18n/locales/messages/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-        } else filename = `./src/i18n/locales/messages/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
+            TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`)
+            filename = `${PROCESSING_DIR}//${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+          } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+        } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.json`
         console.log(filename)
         fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
       }

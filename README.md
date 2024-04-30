@@ -46,14 +46,19 @@ $ sudo docker run \
 ###### To add a new set
 
 to get images from dominionstrategy.com
+ - Add a type if needed. You will need to code a bit.
+   This might occur in file `./process/download.js`
 
-add a type if needed. You will need to code a bit.
+you need to set in `download.js` the type of image card or ste you want to get
+this is here in term of code
 
-run either from directory "./process" : 
-`node download.js`
-but you will need to create some directories
-or run it from kingdom_creator root directory : 
-`node process/download.js`
+    //processAllSets();  // to process all known sets
+    //getAllImages(getCards(sets.plunder)); // to process 1 set 
+    getImage(sets.plunder.cards.filter(card => card.name == "Cage")[0]) // to process 1 card
+
+to execute 
+    `cd process`
+run `node download.js`
 Images will be created for english version.
 
 to build kingdom file related to an expansion use
@@ -65,14 +70,15 @@ strings = ["Introduction: Cartographer, Crossroads, Develop, Jack of all Trades,
 ###### Cards translation generation
 == Active ==
 to generate new translation files in process directory 
+`cd process`
 Use `node Build-translation-pages.js`
 The source is 1 file for all the expansions
-patern is `./process/resources/pages.csv`
+patern is `./resources/pages.csv` in `process` folder
 It will create for each language defined at line 2 of page.csv, files in 
-`src\i18n\messages\${lang}` for dominionrandomizer pages and
-a file per set in `src\i18n\messages\${lang}\cards` with card name translation for this set.
+`./processed/src/i18n/messages/${lang}` for dominionrandomizer pages and
+a file per set in `./processed/src/i18n/messages/${lang}/cards` with card name translation for this set.
 
-
+To use copy folder form `./processed` to root directory
 
 == Deprecated ==
 to translate cards in process directory 

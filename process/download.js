@@ -1,12 +1,64 @@
 import axios from 'axios';
 import Loader from './loader.js'; // Assuming loader.js uses ES modules
 import fs from 'fs/promises'; // Using promises for async/await
-import resize from './resize.js';
+import Jfs from 'fs';
+import resize from './resize.js'
 
-const sets = await Loader.loadSets(); // Assuming loadSets is async function
+const sets = Loader.loadSets(); // Assuming loadSets is async function
 
+const WORK_CARDS = "processed/cards"
+const DOC_IMG = "processed/docs/img/cards"
 // Enable logging for debugging
 const trace = false;
+
+
+
+async function getAllImages(cards) {
+  for (let i = 0; i < cards.length; i++) {
+    console.log(cards[i].id);
+    await getImage(cards[i]);
+  }
+}
+
+async function getImage(card) {
+  console.log("Requesting : " + createPageUrl(card))
+
+  const response = await axios.get(createPageUrl(card));
+  if (response.status != 200) {
+    console.log(`Invalid URL: ${card.name}`);
+    return;
+  }
+  const match1 = response.data.match(/\.jpg\"\ssrc=\"(.+?.jpg)\"/);
+  const match = response.data.match(/class="fullImageLink" id="file"><a href="(\/images\/[^.]+)/);
+
+  if (!match || match.length < 2) {
+    console.log(`Unable to find URL: ${card.name}`);
+    return;
+  }
+
+  const imageUrl = `https://wiki.dominionstrategy.com${match[1]}.jpg`;
+  console.log("matched : Getting " + imageUrl)
+  const imageResponse = await axios.get( imageUrl, { responseType: "stream" });
+  const tempFilename = `${WORK_CARDS}/${card.setId}/${card.id}.jpg`;
+
+  await fs.mkdir(`${DOC_IMG}/${card.setId}`, { recursive: true }); // Create directories recursively
+  await fs.mkdir(`${WORK_CARDS}/${card.setId}`, { recursive: true }); // Create directories recursively
+
+  const writer = Jfs.createWriteStream(tempFilename);
+  imageResponse.data.pipe(writer);
+
+  return new Promise((resolve) => {
+    writer.on("finish", () => {
+      resize(tempFilename, `${DOC_IMG}/${card.setId}/${card.id}.jpg`);
+      resolve();
+    });
+  });
+}
+
+function createPageUrl(card) {
+  const name = card.name.replace(/\s/g, "_");
+  return `https://wiki.dominionstrategy.com/index.php/File:${name}.jpg`;
+}
 
 // Function to get all cards from a set (including sub-categories)
 function getCards(set) {
@@ -21,77 +73,7 @@ function getCards(set) {
   return cards;
 }
 
-// Function to create the full image URL
-function createPageUrl(card) {
-  const name = card.name.replace(/\s/g, '_').replace(/'/g, '%27');
-  return `http://wiki.dominionstrategy.com/index.php/File:${name}.jpg`;
-}
 
-// Async function to download and resize an image
-async function downloadAndResizeImage(card) {
-  console.log(card)
-  try {
-    const url = createPageUrl(card);
-    console.log(`Request URL : ${url}`)
-    const response = await axios.get(url, { responseType: 'stream' });
-
-    if (response.status !== 200) {
-      console.log(`Invalid URL: ${card.name}`);
-      return;
-    }
-    //console.log(response.status)
-
-    const name = card.name.replace(/\s/g, '_').replace(/'/g, '%27');
-    //console.log(response.data)
-    //const match = response.data.toString().match(/class="fullImageLink" id="file"><a href="(\/images\/[^.]+)/);
-    const match = response.data.toString().match(/\.jpg\"\ssrc=\"(.+?.jpg)\"/);
-    if (!match || match.length < 2) {
-      console.log(`Unable to find URL: ${card.setId} - ${card.name} - ${name} for URL ${url}`);
-      //console.log(response.data))
-      return;
-    }
-
-    const imageUrl = `http://wiki.dominionstrategy.com${match[1]}`;
-    const imageResponse = await axios.get(imageUrl, { responseType: 'stream' });
-
-    const tempFilename = `process/cards/${card.setId}/${card.id}.jpg`;
-    await fs.mkdir(`process/cards/${card.setId}`, { recursive: true }); // Create directories recursively
-    const writer = fs.createWriteStream(tempFilename);
-    imageResponse.data.pipe(writer);
-
-    await new Promise((resolve) => {
-      writer.on('finish', async () => {
-        await fs.mkdir('docs/img/cards', { recursive: true }); // Create directories recursively
-        await resize(tempFilename, `docs/img/cards/${card.setId}/${card.id}.jpg`);
-        console.log(`  ${card.id} : Complete`);
-        resolve();
-      });
-    });
-  } catch (error) {
-    console.error(`Error downloading image for ${card.name}:`, error);
-  }
-}
-
-// Function to process all images for a set
-async function getAllImages(cards) {
-  for (const card of cards) {
-    if (trace) console.log(` 0 - before getImage`);
-    if (!card.shortId.includes('tohide')) {
-      await downloadAndResizeImage(card);
-    }
-  }
-}
-
-// Function to process all sets
-async function processAllSets() {
-  for (const setName in sets) {
-    console.log(setName);
-    await getAllImages(getCards(sets[setName]));
-  }
-}
-
-//processAllSets();
-//getAllImages(getCards(sets.plunder));
-downloadAndResizeImage(sets.plunder.cards.filter(card => card.name == "Grotto")[0])
-
-
+//processAllSets();  // to process all known sets
+getAllImages(getCards(sets.plunder)); // to process 1 set 
+//getImage(sets.plunder.cards.filter(card => card.name == "Cage")[0]) // to process 1 card

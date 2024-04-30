@@ -37,6 +37,4 @@ function isHorizontal(name) {
   return false;
 }
 
-export default {
-  resize
- }
+export default resize;
