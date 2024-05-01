@@ -85,6 +85,22 @@ console.log("")
 console.log("")
 }
 
+function  Add2ndEditions(processedSet, translated) {
+  console.log(processedSet, "##")
+  //console.log (sets)
+  for (const setId in sets) {
+    const set = sets[setId];
+    if ((processedSet +2) == setId) {
+      console.log("work", setId)
+      console.log (set.cards)
+    }
+    //console.log (set.cards)
+    //console.log (set.setId)
+  }
+}
+
+
+//==============================================================
 usage()
 const csv = fs.readFileSync(TRANSLATION_CSV, "utf8");
 const lines = csv.replace(/"/g, "").split(/\r?\n/);
@@ -109,15 +125,13 @@ for (let i = start_line + 1; i < lines.length; i++) {
   names[Line_splittted[0]]={}
 }
 const resultPages = Object.keys(names);
-console.log(resultPages)
-
+//console.log(resultPages)
 TestAndCreateDir(PROCESSING_DIR);
-
-
 
 for (let i = 0; i < resultPages.length; i++) {
   const page = resultPages[i];
   if (page != "" ) {
+    console.log("page is", page)
     for (let n = 2; n < languages.length; n++) {
       if (languages[n] != "" ) names[languages[n]]={};
     }
@@ -125,17 +139,21 @@ for (let i = 0; i < resultPages.length; i++) {
     for (let i = 1; i < lines.length; i++) {
       const Line_splittted = lines[i].split(separator);
       if (Line_splittted[0] == page) {
-//    names[Line_splittted[0]][Line_splittted[1]]=[]
+        // names[Line_splittted[0]][Line_splittted[1]]=[]
         for (let j = 2 ; j < Line_splittted.length; j++) {
           //names[languages[j]][Line_splittted[1]]= Line_splittted[2]
           if (Line_splittted[j] != '') names[languages[j]][Line_splittted[1]]= Line_splittted[j]
-          console.log(Line_splittted[1])
+          //console.log(Line_splittted[1])
         }
       }
     }
-    console.log(languages)
+
+    
+    //console.log(languages)
     const filenamesplitted=(resultPages[i]).split('.')
-    for (let j= 2 ; j < languages.length; j++) {
+    //console.log(filenamesplitted)
+//for (let j= 2 ; j < languages.length; j++) {
+    for (let j= 2 ; j < 4; j++) {
       if (languages[j] != "" ) {
         lang=languages[j]
         if (lang=="en" && resultPages[i]=="sets") continue
@@ -144,9 +162,11 @@ for (let i = 0; i < resultPages.length; i++) {
         if (filenamesplitted.length > 1 ) {
           if (filenamesplitted[0] == "cards") {
             TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`)
-            filename = `${PROCESSING_DIR}//${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-          } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-        } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.json`
+            filename = `${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+            // Add 2nd edition translation
+            Add2ndEditions(filenamesplitted[1], names[languages[j]])
+          } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+        } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
         console.log(filename)
         fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
       }
@@ -154,7 +174,7 @@ for (let i = 0; i < resultPages.length; i++) {
   }
 }
 
-usage()
+//usage()
 
 
 
