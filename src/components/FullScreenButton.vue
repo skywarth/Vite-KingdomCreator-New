@@ -72,7 +72,7 @@ export default defineComponent({
 </script>
 
 
-<style>
+<style scoped>
 .fullscreen-button {
   -webkit-appearance: none;
   appearance: none;

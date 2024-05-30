@@ -53,7 +53,7 @@ export default defineComponent({
   })
 </script>
 
-<style>
+<style scoped>
 .ally-header {
   margin: 10px 0 0;
   font-size: 20px;

@@ -1,6 +1,6 @@
 <template>
   <Page :subtitle="$t('rules_page_subtitle')" :selectedType="selectedType">
-    <div class="content main">
+    <div class="contentRules main">
       <Rulebooks />
     </div>
   </Page>

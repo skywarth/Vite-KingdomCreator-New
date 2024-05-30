@@ -5,7 +5,21 @@
       {{ $t(randomizeButtonText) }}
     </a>
     <div class="sidebar-content filters">
-      <div class="sidebar-content-title">{{ $t("Sets") }}</div>
+      <div class="sidebar-content-title">
+        <span>{{ $t("Sets") }}</span>
+        <div>
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
+            @change="handleSetOrderTypeChange('alpha')" />
+            <span>{{ $t("Alphabetical") }}</span>
+        </label> 
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
+            @change="handleSetOrderTypeChange('date')" />
+            <span>{{ $t("Date") }}</span>
+        </label>
+        </div>
+      </div>
       <div class="sets">
         <div class="set" v-for="setId in setIds" :key="setId">
           <label class="checkbox">
@@ -103,15 +117,18 @@
 <script lang="ts">
 /* import Vue, typescript */
 import { defineComponent, ref, computed, watch } from "vue";
+import { useI18n } from 'vue-i18n'
 
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import { MultipleVersionSets, HideMultipleVersionSets, Sets_To_Ignore_Regroup } from "../dominion/set-id";
 import type { SetId } from "../dominion/set-id";
+import { Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
 
 /* imoprt store  */
 import { useWindowStore } from "../pinia/window-store";
 import { useRandomizerStore } from "../pinia/randomizer-store";
+import { useSetsStore } from '../pinia/sets-store';
 
 import type { SettingsParams } from "../settings/settings";
 import { SortOption } from "../settings/settings";
@@ -124,7 +141,9 @@ export default defineComponent({
   components: {
   },
   setup(props, { emit }) {
+    const { t } = useI18n();
     const randomizerStore = useRandomizerStore()
+    const setsStore = useSetsStore()
     const windowStore = useWindowStore()
     const isCondensed = computed(() => { return windowStore.isCondensed });
     const isDistributeCostAllowed = computed(() => { return randomizerStore.isDistributeCostAllowed });
@@ -133,9 +152,18 @@ export default defineComponent({
     const randomizeButtonText = computed(() => { return randomizerStore.randomizeButtonText });
     const settings = computed(() => { return randomizerStore.settings });
     const randomizerSettings = computed(() => { return randomizerStore.settings.randomizerSettings });
+    const setsOrderType = ref(setsStore.setsOrderType)
 
-    const setIds = DominionSets.getAllSetsIds().filter(setId => !Sets_To_Ignore_Regroup.has(setId))
-      .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
+    const setIds = computed(() => { 
+        const AllSetIdsToConsider = DominionSets.getAllSetsIds()
+            .filter(setId => !Sets_To_Ignore_Regroup.has(setId))
+            .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) })
+        const sortedSets = setsOrderType.value === 'date'   // Check if sortType has a value (not undefined)
+            ? AllSetIdsToConsider.sort((a, b) => (Year_set.find(set => set.id === a)?.order ||0) - (Year_set.find(set => set.id === b)?.order ||0))
+            : AllSetIdsToConsider.sort((a, b) => t(a).localeCompare(t(b)))
+        return sortedSets;
+      }
+      );
 
     const selectedSetIds = ref(settings.value.selectedSets);
     watch(selectedSetIds, (values: string[]) => {
@@ -217,6 +245,10 @@ export default defineComponent({
       emit("randomize")
     }
 
+    const handleSetOrderTypeChange = (value: string) => {
+      setsStore.updateSetsOrderType(value);
+    };
+
     const updateRandomizerSettings = (params: RandomizerSettingsParams) => {
       randomizerStore.UPDATE_SETTINGS({
         randomizerSettings: params
@@ -226,9 +258,11 @@ export default defineComponent({
     return {
       randomizeButtonText,
       handleRandomize,
+      handleSetOrderTypeChange,
       isCondensed,
       setIds,
       selectedSetIds,
+      setsOrderType,
       FindMultipleVersionSets,
       requireActionProvider,
       requireBuyProvider,
@@ -253,7 +287,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .desktop_randomize-button,
 .condensed_randomize-button {
   display: block;

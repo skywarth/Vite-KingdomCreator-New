@@ -35,7 +35,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .card-title-overlay {
   margin-top: -13px;
 }

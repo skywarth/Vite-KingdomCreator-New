@@ -4,7 +4,9 @@
       <ul class="condensed-menu_items">
         <li class="condensed-menu_item" v-for="menuItem in menuItems" :class="{ active: isMenuItemActive(menuItem) }"
           :key="menuItem.url">
-          <a class="condensed-menu_item_link" :href="getMenuItemUrl(menuItem.url)">{{ $t(menuItem.title) }}</a>
+          <RouterLink class="condensed-menu_item_link" :to="getMenuItemUrl(menuItem.url)">
+                {{ $t(menuItem.title) }}
+              </RouterLink>
         </li>
       </ul>
     </div>
@@ -20,9 +22,10 @@
         <div class="condensed-menu-button" v-if="isCondensed" @click="handleMenuClick"></div>
         <div class="menu" v-if="!isCondensed">
           <ul class="menu_items">
-            <li class="menu_item" v-for="menuItem in menuItems" :class="{ active: isMenuItemActive(menuItem) }"
-              :key="menuItem.title">
-              <a class="menu_item_link" :href="getMenuItemUrl(menuItem.url)">{{ $t(menuItem.title) }}</a>
+            <li class="menu_item" v-for="menuItem in menuItems" :key="menuItem.title" :class="{ active: isMenuItemActive(menuItem) }">
+              <router-link class="menu_item_link" :to="getMenuItemUrl(menuItem.url)">
+                {{ $t(menuItem.title) }}
+              </router-link>
             </li>
           </ul>
         </div> 
@@ -105,20 +108,14 @@ class MenuItem {
 }
 
 let MENU_ITEMS = [
-  new MenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/index.html"),
-  new MenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets.html"),
-  new MenuItem(MenuItemType.RULES, "Rules", "/rules.html"),
-  new MenuItem(MenuItemType.BOXES, "Box content", "/boxes.html"),
+  new MenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/index"),
+  new MenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets"),
+  new MenuItem(MenuItemType.RULES, "Rules", "/rules"),
+  new MenuItem(MenuItemType.BOXES, "Box content", "/boxes"),
 ];
 
 if (process.env.NODE_ENV == "development") {
-  MENU_ITEMS = [
-    new MenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/"),
-    new MenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets.html"),
-    new MenuItem(MenuItemType.RULES, "Rules", "/rules.html"),
-    new MenuItem(MenuItemType.BOXES, "Box content", "/boxes.html"),
-    // new MenuItem(MenuItemType.CARDS, "Cards", "/cards.html"),
-  ];
+  MENU_ITEMS.push(new MenuItem(MenuItemType.CARDS, "Cards", "/cards"));
 }
 
 export default defineComponent({
@@ -133,14 +130,23 @@ export default defineComponent({
     const i18nStore = usei18nStore();
 
     const { t } = useI18n();
-    const language = ref(i18nStore.language);
+    const language = computed(() => i18nStore.language);
     const isCondensedMenuActive = ref(false);
     const menuItems = MENU_ITEMS;
-    const isCondensed = computed(() =>{ return WindowStore.isCondensed});
+    const isCondensed = computed(() =>{ return WindowStore.isCondensed });
     const shouldShowCondensedMenu = computed(()=> { return isCondensed.value && isCondensedMenuActive.value });
     const languages = computed(() => { return Object.values(Language) });
-    const getMenuItemUrl = (url: string) => language.value !== Language.ENGLISH ? `${url}?lang=${language.value}` : url;
     const isMenuItemActive = (menuItem: MenuItem) => menuItem.type === props.selectedType;
+
+    const getMenuItemUrl = (url: string) => {
+      return {
+          path: url,
+          query: {
+            ...route.query,
+            lang: language.value,
+          }
+        };
+      };
 
     const getLanguageLinkOptions = (language: string) => {
       return {

@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n'
 import type { Composer, VueI18n, I18nMode, I18n } from 'vue-i18n'
 
 import en from "./locales/en";
-import { Language, defaultLanguage} from "./language";
+import { Language, defaultLanguage } from "./language";
 
 export const i18n = createI18n({
   legacy: false,
@@ -66,20 +66,13 @@ export function setI18nLanguage(i18n: I18n, locale: Language): void {
 export async function loadLocaleMessages(i18n: I18n, locale: Language): Promise<any> {
   // load locale messages
   if (i18n.global.availableLocales.includes(locale)) {
-    //console.log("locale already loaded")
     return Promise.resolve();
   }
-  //console.log("need to load locale", locale);
-  
-  // const { messages } = await import( 
-  // 	/* webpackChunkName: "language-[request]" */ `./locales/${locale}.ts`); 
 
   const messages = await fetch(`./locales/${locale}.json`)
       .then((response) => { return response.json(); })
-
   // fetch() error occurred.
   if (messages === undefined) return nextTick();
-  
   // set locale and locale message
   i18n.global.setLocaleMessage(locale, messages);
   return nextTick();

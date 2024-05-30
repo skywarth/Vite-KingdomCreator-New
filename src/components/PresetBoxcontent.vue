@@ -22,7 +22,7 @@
         :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Boons -->
       <GenericLayout :items="getCards(set.boons.concat(getOtherCards(set, 'Boons') as any []))" :title="$t('Boons')"
-        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" /> -->
+        :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
       <!-- generic slot : Allies -->
       <GenericLayout :items="getCards(set.allies.concat(getOtherCards(set, 'Allies') as any []))" :title="$t('Allies')"
         :shape="Shape.CARD" :showOverlay="false" :generic-nb-columns="numberOfColumnsForAddons" :is-vertical="false" />
@@ -191,7 +191,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 @media (max-width: 450px) {
   .preset-kingdom_title_name {
     font-size: 30px;

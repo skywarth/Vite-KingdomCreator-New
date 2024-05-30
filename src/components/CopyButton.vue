@@ -59,7 +59,7 @@ export default defineComponent({
 </script>
 
 
-<style>
+<style scoped>
 .copy-button {
   border: none;
   height: 30px;

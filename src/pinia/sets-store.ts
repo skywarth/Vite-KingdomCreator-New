@@ -5,6 +5,7 @@ import { SetId } from "../dominion/set-id";
 import { SortOption } from "../settings/settings";
 
 export interface State {
+  setsOrderType: string,
   selectedSetId: SetId;
   sortSet: string;
   selectedBoxesSetId: SetId;
@@ -19,6 +20,7 @@ export interface State {
 export const useSetsStore = defineStore(
   'setsStore', {
   state: () => ({
+    setsOrderType: 'alpha',
     selectedSetId: SetId.BASE_SET,
     sortSet: SortOption.SET,
     selectedBoxesSetId: SetId.BASE_SET,
@@ -31,6 +33,9 @@ export const useSetsStore = defineStore(
   }),
   persist: true,
   actions: {
+    updateSetsOrderType (Ordertype: string) {
+      this.setsOrderType = Ordertype;
+    },
     updateSelectedSet (setId: SetId) {
       this.selectedSetId = setId;
     },

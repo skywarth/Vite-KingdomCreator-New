@@ -67,8 +67,8 @@ export default defineComponent({
 
     const onKingdomChanged= () => {
       const query = {  lang: i18nStore.language,
-        ...serializeKingdom(kingdom.value)
-      }
+          ...serializeKingdom(kingdom.value)
+        }
       if (!isEqual(route.query, query)) {
         router.replace({ query })
       }
@@ -123,7 +123,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .randomizer-copy-button {
   margin-top: 4px;
 }

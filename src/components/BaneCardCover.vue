@@ -56,7 +56,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 
 .card-cover {
   width: 100%;
@@ -93,37 +93,7 @@ export default defineComponent({
   padding: 5px 10px;
 }
 
-.bane-color {
-  border: 8px solid #b78eca   /* curse-color */;
-}
-.bane-color-text {
-  color: white;
-  background: #b78eca        /* curse-color */;
-}
 
-.obelisk-color {
-  border: 8px solid #7db68d /* landmark-color */;
-}
-.obelisk-color-text {
-  color: black;
-  background: #7db68d       /* Landmark-color */;
-}
-
-.mouseway-color {
-  border: 8px solid #bad4eb /* mouseway-color */;
-}
-.mouseway-color-text {
-  color: black;
-  background: #bad4eb       /* mouseway-color */;
-}
-
-.trait-color {
-  border: 8px solid #343979 /* trait-color */;
-}
-.trait-color-text {
-  color: white;
-  background: #343979      /* trait-color */;
-}
 
 @media (max-width: 600px) {
   .card-cover {
@@ -137,7 +107,6 @@ export default defineComponent({
   bottom:30%;
   }
 }
-
 
 @media (600px <= width <= 650px) {
   .card-cover {

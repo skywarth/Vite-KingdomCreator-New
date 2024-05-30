@@ -141,7 +141,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 /* .addons .flip-card__content__back {
   cursor: pointer;
 } */

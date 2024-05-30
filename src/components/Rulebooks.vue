@@ -5,7 +5,7 @@
     </div>
     <GridLayout 
       :items="rulebooks"
-      :number-of-columns="3"
+      :number-of-columns="numberOfColumns"
       :is-vertical="true"
       :shape="Shape.SQUARE"
     >
@@ -18,17 +18,21 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 /* import Dominion Objects and type*/
-import { SetId, Set_To_Ignore_Rules, Set_To_Ignore_Rules_FR } from "../dominion/set-id";
+import { SetId, Set_To_Ignore_Rules, Set_To_Ignore_Rules_FR, Sets_To_Ignore_Regroup } from "../dominion/set-id";
 import { DominionSets } from "../dominion/dominion-sets";
+import { Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
 
 import { Language } from "../i18n/language";
 
 /* import store  */
 import { usei18nStore } from '../pinia/i18n-store';
+import { useSetsStore } from '../pinia/sets-store';
+import { useWindowStore } from "../pinia/window-store";
+
 
 /* import Components */
 import GridLayout, { Shape } from "./GridLayout.vue";
@@ -44,50 +48,51 @@ export default defineComponent({
   setup() {
     const { t } = useI18n();
     const i18nStore = usei18nStore();
+    const WindowStore = useWindowStore();
+    const setsStore = useSetsStore()
+    const WinSize = computed(() =>{ return WindowStore.width });
     const language = computed(() => {return i18nStore.language});
+    const setsOrderType = ref(setsStore.setsOrderType)
 
+    const numberOfColumns = computed(() => {
+      if (WinSize.value < 600) return 1;
+      if (WinSize.value < 1000) return 2;
+      if (WinSize.value  < 1400) return 3;
+      return 4
+    }) 
 
-    const rulebooks = computed(() => {
-      const listSets =  DominionSets
-        .getAllSets()
-        .filter(s => !Set_To_Ignore_Rules.has(s.setId))
-        .map(s => {
-          return {
-            id: s.setId,
-            name: t(s.setId),
-          } as RulebookInterface
-        })
-/*        .concat({
-          id: SetId.GUILDSCONUCOPIA as string,
-          name: t(SetId.GUILDS) + " / " + t(SetId.CORNUCOPIA),
-        }) */
-        .filter((set) => !(
-            language.value == Language.FRENCH  
-            ? Set_To_Ignore_Rules_FR.has(set.id as SetId) 
-            : "" )
-        )
-        .sort((a, b) => {
-          return a.id == b.id ? 0 : a.id < b.id ? -1 : 1;
-        });
-      return listSets;
-    });
+    const rulebooks = computed(() => { 
+        const AllSetIdsToConsider = DominionSets.getAllSetsIds()
+            .filter(setId => !Sets_To_Ignore_Regroup.has(setId))
+            .filter(setid => !Set_To_Ignore_Rules.has(setid))
+       //     .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) })
+       // const sortedSets = AllSetIdsToConsider.sort((a, b) => (Year_set.find(set => set.id === a)?.order ||0) - (Year_set.find(set => set.id === b)?.order ||0))
+        const sortedSets = setsOrderType.value === 'date'   // Check if sortType has a value (not undefined)
+            ? AllSetIdsToConsider.sort((a, b) => (Year_set.find(set => set.id === a)?.order ||0) - (Year_set.find(set => set.id === b)?.order ||0))
+            : AllSetIdsToConsider.sort((a, b) => t(a).localeCompare(t(b)))
+        const listsets = sortedSets
+           .map(setid => {
+             return {
+               id: setid,
+               name: t(setid),
+             } as RulebookInterface
+           })
+           .filter((set) => !(
+               language.value == Language.FRENCH  
+                ? Set_To_Ignore_Rules_FR.has(set.id as SetId) 
+                : "" )
+            )
+        return listsets;
+      }
+      )
+
     
     return { 
-      rulebooks, 
-      Shape 
+      rulebooks,
+      numberOfColumns,
+      Shape
     };
   }
 });
 </script>
 
-<style>
-.rulebooks {
-  max-width: 800px;
-}
-
-.rulebooks-description {
-  font-family: 'Alegreya Sans', sans-serif;
-  font-weight: 300;
-  margin: 10px 5px;
-}
-</style>

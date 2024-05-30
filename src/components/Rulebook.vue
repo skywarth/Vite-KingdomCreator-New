@@ -56,7 +56,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+ <style scoped>
 .rulebook {
   align-items: center;
   display: flex;

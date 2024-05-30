@@ -50,14 +50,12 @@ export class SupplyBuilder {
     let divisions = SupplyDivisions.applyDividers([division], this.dividers);
 
     divisions = this.applyExistingCards(divisions, existingCards);
-    console.log("in create supply- applyExistingCards" , divisions)
 
     return divisions;
   }
 
   createSupply(existingCards: SupplyCard[]) {
     let divisions = this.createUnfilledDivisions(existingCards);
-    console.log("in create supply" , divisions)
     divisions = this.applyRequirements(divisions);
     divisions = SupplyDivisions.applyCorrections(divisions, this.corrections);
     divisions = SupplyDivisions.fillDivisions(divisions);

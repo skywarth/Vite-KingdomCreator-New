@@ -39,10 +39,10 @@ export class EventTracker {
 
   private static attemptToSend(category: Category, eventType: EventType) {
     try {
-		console.log(`send event: ${category}: ${eventType}`);
+		//console.log(`send event: ${category}: ${eventType}`);
 		//ga("send", "event", category, eventType);
     } catch (e) {
-      console.log(`Attempted to send event: ${category}: ${eventType}`);
+      //console.log(`Attempted to send event: ${category}: ${eventType}`);
     }
   }
 }

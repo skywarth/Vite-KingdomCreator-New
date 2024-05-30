@@ -25,7 +25,7 @@ common	disclaimers_and_credits_smashicons	Smashicons	Smashicons	Smashicons	Smash
 common	disclaimers_and_credits_creative_commons	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY	CC 3.0 BY
 common							
 page-boxes	boxes_page_subtitle	Content of Dominion boxes	Content of Dominion boxes	Content of Dominion boxes	Contenu des boites Dominion	Contenu des boites Dominion	Content of Dominion boxes
-page-boxes	boxes_page_description	All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...			Toutes les cartes présentés dans les boites de Dominion. Les types de cartes sont 		All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...
+page-boxes	boxes_page_description	All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, hex, ...			Toutes les cartes présentés dans les boites de Dominion. Les types de cartes sont : royaunme, ruine, victoire, trésor, événement, repère, projet, aubaine, sortilèges, ...		All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...
 page-boxes	Sets content	Sets content			Boîtes		
 page-boxes	Kingdoms Cards	Kingdoms Cards			Cartes Royaume		
 page-boxes	Events	Events			Events		
@@ -78,7 +78,7 @@ page-index	Allow Attacks	Allow Attacks		Attacken Erlauben	Allow Attacks
 page-index	Require Reaction	Require Reaction		Mit Reaktion	Require Reaction		
 page-index	Require Trashing	Require Trashing		Mit Entsorgung	Require Trashing		
 page-index	Distribute Cost	Distribute Cost		Kosten Verteilen	Distribute Cost		
-page-index	Prioritize Set	Prioritize Set  		"Priorisiere Set	Prioritize Sets		
+page-index	Prioritize Set	Prioritize Set  		"""Priorisiere Set"	Prioritize Sets		
 page-index	Set	Set		Nach Set	par Set		
 page-index	Alphabetical	Alphabetical		Alphabetisch	Alphabétique		
 page-index	Cost	Cost		Nach Kosten	par Coût		
@@ -127,6 +127,9 @@ sets	cornucopia	cornucopia	Overvloed	Reiche Ernte	Abondance	Cornucopia	Róg obfi
 sets	darkages	darkages	Middeleeuwen	Dark Ages	L'âge des ténèbres	Edad Oscura	Dark Ages
 sets	empires	empires	Keizerrijken	Empires	Empires	Imperios	Imperium
 sets	guilds	guilds	De Gilden	Die Gilden	Guildes	Gremios	Guilds
+sets	guildscornucopia	guildscornucopia	De Gilden  / Overloed	Die Gilden / Reiche Ernte	Guildes / Abondance	Gremios / Cornucopia	Guilds / Róg obfitości
+sets	guildscornucopia2	guildscornucopia	De Gilden  / Overloed	Die Gilden / Reiche Ernte	Guildes / Abondance	Gremios / Cornucopia	Guilds / Róg obfitości
+sets	guildscornucopia2add	guildscornucopia			Guildes / Abondance updatepack		
 sets	hinterlands	hinterlands	Het Achterland	Hinterland	L'Arrière-Pays	Comarcas	Hinterlands
 sets	hinterlands2	hinterlands2	Het Achterland II	Hinterland II	L'Arrière-Pays (2nd ed)	Comarcas 2ª Ed.	Hinterlands II
 sets	hinterlands2add	hinterlands2add			L'Arrière-Pays updatepack		Hinterlands updatepack
@@ -228,7 +231,7 @@ cards.intrigue	intrigue_saboteur	Saboteur	Saboteur	Saboteur	Saboteur	Saboteador	
 cards.intrigue	intrigue_upgrade	Upgrade	Opwaardering	Anbau	Mise à niveau	Mejora	Rozbudowa
 cards.intrigue	intrigue_tribute	Tribute	Tolheffing	Tribut	Hommage	Tributo	Danina
 cards.intrigue	intrigue_greathall	Great Hall	Grote Zaal	Grosse Halle	Grand hall	Gran Sala	Westybul
-cards.intrigue	intrigue_shantytown	Shanty Town	Sloppenwijk	Armenviertel	Taudis	Chabolas	Rudera"
+cards.intrigue	intrigue_shantytown	Shanty Town	Sloppenwijk	Armenviertel	Taudis	Chabolas	"Rudera"""
 							
 cards.seaside	seaside_ghostship	Ghost Ship	De Vliegende Hollander	Geisterschiff	Vaisseau fantôme	Barco Fantasma	Okręt widmo
 cards.seaside	seaside_smugglers	Smugglers	Smokkelaar	Schmuggler	Contrebandiers	Contrabandistas	Przemytnicy
@@ -255,7 +258,7 @@ cards.seaside	seaside_pirateship	Pirate Ship	Piratenschip	Piratenschiff	Bateau p
 cards.seaside	seaside_pearldiver	Pearl Diver	Parelduiker	Perlentaucher	Plongeur de perles	Pescador de Perlas	Poławiacz pereł
 cards.seaside	seaside_merchantship	Merchant Ship	Handelsschip	Handelsschiff	Navire marchand	Barco Mercante	Okręt kupiecki
 cards.seaside	seaside_embargo	Embargo	Embargo	Embargo	Embargo	Embargo	Embargo
-cards.seaside	seaside_outpost	Outpost	Voorpost	Aussenposten	Avant-poste	Puesto Avanzado	Przyczółek"
+cards.seaside	seaside_outpost	Outpost	Voorpost	Aussenposten	Avant-poste	Puesto Avanzado	"Przyczółek"""
 cards.seaside	seaside2_astrolabe	Astrolabe		Astrolabium	Astrolabe		
 cards.seaside	seaside2_monkey	Monkey		Affe	Singe		
 cards.seaside	seaside2_seachart	Sea Chart		Seekarte	Carte Maritime		
@@ -303,7 +306,7 @@ cards.prosperity	prosperity_royalseal	Royal Seal	Koninklijk zegel	Königliches S
 cards.prosperity	prosperity_mountebank	Mountebank	Charlatan	Quacksalber	Charlatan	Charlatán	Szarlatan
 cards.prosperity	prosperity_workersvillage	Worker's Village	Arbeidersdorp	Arbeiterdorf	Village ouvrier	Pueblo de Trabajadores	Wioska robotnicza
 cards.prosperity	prosperity_vault	Vault	Schatkelder	Gewölbe	Chambre forte	Bóveda	Składnica
-cards.prosperity	prosperity_venture	Venture	Waagstuk	Abenteuer	Entreprise risquée	Especulación	Złoty interes"
+cards.prosperity	prosperity_venture	Venture	Waagstuk	Abenteuer	Entreprise risquée	Especulación	"Złoty interes"""
 cards.prosperity	prosperity2_anvil	Anvil		Amboss	Enclume		
 cards.prosperity	prosperity2_clerk	Clerk		Buchhalterin	Compatble		
 cards.prosperity	prosperity2_investment	Investment		Geldanlage	Placement		
@@ -326,7 +329,7 @@ cards.cornucopia	cornucopia_hornofplenty	Horn of Plenty	Hoorn des overvloeds	Fü
 cards.cornucopia	cornucopia_huntingparty	Hunting Party	Jachtgezelschap	Treibjagd	Chasseurs	Cacería	Polowanie
 cards.cornucopia	cornucopia_menagerie	Menagerie	Menagerie	Menagerie	Ménagerie	Colección de Animales	Menażeria
 cards.cornucopia	cornucopia_farmingvillage	Farming Village	Boerendorp	Bauerndorf	Village agricole	Poblado Agrícola	Farma
-cards.cornucopia	cornucopia_remake	Remake	Nieuwe versie	Nachbau	Renouvellement	Reconstrucción	Rozbiórka"
+cards.cornucopia	cornucopia_remake	Remake	Nieuwe versie	Nachbau	Renouvellement	Reconstrucción	"Rozbiórka"""
 cards.cornucopia	cornucopia_bagofgold	Bag of Gold			Sac d'Or		
 cards.cornucopia	cornucopia_diadem	Diadem			Diadème		
 cards.cornucopia	cornucopia_followers	Followers			Partisans		
@@ -967,3 +970,49 @@ cards.plunder	plunder_trait_reckless	Reckless		Waghalsig	Téméraire
 cards.plunder	plunder_trait_rich	Rich		Reich	Riche		
 cards.plunder	plunder_trait_shy	Shy		Scheu	Timide		
 cards.plunder	plunder_trait_tireless	Tireless		Unermüdlich	Infatigable		
+							
+cards.guildscornucopia	guildscornucopia_harvest	Harvest	Oogst	Ernte	Récolte	Cosecha	Żniwa
+cards.guildscornucopia	guildscornucopia_youngwitch	Young Witch	Jonge heks	Junge Hexe	Jeune sorcière	Bruja Joven	Młoda wiedźma
+cards.guildscornucopia	guildscornucopia_horsetraders	Horse Traders	Paardenhandelaars	Pferdehändler	Maquignons	Tratantes de Caballos	Banda koniokradów
+cards.guildscornucopia	guildscornucopia_tournament	Tournament	Toernooi	Turnier	Tournoi	Torneo	Tournament
+cards.guildscornucopia	guildscornucopia_hamlet	Hamlet	Gehucht	Weiler	Hameau	Caserío	Folwark
+cards.guildscornucopia	guildscornucopia_jester	Jester	Nar	Harlekin	Bouffon	Bufón	Błazen
+cards.guildscornucopia	guildscornucopia_fortuneteller	Fortune Teller	Waarzegster	Wahrsagerin	Diseuse de bonne aventure	Adivinadora	Cyganka
+cards.guildscornucopia	guildscornucopia_fairgrounds	Fairgrounds	Kermisterrein	Festplatz	Champ de foire	Recinto Ferial	Odpust
+cards.guildscornucopia	guildscornucopia_hornofplenty	Horn of Plenty	Hoorn des overvloeds	Füllhorn	Corne d'abondance	Cornucopia	Róg obfitości
+cards.guildscornucopia	guildscornucopia_huntingparty	Hunting Party	Jachtgezelschap	Treibjagd	Chasseurs	Cacería	Polowanie
+cards.guildscornucopia	guildscornucopia_menagerie	Menagerie	Menagerie	Menagerie	Ménagerie	Colección de Animales	Menażeria
+cards.guildscornucopia	guildscornucopia_farmingvillage	Farming Village	Boerendorp	Bauerndorf	Village agricole	Poblado Agrícola	Farma
+cards.guildscornucopia	guildscornucopia_remake	Remake	Nieuwe versie	Nachbau	Renouvellement	Reconstrucción	"Rozbiórka"""
+cards.guildscornucopia	guildscornucopia_bagofgold	Bag of Gold			Sac d'Or		
+cards.guildscornucopia	guildscornucopia_diadem	Diadem			Diadème		
+cards.guildscornucopia	guildscornucopia_followers	Followers			Partisans		
+cards.guildscornucopia	guildscornucopia_princess	Princess			Princesse		
+cards.guildscornucopia	guildscornucopia_trustysteed	Trusty Steed			Fidèle Destrier		
+cards.guildscornucopia	guildscornucopia_advisor	Advisor	Adviseur	Berater	Conseiller	Asesor	
+cards.guildscornucopia	guildscornucopia_baker	Baker	Bakker	Bäcker	Boulanger	Panadero	
+cards.guildscornucopia	guildscornucopia_butcher	Butcher	Slager	Metzger	Boucher	Carnicero	
+cards.guildscornucopia	guildscornucopia_candlestickmaker	Candlestick Maker	Kandelaarmaker	Leuchtenmacher	Cirier	Fabricante de Velas	
+cards.guildscornucopia	guildscornucopia_doctor	Doctor	Arts	Arzt	Médecin	Doctor	
+cards.guildscornucopia	guildscornucopia_herald	Herald	Heraut	Herold	Héraut	Heraldo	
+cards.guildscornucopia	guildscornucopia_journeyman	Journeyman	Gezel	Wandergeselle	Compagnon	Oficial	
+cards.guildscornucopia	guildscornucopia_masterpiece	Masterpiece	Meesterwerk	Meisterstück	Chef-d'œuvre	Obra Maestra	
+cards.guildscornucopia	guildscornucopia_merchantguild	Merchant Guild	Koopmansgilde	Kaufmannsgilde	Guilde des marchands	Gremio Mercantil	
+cards.guildscornucopia	guildscornucopia_plaza	Plaza	Plaza	Platz	Place du village	Plaza	
+cards.guildscornucopia	guildscornucopia_soothsayer	Soothsayer	Helderziende	Hellseherin	Devin	Vidente	
+cards.guildscornucopia	guildscornucopia_stonemason	Stonemason	Steenhouwer	Steinmetz	Tailleur de pierre	Cantero	
+cards.guildscornucopia	guildscornucopia_taxman	Taxman	Belastinginner	Steuereintreiber	Percepteur	Recaudador	
+cards.guildscornucopia	guildscornucopia2_farrier	Farrier			Maréchal-ferrant		
+cards.guildscornucopia	guildscornucopia2_shop	Shop			Échoppe		
+cards.guildscornucopia	guildscornucopia2_infirmary	Infirmary			Infirmerie		
+cards.guildscornucopia	guildscornucopia2_farmhands	Farmhands			Glaneuses		
+cards.guildscornucopia	guildscornucopia2_carnival	Carnival			Carnaval		
+cards.guildscornucopia	guildscornucopia2_ferryman	Ferryman			Passeur		
+cards.guildscornucopia	guildscornucopia2_footpad	Foopad			Gredin		
+cards.guildscornucopia	guildscornucopia2_joust	Joust			Joute		
+cards.guildscornucopia	guildscornucopia2_coronet	Coronet			Couronne de noblesse		
+cards.guildscornucopia	guildscornucopia2_courser	Courser			Coursier		
+cards.guildscornucopia	guildscornucopia2_desmene	Desmene			Propriété		
+cards.guildscornucopia	guildscornucopia2_housecarl	Housecarl			Housecarl		
+cards.guildscornucopia	guildscornucopia2_hugeturnip	Huge Turnip			Navet géant		
+cards.guildscornucopia	guildscornucopia2_renown	Renow			Renommée		

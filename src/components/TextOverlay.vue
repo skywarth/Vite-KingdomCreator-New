@@ -16,7 +16,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .text-overlay {
   background: rgba(30,30,30,0.7);
   box-sizing: border-box;

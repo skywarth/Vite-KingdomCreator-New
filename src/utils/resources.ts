@@ -39,7 +39,7 @@ export function getCardImageUrl(cardId: string, language: Language) {
           } else {
             return `${IMAGE_PREFEX}.${language}/${SetName[0]}/${cardName}.jpg`;
           }
-        }  
+        }
     default:
       if (findMultipleVersionSets(SetName[0]).length == 0) {
         return `${IMAGE_PREFEX}/${SetName[0]}/${SetName[0]}_${cardName}.jpg`;
@@ -152,8 +152,6 @@ export function incaseofImgerror(ev: any) {
   */
 
   //  switch (finalphrase)
-
-
   if (last4letters == "2add") {
     if (!isLangEN) {
       // switching to english need to add setname

@@ -55,7 +55,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .grid-layout {
   display: flex;
   flex-direction: row;

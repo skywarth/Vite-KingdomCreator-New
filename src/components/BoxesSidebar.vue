@@ -1,7 +1,21 @@
 <template>
   <div class="sidebar">
     <div class="sidebar-content">
-      <div class="sidebar-content-title">{{ $t("Sets content") }}</div>
+      <div class="sidebar-content-title">
+        <span>{{ $t("Sets content") }}</span>
+        <div>
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
+            @change="handleSetOrderTypeChange('alpha')" />
+            <span>{{ $t("Alphabetical") }}</span>
+        </label> 
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
+            @change="handleSetOrderTypeChange('date')" />
+            <span>{{ $t("Date") }}</span>
+        </label>      
+        </div>
+      </div>
       <div class="set">
         <div class="sets" v-for="setId in sets" :key="setId">
           <label class="checkbox">
@@ -36,12 +50,15 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useI18n } from 'vue-i18n'
 
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import type { SetId } from "../dominion/set-id";
-import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
+import { Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
+
+import { MultipleVersionSets, HideMultipleVersionSets, Sets_To_Ignore_Regroup } from "../dominion/set-id";
 import { SortOption } from "../settings/settings";
 
 /* import store  */
@@ -54,21 +71,37 @@ const sortOptions = [
   { display: "Cost", value: SortOption.COST },
 ];
 
-
 export default defineComponent({
   name: 'BoxesSidebar',
   setup() {
+    const { t } = useI18n();
     const setsStore = useSetsStore()
     const selectedBoxesSetId = ref(setsStore.selectedBoxesSetId)
     const sortBoxesSet = ref(setsStore.sortBoxesSet);
+    const setsOrderType = ref(setsStore.setsOrderType)
+    const sortSet = ref(setsStore.sortSet);
+    setsStore.updateSortSet(sortSet.value)
 
-    const sets = DominionSets.getAllSetsIds()
-      .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
+
+    const sets = computed(() => { 
+        const AllSetIdsToConsider = DominionSets.getAllSetsIds()
+            .filter(setId => !Sets_To_Ignore_Regroup.has(setId))
+            .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) })
+        const sortedSets = setsOrderType.value === 'date'   // Check if sortType has a value (not undefined)
+            ? AllSetIdsToConsider.sort((a, b) => (Year_set.find(set => set.id === a)?.order ||0) - (Year_set.find(set => set.id === b)?.order ||0))
+            : AllSetIdsToConsider.sort((a, b) => t(a).localeCompare(t(b)))
+        return sortedSets;
+      }
+      );
 
     const handleSelectionChange = (value: SetId) => {
       setsStore.updateSelectedBoxesSet(value);
     };
 
+    const handleSetOrderTypeChange = (value: string) => {
+      setsStore.updateSetsOrderType(value);
+    };
+    
     const handleSortChange = (value: SortOption) => {
       console.log(value);
       setsStore.updateSortBoxesSet(value);
@@ -83,10 +116,12 @@ export default defineComponent({
     return {
       selectedBoxesSetId,
       sortBoxesSet,
+      setsOrderType,
 
       sortOptions,
       sets,
       handleSelectionChange,
+      handleSetOrderTypeChange,
       handleSortChange,
       findMultipleVersionSets
     };

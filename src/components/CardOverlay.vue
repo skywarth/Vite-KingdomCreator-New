@@ -54,9 +54,9 @@ export default defineComponent({
   },
   setup(props) {
     const i18nStore = usei18nStore();
-    const language = i18nStore.language;
 
-    const hasCardName = computed(() => !LANGUAGES_WITH_TRANSLATED_CARDS.has(language));
+    const language = computed(() =>i18nStore.language);
+    const hasCardName = computed(() => !LANGUAGES_WITH_TRANSLATED_CARDS.has(language.value));
 
     return {
       // language,

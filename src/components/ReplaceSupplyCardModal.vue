@@ -78,7 +78,7 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, computed, watch } from "vue";
+import { defineComponent, computed, watch, ref } from "vue";
 
 /* import Dominion Objects and type*/
 import type { SetId } from "../dominion/set-id";
@@ -124,8 +124,8 @@ export default defineComponent({
   setup() {
     const randomizerStore = useRandomizerStore()
     const selectedSetIds = computed(() => randomizerStore.settings.selectedSets);
-    const selectedSetId: SetId | null = null;
-    const selectedType: CardType | null = null;
+    const selectedSetId = ref<SetId | null>(null);
+    const selectedType = ref<CardType | null>(null);
     const selectedCosts = [
       CostType.TREASURE_2_OR_LESS,
       CostType.TREASURE_3,
@@ -163,8 +163,8 @@ export default defineComponent({
     }
     const handleRandomize = () => {
       randomizerStore.RANDOMIZE_SUPPLY_CARD({
-        selectedSetId: selectedSetId,
-        selectedCardType: selectedType,
+        selectedSetId: selectedSetId.value,
+        selectedCardType: selectedType.value,
         selectedCostTypes: selectedCosts
       } as RandomizeSupplyCardParams);
     }
@@ -185,7 +185,8 @@ export default defineComponent({
 
 </script>	
 
-<style>	.modal-background,
+<style scoped>
+  .modal-background,
 	.modal-container {
 	  position: fixed;
 	  height: 100%;

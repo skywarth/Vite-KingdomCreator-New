@@ -358,7 +358,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .kingdom-supply--is-enlarged .card-set-description .card-description {
   font-size: 16px !important;
 }

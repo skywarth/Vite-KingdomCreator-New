@@ -67,7 +67,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 @media (max-width: 450px) {
   .preset-kingdom_title_name {
     font-size: 30px;

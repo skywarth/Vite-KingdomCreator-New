@@ -1,0 +1,42 @@
+ok gestion de Guild/cornucipia 
+ok randomize specify not reactive
+ok Régle sur nb colonnes variable  
+ok Carte promo EN
+ok convert excel transalte to csv
+ok build translation from vite and merge
+ok Ordre des sets (date ou alpha) 
+        - randomizer OK Store info in settings ok
+        - set OK Store info in settings ok
+        - boxes ok
+        - Cards ok
+        - Rules ok
+
+ok liste cartes Guild/cornucipia 2
+ok Updatepack Guild/cornucipia
+ok traduction Updatepack Guild/cornucipia
+ok Modifier SETS_WITH_DUPLICATES dans randomizer.ts pour utiliser une définition dasn set-id.ts
+ok gerer le cas de duplication de guilds et cornucopia sur guildscornucopia et guildscornucopia2
+
+kingdom Guild/cornucipia
+
+
+CSS taille bandeau si taill ecran
+
+cartes en Francais
+    Pillage
+        illustrateurs
+    Carte promo (1)
+    carte Guild Cornucopia 2
+
+Cartes des boites avec overlay si pas FR ou EN
+
+Recherche de cartes par critères 
+
+Settings
+    liste des extensions à afficher/masquer
+    nb de cartes à selectionner
+    nb de cartes par exetension
+    extensions au hasrad
+    
+Gestion sur un cloud de mes paramètres
+

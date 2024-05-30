@@ -88,7 +88,6 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
 export function deserializeKingdom(serializedKingdom: any, selectedSets: string[]): Kingdom | null {
   const serializedSupply = serializedKingdom.supply || serializedKingdom.cards;
   const supplyIds = parseCommaSeparatedValues(serializedSupply)
-  console.log("deserialized supplyIds", supplyIds)
 
   // Only use the deserialized kingdom if the supply exists.
   if (!supplyIds || !supplyIds.length) {
@@ -175,7 +174,6 @@ function deserializeMetadata(serializedKingdom: any): KingdomMetadata {
   );
 }
 
-
 function findByIds<T>(ids: string[], lookupFn: (id: string) => T, ext?: string, filteredSet?: string[])  : T[] {
   const results = [];
   if (typeof filteredSet !== 'undefined' ) {
@@ -220,10 +218,10 @@ function extractStringParenthesis(arr: string[]): [string [], string[]] {
   for (let str of arr) {
     const match = str.match(/^(.*?)\((.*?)\)$/); // recherche la chaine entre ()
     if (match) {
-      array1.push(match[2]); // ajoute la chaîne entre () à l'array1
-      array2.push(match[1]); // ajoute la chaîne avant () à l'array2
+      array1.push(match[2]); // ajoute la chaï¿½ne entre () ï¿½ l'array1
+      array2.push(match[1]); // ajoute la chaï¿½ne avant () ï¿½ l'array2
     } else {
-      array2.push(str); // sinon ajoute la string à l'array2
+      array2.push(str); // sinon ajoute la string ï¿½ l'array2
     }
   }
   return [array1, array2];

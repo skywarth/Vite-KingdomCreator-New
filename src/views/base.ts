@@ -10,8 +10,7 @@ import { Language, getLanguage } from "../i18n/language";
 import { i18n, getLocale } from "../i18n/i18n";
 
 /* import Components */
-
-const useBase = () => {
+  const useBase = () => {
   const i18nStore = usei18nStore();
   const route = useRoute();
   const router = useRouter();
@@ -19,7 +18,8 @@ const useBase = () => {
   const languageStateStr = computed(() => getLocale(i18n as I18n));
   const routeQueryLang = computed(() => route.query.lang);
 
-  // function for onBeforeMount 
+  // functions for onBeforeMount 
+  // placed her to avoid: Cannot access 'loadLanguageForQueryParam' before initialization
   const loadLanguageForQueryParam = () => {
     const langStr = Array.isArray(route.query.lang)
       ? route.query.lang[0]
@@ -29,16 +29,12 @@ const useBase = () => {
     }
   };
 
-  if (route.query.lang) {
-    loadLanguageForQueryParam();
-  } else {
-    i18nStore.UPDATE_LANGUAGE(i18nStore.language);
-  }
-
   // for Watch function : languageStateStr
   const onLanguageChanged = () => {
     if (route.query.lang === languageStateStr.value) { return; }
     if (getLanguage(languageStateStr.value) === Language.ENGLISH) {
+      if (! route.query.lang) { 
+        return; }
       const { lang, ...query } = route.query;
       router.replace({ query });
     } else {
@@ -54,11 +50,16 @@ const useBase = () => {
   // for Watch function : $route.query.lang
   const onLanguageQueryParameterChanged = () => {
     if (route.query.lang !== languageStateStr.value) {
-      //loadLocaleMessages(i18n as I18n, (route.query.lang as any) as Language);
-      //setI18nLanguage(i18n as I18n, (route.query.lang as any) as Language);
       i18nStore.UPDATE_LANGUAGE(route.query.lang as Language);
     }
   };
+
+  if (route.query.lang) {
+    loadLanguageForQueryParam();
+  } else {
+    i18nStore.UPDATE_LANGUAGE(i18nStore.language);
+    onLanguageChanged();
+  }
 
   watch(languageStateStr, onLanguageChanged);
   watch(routeQueryLang, onLanguageQueryParameterChanged);

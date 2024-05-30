@@ -36,7 +36,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .static-card {
   align-items: center;
   display: flex;

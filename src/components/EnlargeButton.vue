@@ -44,7 +44,7 @@ export default defineComponent({
 </script>
 
 
-<style>
+<style scoped>
 .expand-view-button {
   position: fixed;
   right: 0;

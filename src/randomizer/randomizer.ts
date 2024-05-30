@@ -12,7 +12,7 @@ import { Landmark } from "../dominion/landmark"
 import { Metadata as KingdomMetadata } from "./kingdom";
 import { Project } from "../dominion/project"
 import type { RandomizerOptions } from "./randomizer-options";
-import { SetId } from "../dominion/set-id";
+import { SetId, New_SETS_WITH_DUPLICATES } from "../dominion/set-id";
 import { SetSupplyBan } from "./set-supply-ban";
 import { SetSupplyDivider } from "./set-supply-divider";
 import { Supply, Replacements } from "./supply";
@@ -35,7 +35,10 @@ const SETS_WITH_DUPLICATES: { [index: string]: string } = {
   'intrigue': 'intrigue2',
   'seaside': 'seaside2',
   'prosperity': 'prosperity2',
-  'hinterlands': 'hinterlands2'
+  'hinterlands': 'hinterlands2',
+  'guildscornucopia': 'guildscornucopia2',
+  'guilds': 'guildscornucopia',
+  'cornucopia': 'guildscornucopia',
 };
 
 const MAX_RETRIES = 3;
@@ -63,9 +66,9 @@ export class Randomizer {
     const boons = this.getRandomBoons(supply, []);
     const ally = this.getRandomAlly(supply);
     const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons);
-    console.log(adjustedSupplyCards)
+    //console.log(adjustedSupplyCards)
     const metadata = this.getMetadata(randomizerOptions.setIds);
-    // console.log("createKingdom", supply)
+    console.log("createKingdom", supply)
     return new Kingdom(
       Date.now(),          /* id: number,  */
       adjustedSupplyCards, /* supply: Supply, */
@@ -289,22 +292,20 @@ export class Randomizer {
   static adjustSupplyBasedOnAddons(supply: Supply, Localaddons :Addons) {
     // to add obeliskCard
     let calculatedObeliskCard = null;
-    console.log("in adjust1", Localaddons)
     if ((Localaddons.landmarks).includes(DominionSets.getLandmarkById(OBELISK_LANDMARK_ID))) {
-      console.log("need to find an action for Obelisk")
+      //console.log("need to find an action for Obelisk")
       const onlyActionSupply = supply.supplyCards.filter(card => card.isOfType(OBELISK_CARDTYPE_REQUESTED));
-      console.log("adjustSupplyBasedOnAddons onlyActionSupply", onlyActionSupply);
+      //console.log("adjustSupplyBasedOnAddons onlyActionSupply", onlyActionSupply);
       calculatedObeliskCard = this.selectRandomCards(onlyActionSupply, 1)[0]
-      console.log("new Obelisk card", calculatedObeliskCard)
+      //console.log("new Obelisk card", calculatedObeliskCard)
     }
 
     // to add mouseWayCard
     let calculatedmouseWayCard = null;
     let localReplacements = supply.replacements;
-    console.log("in adjust2", Localaddons.ways)
     if ((Localaddons.ways).includes(DominionSets.getWayById(MOUSE_WAY_ID))) {
-      console.log("need to find an action for mouse way")
-      console.log(supply.replacements.replacements)
+      //console.log("need to find an action for mouse way")
+      //console.log(supply.replacements.replacements)
       const candidateCards = supply.replacements
         .getReplacementsForId(supply.supplyCards[0].id)
         .filter(card => {
@@ -326,9 +327,9 @@ export class Randomizer {
     if (Localaddons.traits.length >0 ) {
       const onlyTraitsPossibleSupplies = supply.supplyCards.filter(card => card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_1) || 
                                                                   card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_2));
-      console.log("adjustSupplyBasedOnAddons onlyTraitsPossibleSupplies", onlyTraitsPossibleSupplies);
+      //console.log("adjustSupplyBasedOnAddons onlyTraitsPossibleSupplies", onlyTraitsPossibleSupplies);
       calculatedTraitsCard = this.selectRandomCards(onlyTraitsPossibleSupplies, Localaddons.traits.length)
-      console.log("new Supply Traits card", calculatedTraitsCard)
+      //console.log("new Supply Traits card", calculatedTraitsCard)
     }
     const NewSupply = new Supply(
       supply.supplyCards,     /* supply Cards */
@@ -338,7 +339,7 @@ export class Randomizer {
       calculatedTraitsCard,   /* supply for traits */
       localReplacements
     )
-    console.log(NewSupply)
+    //console.log(NewSupply)
     return NewSupply
   }
 
@@ -447,10 +448,9 @@ export class Randomizer {
   private static removeDuplicateCards(cards: SupplyCard[], requiredCardIds: string[]) {
     // Removes duplicate cards (cards appearing in multiple sets); keep setA's version.
     // Cards to keep = (A - [B required as A]) + (B - ([A as B] - B required))
-    const keys = Object.keys(SETS_WITH_DUPLICATES);
-    for (const key of keys) {
-      const setA = key as SetId;
-      const setB = SETS_WITH_DUPLICATES[key] as SetId;
+    for (const duplicateSets of New_SETS_WITH_DUPLICATES) {
+      const setA = duplicateSets.id
+      const setB = duplicateSets.idv2
       const setACards = cards.filter(Cards.filterByIncludedSetIds([setA]));
       const setBCards = cards.filter(Cards.filterByIncludedSetIds([setB]));
 

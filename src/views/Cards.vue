@@ -1,6 +1,6 @@
 <template>
   <Page :subtitle="$t('sets_page_subtitle')" :selectedType="selectedType">
-    <div class="content">
+    <div class="contentCards">
       <BoxesSidebar />
       <div class="main">
         <card-online-page-component :set="set" v-if="true" />

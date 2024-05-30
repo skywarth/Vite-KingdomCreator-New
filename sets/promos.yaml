@@ -150,7 +150,6 @@ cards:
     isTraveller: false
     isVictory: false
 
-
   - name: Sauna / Avanto
     cost:
       treasure: 4
@@ -166,6 +165,13 @@ cards:
     isTrashing: false
     isTraveller: false
     isVictory: false
+
+  - name: Marchland
+    cost:
+      treasure: 5
+      potion: 0
+    isBuySupplier: true
+    isVictory: true
 
 events:
   - name: Summon

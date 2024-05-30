@@ -1,6 +1,6 @@
 {
   "boxes_page_subtitle": "Content of Dominion boxes",
-  "boxes_page_description": "All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...",
+  "boxes_page_description": "All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, hex, ...",
   "Sets content": "Sets content",
   "Kingdoms Cards": "Kingdoms Cards",
   "Events": "Events",
@@ -8,6 +8,7 @@
   "Projects": "Projects",
   "Boons": "Boons",
   "Ways": "Ways",
+  "Allies": "Allies",
   "Traits": "Traits",
   "States": "States",
   "Hexes": "Hexes",
@@ -23,9 +24,13 @@
   "Supply Cards - Castles": "Supply Cards - Castles",
   "Supply Cards - Knights": "Supply Cards - Knights",
   "Loot Cards": "Loot Cards",
+  "Cost": "Cost",
   "Tokens included in box": "Tokens included in box",
+  "Randomizer": "Randomizer",
   "Mat included in box": "Mat included in box",
   "Tokens": "Tokens",
   "Cards": "Cards",
+  "Rules": "Rules",
+  "Recommended Kingdoms": "Recommended Kingdoms",
   "Box content ": "Box content"
 }

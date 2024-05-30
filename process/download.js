@@ -11,8 +11,6 @@ const DOC_IMG = "processed/docs/img/cards"
 // Enable logging for debugging
 const trace = false;
 
-
-
 async function getAllImages(cards) {
   for (let i = 0; i < cards.length; i++) {
     console.log(cards[i].id);
@@ -20,12 +18,24 @@ async function getAllImages(cards) {
   }
 }
 
+async function getAllSetsImages() {
+  for (var k in sets) {
+    console.log("set :", k)
+    await getAllImages(getCards(sets[k]));
+  }
+  return;
+}
+
 async function getImage(card) {
   console.log("Requesting : " + createPageUrl(card))
 
-  const response = await axios.get(createPageUrl(card));
-  if (response.status != 200) {
-    console.log(`Invalid URL: ${card.name}`);
+  const response = await axios.get(createPageUrl(card))
+      .catch(function (error) {
+        // handle error
+        console.log(`\n\n============> error getting URL: ${card.name}\n`);
+      })
+  if (!response || response.status != 200) {
+    console.log(`============>Invalid URL: ${card.name}\n`);
     return;
   }
   const match1 = response.data.match(/\.jpg\"\ssrc=\"(.+?.jpg)\"/);
@@ -74,6 +84,8 @@ function getCards(set) {
 }
 
 
-//processAllSets();  // to process all known sets
-getAllImages(getCards(sets.plunder)); // to process 1 set 
+//getAllSetsImages();  // to process all known sets
+//getAllImages(getCards(sets.promos).filter(card => card.name != "Sauna / Avanto")); // to process 1 set 
+getAllImages(getCards(sets.guildscornucopia2add).filter(card => card.name != "Sauna / Avanto")); // to process 1 set 
+
 //getImage(sets.plunder.cards.filter(card => card.name == "Cage")[0]) // to process 1 card

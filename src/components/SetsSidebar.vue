@@ -1,14 +1,27 @@
 <template>
   <div class="sidebar">
     <div class="sidebar-content">
-      <div class="sidebar-content-title">{{ $t("Sets") }}</div>
+      <div class="sidebar-content-title">
+        <span>{{ $t("Sets") }}</span>
+        <div>
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
+            @change="handleSetOrderTypeChange('alpha')" />
+            <span>{{ $t("Alphabetical") }}</span>
+        </label> 
+        <label class="checkbox sidebar-content-option">
+            <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
+            @change="handleSetOrderTypeChange('date')" />
+            <span>{{ $t("Date") }}</span>
+        </label>
+        </div>
+      </div>
       <div class="sets">
         <div class="sets" v-for="set in kingdomsets" :key="set">
           <label class="checkbox">
             <input type="radio" v-model="selectedSetId" id="selectedSet" :value="set"
               @change="handleSelectionChange(set)" />
               <span>{{ $t(set) }} <span v-if="findMultipleVersionSets(set).length !== 0"> - 1st</span></span>
-            <!-- <span>{{ $t(set) }} <span v-if="FindMultipleVersionSets(set).length !== 0"> - 1st</span></span> -->
           </label>
           <span v-if="findMultipleVersionSets(set).length !== 0">
             <label class="checkbox suboption-set">
@@ -76,12 +89,14 @@
 <script lang="ts">
 /* import Vue, typescript */
 import { defineComponent, ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n'
 
 /* import Dominion Objects and type*/
 import { DominionKingdom } from "../dominion/dominion-kingdom";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
 import { MultipleVersionSets, HideMultipleVersionSets } from "../dominion/set-id";
 import { SetId, Set_To_Ignore_Kingdoms } from "../dominion/set-id";
+import { Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
 
 import { SortOption } from "../settings/settings";
 
@@ -95,8 +110,10 @@ declare function Yaml_Parsing(file_content: string): any;
 export default defineComponent({
   name: 'SetsSidebar',
   setup() {
+    const { t } = useI18n();
     const setsStore = useSetsStore()
     const selectedSetId = ref(setsStore.selectedSetId)
+    const setsOrderType = ref(setsStore.setsOrderType)
     const sortSet = ref(setsStore.sortSet);
     setsStore.updateSortSet(sortSet.value)
 
@@ -104,9 +121,16 @@ export default defineComponent({
     let file_name = "";
     let show_PersonalFileSelection_Input = ref(false);
 
-    const kingdomsets = DominionKingdoms.getAllSets()
-      .filter((set) => !((Set_To_Ignore_Kingdoms).has(set)))
-      .filter(set => { return (HideMultipleVersionSets.indexOf(set) == -1) });
+    const kingdomsets = computed(() => { 
+        const AllSetIdsToConsider = DominionKingdoms.getAllSets()
+            .filter(setId => !((Set_To_Ignore_Kingdoms).has(setId)))
+            .filter(setId => { return (HideMultipleVersionSets.indexOf(setId) == -1) });
+        const sortedSets = setsOrderType.value === 'date'   // Check if sortType has a value (not undefined)
+            ? AllSetIdsToConsider.sort((a, b) => (Year_set.find(set => set.id === a)?.order ||1000) - (Year_set.find(set => set.id === b)?.order ||1000))
+            : AllSetIdsToConsider.sort((a, b) => t(a).localeCompare(t(b)))
+        return sortedSets;
+      }
+      );
 
     const valueForSetId_All = SetId.ALL;
     const valueForSetId_Personal = SetId.PERSONAL;
@@ -164,6 +188,10 @@ export default defineComponent({
     const handleSortChange = (value: SortOption) => {
       setsStore.updateSortSet(value);
     };
+    
+    const handleSetOrderTypeChange = (value: string) => {
+      setsStore.updateSetsOrderType(value);
+    };
 
     const handleFilterOptionChange = (value: string) => {
       setsStore.updateShowFilterPlayedGames(value);
@@ -181,6 +209,7 @@ export default defineComponent({
       selectedSetId,
       sortSet,
       selectedFilterOption,
+      setsOrderType,
 
       kingdomsets,
       valueForSetId_All,
@@ -194,6 +223,7 @@ export default defineComponent({
       filterOptions,
 
       handleSelectionChange,
+      handleSetOrderTypeChange,
       handleSortChange,
       handleFilterOptionChange,
       findMultipleVersionSets
@@ -202,7 +232,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 /* styles de base si JS est activé */
 .js .input-file-container {
   position: relative;

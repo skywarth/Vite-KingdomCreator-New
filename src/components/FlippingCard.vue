@@ -214,7 +214,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .flip-card {
   background-color: transparent;
   cursor: pointer;

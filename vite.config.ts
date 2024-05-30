@@ -3,42 +3,37 @@ import fs from 'fs';
 import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
+import VueDevTools from 'vite-plugin-vue-devtools'
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
-import { createMpaPlugin } from 'vite-plugin-virtual-mpa';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import rollupDel from 'rollup-plugin-delete';
 
-// On-demand components auto importing for Vue.
-import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
-
-import { DominionContentGenerate, mergeJSONLanguageFiles } from './plugins/vite-dominion-content';
+import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins/vite-dominion-content';
 
 const devServerPort = 5173
 
-export default defineConfig( ({ mode }) => {
-
+export default defineConfig( ({ mode}) => {
+console.log(process.argv)
   if (mode === "production" || mode === "development") {
-    mergeJSONLanguageFiles();
+   // mergeJSONLanguageFiles();
     DominionContentGenerate();
     const sourceFile = './styles/normalize-v8.css';
     const destinationFile = './docs/normalize.css';
     fs.copyFile(sourceFile, destinationFile, () => {
       console.log(`Le fichier a été copié avec succès de ${sourceFile} vers ${destinationFile}`);
     })
+    let ArgGenLocale = "Merge"
+    if (process.argv.slice(3)[0] == "Gen") {
+        ArgGenLocale = "Gen&Merge"
+    }
+    HandleLocaleGenerateAndMerge(ArgGenLocale)
   }
 
   return {
-    // appType: 'spa',
+    appType: 'spa',
     plugins: [
-      UnPluginVueComponents({
-        // Chemin vers le dossier qui contient les composants
-        dirs: ['src/components'],
-        // Filtre des fichiers de composants
-        extensions: ['vue'],
-        // Options pour le plugin vue-router (optionnel)
-        deep: true,
-      }),
       vue(),
+      VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 
@@ -46,61 +41,7 @@ export default defineConfig( ({ mode }) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      // import { createMpaPlugin } from 'vite-plugin-virtual-mpa'; //
-      createMpaPlugin({
-        htmlMinify: false,
-        verbose: false,
-        pages: [
-          {
-            name: "index",
-            filename: "index.html",
-            template: "./views/layout.html",
-            data: {
-              injectDominioncontent: '<script src="./dominion-content.js"></script>',
-              injectEntry: '<script type="module" src="/src/index-page.ts"></script>',
-            }
-          },
-          {
-            name: "sets",
-            filename: "sets.html",
-            template: "./views/layout.html",
-            data: {
-              injectDominioncontent: `<script src="./dominion-content.js"></script>`,
-              injectEntry: `<script type="module" src="/src/sets-page.ts"></script>
-              <script src="./img/js-yaml-v4.js"></script>
-              <script src="./img/myfunctions.js"></script>`,
-            }
-          },
-          {
-            name: "rules",
-            filename: "rules.html",
-            template: "./views/layout.html",
-            data: {
-              injectDominioncontent: '<script src="/dominion-content.js"></script>',
-              injectEntry: '<script type="module" src="/src/rules-page.ts"></script>',
-            }
-          },
-          {
-            name: "boxes",
-            filename: "boxes.html",
-            template: "./views/layout.html",
-            data: {
-              injectDominioncontent: `<script src="/dominion-content.js"></script>`,
-              injectEntry: `<script type="module" src="/src/boxes-page.ts"></script>`,
-            }
-          },
-          {
-            name: "cards",
-            filename: "cards.html",
-            template: "./views/layout.html",
-            data: {
-              injectDominioncontent: '<script src="/dominion-content.js"></script>',
-              injectEntry: '<script type="module" src="/src/cards-page.ts"></script>',
-            }
-          },
-        ]
-      }),
-      mode == "development" ? rollupDel({
+      rollupDel({
         targets: ['docs/*',
           '!docs/rules',
           '!docs/rules.fr',
@@ -113,25 +54,11 @@ export default defineConfig( ({ mode }) => {
           '!docs/CNAME',
           '!docs/ads.txt'],
         verbose: false
-      })
-        : rollupDel({
-          targets: ['docs/*',
-            '!docs/rules',
-            '!docs/rules.fr',
-            '!docs/img',
-            '!docs/favicon.ico',
-            '!docs/dominion-content.js',
-            '!docs/normalize.css',
-            '!docs/locales',
-            '!docs/locales/??.json',
-            '!docs/CNAME',
-            '!docs/ads.txt'],
-          verbose: false
-        }),
-        viteStaticCopy({
-          targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
+      }),
+      viteStaticCopy({
+        targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
             { src: 'docs/normalize.css', dest: 'assets/' } ]
-        }),
+      }),
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']

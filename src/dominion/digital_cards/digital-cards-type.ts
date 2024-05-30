@@ -12,5 +12,6 @@ export interface IllustratorCard {
 
 export interface YearOfSet {
     readonly id: string,
-    readonly year: number
+    readonly year: number,
+    readonly order: number
   }
