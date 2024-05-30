@@ -95,6 +95,7 @@ console.log("")
 console.log("")
 }
 
+  console.log(processedSet, "##")
 function  Add2ndEditions(processedSet, translated) {
   for (const setId in sets) {
     const set = sets[setId];
@@ -130,60 +131,58 @@ function GenerateTranslation() {
   }
   languages = lines[start_line].split(separator);
 
-  const pages = new Set();
+for (let i = start_line + 1; i < lines.length; i++) {
+  const Line_splittted = lines[i].split(separator);
+  names[Line_splittted[0]]={}
+}
+const resultPages = Object.keys(names);
+console.log(resultPages)
 
-  for (let i = start_line + 1; i < lines.length; i++) {
-    const Line_splittted = lines[i].split(separator);
-    names[Line_splittted[0]] = {};
-  }
-  const resultPages = Object.keys(names);
-  //console.log(resultPages)
-  TestAndCreateDir(PROCESSING_DIR);
+TestAndCreateDir(PROCESSING_DIR);
 
-  for (let i = 0; i < resultPages.length; i++) {
-    const page = resultPages[i];
-    if (page != "") {
-      //console.log("page is", page)
-      for (let n = 2; n < languages.length; n++) {
-        if (languages[n] != "") names[languages[n]] = {};
-      }
 
-      for (let i = 1; i < lines.length; i++) {
-        const Line_splittted = lines[i].split(separator);
-        if (Line_splittted[0] == page) {
-          // names[Line_splittted[0]][Line_splittted[1]]=[]
-          for (let j = 2; j < Line_splittted.length; j++) {
-            //names[languages[j]][Line_splittted[1]]= Line_splittted[2]
-            if (Line_splittted[j] != '') names[languages[j]][Line_splittted[1]] = Line_splittted[j];
-            //console.log(Line_splittted[1])
-          }
+
+for (let i = 0; i < resultPages.length; i++) {
+  const page = resultPages[i];
+  if (page != "" ) {
+    for (let n = 2; n < languages.length; n++) {
+      if (languages[n] != "" ) names[languages[n]]={};
+    }
+    
+    for (let i = 1; i < lines.length; i++) {
+      const Line_splittted = lines[i].split(separator);
+      if (Line_splittted[0] == page) {
+//    names[Line_splittted[0]][Line_splittted[1]]=[]
+        for (let j = 2 ; j < Line_splittted.length; j++) {
+          //names[languages[j]][Line_splittted[1]]= Line_splittted[2]
+          if (Line_splittted[j] != '') names[languages[j]][Line_splittted[1]]= Line_splittted[j]
+          console.log(Line_splittted[1])
         }
       }
-
-      const filenamesplitted = (resultPages[i]).split('.');
-      for (let j = 2; j < languages.length; j++) {
-        if (languages[j] != "") {
-          lang = languages[j];
-          if (lang == "en" && resultPages[i] == "sets") continue;
-          // if (lang=="en") lang =""
-          TestAndCreateDir(`${PROCESSING_DIR}/${lang}`);
-          if (filenamesplitted.length > 1) {
-            if (filenamesplitted[0] == "cards") {
-              TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`);
-              filename = `${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`;
-              // Add 2nd edition translation
-              Add2ndEditions(filenamesplitted[1], names[languages[j]]);
-            } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`;
-          } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`;
-          console.log(filename);
-          fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
-        }
+    }
+    console.log(languages)
+    const filenamesplitted=(resultPages[i]).split('.')
+    for (let j= 2 ; j < languages.length; j++) {
+      if (languages[j] != "" ) {
+        lang=languages[j]
+        if (lang=="en" && resultPages[i]=="sets") continue
+        // if (lang=="en") lang =""
+        TestAndCreateDir(`${PROCESSING_DIR}/${lang}`)
+        if (filenamesplitted.length > 1 ) {
+          if (filenamesplitted[0] == "cards") {
+            TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`)
+            filename = `${PROCESSING_DIR}//${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+          } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+        } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.json`
+        console.log(filename)
+        fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
       }
     }
   }
 
 }
 
+usage()
 
 //==============================================================
 const argv = process.argv.slice(2); // Get arguments excluding script name and potentially the output directory
