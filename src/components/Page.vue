@@ -2,7 +2,7 @@
   <div>
     <div class="condensed-menu" v-if="isCondensed">
       <ul class="condensed-menu_items">
-        <li class="condensed-menu_item" v-for="menuItem in menuItems" :class="{ active: isMenuItemActive(menuItem) }"
+        <li class="condensed-menu_item" v-for="menuItem in getMenuItem(0, false)" :class="{ active: isMenuItemActive(menuItem) }"
           :key="menuItem.url">
           <RouterLink class="condensed-menu_item_link" :to="getMenuItemUrl(menuItem.url)">
                 {{ $t(menuItem.title) }}
@@ -11,7 +11,7 @@
       </ul>
     </div>
     <a id="TopofThePage" />
-    <div class="page" :class="{ 'show-condensed-menu': shouldShowCondensedMenu }">
+    <div class="page" :class="{ 'show-condensed-menu': shouldShowCondensedMenu }" :style="condensedMenuHeightStyle" >
       <header>
        <div class="title-container">
           <h1 class="title">
@@ -22,10 +22,24 @@
         <div class="condensed-menu-button" v-if="isCondensed" @click="handleMenuClick"></div>
         <div class="menu" v-if="!isCondensed">
           <ul class="menu_items">
-            <li class="menu_item" v-for="menuItem in menuItems" :key="menuItem.title" :class="{ active: isMenuItemActive(menuItem) }">
-              <router-link class="menu_item_link" :to="getMenuItemUrl(menuItem.url)">
-                {{ $t(menuItem.title) }}
+            <li class="menu_item" v-for="mymenuItem in getMenuItem(3, true)" :key="mymenuItem.title" :class="{ active: isMenuItemActive(mymenuItem) }">
+              <router-link class="menu_item_link" :to="getMenuItemUrl(mymenuItem.url)">
+                {{ $t(mymenuItem.title) }}
               </router-link>
+            </li>
+            <li class="menuItemIcon">
+            <Menu as="div">
+            <MenuButton as="div" class="condensed-menu-button" v-if="!isCondensed"/>
+            <MenuItems as="div" class="popOverPanelWrapper">
+              <div class="extended-menu_item" v-for="mymenuItem in getMenuItem(3, false)" :key="mymenuItem.title">
+                    <MenuItem as="div">
+                    <router-link class="extended-menu_item_link" :to="getMenuItemUrl(mymenuItem.url)">
+                      {{ $t(mymenuItem.title) }}
+                    </router-link>
+                  </MenuItem>
+                  </div>
+            </MenuItems>
+            </Menu>
             </li>
           </ul>
         </div> 
@@ -84,6 +98,8 @@
 import { defineComponent, computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from 'vue-router';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+//import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 /* import Dominion Objects and type*/
 
@@ -102,20 +118,20 @@ export enum MenuItemType {
   BOXES,
 }
 
-class MenuItem {
+class LocalMenuItem {
   constructor(readonly type: MenuItemType, readonly title: string, readonly url: string) {
   }
 }
 
 let MENU_ITEMS = [
-  new MenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/index"),
-  new MenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets"),
-  new MenuItem(MenuItemType.RULES, "Rules", "/rules"),
-  new MenuItem(MenuItemType.BOXES, "Box content", "/boxes"),
+  new LocalMenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/index"),
+  new LocalMenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets"),
+  new LocalMenuItem(MenuItemType.RULES, "Rules", "/rules"),
+  new LocalMenuItem(MenuItemType.BOXES, "Box content", "/boxes"),
 ];
 
 if (process.env.NODE_ENV == "development") {
-  MENU_ITEMS.push(new MenuItem(MenuItemType.CARDS, "Cards", "/cards"));
+  MENU_ITEMS.push(new LocalMenuItem(MenuItemType.CARDS, "Cards", "/cards"));
 }
 
 export default defineComponent({
@@ -123,6 +139,10 @@ export default defineComponent({
   props: {
     subtitle: String,
     selectedType: Number
+  },
+  components: {
+  //  Popover, PopoverButton, PopoverPanel,
+    Menu, MenuButton, MenuItems, MenuItem
   },
   setup(props) {
     const route = useRoute();
@@ -132,11 +152,16 @@ export default defineComponent({
     const { t } = useI18n();
     const language = computed(() => i18nStore.language);
     const isCondensedMenuActive = ref(false);
-    const menuItems = MENU_ITEMS;
     const isCondensed = computed(() =>{ return WindowStore.isCondensed });
     const shouldShowCondensedMenu = computed(()=> { return isCondensed.value && isCondensedMenuActive.value });
     const languages = computed(() => { return Object.values(Language) });
-    const isMenuItemActive = (menuItem: MenuItem) => menuItem.type === props.selectedType;
+    const isMenuItemActive = (menuItem: LocalMenuItem) => menuItem.type === props.selectedType;
+    const condensedMenuHeightStyle = computed(()=> { 
+        const condensedMenuHeight= (10 + MENU_ITEMS.length * 42); 
+        const returnStr = " transform: translate(0, "+ condensedMenuHeight+"px); "
+        if (isCondensedMenuActive.value) return returnStr;
+        return ""
+      });
 
     const getMenuItemUrl = (url: string) => {
       return {
@@ -147,6 +172,12 @@ export default defineComponent({
           }
         };
       };
+
+    const getMenuItem = ((nbEntry: number, FirstPart: boolean) => { 
+      return FirstPart ?  
+          MENU_ITEMS.slice(0, nbEntry):
+          MENU_ITEMS.slice(nbEntry,10);
+    });
 
     const getLanguageLinkOptions = (language: string) => {
       return {
@@ -164,9 +195,11 @@ export default defineComponent({
 
     return {
       isCondensed,
+      isCondensedMenuActive,
       shouldShowCondensedMenu,
-      menuItems,
+      condensedMenuHeightStyle,
       languages,
+      getMenuItem,
       getMenuItemUrl,
       getLanguageLinkOptions,
       handleMenuClick,
@@ -200,5 +233,66 @@ footer {
   font-size: 12px;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.menuItemIcon {
+  display: block;
+  padding: 8px 20px ;
+  border: unset;
+/*  position: relative;*/
+  list-style: none;
+}
+
+.menu-layer {
+  background-color: rgba(113, 179, 200, 0.9); /* White background with some transparency */
+  z-index: 10; /* Sets the layer above other elements */
+  /* Adjust width as needed based on your menu content */
+  width: 200px; 
+  display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+
+.extended-menu_items {
+  list-style: none; /* Removes default bullet points */
+  position: relative;
+  display: flex;
+  padding: 12px 10px 8px 10px;
+  flex-direction: column;
+  margin: 0
+}
+
+.extended-menu_item {
+  /*margin-bottom: 5px; /* Spacing between menu items */
+  display: block;
+  padding: 4px 16px ;
+  flex: none;
+}
+
+.extended-menu_item_link {
+  color: #ddd;
+  display: inline-block;
+  font-size: 20px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  padding: 4px 0;
+  text-decoration: none;
+}
+
+.extended-menu_item.active .extended-menu_item_link {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.popOverPanelWrapper {
+  position: absolute;
+  background-color: rgba(113, 179, 200, 0.9); /* White background with some transparency */
+  top: 70%; /* Initial position below the button */
+  right: 0%; /* Align left edge with button */
+  z-index: 10;
+  outline-style: unset;
 }
 </style>

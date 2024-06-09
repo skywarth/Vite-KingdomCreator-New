@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import XLSX from 'xlsx'
+import XLSX from 'xlsx';
 import { spawnSync } from 'child_process';
 
 const languages = ['fr', 'de', 'es', 'nl', 'pl']; // Liste des langues à fusionner
@@ -19,6 +19,7 @@ export function Convert_to_CSV () {
   console.log("Starting CSV conversion")
   const inputfile = path.join(MessagesFileDir, XLSXMessagesFileName)
   const outputfile = path.join(MessagesFileDir, CSVMessagesFileName)
+  XLSX.set_fs(fs);
   const workbook = XLSX.readFile(inputfile);
   const worksheet = workbook.Sheets[Object.keys(workbook.Sheets)[0]]; // Prendre la première feuille de calcul
   const csvLines = XLSX.utils.sheet_to_csv(worksheet,

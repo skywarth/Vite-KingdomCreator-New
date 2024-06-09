@@ -201,3 +201,5 @@ othercards:
     type: Mat Horizontal
   - name: CoinsTokens
     type: Tokens
+  - name: Bane
+    type: Mat Horizontal

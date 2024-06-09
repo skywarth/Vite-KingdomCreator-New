@@ -68,6 +68,7 @@ string variable set with kingdom list
 strings = ["Introduction: Cartographer, Crossroads, Develop, Jack of all Trades, Margrave, Nomads, Oasis, Spice Merchant, Stables, Weaver"]
 
 ###### Cards translation generation
+functionnality included in `npm run Gen`
 == Active ==
 to generate new translation files in process directory 
 `cd process`

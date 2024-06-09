@@ -78,6 +78,9 @@ export default defineComponent({
 .bane-div{
   bottom: 10%;
 }
+.ferryman-div{
+  bottom: 10%;
+}
 .obelisk-div{
   bottom: 20%;
 }

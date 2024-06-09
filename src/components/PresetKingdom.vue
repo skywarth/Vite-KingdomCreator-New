@@ -39,6 +39,7 @@
       <template v-slot:default="slotProps">
         <StaticCardWithSet :card="slotProps.item" />
         <BaneCardCover isType="Bane" v-if="isBaneCard(slotProps.item)" />
+        <BaneCardCover isType="Ferryman" v-if="isFerrymanCard(slotProps.item)" />
         <BaneCardCover isType="Obelisk" v-if="isObeliskCard(slotProps.item)" />
         <BaneCardCover isType="MouseWay" v-if="isMouseWayCard(slotProps.item)" />
         <BaneCardCover :is-type="traitsTitle(0)" v-if="isTraitsCard(slotProps.item, 0)" />
@@ -165,6 +166,9 @@ export default defineComponent({
       if (props.kingdom.baneCardId) {
         Cards.push(getCards([props.kingdom.baneCardId])[0]);
       }
+      if (props.kingdom.ferrymanCardId) {
+        Cards.push(getCards([props.kingdom.ferrymanCardId])[0]);
+      }
       if (props.kingdom.wayofthemouseCardId) {
         Cards.push(getCards([props.kingdom.wayofthemouseCardId])[0]);
       }
@@ -178,6 +182,11 @@ export default defineComponent({
     const isBaneCard = (supplyCard: SupplyCard) => {
       return props.kingdom.baneCardId &&
         props.kingdom.baneCardId == supplyCard.id;
+    };
+
+    const isFerrymanCard = (supplyCard: SupplyCard) => {
+      return props.kingdom.ferrymanCardId &&
+        props.kingdom.ferrymanCardId == supplyCard.id;
     };
 
     const isObeliskCard = (supplyCard: SupplyCard) => {
@@ -256,6 +265,7 @@ export default defineComponent({
       getCards,
 
       isBaneCard,
+      isFerrymanCard,
       isObeliskCard,
       isMouseWayCard,
       isTraitsCard,

@@ -33,7 +33,7 @@ console.log(process.argv)
     appType: 'spa',
     plugins: [
       vue(),
-      VueDevTools(),
+      //VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 
@@ -106,7 +106,7 @@ console.log(process.argv)
         },
         '/rules/': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => {console.log(path); return path.replace(/^\/rules/, '/docs/rules/')},
+          rewrite: (path) => path.replace(/^\/rules/, '/docs/rules/'),
         },
         '/locales': {
           target: 'http://localhost:' + devServerPort,

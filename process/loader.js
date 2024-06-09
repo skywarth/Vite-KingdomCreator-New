@@ -100,6 +100,15 @@ const loadSets = function() {
             card.cardType="6 // allies"
          }
       }
+      if (set.traits) {
+         for (let i = 0; i < set.traits.length; i++) {
+            const card = set.traits[i];
+            card.id = convertToTraitId(setId, card.name);
+            card.shortId = tokenize(card.name);
+            card.setId = setId;
+            card.cardType="7 // traits"
+         }
+      }
       if (set.othercards) {
          for (let i = 0; i < set.othercards.length; i++) {
             const card = set.othercards[i];

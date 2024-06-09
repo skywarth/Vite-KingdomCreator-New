@@ -1,4 +1,4 @@
-name: Guilds / Cornucopia
+name: Guilds / Cornucopia (2nd)
 cards:
   - name: Advisor
     cost:
@@ -208,3 +208,5 @@ othercards:
     type: Mat Horizontal
   - name: CoinsTokens
     type: Tokens
+  - name: Bane
+    type: Mat Horizontal

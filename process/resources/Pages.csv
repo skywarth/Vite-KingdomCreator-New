@@ -128,7 +128,7 @@ sets	darkages	darkages	Middeleeuwen	Dark Ages	L'âge des ténèbres	Edad Oscura	
 sets	empires	empires	Keizerrijken	Empires	Empires	Imperios	Imperium
 sets	guilds	guilds	De Gilden	Die Gilden	Guildes	Gremios	Guilds
 sets	guildscornucopia	guildscornucopia	De Gilden  / Overloed	Die Gilden / Reiche Ernte	Guildes / Abondance	Gremios / Cornucopia	Guilds / Róg obfitości
-sets	guildscornucopia2	guildscornucopia	De Gilden  / Overloed	Die Gilden / Reiche Ernte	Guildes / Abondance	Gremios / Cornucopia	Guilds / Róg obfitości
+sets	guildscornucopia2	guildscornucopia	De Gilden  / Overloed II	Die Gilden / Reiche Ernte II	Guildes / Abondance (2nd ed)	Gremios / Cornucopia 2ª Ed.	Guilds / Róg obfitości II
 sets	guildscornucopia2add	guildscornucopia			Guildes / Abondance updatepack		
 sets	hinterlands	hinterlands	Het Achterland	Hinterland	L'Arrière-Pays	Comarcas	Hinterlands
 sets	hinterlands2	hinterlands2	Het Achterland II	Hinterland II	L'Arrière-Pays (2nd ed)	Comarcas 2ª Ed.	Hinterlands II
@@ -1012,7 +1012,7 @@ cards.guildscornucopia	guildscornucopia2_footpad	Foopad			Gredin
 cards.guildscornucopia	guildscornucopia2_joust	Joust			Joute		
 cards.guildscornucopia	guildscornucopia2_coronet	Coronet			Couronne de noblesse		
 cards.guildscornucopia	guildscornucopia2_courser	Courser			Coursier		
-cards.guildscornucopia	guildscornucopia2_desmene	Desmene			Propriété		
+cards.guildscornucopia	guildscornucopia2_demene	Demene			Propriété		
 cards.guildscornucopia	guildscornucopia2_housecarl	Housecarl			Housecarl		
 cards.guildscornucopia	guildscornucopia2_hugeturnip	Huge Turnip			Navet géant		
 cards.guildscornucopia	guildscornucopia2_renown	Renow			Renommée		
