@@ -5,6 +5,7 @@ export class Supply {
   constructor(
       readonly supplyCards: SupplyCard[],
       readonly baneCard: SupplyCard | null,
+      readonly ferrymanCard: SupplyCard | null,
       readonly obeliskCard: SupplyCard | null,
       readonly mouseWay: SupplyCard | null,
       readonly traitsSupply: SupplyCard[],
@@ -23,7 +24,7 @@ export class Supply {
   }
 
   static empty() {
-    return new Supply([], null, null, null, [], Replacements.empty());
+    return new Supply([], null, null, null, null, [], Replacements.empty());
   }
 }
 

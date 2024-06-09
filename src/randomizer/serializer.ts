@@ -1,9 +1,9 @@
-import type {Card} from "../dominion/card";
-import {DominionSets} from "../dominion/dominion-sets";
-import {Kingdom} from "./kingdom";
-import type {SupplyCard} from "../dominion/supply-card";
-import {Metadata as KingdomMetadata} from "./kingdom";
-import {Supply, Replacements} from "../randomizer/supply";
+import type { Card} from "../dominion/card";
+import { DominionSets} from "../dominion/dominion-sets";
+import { Kingdom} from "./kingdom";
+import type { SupplyCard} from "../dominion/supply-card";
+import { Metadata as KingdomMetadata} from "./kingdom";
+import { Supply, Replacements} from "../randomizer/supply";
 import { Landmark } from "../dominion/landmark";
 import { Way } from "../dominion/way";
 
@@ -14,6 +14,9 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
   };
   if (kingdom.supply.baneCard) {
     result.bane = serializeCards([kingdom.supply.baneCard]);
+  } 
+  if (kingdom.supply.ferrymanCard) {
+    result.ferryman = serializeCards([kingdom.supply.ferrymanCard]);
   } 
   if (kingdom.events.length) {
     result.events = serializeCards(kingdom.events);
@@ -73,8 +76,9 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
   console
   /*
       lang=en&
-      supply=coven,youngwitch,gatekeeper,hostelry,huntinglodge,livery,mastermind,paddock,stockpile,supplies
+      supply=coven,youngwitch,gatekeeper,ferryman,huntinglodge,livery,mastermind,paddock,stockpile,supplies
       &bane=hamlet
+      &ferryman=village
       &events=populate
       &landmarks=obelisk(coven)
       //&obeliskCard=coven
@@ -95,6 +99,7 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   }
 
   const baneIds = parseCommaSeparatedValues(serializedKingdom.bane) || [];
+  const ferrymanIds = parseCommaSeparatedValues(serializedKingdom.ferryman) || [];
   const eventIds = parseCommaSeparatedValues(serializedKingdom.events) || [];
   // const  landmarkIds = parseCommaSeparatedValues(serializedKingdom.landmarks) || [];
   const [obeliskCardIds, landmarkIds] = extractStringParenthesis(parseCommaSeparatedValues(serializedKingdom.landmarks) || [])
@@ -110,6 +115,10 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   let baneCard: SupplyCard | null = null;
   if (baneIds.length) {
      baneCard = findByIds(baneIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;
+  }
+  let ferrymanCard: SupplyCard | null = null;
+  if (ferrymanIds.length) {
+     ferrymanCard = findByIds(ferrymanIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;
   }
   const events = findByIds(eventIds, DominionSets.getEventById, "event_", selectedSets).slice(0, 2);
   const landmarks =
@@ -133,7 +142,7 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
           .slice(0, Math.max(0, 2 - events.length - landmarks.length - projects.length - ways.length));
   const allies = findByIds(allyIds, DominionSets.getAllyById, "ally_", selectedSets).slice(0, 1);
   const boons = findByIds(boonIds, DominionSets.getBoonById, "boon_", selectedSets).slice(0, 3);
-  const supply = new Supply(supplyCards, baneCard, obeliskCard, mouseWayCard, [], Replacements.empty());
+  const supply = new Supply(supplyCards, baneCard, ferrymanCard, obeliskCard, mouseWayCard, [], Replacements.empty());
 
   return new Kingdom(
                Date.now(),                                /* id: number,  */

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GridLayout :items="supplyCardsWithBaneMouseWay" :number-of-columns="numberOfColumns" :is-vertical="true"
+    <GridLayout :items="supplyCardsWithBaneFerrymanMouseWay" :number-of-columns="numberOfColumns" :is-vertical="true"
       class="sortable-supply-cards" :class="{ 'kingdom-supply--is-enlarged': isEnlarged }">
       <template v-slot:default="slotProps">
         <FlippingCard :card="slotProps.item" :is-vertical="true" @front-visible="handleSupplyCardFrontVisible"
@@ -14,6 +14,7 @@
           </template>
           <!--<BaneCardCover v-if="isBane(slotProps.item)" />-->
           <BaneCardCover isType="Bane" v-if="isBaneCard(slotProps.item)" />
+          <BaneCardCover isType="Ferryman" v-if="isFerrymanCard(slotProps.item)" />
           <BaneCardCover isType="Obelisk" v-if="isObeliskCard(slotProps.item)" />
           <BaneCardCover isType="MouseWay" v-if="isMouseWayCard(slotProps.item)" />
           <BaneCardCover :is-type="traitsTitle(0)" v-if="isTraitsCard(slotProps.item, 0)" />
@@ -96,11 +97,14 @@ export default defineComponent({
       return isEnlarged.value ? 2 : windowWidth.value > 450 ? 5 : 4;
     });
 
-    const supplyCardsWithBaneMouseWay = computed(() => {
+    const supplyCardsWithBaneFerrymanMouseWay = computed(() => {
       //const cards =  SupplyCardSorter.sort(this.supplyCards.concat() as SupplyCard[], this.sortOption, this.$t.bind(this));
       const cards = supplyCards.value.concat();
       if (kingdom.value.supply.baneCard) {
         cards.push(kingdom.value.supply.baneCard);
+      }
+      if (kingdom.value.supply.ferrymanCard) {
+        cards.push(kingdom.value.supply.ferrymanCard);
       }
       if (kingdom.value.supply.mouseWay) {
         cards.push(kingdom.value.supply.mouseWay);
@@ -152,6 +156,10 @@ export default defineComponent({
       return kingdom.value.supply.baneCard &&
         kingdom.value.supply.baneCard.id == supplyCard.id;
     }
+    const isFerrymanCard = (supplyCard: SupplyCard) => {
+      return kingdom.value.supply.ferrymanCard &&
+        kingdom.value.supply.ferrymanCard.id == supplyCard.id;
+    };
     const isObeliskCard = (supplyCard: SupplyCard) => {
       return kingdom.value.supply.obeliskCard &&
         kingdom.value.supply.obeliskCard.id == supplyCard.id;
@@ -342,12 +350,13 @@ export default defineComponent({
       return new Set(oldSupplyCards.filter((card) => !newIds.has(card.id)).map((card) => card.id));
     }
     return {
-      supplyCardsWithBaneMouseWay,
+      supplyCardsWithBaneFerrymanMouseWay,
       numberOfColumns,
       isEnlarged,
       handleSupplyCardFrontVisible,
       handleSupplyCardFlippingToBack,
       isBaneCard,
+      isFerrymanCard,
       isObeliskCard,
       isMouseWayCard,
       isTraitsCard,

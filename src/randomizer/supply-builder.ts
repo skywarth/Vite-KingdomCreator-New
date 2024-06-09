@@ -9,7 +9,8 @@ import type {SupplyRequirement} from "./supply-requirement";
 import {Supply, Replacements} from "./supply";
 import {getRandomInt, selectRandom} from "../utils/rand";
 import { SupplyDivisions } from "./supply-divisions";
-import { YOUNG_WITCH_ID, BANE_MIN_COST, BANE_MAX_COST } from "./special-need-cards";
+import { YOUNG_WITCH_IDS, BANE_MIN_COST, BANE_MAX_COST } from "./special-need-cards";
+import { FERRYMAN_IDS, FERRYMAN_MIN_COST, FERRYMAN_MAX_COST } from "./special-need-cards";
 
 const NUM_CARDS_IN_KINGDOM = 10;
 
@@ -19,6 +20,7 @@ export class SupplyBuilder {
   private bans: SupplyBan[] = [];
   private corrections: SupplyCorrection[] = [];
   private forceBaneCard: SupplyCard | null = null;
+  private forceFerrymanCard: SupplyCard | null = null;
   constructor(private readonly cards: SupplyCard[]) {
   }
 
@@ -42,6 +44,10 @@ export class SupplyBuilder {
     this.forceBaneCard = baneCard;
   }
 
+  setFerrymanCard(ferrymanCard: SupplyCard) {
+    this.forceFerrymanCard = ferrymanCard;
+  }
+
   createUnfilledDivisions(existingCards: SupplyCard[]): SupplyDivision[] {
     let division = new SupplyDivision(this.cards, [], [], NUM_CARDS_IN_KINGDOM, new Map());
     division = this.prepareDivisionForBanning(division, existingCards);
@@ -60,7 +66,8 @@ export class SupplyBuilder {
     divisions = SupplyDivisions.applyCorrections(divisions, this.corrections);
     divisions = SupplyDivisions.fillDivisions(divisions);
     const baneCard = this.selectBaneCard(divisions);
-    return this.gatherCardsIntoSupply(divisions, baneCard);
+    const ferrymanCard = this.selectFerrymanCard(divisions);
+    return this.gatherCardsIntoSupply(divisions, baneCard, ferrymanCard);
   }
 
   clone() {
@@ -187,10 +194,37 @@ export class SupplyBuilder {
 
   private requiresBaneCard(divisions: SupplyDivision[]) {
     const supplyCards = SupplyDivisions.getLockedAndSelectedCards(divisions);
-    return supplyCards.some(s => s.id == YOUNG_WITCH_ID);
+    return supplyCards.some(s => YOUNG_WITCH_IDS.includes(s.id));
   }
 
-  private gatherCardsIntoSupply(divisions: SupplyDivision[], baneCard: SupplyCard | null) {
+  private selectFerrymanCard(divisions: SupplyDivision[]) {
+    if (!this.requiresFerrymanCard(divisions)) {
+      return null;
+    }
+    if (this.forceFerrymanCard) {
+      return this.forceFerrymanCard;
+    }
+    const availableCards = 
+      SupplyDivisions
+        .getAvailableCards(divisions)
+        .filter(card => {
+          return card.cost.debt == 0 &&
+            card.cost.potion == 0 &&
+            card.cost.treasure <= FERRYMAN_MAX_COST &&
+            card.cost.treasure >= FERRYMAN_MIN_COST;
+        });
+    if (!availableCards.length) {
+      return null;
+    }
+    return selectRandom(availableCards);
+  }
+
+  private requiresFerrymanCard(divisions: SupplyDivision[]) {
+    const supplyCards = SupplyDivisions.getLockedAndSelectedCards(divisions);
+    return supplyCards.some(s => FERRYMAN_IDS.includes(s.id));
+  }
+
+  private gatherCardsIntoSupply(divisions: SupplyDivision[], baneCard: SupplyCard | null, ferrymanCard: SupplyCard | null) {
     const replacements: Map<string, SupplyCard[]> = new Map();
     const cards: SupplyCard[] = [];
     for (const division of divisions) {
@@ -199,7 +233,7 @@ export class SupplyBuilder {
         replacements.set(card.id, division.getReplacements(card.id));
       }
     }
-    return new Supply(cards, baneCard, null, null, [], new Replacements(replacements));
+    return new Supply(cards, baneCard, ferrymanCard, null, null, [], new Replacements(replacements));
   }
 
   private orderRequirementsForDivisions(divisions: SupplyDivision[]): SupplyRequirement[] {

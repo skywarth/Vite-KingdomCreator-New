@@ -6,7 +6,7 @@ import type { Way } from "../dominion/way";
 import type { Ally } from "../dominion/ally";
 import type { Trait } from "../dominion/trait";
 import { Supply } from "../randomizer/supply";
-import { YOUNG_WITCH_ID, OBELISK_LANDMARK_ID, MOUSE_WAY_ID } from "./special-need-cards";
+import { YOUNG_WITCH_IDS, FERRYMAN_IDS, OBELISK_LANDMARK_ID, MOUSE_WAY_ID } from "./special-need-cards";
 import { DominionSets } from "../dominion/dominion-sets";
 
 export class Kingdom {
@@ -26,7 +26,7 @@ export class Kingdom {
   static empty() {
     return new Kingdom(
       0,                /* id: number,  */
-      Supply.empty(),   /* supply: Supply, containing bane, obeliskCard, mouseWay, Traits[] */
+      Supply.empty(),   /* supply: Supply, containing baneCard, ferrymanCard, obeliskCard, mouseWay, Traits[] */
       [],               /* events: Event[], */
       [],               /* landmarks: Landmark[], */
       [],               /* projects: Project[], */
@@ -39,10 +39,15 @@ export class Kingdom {
 
   public isKingdomValid() {
     if (this.supply.supplyCards.length != 10) return false;
-    if (this.supply.supplyCards.includes(DominionSets.getSupplyCardById(YOUNG_WITCH_ID))) {
+    if (this.supply.supplyCards.some(card => YOUNG_WITCH_IDS.includes(card.id))) {
       if (this.supply.baneCard == null) return false;
     } else {
       if (this.supply.baneCard != null) return false;
+    }
+    if (this.supply.supplyCards.some(card => FERRYMAN_IDS.includes(card.id))) {
+      if (this.supply.ferrymanCard == null) return false;
+    } else {
+      if (this.supply.ferrymanCard != null) return false;
     }
     if (this.landmarks.includes(DominionSets.getLandmarkById(OBELISK_LANDMARK_ID))) {
       if (this.supply.obeliskCard == null) return false;

@@ -18,6 +18,7 @@ export class RandomizerOptions {
     readonly distributeCost: boolean,
     readonly prioritizeSet: SetId | null,
     readonly baneCardId: string | null,
+    readonly ferrymanCardId: string | null,
     readonly useAlchemyRecommendation: boolean,) {
   }
 }
@@ -37,6 +38,7 @@ export class RandomizerOptionsBuilder {
   distributeCost: boolean = false;
   prioritizeSet: SetId | null = null;
   baneCardId: string | null = null;
+  ferrymanCardId: string | null = null;
   useAlchemyRecommendation = true;
 
   setSetIds(setIds: SetId[]) {
@@ -110,6 +112,11 @@ export class RandomizerOptionsBuilder {
     return this;
   }
 
+  setFerrymanCardId(ferrymanCardId: string | null) {
+    this.ferrymanCardId = ferrymanCardId;
+    return this;
+  }
+
   setUseAlchemyRecommendation(useAlchemyRecommendation: boolean) {
     this.useAlchemyRecommendation = useAlchemyRecommendation;
     return this;
@@ -131,6 +138,7 @@ export class RandomizerOptionsBuilder {
         this.distributeCost,
         this.prioritizeSet,
         this.baneCardId,
+        this.ferrymanCardId,
         this.useAlchemyRecommendation);
   }
 }

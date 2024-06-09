@@ -117,13 +117,14 @@ export class Randomizer {
       this.removeDuplicateCards(
         allSupplyCards.filter(Cards.filterByIncludedSetIds(randomizerOptions.setIds)), []);
     let supplyBuilder = new SupplyBuilder(allSupplyCardsToUse);
-
+console.log(120 , supplyBuilder)
     // Set the bane card if supplyed in the options and remove it from the pool of 
     // available cards.
     if (randomizerOptions.baneCardId) {
       supplyBuilder.setBaneCard(
         DominionSets.getSupplyCardById(randomizerOptions.baneCardId));
       supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.baneCardId]));
+      console.log(127, supplyBuilder)
     }
 
     // Configure bans.
@@ -334,6 +335,7 @@ export class Randomizer {
     const NewSupply = new Supply(
       supply.supplyCards,     /* supply Cards */
       supply.baneCard,        /* bane if needed */
+      supply.ferrymanCard,    /* ferryman carrd to add if needed */
       calculatedObeliskCard,  /* obeliskCard if needed */
       calculatedmouseWayCard, /* mouseWayCard if needed */
       calculatedTraitsCard,   /* supply for traits */
