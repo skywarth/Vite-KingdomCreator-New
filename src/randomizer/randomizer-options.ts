@@ -19,6 +19,8 @@ export class RandomizerOptions {
     readonly prioritizeSet: SetId | null,
     readonly baneCardId: string | null,
     readonly ferrymanCardId: string | null,
+    readonly mousewayCardId: string | null,
+    readonly obeliskCardId: string | null,
     readonly useAlchemyRecommendation: boolean,) {
   }
 }
@@ -39,6 +41,8 @@ export class RandomizerOptionsBuilder {
   prioritizeSet: SetId | null = null;
   baneCardId: string | null = null;
   ferrymanCardId: string | null = null;
+  mousewayCardId: string | null = null;
+  obeliskCardId: string | null = null;
   useAlchemyRecommendation = true;
 
   setSetIds(setIds: SetId[]) {
@@ -117,6 +121,16 @@ export class RandomizerOptionsBuilder {
     return this;
   }
 
+  setMousewayCardId(mousewayCardId: string | null) {
+    this.mousewayCardId = mousewayCardId;
+    return this;
+  }
+
+  setObeliskCardId(obeliskCardId: string | null) {
+    this.obeliskCardId = obeliskCardId;
+    return this;
+  }
+
   setUseAlchemyRecommendation(useAlchemyRecommendation: boolean) {
     this.useAlchemyRecommendation = useAlchemyRecommendation;
     return this;
@@ -139,6 +153,8 @@ export class RandomizerOptionsBuilder {
         this.prioritizeSet,
         this.baneCardId,
         this.ferrymanCardId,
+        this.mousewayCardId,
+        this.obeliskCardId,
         this.useAlchemyRecommendation);
   }
 }

@@ -11,6 +11,7 @@ import { DominionSets } from "../dominion/dominion-sets";
 import type { SupplyCard } from "../dominion/supply-card";
 import type { Addon } from "../dominion/addon";
 import type { Selection } from "./selection";
+import { isObjectBindingPattern } from "typescript";
 
 export const MIN_SETS_FOR_PRIORITIZE_OPTION = 3;
 export const MIN_CARDS_FOR_DISTRIBUTE_COST = 24;
@@ -24,12 +25,26 @@ export interface randomizerStoreState {
 }
 
 export function randomizeSelectedCards(context: randomizerStoreState): Supply | null {
+  console.log("randomizeSelectedCards")
+  console.log(context)
   const excludeCardIds = getSelectedSupplyCards(context).map((card) => card.id);
   const isBaneSelected = isBaneCardSelected(context);
+  const isFerrymanSelected = isFerrymanCardSelected(context);
+  const isMousewaySelected = isMousewayCardSelected(context);
+  const isObeliskSelected = isObeliskCardSelected(context);
+  // handle special case where bane, ferryman, obeliskCard, mousewayCard is selected
   if (isBaneSelected) {
     excludeCardIds.push(context.kingdom.supply.baneCard?.id ?? "");
   }
-
+  if (isFerrymanSelected) {
+    excludeCardIds.push(context.kingdom.supply.ferrymanCard?.id ?? "");
+  }
+  if (isMousewaySelected) {
+    excludeCardIds.push(context.kingdom.supply.mouseWay?.id ?? "");
+  }
+  if (isObeliskSelected) {
+    excludeCardIds.push(context.kingdom.supply.obeliskCard?.id ?? "");
+  }
   const optionsBuilder = createRandomizerOptionsBuilder(context)
       .setSetIds(getSelectedSetIds(context))
       .setIncludeCardIds(getUnselectedSupplyCards(context).map((card) => card.id))
@@ -38,6 +53,15 @@ export function randomizeSelectedCards(context: randomizerStoreState): Supply | 
 
   if (!isBaneSelected && context.kingdom.supply.baneCard) {
     optionsBuilder.setBaneCardId(context.kingdom.supply.baneCard?.id ?? false)
+  }
+  if (!isFerrymanSelected && context.kingdom.supply.ferrymanCard) {
+    optionsBuilder.setFerrymanCardId(context.kingdom.supply.ferrymanCard?.id ?? false)
+  }
+  if (!isMousewaySelected && context.kingdom.supply.mouseWay) {
+    optionsBuilder.setMousewayCardId(context.kingdom.supply.mouseWay?.id ?? false)
+  }
+  if (!isObeliskSelected && context.kingdom.supply.obeliskCard) {
+    optionsBuilder.setObeliskCardId(context.kingdom.supply.obeliskCard?.id ?? false)
   }
   const supply = Randomizer.createSupplySafe(optionsBuilder.build());
   if (supply) {
@@ -147,7 +171,7 @@ export function getExcludeTypes(context: randomizerStoreState): CardType[] {
 }
 
 export function getSelectedSupplyCards(context: randomizerStoreState) {
-  return getSelected(context, context.kingdom.supply.getSupplyCardsWithBane());
+  return getSelected(context, context.kingdom.supply.getSupplyCardsWithBaneandOthers());
 }
 
 export function getUnselectedSupplyCards(context: randomizerStoreState) {
@@ -227,4 +251,22 @@ export function isBaneCardSelected(context: randomizerStoreState) {
   const selection = context.selection;
   const baneCard = context.kingdom.supply.baneCard;
   return Boolean(baneCard && selection.contains(baneCard.id));
+}
+
+export function isFerrymanCardSelected(context: randomizerStoreState) {
+  const selection = context.selection;
+  const ferrymanCard = context.kingdom.supply.ferrymanCard;
+  return Boolean(ferrymanCard && selection.contains(ferrymanCard.id));
+}
+
+export function isMousewayCardSelected(context: randomizerStoreState) {
+  const selection = context.selection;
+  const mousewayCard = context.kingdom.supply.mouseWay;
+  return Boolean(mousewayCard && selection.contains(mousewayCard.id));
+}
+
+export function isObeliskCardSelected(context: randomizerStoreState) {
+  const selection = context.selection;
+  const obeliskCard = context.kingdom.supply.obeliskCard;
+  return Boolean(obeliskCard && selection.contains(obeliskCard.id));
 }

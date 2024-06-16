@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { fileURLToPath, URL } from 'node:url'
 import fs from 'fs';
 import path from 'path';
 
@@ -13,7 +14,7 @@ import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins
 const devServerPort = 5173
 
 export default defineConfig( ({ mode}) => {
-console.log(process.argv)
+//console.log(process.argv)
   if (mode === "production" || mode === "development") {
    // mergeJSONLanguageFiles();
     DominionContentGenerate();
@@ -33,7 +34,7 @@ console.log(process.argv)
     appType: 'spa',
     plugins: [
       vue(),
-      //VueDevTools(),
+      VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 
@@ -64,11 +65,12 @@ console.log(process.argv)
       include: ['vue', 'vue-i18n']
     },
     resolve: {
-      extensions: ['.ts', '.vue'],
+      //extensions: ['.ts', '.vue'],
       alias: {
         // Alias pour les modules non-Esbuild compatibles avec Vite
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
-        'vue': 'vue/dist/vue.esm-bundler.js', 
+        //'@': fileURLToPath(new URL('./src', import.meta.url)),
+        //'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
+        //'vue': 'vue/dist/vue.esm-bundler.js', 
       },
     },
     build: {

@@ -5,14 +5,17 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useWindowStore } from "./pinia/window-store";
 
+import App from "./views/App.vue";
+
 export function initialize<S>(router: Router) {
-  const app = createApp({
+  /*const app = createApp({
     template: `
       <div id="app">
         <router-view></router-view>
       </div>
     `
-  });
+  });*/
+  const app = createApp(App)
   app.use(i18n);
   app.use(router);
   app.use(createPinia().use(piniaPluginPersistedstate));

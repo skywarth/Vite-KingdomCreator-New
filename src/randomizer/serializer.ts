@@ -6,6 +6,7 @@ import { Metadata as KingdomMetadata} from "./kingdom";
 import { Supply, Replacements} from "../randomizer/supply";
 import { Landmark } from "../dominion/landmark";
 import { Way } from "../dominion/way";
+import { Trait } from "../dominion/trait";
 
 export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
   const result: {[index: string]: string} = {
@@ -71,9 +72,29 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
     result.ally = serializeCards([kingdom.ally]);
   }
   if (kingdom.traits.length) {
-    result.traits = serializeCards(kingdom.traits)
+    const traitToSerialize=[...kingdom.traits]
+    for (const index in traitToSerialize)
+    {
+      traitToSerialize[index] = new Trait(
+        traitToSerialize[index].id, 
+        traitToSerialize[index].shortId+"("+kingdom.supply.traitsSupply[index].shortId+")",
+        traitToSerialize[index].setId,
+        traitToSerialize[index].name,
+        traitToSerialize[index].orderstring,
+        traitToSerialize[index].cost)
+    } 
+    result.traits = serializeCards(traitToSerialize);
+    // pour chaque (traits, index), creer traiToSerialze 
+    // avec id = trait.id
+    // shortId = trait.shortId + "(" + kingdom.supply.traitsupply[index] + ")"
+    // setId = trait.setId
+    // name = trait.name
+    // orderstring = trait.orderstring
+    // cost = trait.cost
+    // ajouter traitToSerialize dans result.traits
+
   }
-  console
+  
   /*
       lang=en&
       supply=coven,youngwitch,gatekeeper,ferryman,huntinglodge,livery,mastermind,paddock,stockpile,supplies
@@ -84,7 +105,7 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
       //&obeliskCard=coven
       &ways=wayofthemouse(menagerie)
       //&mouseWayCard=menagerie
-      &traits=poor,rich
+      &traits=poor(gatekeeper),rich(livery)
   */
   return result;
 }

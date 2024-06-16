@@ -65,7 +65,9 @@ export class Randomizer {
     const addons = this.getAddons(randomizerOptions.setIds);
     const boons = this.getRandomBoons(supply, []);
     const ally = this.getRandomAlly(supply);
-    const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons);
+    const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons, 
+      new Kingdom(0, new Supply([], null, null, null, null, [], Replacements.empty()),
+          [], [], [], [], [], null, [], new KingdomMetadata(false, false)));
     //console.log(adjustedSupplyCards)
     const metadata = this.getMetadata(randomizerOptions.setIds);
     console.log("createKingdom", supply)
@@ -117,16 +119,30 @@ export class Randomizer {
       this.removeDuplicateCards(
         allSupplyCards.filter(Cards.filterByIncludedSetIds(randomizerOptions.setIds)), []);
     let supplyBuilder = new SupplyBuilder(allSupplyCardsToUse);
-console.log(120 , supplyBuilder)
-    // Set the bane card if supplyed in the options and remove it from the pool of 
+    // Set the bane card, the ferryman card, the mouseway card 
+    //if supplyed in the options and remove it from the pool of 
     // available cards.
     if (randomizerOptions.baneCardId) {
       supplyBuilder.setBaneCard(
         DominionSets.getSupplyCardById(randomizerOptions.baneCardId));
       supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.baneCardId]));
-      console.log(127, supplyBuilder)
     }
-
+    if (randomizerOptions.ferrymanCardId) {
+      supplyBuilder.setFerrymanCard(
+        DominionSets.getSupplyCardById(randomizerOptions.ferrymanCardId));
+      supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.ferrymanCardId]));
+    }
+    if (randomizerOptions.mousewayCardId) {
+      supplyBuilder.setMousewayCard(
+        DominionSets.getSupplyCardById(randomizerOptions.mousewayCardId));
+      supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.mousewayCardId]));
+    }
+    if (randomizerOptions.obeliskCardId) {
+      supplyBuilder.setObeliskCard(
+        DominionSets.getSupplyCardById(randomizerOptions.obeliskCardId));
+      supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.obeliskCardId]));
+    }
+    
     // Configure bans.
     if (randomizerOptions.excludeCardIds.length) {
       supplyBuilder.addBan(new CardSupplyBan(randomizerOptions.excludeCardIds));
@@ -290,47 +306,57 @@ console.log(120 , supplyBuilder)
     return new KingdomMetadata(useColonies, useShelters);
   }
 
-  static adjustSupplyBasedOnAddons(supply: Supply, Localaddons :Addons) {
+  static adjustSupplyBasedOnAddons(supply: Supply, Localaddons :Addons, oldkingdom: Kingdom) {
     // to add obeliskCard
     let calculatedObeliskCard = null;
-    if ((Localaddons.landmarks).includes(DominionSets.getLandmarkById(OBELISK_LANDMARK_ID))) {
-      //console.log("need to find an action for Obelisk")
-      const onlyActionSupply = supply.supplyCards.filter(card => card.isOfType(OBELISK_CARDTYPE_REQUESTED));
-      //console.log("adjustSupplyBasedOnAddons onlyActionSupply", onlyActionSupply);
-      calculatedObeliskCard = this.selectRandomCards(onlyActionSupply, 1)[0]
-      //console.log("new Obelisk card", calculatedObeliskCard)
+    if (Localaddons.landmarks.some(landmark => DominionSets.getLandmarkById(OBELISK_LANDMARK_ID).id === landmark.id)) {
+      if (!supply.obeliskCard) {
+        const onlyActionSupply = supply.supplyCards.filter(card => card.isOfType(OBELISK_CARDTYPE_REQUESTED));
+        calculatedObeliskCard = this.selectRandomCards(onlyActionSupply, 1)[0]
+      } else {
+        calculatedObeliskCard=supply.obeliskCard
+      }
     }
 
     // to add mouseWayCard
     let calculatedmouseWayCard = null;
     let localReplacements = supply.replacements;
-    if ((Localaddons.ways).includes(DominionSets.getWayById(MOUSE_WAY_ID))) {
-      //console.log("need to find an action for mouse way")
-      //console.log(supply.replacements.replacements)
-      const candidateCards = supply.replacements
-        .getReplacementsForId(supply.supplyCards[0].id)
-        .filter(card => {
-          return card.cost.debt == 0 &&
-            card.cost.potion == 0 &&
-            card.cost.treasure <= MOUSE_MAX_COST &&
-            card.cost.treasure >= MOUSE_MIN_COST;
-        });
-      const randomIndex = Math.floor(Math.random() * candidateCards.length);
-      if (candidateCards.length != 0) {
-        calculatedmouseWayCard = candidateCards[randomIndex];
-        localReplacements = new Replacements(Replacements.createReplacementByRemoveCards(supply.replacements.replacements, [calculatedmouseWayCard.id]));
+    if (Localaddons.ways.some(way => DominionSets.getWayById(MOUSE_WAY_ID).id === way.id)) {
+      if(!supply.mouseWay) {
+        const candidateCards = supply.replacements
+          .getReplacementsForId(supply.supplyCards[0].id)
+          .filter(card => {
+            return card.cost.debt == 0 &&
+              card.cost.potion == 0 &&
+              card.cost.treasure <= MOUSE_MAX_COST &&
+              card.cost.treasure >= MOUSE_MIN_COST;
+          });
+        const randomIndex = Math.floor(Math.random() * candidateCards.length);
+        if (candidateCards.length != 0) {
+          calculatedmouseWayCard = candidateCards[randomIndex];
+          localReplacements = new Replacements(Replacements.createReplacementByRemoveCards(supply.replacements.replacements, [calculatedmouseWayCard.id]));
+        }
+      } else {
+        calculatedmouseWayCard = supply.mouseWay
       }
-      console.log("mouse ", calculatedmouseWayCard)
     }
 
     // to add traits Supply
-    let calculatedTraitsCard:SupplyCard[]= []
-    if (Localaddons.traits.length >0 ) {
-      const onlyTraitsPossibleSupplies = supply.supplyCards.filter(card => card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_1) || 
-                                                                  card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_2));
-      //console.log("adjustSupplyBasedOnAddons onlyTraitsPossibleSupplies", onlyTraitsPossibleSupplies);
-      calculatedTraitsCard = this.selectRandomCards(onlyTraitsPossibleSupplies, Localaddons.traits.length)
-      //console.log("new Supply Traits card", calculatedTraitsCard)
+    let calculatedTraitsSupplyCard:SupplyCard[]= []
+    let onlyTraitsPossibleSupplies = supply.supplyCards.filter(card => card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_1) || 
+          card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_2));
+    if (Localaddons.traits.length > 0) {
+      for (const trait of Localaddons.traits) {
+        const index = oldkingdom.traits.findIndex((oldtrait) => oldtrait.id === trait.id);
+        if (index>=0) {
+          calculatedTraitsSupplyCard.push(oldkingdom.supply.traitsSupply[index]);
+          onlyTraitsPossibleSupplies = onlyTraitsPossibleSupplies.filter((card) => card != oldkingdom.supply.traitsSupply[index]);
+        } else {
+          const randomTraitCard = this.selectRandomCards(onlyTraitsPossibleSupplies, 1)[0];
+          calculatedTraitsSupplyCard.push(randomTraitCard);
+          onlyTraitsPossibleSupplies = onlyTraitsPossibleSupplies.filter((card) => card != randomTraitCard);
+        }
+      }
     }
     const NewSupply = new Supply(
       supply.supplyCards,     /* supply Cards */
@@ -338,7 +364,7 @@ console.log(120 , supplyBuilder)
       supply.ferrymanCard,    /* ferryman carrd to add if needed */
       calculatedObeliskCard,  /* obeliskCard if needed */
       calculatedmouseWayCard, /* mouseWayCard if needed */
-      calculatedTraitsCard,   /* supply for traits */
+      calculatedTraitsSupplyCard,   /* supply for traits */
       localReplacements
     )
     //console.log(NewSupply)

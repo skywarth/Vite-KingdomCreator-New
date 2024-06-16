@@ -15,10 +15,16 @@ export class Supply {
     }
   }
 
-  getSupplyCardsWithBane() {
+  getSupplyCardsWithBaneandOthers() {
     const cards = this.supplyCards.concat();
     if (this.baneCard) {
       cards.push(this.baneCard);
+    }
+    if (this.ferrymanCard) {
+      cards.push(this.ferrymanCard);
+    }
+    if (this.mouseWay) {
+      cards.push(this.mouseWay);
     }
     return cards;
   }
