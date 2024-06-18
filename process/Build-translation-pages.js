@@ -97,7 +97,6 @@ function usage() {
 
 
 function Add2ndEditions(processedSet, translated) {
-  console.log(processedSet, "##")
   for (const setId in sets) {
     const set = sets[setId];
     if ((processedSet + "2") == setId) {
@@ -135,11 +134,8 @@ function GenerateTranslation() {
     names[Line_splittted[0]] = {}
   }
   const resultPages = Object.keys(names);
-  //console.log(resultPages)
 
   TestAndCreateDir(PROCESSING_DIR);
-
-
 
   for (let i = 0; i < resultPages.length; i++) {
     const page = resultPages[i];
@@ -160,6 +156,7 @@ function GenerateTranslation() {
         }
       }
       const filenamesplitted = (resultPages[i]).split('.')
+      console.log( filenamesplitted )
       for (let j = 2; j < languages.length; j++) {
         if (languages[j] != "") {
           lang = languages[j]
@@ -168,10 +165,13 @@ function GenerateTranslation() {
           TestAndCreateDir(`${PROCESSING_DIR}/${lang}`)
           if (filenamesplitted.length > 1) {
             if (filenamesplitted[0] == "cards") {
+              Add2ndEditions(filenamesplitted[1],names[languages[j]]);
+
+
               TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`)
-              filename = `${PROCESSING_DIR}//${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-            } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-          } else filename = `${PROCESSING_DIR}//${lang}/${filenamesplitted[0]}.${languages[j]}.json`
+              filename = `${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+            } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+          } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
           console.log(filename)
           fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
         }

@@ -33,7 +33,7 @@ export function Convert_to_CSV () {
 function Build_Translation() {
   console.log("Start building translation")
   if (fs.existsSync(LocaleResultDir)) {
-    fs.rmdirSync(LocaleResultDir, { recursive: true })
+    fs.rmSync(LocaleResultDir, { recursive: true })
   }
   const buildProcess = spawnSync('node', ['Build-translation-pages.js', '..'], { cwd: 'process' } );
   console.log(`${ buildProcess.stdout}`)

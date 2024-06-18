@@ -1,15 +1,15 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar-content">
+    <div class="sidebar-content filters">
       <div class="sidebar-content-title">
         <span>{{ $t("Sets") }}</span>
-        <div>
+        <div class="sidebar-content-option">
         <label class="checkbox sidebar-content-option">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
             @change="handleSetOrderTypeChange('alpha')" />
             <span>{{ $t("Alphabetical") }}</span>
         </label> 
-        <label class="checkbox sidebar-content-option">
+        <label class="checkbox sidebar-content-option" style="margin-left:10px;">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
             @change="handleSetOrderTypeChange('date')" />
             <span>{{ $t("Date") }}</span>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="sets">
-        <div class="sets" v-for="set in kingdomsets" :key="set">
+        <div class="set" v-for="set in kingdomsets" :key="set">
           <label class="checkbox">
             <input type="radio" v-model="selectedSetId" id="selectedSet" :value="set"
               @change="handleSelectionChange(set)" />

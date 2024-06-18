@@ -3,21 +3,21 @@
     <div class="sidebar-content">
       <div class="sidebar-content-title">
         <span>{{ $t("Sets content") }}</span>
-        <div>
+        <div class="sidebar-content-option">
         <label class="checkbox sidebar-content-option">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
             @change="handleSetOrderTypeChange('alpha')" />
             <span>{{ $t("Alphabetical") }}</span>
         </label> 
-        <label class="checkbox sidebar-content-option">
+        <label class="checkbox sidebar-content-option" style="margin-left:10px;">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
             @change="handleSetOrderTypeChange('date')" />
             <span>{{ $t("Date") }}</span>
         </label>      
         </div>
       </div>
-      <div class="set">
-        <div class="sets" v-for="setId in sets" :key="setId">
+      <div class="sets">
+        <div class="set" v-for="setId in sets" :key="setId">
           <label class="checkbox">
             <input type="radio" v-model="selectedBoxesSetId" :id="setId" :value="setId"
               @change="handleSelectionChange(setId)" />

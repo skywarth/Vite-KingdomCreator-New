@@ -7,13 +7,13 @@
     <div class="sidebar-content filters">
       <div class="sidebar-content-title">
         <span>{{ $t("Sets") }}</span>
-        <div>
+        <div class="sidebar-content-option">
         <label class="checkbox sidebar-content-option">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'alpha'"
             @change="handleSetOrderTypeChange('alpha')" />
             <span>{{ $t("Alphabetical") }}</span>
         </label> 
-        <label class="checkbox sidebar-content-option">
+        <label class="checkbox sidebar-content-option" style="margin-left:10px;">
             <input type="radio" style="margin-left:5px;" v-model="setsOrderType" :value="'date'"
             @change="handleSetOrderTypeChange('date')" />
             <span>{{ $t("Date") }}</span>
