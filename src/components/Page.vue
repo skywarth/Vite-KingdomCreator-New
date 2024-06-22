@@ -15,7 +15,7 @@
       <header>
        <div class="title-container">
           <h1 class="title">
-            <a class="title_link" href="/index.html">Dominion Randomizer</a>
+            <a class="title_link" :href="getCurrentMenuItemUrl">Dominion Randomizer</a>
           </h1>
           <h2 class="tagline">{{ subtitle }}</h2>
         </div> 
@@ -99,7 +99,6 @@ import { defineComponent, computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from 'vue-router';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-//import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 /* import Dominion Objects and type*/
 
@@ -173,6 +172,10 @@ export default defineComponent({
         };
       };
 
+    const getCurrentMenuItemUrl = computed(() =>{
+      return window.location.href 
+    });
+
     const getMenuItem = ((nbEntry: number, FirstPart: boolean) => { 
       return FirstPart ?  
           MENU_ITEMS.slice(0, nbEntry):
@@ -201,6 +204,7 @@ export default defineComponent({
       languages,
       getMenuItem,
       getMenuItemUrl,
+      getCurrentMenuItemUrl,
       getLanguageLinkOptions,
       handleMenuClick,
       isMenuItemActive,

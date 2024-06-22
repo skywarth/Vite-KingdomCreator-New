@@ -1,6 +1,7 @@
 <template>
   <div class="content Coef_scale12 card-rows ">
     <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
+      <div class="card-container">
       <div class="full-card unselectable" style="z-index:0; cursor:default;
            transform: scale(1); transition:none; position: sticky;">
         <!-- is a card -->
@@ -63,6 +64,10 @@
         <div class="full-card-border">
         </div>
       </div>
+      <div class="separator-card" style="z-index:0;">
+           <img class="full-card static-card__img" style="z-index:0; width:310px;" :src="cardImageUrl(Card)" :key="cardImageUrl(Card)" @error="incaseoferror" />
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -80,6 +85,8 @@ import type { OtherCard } from "../dominion/other-card";
 import { CardType } from "../dominion/card-type"
 import type{ Cost } from "../dominion/cost"
 import type { DominionSet } from "../dominion/dominion-set";
+import { getCardImageUrl } from "../utils/resources";
+import { incaseofImgerror } from "../utils/resources";
 
 import type { DigitalCard } from "../dominion/digital_cards/digital-cards-type"
 import { OtherCards_list } from "../dominion/digital_cards/digital-cards-othercards"
@@ -110,6 +117,15 @@ export default defineComponent({
         props.set.otherCards.some(function (item) { return ((item.shortId == card.id)); }));
     })
 
+    const cardImageUrl = (card: DigitalCard) => {
+      return getCardImageUrl(getCardSetById(card) + "_" + card.id, "en" as any);
+    }
+
+    const incaseoferror = (ev: any) => {
+      console.log(ev)
+      incaseofImgerror(ev);
+    }
+    
     const getHost= () => {
       return window.location.protocol + "//" + window.location.host;
     }
@@ -229,7 +245,9 @@ export default defineComponent({
       getCardBottomBarOffset,
       getCardCost,
       getCardSetById,
-      getCardTypeFontSize
+      getCardTypeFontSize,
+      cardImageUrl,
+      incaseoferror
     }
   }
 });

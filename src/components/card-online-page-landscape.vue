@@ -2,8 +2,7 @@
   <!-- for the Landscape cards -->
   <div class="content Coef_scale12 card-rows ">
     <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
-
-      <!--<div class="landscape-study-window" style="width:471px;height:294px;top:341px;left:378px;"> -->
+      <div class="card-container-landscape">
       <div class="landscape unselectable" style="left:0px; top:0px; z-index:0;transform: scale(1); cursor:">
         <div class="landscape-template"
           :style='"background-image: url(" + getHost() + "/img/Templates-card-type/" + getCardTypeById(Card).png + ".png);"'>
@@ -55,7 +54,10 @@
         </div>
         <!---->
       </div>
-      <!--</div>-->
+      <div class="separator-card-landscape" style="z-index:0;">
+           <img class="landscape " style="z-index:0; " :src="cardImageUrl(Card)" :key="cardImageUrl(Card)" @error="incaseoferror" />
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +77,8 @@ import type { Addon } from "../dominion/addon"
 import type { Cost } from "../dominion/cost"
 import { SetId } from "../dominion/set-id"
 import type { DominionSet } from "../dominion/dominion-set";
+import { getCardImageUrl } from "../utils/resources";
+import { incaseofImgerror } from "../utils/resources";
 
 import type { DigitalCard } from "../dominion/digital_cards/digital-cards-type"
 import { Cards_list } from "../dominion/digital_cards/digital-cards-landscape"
@@ -82,6 +86,8 @@ import type { IllustratorCard } from "../dominion/digital_cards/digital-cards-ty
 import { Cards_list_Illustrator, Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
 
 /* import store  */
+import { useWindowStore } from '../pinia/window-store';
+
 /* import Components */
 
 export const QuestionMarkVaue =
@@ -105,6 +111,7 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n();
+    const windowStore = useWindowStore();
 
     const Cards = computed(() => {
       return Cards_list.filter(card =>
@@ -132,6 +139,17 @@ export default defineComponent({
             props.set.allies.some(function (item) { return item.shortId == card.id; }))
         )
     });
+
+    const cardImageUrl = (card: DigitalCard) => {
+      const cardType = DominionSets.getCardById(card.id);
+      console.log(getCardImageUrl(getCardSetById(card) + "_" + cardType.constructor.name + "_" + card.id, "en" as any))
+      return getCardImageUrl(getCardSetById(card) + "_" + cardType.constructor.name + "_" + card.id, "en" as any);
+    }
+
+    const incaseoferror = (ev: any) => {
+      console.log(ev)
+      incaseofImgerror(ev);
+    }
 
     const getHost= () => {
       return window.location.protocol + "//" + window.location.host;
@@ -375,7 +393,9 @@ export default defineComponent({
       getCardSetById,
       ExpansionillustratorOffset,
       getCardIllustrator,
-      getCardSetYear
+      getCardSetYear,
+      cardImageUrl,
+      incaseoferror
     }
   }
 });

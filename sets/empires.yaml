@@ -600,7 +600,7 @@ othercards:
     orderstring: Castles step 7
     cost:
       treasure: 9
-  - name: Kings Castle
+  - name: King's Castle
     type: Victory - Castle
     orderstring: Castles step 8
     cost:

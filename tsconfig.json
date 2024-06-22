@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.json",
-  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue", "plugins/*.ts"],
+  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue"],
   "compilerOptions": {
     //"importsNotUsedAsValues": "preserve",
     "isolatedModules": true,

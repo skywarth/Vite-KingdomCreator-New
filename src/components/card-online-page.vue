@@ -1,6 +1,7 @@
 <template>
-  <div class="content Coef_scale12 card-rows ">
+  <div class="content Coef_scale12 card-rows">
     <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
+      <div class="card-container">
       <div class="full-card unselectable" style="z-index:0; cursor:default;
            transform: scale(1); transition:none; position: sticky;">
         <!-- is a card -->
@@ -68,9 +69,10 @@
           <div class="card-footer copyright">{{ getCardSetYear(Card) }}</div>
         </div>
       </div>
-    </div>
-    <div v-if="Cards.length > 1" class="v-for card-theme-title-dark card-theme-text-dark">
-      <img class="static-card__img" style="width:320px;" :src="cardImageUrl" :key="cardImageUrl" @error="incaseoferror" />
+      <div class="separator-card" style="z-index:0;">
+           <img class="full-card static-card__img" style="z-index:0; width:310px;" :src="cardImageUrl(Card)" :key="cardImageUrl(Card)" @error="incaseoferror" />
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -200,9 +202,9 @@ export default defineComponent({
         )
     })
 
-    const cardImageUrl = computed(() => {
-      return getCardImageUrl(getCardSetById(Work_Card) + "_" + Work_Card.id, "en" as any);
-    })
+    const cardImageUrl = (card: DigitalCard) => {
+      return getCardImageUrl(getCardSetById(card) + "_" + card.id, "en" as any);
+    }
 
     const incaseoferror = (ev: any) => {
       console.log(ev)

@@ -34,7 +34,7 @@ export default defineConfig( ({ mode}) => {
     appType: 'spa',
     plugins: [
       vue(),
-      VueDevTools(),
+      //VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 
