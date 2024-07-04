@@ -78,7 +78,7 @@ page-index	Allow Attacks	Allow Attacks		Attacken Erlauben	Allow Attacks
 page-index	Require Reaction	Require Reaction		Mit Reaktion	Require Reaction		
 page-index	Require Trashing	Require Trashing		Mit Entsorgung	Require Trashing		
 page-index	Distribute Cost	Distribute Cost		Kosten Verteilen	Distribute Cost		
-page-index	Prioritize Set	Prioritize Set  		"""Priorisiere Set"	Prioritize Sets		
+page-index	Prioritize Set	Prioritize Set  		Priorisiere Set	Prioritize Sets		
 page-index	Set	Set		Nach Set	par Set		
 page-index	Alphabetical	Alphabetical		Alphabetisch	Alphabétique		
 page-index	Cost	Cost		Nach Kosten	par Coût		
@@ -120,7 +120,7 @@ page-sets
 sets	adventures	adventures	Avonturen	Abenteuer	Aventures	Aventuras	Adventures
 sets	alchemy	alchemy	De Alchemisten	Die Alchemisten	Alchimie	Alquimia	Alchemy
 sets	allies	allies		Verbündete	Alliés		Allies
-sets	baseset2add	baseset2add			Dominion updatepack		Dominion updatepack
+sets	baseset2add	baseset2add		Dominion Updatepack	Dominion updatepack		Dominion updatepack
 sets	baseset2	baseset2	Dominion II	Dominion II	Dominion (2nd ed)	Dominion 2ª Ed.	Dominion II
 sets	baseset	baseset	Dominion	Dominion	Dominion	Dominion	Dominion
 sets	cornucopia	cornucopia	Overvloed	Reiche Ernte	Abondance	Cornucopia	Róg obfitości
@@ -129,11 +129,11 @@ sets	empires	empires	Keizerrijken	Empires	Empires	Imperios	Imperium
 sets	guilds	guilds	De Gilden	Die Gilden	Guildes	Gremios	Guilds
 sets	guildscornucopia	guildscornucopia	De Gilden  / Overloed	Die Gilden / Reiche Ernte	Guildes / Abondance	Gremios / Cornucopia	Guilds / Róg obfitości
 sets	guildscornucopia2	guildscornucopia	De Gilden  / Overloed II	Die Gilden / Reiche Ernte II	Guildes / Abondance (2nd ed)	Gremios / Cornucopia 2ª Ed.	Guilds / Róg obfitości II
-sets	guildscornucopia2add	guildscornucopia			Guildes / Abondance updatepack		
+sets	guildscornucopia2add	guildscornucopia		Die Gilden / Reiche Ernte Updatepack	Guildes / Abondance updatepack		
 sets	hinterlands	hinterlands	Het Achterland	Hinterland	L'Arrière-Pays	Comarcas	Hinterlands
 sets	hinterlands2	hinterlands2	Het Achterland II	Hinterland II	L'Arrière-Pays (2nd ed)	Comarcas 2ª Ed.	Hinterlands II
-sets	hinterlands2add	hinterlands2add			L'Arrière-Pays updatepack		Hinterlands updatepack
-sets	intrigue2add	intrigue2add			Intrigue updatepack		Intryga updatepack
+sets	hinterlands2add	hinterlands2add		Hinterland Updatepack	L'Arrière-Pays updatepack		Hinterlands updatepack
+sets	intrigue2add	intrigue2add		Die Intrige Updatepack	Intrigue updatepack		Intryga updatepack
 sets	intrigue2	intrigue2	Intrige II	Die Intrige II	L'Intrigue (2nd ed)	Intriga 2ª Ed.	Intryga II
 sets	intrigue	intrigue	Intrige	Die Intrige	L'Intrigue	Intriga	Intryga
 sets	menagerie	menagerie	Menagerie	Menagerie	Ménagerie	Bestiario	Menagerie
@@ -145,8 +145,8 @@ sets	prosperity2	prosperity2		Blütezeit II	Prospérité (2nd ed)	Prosperidad 2�
 sets	renaissance	renaissance	Renaissance	Renaissance	Renaissance	Renacimiento	Renaissance
 sets	seaside	seaside	Hijs de Zeilen	Seaside	Rivages	Terramar	Przystań
 sets	seaside2	seaside2	Hijs de Zeilen II	Seaside II	Rivages (2nd ed)	Terramar 2ª Ed.	Przystań II
-sets	seaside2add	seaside2add			Rivages updatepack		Przystań updatepack
-sets	plunder	plunder			Pillage		
+sets	seaside2add	seaside2add		Seaside Updatepack	Rivages updatepack		Przystań updatepack
+sets	plunder	plunder		Plünderer	Pillage		
 							
 cards.baseset	baseset2_harbinger	Harbinger	Voorbode	Vorbotin	Présage	Emisario	
 cards.baseset	baseset2_merchant	Merchant	Koopman	Händlerin	Marchand	Tendera	
@@ -310,12 +310,12 @@ cards.prosperity	prosperity_venture	Venture	Waagstuk	Abenteuer	Entreprise risqu�
 cards.prosperity	prosperity2_anvil	Anvil		Amboss	Enclume		
 cards.prosperity	prosperity2_clerk	Clerk		Buchhalterin	Compatble		
 cards.prosperity	prosperity2_investment	Investment		Geldanlage	Placement		
-cards.prosperity	prosperity2_tiara	Tiara		Brautkrone	Couronne de Mariée		
+cards.prosperity	prosperity2_tiara	Tiara		Brautkrone	Couronne de mariée		
 cards.prosperity	prosperity2_charlatan	Charlatan		Wunderheilerin	Charlatane		
 cards.prosperity	prosperity2_collection	Collection		Sammelsurium	Collection		
-cards.prosperity	prosperity2_crystalball	Crystal Ball		Kristallkugel	Boule de Cristal		
+cards.prosperity	prosperity2_crystalball	Crystal Ball		Kristallkugel	Boule de cristal		
 cards.prosperity	prosperity2_magnate	Magnate		Magnatin	Magnat		
-cards.prosperity	prosperity2_warchest	War Chest		Waffenkiste	Trésor de Guerre		
+cards.prosperity	prosperity2_warchest	War Chest		Waffenkiste	Trésor de guerre		
 							
 cards.cornucopia	cornucopia_harvest	Harvest	Oogst	Ernte	Récolte	Cosecha	Żniwa
 cards.cornucopia	cornucopia_youngwitch	Young Witch	Jonge heks	Junge Hexe	Jeune sorcière	Bruja Joven	Młoda wiedźma
@@ -334,7 +334,7 @@ cards.cornucopia	cornucopia_bagofgold	Bag of Gold			Sac d'Or
 cards.cornucopia	cornucopia_diadem	Diadem			Diadème		
 cards.cornucopia	cornucopia_followers	Followers			Partisans		
 cards.cornucopia	cornucopia_princess	Princess			Princesse		
-cards.cornucopia	cornucopia_trustysteed	Trusty Steed			Fidèle Destrier		
+cards.cornucopia	cornucopia_trustysteed	Trusty Steed			Fidèle destrier		
 							
 cards.hinterlands	hinterlands_bordervillage	Border Village	Grensdorp	Grenzdorf	Village frontalier	Pueblo Fronterizo	
 cards.hinterlands	hinterlands_foolsgold	Fool's Gold	Klatergoud	Katzengold	Or des fous	Oro Falso	
@@ -366,11 +366,11 @@ cards.hinterlands	hinterlands2_trail	Trail		Pfad	Sentier
 cards.hinterlands	hinterlands2_weaver	Weaver		Weberin	Tisserande		
 cards.hinterlands	hinterlands2_berserker	Berserker		Berserker	Berserker		
 cards.hinterlands	hinterlands2_cauldron	Cauldron		Hexenkessel	Chaudron		
-cards.hinterlands	hinterlands2_guarddog	Guard Dog		Wachhund	Chien de Garde		
+cards.hinterlands	hinterlands2_guarddog	Guard Dog		Wachhund	Chien de garde		
 cards.hinterlands	hinterlands2_nomads	Nomads		Nomaden	Nomades		
 cards.hinterlands	hinterlands2_souk	Souk		Souk	Souk		
 cards.hinterlands	hinterlands2_wheelwright	Wheelwright		Radmacherin	Charronne		
-cards.hinterlands	hinterlands2_witchshut	Witch's Hut		Hexenhütte	Cabanne de Sorcière		
+cards.hinterlands	hinterlands2_witchshut	Witch's Hut		Hexenhütte	Cabanne de sorcière		
 							
 cards.promos	promos_avanto	Avanto	Avanto	Avanto	Trou Dans La Glace	Avanto	
 cards.promos	promos_blackmarket	Black Market	Zwarte Markt	Schwarzmarkt	Marché noir	Mercado Negro	
