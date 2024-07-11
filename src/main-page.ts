@@ -3,6 +3,7 @@ import Sets from './views/Sets.vue'
 import Rules from './views/Rules.vue'
 import Boxes from './views/Boxes.vue'
 import Cards from './views/Cards.vue'
+import Settings from './views/Settings.vue'
 
 import { initialize } from './setup';
 import { AppCreateRouterMultiple } from './router';
@@ -19,4 +20,5 @@ initialize(AppCreateRouterMultiple([
                 { paths: ["/rules"], component : Rules },
                 { paths: ["/boxes"], component : Boxes },
                 { paths: ["/cards"], component : Cards },
+                { paths: ["/settings"], component : Settings },
             ]))

@@ -29,6 +29,7 @@ import { Trait } from "../dominion/trait";
 import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "./special-need-cards";
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
+import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
 
 const SETS_WITH_DUPLICATES: { [index: string]: string } = {
   'baseset': 'baseset2',
@@ -42,7 +43,7 @@ const SETS_WITH_DUPLICATES: { [index: string]: string } = {
 };
 
 const MAX_RETRIES = 3;
-const NUM_CARDS_IN_KINGDOM = 10;
+//const NUM_CARDS_IN_KINGDOM = NB_CARD_DECK;
 
 // Alchemy constants.
 const MIN_ALCHEMY_CARDS_IN_KINGDOM = 3;
@@ -68,9 +69,7 @@ export class Randomizer {
     const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons, 
       new Kingdom(0, new Supply([], null, null, null, null, [], Replacements.empty()),
           [], [], [], [], [], null, [], new KingdomMetadata(false, false)));
-    //console.log(adjustedSupplyCards)
     const metadata = this.getMetadata(randomizerOptions.setIds);
-    console.log("createKingdom", supply)
     return new Kingdom(
       Date.now(),          /* id: number,  */
       adjustedSupplyCards, /* supply: Supply, */
@@ -367,7 +366,6 @@ export class Randomizer {
       calculatedTraitsSupplyCard,   /* supply for traits */
       localReplacements
     )
-    //console.log(NewSupply)
     return NewSupply
   }
 

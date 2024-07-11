@@ -11,8 +11,9 @@ import {getRandomInt, selectRandom} from "../utils/rand";
 import { SupplyDivisions } from "./supply-divisions";
 import { YOUNG_WITCH_IDS, BANE_MIN_COST, BANE_MAX_COST, MOUSE_WAY_ID, MOUSE_MAX_COST, MOUSE_MIN_COST, OBELISK_LANDMARK_ID } from "./special-need-cards";
 import { FERRYMAN_IDS, FERRYMAN_MIN_COST, FERRYMAN_MAX_COST } from "./special-need-cards";
+import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
 
-const NUM_CARDS_IN_KINGDOM = 10;
+//const NUM_CARDS_IN_KINGDOM = 10;
 
 export class SupplyBuilder {
   private dividers: SupplyDivider[] = [];

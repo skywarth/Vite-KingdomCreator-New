@@ -7,6 +7,8 @@ import { Supply, Replacements} from "../randomizer/supply";
 import { Landmark } from "../dominion/landmark";
 import { Way } from "../dominion/way";
 import { Trait } from "../dominion/trait";
+import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
+
 
 export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
   const result: {[index: string]: string} = {
@@ -131,8 +133,8 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   const allyIds = parseCommaSeparatedValues(serializedKingdom.ally) || [];
   const traitIds = parseCommaSeparatedValues(serializedKingdom.traits) || [];
   
-  const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById, "", selectedSets).slice(0, 10);
-  //const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById).slice(0, 10);
+  const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById, "", selectedSets).slice(0, NUM_CARDS_IN_KINGDOM);
+  //const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById).slice(0, NUM_CARDS_IN_KINGDOM);
   let baneCard: SupplyCard | null = null;
   if (baneIds.length) {
      baneCard = findByIds(baneIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;
@@ -168,7 +170,6 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
 
   const traitSupplyCards = /* transform pious(masterpiece) => masterpiece */
       findByIds(traitssupplyIds, DominionSets.getSupplyCardById, "", selectedSets).slice(0, 2);
-  console.log(traitSupplyCards)
   const allies = findByIds(allyIds, DominionSets.getAllyById, "ally_", selectedSets).slice(0, 1);
   const boons = findByIds(boonIds, DominionSets.getBoonById, "boon_", selectedSets).slice(0, 3);
   const supply = new Supply(supplyCards, baneCard, ferrymanCard, obeliskCard, mouseWayCard, traitSupplyCards, Replacements.empty());

@@ -111,6 +111,7 @@ export enum MenuItemType {
   RULES,
   CARDS,
   BOXES,
+  SETTINGS
 }
 
 class LocalMenuItem {
@@ -127,6 +128,7 @@ let MENU_ITEMS = [
 
 if (process.env.NODE_ENV == "development") {
   MENU_ITEMS.push(new LocalMenuItem(MenuItemType.CARDS, "Cards", "/cards"));
+  MENU_ITEMS.push(new LocalMenuItem(MenuItemType.SETTINGS, "Settings", "/settings"));
 }
 
 

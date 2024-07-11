@@ -16,7 +16,7 @@
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, computed, ref, watch } from "vue";
+import { defineComponent, computed, ref, watch, onMounted } from "vue";
 
 /* import Dominion Objects and type*/
 import type { Boon } from "../dominion/boon";
@@ -38,17 +38,17 @@ export default defineComponent({
   },
   setup() {
     const randomizerStore = useRandomizerStore();
-    const boons = ref(randomizerStore.kingdom.boons);
+    const boons = computed(() => randomizerStore.kingdom.boons);
     const windowStore = useWindowStore();
-    const windowWidth = ref(windowStore.width);
-    const isEnlarged = ref(windowStore.isEnlarged);
+    const isEnlarged = computed(() => windowStore.isEnlarged);
+    const windowWidth = computed(() => windowStore.width);
     const activeBoons = ref([] as Boon[]);
 
     const numberOfColumns = computed(() => {
       return isEnlarged.value ? 1 : windowWidth.value > 525 ? 3 : 2;
     });
 
-    function handleBoonsChanged() {
+    const updateBoonsContainers = () => {
       if (!boons.value.length) {
         activeBoons.value = [];
         return;
@@ -68,12 +68,21 @@ export default defineComponent({
       }
       activeBoons.value = newActiveBoons.concat(newBoons.slice(newBoonIndex));
     }
-    watch(boons, handleBoonsChanged);
+
+    onMounted(() => {
+      activeBoons.value = boons.value
+      updateBoonsContainers();
+    });
+
+    const handleBoonsChanged = () => {
+      updateBoonsContainers();
+    };
+    watch(boons, handleBoonsChanged)
 
     return {
       numberOfColumns,
       activeBoons,
-      isEnlarged,
+      isEnlarged
     }
   }
 });
