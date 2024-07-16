@@ -31,13 +31,16 @@
             <Menu as="div">
             <MenuButton as="div" class="condensed-menu-button" v-if="!isCondensed"/>
             <MenuItems as="div" class="popOverPanelWrapper">
-              <div class="extended-menu_item" v-for="mymenuItem in getMenuItem(3, false)" :key="mymenuItem.title">
-                    <MenuItem as="div">
+            <router-link v-for="mymenuItem in getMenuItem(3, false)" :key="mymenuItem.title" class="extended-menu_item_link" :to="getMenuItemUrl(mymenuItem.url)">
+              <div class="extended-menu_item" :key="mymenuItem.title">
+                      <MenuItem as="div"> {{ $t(mymenuItem.title) }} </MenuItem>
+              </div>
+            </router-link>
+<!--               <div class="extended-menu_item" v-for="mymenuItem in getMenuItem(3, false)" :key="mymenuItem.title">
                     <router-link class="extended-menu_item_link" :to="getMenuItemUrl(mymenuItem.url)">
-                      {{ $t(mymenuItem.title) }}
+                      <MenuItem as="div"> {{ $t(mymenuItem.title) }} </MenuItem>
                     </router-link>
-                  </MenuItem>
-                  </div>
+                  </div> -->
             </MenuItems>
             </Menu>
             </li>
@@ -111,7 +114,8 @@ export enum MenuItemType {
   RULES,
   CARDS,
   BOXES,
-  SETTINGS
+  SETTINGS,
+  TSW
 }
 
 class LocalMenuItem {
@@ -129,6 +133,8 @@ let MENU_ITEMS = [
 if (process.env.NODE_ENV == "development") {
   MENU_ITEMS.push(new LocalMenuItem(MenuItemType.CARDS, "Cards", "/cards"));
   MENU_ITEMS.push(new LocalMenuItem(MenuItemType.SETTINGS, "Settings", "/settings"));
+  //MENU_ITEMS.push(new LocalMenuItem(MenuItemType.TSW, "test Switch", "/tsw"));
+
 }
 
 
@@ -149,6 +155,8 @@ export default defineComponent({
     const route = useRoute();
     const WindowStore = useWindowStore();
     const i18nStore = usei18nStore();
+
+   
 
     const { t } = useI18n();
     const language = computed(() => i18nStore.language);
@@ -212,15 +220,13 @@ export default defineComponent({
       isMenuItemActive,
       PackageVersion,
       PackageURL,
-      PackageDate
+      PackageDate,
     };
   },
 });
 </script>
 
 <style scoped>
-
-
 footer {
   border-top: 1px #ddd solid;
   font-family: 'Alegreya Sans', sans-serif;
@@ -305,6 +311,8 @@ footer {
   right: 0%; /* Align left edge with button */
   z-index: 10;
   outline-style: unset;
+  display:flex;
+  flex-direction: column;
 }
 
  

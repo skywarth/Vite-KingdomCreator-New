@@ -44,9 +44,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
 import useBase from "./base";
-import Page from "../components/Page.vue";
-import { MenuItemType } from "../components/Page.vue";
-import PresetKingdomList from "../components/PresetKingdomList.vue";
+import Page, { MenuItemType } from "../components/Page.vue";
+import PresetKingdomList from "../components/Sets-PresetKingdomList.vue";
 import SetsSidebar from "../components/SetsSidebar.vue";
 import { DominionKingdoms } from "../dominion/dominion-kingdoms";
 import { DominionSets } from "../dominion/dominion-sets";

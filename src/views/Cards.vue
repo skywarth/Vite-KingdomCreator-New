@@ -14,8 +14,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import useBase from "./base";
-import Page from "../components/Page.vue";
-import { MenuItemType } from "../components/Page.vue";
+import Page, { MenuItemType } from "../components/Page.vue";
+
 
 import CardOnlinePageComponent from "../components/card-online-page.vue";
 import CardOnlinePageLandscapeComponent from "../components/card-online-page-landscape.vue";

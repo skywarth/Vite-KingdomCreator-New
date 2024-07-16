@@ -2,15 +2,16 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import packageJson from './package.json';
 
-
-//import VueDevTools from 'vite-plugin-vue-devtools'
-//import { viteStaticCopy } from 'vite-plugin-static-copy';
-
+import VueDevTools from 'vite-plugin-vue-devtools'
 import vue from '@vitejs/plugin-vue';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import rollupDel from 'rollup-plugin-delete';
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins/vite-dominion-content';
+
+// On-demand components auto importing for Vue.
+//import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
 
 const devServerPort = 5173
 
@@ -19,11 +20,6 @@ export default defineConfig( ({ mode}) => {
   if (mode === "production" || mode === "development") {
    // mergeJSONLanguageFiles();
     DominionContentGenerate('docs');
-/*     const sourceFile = './styles/normalize-v8.css';
-    const destinationFile = './docs/normalize.css';
-    fs.copyFile(sourceFile, destinationFile, () => {
-      console.log(`Le fichier a été copié avec succès de ${sourceFile} vers ${destinationFile}`);
-    }) */
     let ArgGenLocale = "Merge"
     if (process.argv.slice(3)[0] == "Gen") {
         ArgGenLocale = "Gen&Merge"
@@ -45,7 +41,7 @@ export default defineConfig( ({ mode}) => {
     },
     plugins: [
       vue(),
-      //VueDevTools(),
+      mode === "development" && VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 
@@ -67,10 +63,11 @@ export default defineConfig( ({ mode}) => {
           '!docs/ads.txt'],
         verbose: false
       }), 
-      // viteStaticCopy({
-      //   targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
-      //       /*{ src: 'docs/normalize.css', dest: 'assets/' } */ ]
-      // }),
+      viteStaticCopy({
+        targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
+                  { src: 'styles/tailwind-ui.min.css', dest: 'assets/' }
+        ]
+      }),
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
@@ -80,7 +77,7 @@ export default defineConfig( ({ mode}) => {
       alias: {
         // Alias pour les modules non-Esbuild compatibles avec Vite
         //'@': fileURLToPath(new URL('./src', import.meta.url)),
-        //'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
+        //'vue-i18n': 'vue-i18n/dqist/vue-i18n.esm-bundler.js',
         //'vue': 'vue/dist/vue.esm-bundler.js', 
       },
     },

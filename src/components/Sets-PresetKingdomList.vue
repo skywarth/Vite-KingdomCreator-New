@@ -32,7 +32,7 @@ import { SetId } from "../dominion/set-id";
 import { useSetsStore } from "../pinia/sets-store";
 
 /* import Components */
-import PresetKingdom from "./PresetKingdom.vue";
+import PresetKingdom from "./Sets-PresetKingdom.vue";
 
 export default defineComponent({
   name: 'PresetKingdomList',

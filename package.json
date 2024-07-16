@@ -45,7 +45,7 @@
     "typescript": "^5.5.3",
     "vite": "^5.3.3",
     "vite-plugin-static-copy": "^1.0.6",
-    "vite-plugin-vue-devtools": "^7.3.5",
+    "vite-plugin-vue-devtools": "^7.3.6",
     "vue-tsc": "^2.0.26",
     "xlsx": "https://cdn.sheetjs.com/xlsx-latest/xlsx-latest.tgz"
   }
