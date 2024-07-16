@@ -82,11 +82,16 @@ export default defineComponent({
     const ProjectsMax = ref(SettingsStore.ProjectsMax);
     const WaysMax = ref(SettingsStore.WaysMax);
     const TraitsMax = ref(SettingsStore.TraitsMax);
+    const forceAddonsUse = ref(SettingsStore.forceAddonsUse)
+
+// force use of Addons
 
     const updateStoreValues = () => {
       SettingsStore.updateSettings({
+        isUsingCustom: isUsingCustom.value,
         KingdomNb: KingdomNb.value,
         AddonsNb: AddonsNb.value,
+        forceAddonsUse : forceAddonsUse.value,
         EventsMax: EventsMax.value,
         LandmarksMax: LandmarksMax.value,
         ProjectsMax: ProjectsMax.value,
@@ -96,7 +101,7 @@ export default defineComponent({
     };
 
     watch(
-      [KingdomNb, AddonsNb, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
+      [isUsingCustom, KingdomNb, AddonsNb, forceAddonsUse, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
       updateStoreValues,
       { deep: true } // Ensure deep watch to catch nested changes
     );
@@ -117,7 +122,7 @@ export default defineComponent({
 <style scoped>
 .DeskSize {
   margin-left: 50px;
-  width: 30%;
+  width: 35%;
   border-right: 2px solid black; /* Replace #000 with your desired border color */
 }
 
@@ -150,6 +155,7 @@ export default defineComponent({
 
 .custom-settings {
   padding: 0 2rem 0 1.5rem;
+  margin: 1rem 0 0.5rem 0
 }
 
 .kingdomSize{
@@ -157,7 +163,7 @@ export default defineComponent({
 }
 
 .kingdomSize label {
-  flex-basis: 650%;
+  flex-basis: 500%;
 }
 .kingdomSize input {
   flex-grow: 1;

@@ -11,7 +11,7 @@ export class Supply {
       readonly mouseWay: SupplyCard | null,
       readonly traitsSupply: SupplyCard[],
       readonly replacements: Replacements) {
-    if (supplyCards.length > NUM_CARDS_IN_KINGDOM) {
+    if (supplyCards.length > NUM_CARDS_IN_KINGDOM()) {
       throw new Error("Unable to create supply with more than 10 cards.");
     }
   }

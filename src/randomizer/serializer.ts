@@ -133,8 +133,8 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   const allyIds = parseCommaSeparatedValues(serializedKingdom.ally) || [];
   const traitIds = parseCommaSeparatedValues(serializedKingdom.traits) || [];
   
-  const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById, "", selectedSets).slice(0, NUM_CARDS_IN_KINGDOM);
-  //const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById).slice(0, NUM_CARDS_IN_KINGDOM);
+  const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById, "", selectedSets).slice(0, NUM_CARDS_IN_KINGDOM());
+  //const supplyCards = findByIds(supplyIds, DominionSets.getSupplyCardById).slice(0, NUM_CARDS_IN_KINGDOM());
   let baneCard: SupplyCard | null = null;
   if (baneIds.length) {
      baneCard = findByIds(baneIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;

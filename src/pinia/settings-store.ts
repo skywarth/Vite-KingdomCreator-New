@@ -5,6 +5,7 @@ export interface SettingsState {
   isUsingCustom: boolean, 
   KingdomNb: number,
   AddonsNb: number,
+  forceAddonsUse: boolean,
   EventsMax: number,
   LandmarksMax: number,
   ProjectsMax: number,
@@ -18,6 +19,7 @@ export const useSettingsStore = defineStore(
     isUsingCustom: false, 
     KingdomNb: 10,
     AddonsNb: 2,
+    forceAddonsUse: false,
     EventsMax: 2,
     LandmarksMax: 2,
     ProjectsMax: 2,
@@ -32,31 +34,5 @@ export const useSettingsStore = defineStore(
         Object.assign(state, newState);
       });
     },
-
-
-    updateisUsingCustom (isUsingCustom: boolean) {
-      this.isUsingCustom = isUsingCustom;
-    },
-    updateKingdomNb (KingdomNb: number) {
-      this.KingdomNb = KingdomNb;
-    },
-    updateAddonsNb(AddonsNb: number) {
-      this.AddonsNb = AddonsNb;
-    },
-    updateEventsMax(EventsMax: number) {
-      this.EventsMax = EventsMax;
-    },
-    updateLandmarksMax(landmarks: number) {
-      this.LandmarksMax = landmarks;
-    },
-    updateProjectsMax(ProjectsMax: number) {
-      this.ProjectsMax = ProjectsMax;
-    },
-    updateWaysMax(WaysMax: number) {
-      this.WaysMax = WaysMax;
-    },
-    updateTraitsMax(TraitsMax: number) {
-      this.TraitsMax = TraitsMax;
-    }
   }
 });

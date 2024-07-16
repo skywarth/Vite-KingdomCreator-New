@@ -155,7 +155,7 @@ export const useRandomizerStore = defineStore(
           this.UPDATE_KINGDOM(initialKingdom);
           return;
         }
-        //console.log ("kingdom is not valid")
+        console.log ("kingdom is not valid")
         // Randomize the rest of the set if there are less than 10 cards.
         const options =
           rA.createRandomizerOptionsBuilder(this)

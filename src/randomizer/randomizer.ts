@@ -12,7 +12,7 @@ import { Landmark } from "../dominion/landmark"
 import { Metadata as KingdomMetadata } from "./kingdom";
 import { Project } from "../dominion/project"
 import type { RandomizerOptions } from "./randomizer-options";
-import { SetId, New_SETS_WITH_DUPLICATES } from "../dominion/set-id";
+import { SetId, SETS_WITH_DUPLICATES } from "../dominion/set-id";
 import { SetSupplyBan } from "./set-supply-ban";
 import { SetSupplyDivider } from "./set-supply-divider";
 import { Supply, Replacements } from "./supply";
@@ -29,21 +29,10 @@ import { Trait } from "../dominion/trait";
 import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "./special-need-cards";
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
-import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
 
-const SETS_WITH_DUPLICATES: { [index: string]: string } = {
-  'baseset': 'baseset2',
-  'intrigue': 'intrigue2',
-  'seaside': 'seaside2',
-  'prosperity': 'prosperity2',
-  'hinterlands': 'hinterlands2',
-  'guildscornucopia': 'guildscornucopia2',
-  'guilds': 'guildscornucopia',
-  'cornucopia': 'guildscornucopia',
-};
+import { NUM_CARDS_IN_KINGDOM, MAX_ADDONS_IN_KINGDOM } from "../settings/Settings-value";
 
 const MAX_RETRIES = 3;
-//const NUM_CARDS_IN_KINGDOM = NB_CARD_DECK;
 
 // Alchemy constants.
 const MIN_ALCHEMY_CARDS_IN_KINGDOM = 3;
@@ -54,8 +43,6 @@ const HIGH_COST_CUT_OFF = 5;
 const MIN_HIGH_CARDS_IN_KINGDOM = 3;
 const MAX_HIGH_CARDS_IN_KINGDOM = 5;
 
-// Addon constants.
-const MAX_ADDONS_IN_KINGDOM = 2;
 
 // Prioritize set constants.
 const NUM_PRIORITIZED_SET = 5;
@@ -172,7 +159,7 @@ export class Randomizer {
     }
 
     // Configure dividers.
-    let remainingCards = NUM_CARDS_IN_KINGDOM;
+    let remainingCards = NUM_CARDS_IN_KINGDOM();
 
     if (randomizerOptions.prioritizeSet && randomizerOptions.prioritizeSet != SetId.ALCHEMY) {
       supplyBuilder.addDivider(
@@ -219,13 +206,14 @@ export class Randomizer {
   private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[], ways: Way[], allies: Ally[], traits: Trait[] } {
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
     const cards = Cards.getAllCardsFromSets(setsToUse);
-    const selectedCards = this.selectRandomCards(cards, NUM_CARDS_IN_KINGDOM);
+    const selectedCards = this.selectRandomCards(cards, 2*NUM_CARDS_IN_KINGDOM());
     const selectedEvents: Event[] = [];
     const selectedLandmarks: Landmark[] = [];
     const selectedProjects: Project[] = [];
     const selectedWays: Way[] = [];
     const selectedAllies: Ally[] = [];
     const selectedTraits: Trait[] = [];
+    console.log("selectedCards", selectedCards)
     for (const card of selectedCards) {
       if (card instanceof Event) {
         selectedEvents.push(card);
@@ -235,8 +223,8 @@ export class Randomizer {
         selectedProjects.push(card);
       } else if (card instanceof Way) {
         selectedWays.push(card);
-      } else if (card instanceof Ally) {
-        selectedAllies.push(card);
+      //} else if (card instanceof Ally) {
+      //  selectedAllies.push(card);
       } else if (card instanceof Trait) {
         selectedTraits.push(card)
       }
@@ -245,12 +233,14 @@ export class Randomizer {
         + selectedLandmarks.length
         + selectedProjects.length
         + selectedWays.length
-        + selectedAllies.length
+        //  + selectedAllies.length
         + selectedTraits.length;
-      if (addonCount >= MAX_ADDONS_IN_KINGDOM) {
+      if (addonCount >= MAX_ADDONS_IN_KINGDOM()) {
         break;
       }
     }
+    console.log("MAX_ADDONS_IN_KINGDOM", MAX_ADDONS_IN_KINGDOM())
+    console.log(selectedEvents,selectedLandmarks,  selectedProjects,selectedWays, selectedTraits)
     return {
       events: selectedEvents,
       landmarks: selectedLandmarks,
@@ -474,7 +464,7 @@ export class Randomizer {
   private static removeDuplicateCards(cards: SupplyCard[], requiredCardIds: string[]) {
     // Removes duplicate cards (cards appearing in multiple sets); keep setA's version.
     // Cards to keep = (A - [B required as A]) + (B - ([A as B] - B required))
-    for (const duplicateSets of New_SETS_WITH_DUPLICATES) {
+    for (const duplicateSets of SETS_WITH_DUPLICATES) {
       const setA = duplicateSets.id
       const setB = duplicateSets.idv2
       const setACards = cards.filter(Cards.filterByIncludedSetIds([setA]));

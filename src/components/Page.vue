@@ -114,8 +114,7 @@ export enum MenuItemType {
   RULES,
   CARDS,
   BOXES,
-  SETTINGS,
-  TSW
+  SETTINGS
 }
 
 class LocalMenuItem {
@@ -128,13 +127,11 @@ let MENU_ITEMS = [
   new LocalMenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets"),
   new LocalMenuItem(MenuItemType.RULES, "Rules", "/rules"),
   new LocalMenuItem(MenuItemType.BOXES, "Box content", "/boxes"),
+  new LocalMenuItem(MenuItemType.SETTINGS, "Settings", "/settings")
 ];
 
 if (process.env.NODE_ENV == "development") {
   MENU_ITEMS.push(new LocalMenuItem(MenuItemType.CARDS, "Cards", "/cards"));
-  MENU_ITEMS.push(new LocalMenuItem(MenuItemType.SETTINGS, "Settings", "/settings"));
-  //MENU_ITEMS.push(new LocalMenuItem(MenuItemType.TSW, "test Switch", "/tsw"));
-
 }
 
 
