@@ -1,4 +1,5 @@
 import type { Addon, Addons } from "../dominion/addon";
+import { Addons_TYPE } from "../dominion/addon";
 import { CardSupplyBan } from "./card-supply-ban";
 import { CostSupplyBan } from "./cost-supply-ban";
 import { CostSupplyDivider } from "./cost-supply-divider";
@@ -30,7 +31,7 @@ import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "./special-need-
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
 
-import { NUM_CARDS_IN_KINGDOM, MAX_ADDONS_IN_KINGDOM } from "../settings/Settings-value";
+import { NUM_CARDS_IN_KINGDOM, MAX_ADDONS_IN_KINGDOM, FORCE_ADDONS_USE, MAX_ADDONS_OF_TYPE } from "../settings/Settings-value";
 
 const MAX_RETRIES = 3;
 
@@ -206,27 +207,30 @@ export class Randomizer {
   private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[], ways: Way[], allies: Ally[], traits: Trait[] } {
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
     const cards = Cards.getAllCardsFromSets(setsToUse);
-    const selectedCards = this.selectRandomCards(cards, 2*NUM_CARDS_IN_KINGDOM());
+    const selectedCards = FORCE_ADDONS_USE() ? 
+        this.selectRandomCards(cards.filter(card => (card instanceof Event)||(card instanceof Landmark)||
+        (card instanceof Project)||(card instanceof Way)||(card instanceof Trait)), NUM_CARDS_IN_KINGDOM())
+        : this.selectRandomCards(cards, 2*NUM_CARDS_IN_KINGDOM());
     const selectedEvents: Event[] = [];
     const selectedLandmarks: Landmark[] = [];
     const selectedProjects: Project[] = [];
     const selectedWays: Way[] = [];
     const selectedAllies: Ally[] = [];
     const selectedTraits: Trait[] = [];
-    console.log("selectedCards", selectedCards)
+
+    console.log("in getAddons", selectedEvents, selectedLandmarks, selectedProjects, selectedWays, selectedAllies, selectedTraits)
+
     for (const card of selectedCards) {
       if (card instanceof Event) {
-        selectedEvents.push(card);
+        if (selectedEvents.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.EVENT)) selectedEvents.push(card);
       } else if (card instanceof Landmark) {
-        selectedLandmarks.push(card);
+        if (selectedLandmarks.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.LANDMARK)) selectedLandmarks.push(card);
       } else if (card instanceof Project) {
-        selectedProjects.push(card);
+        if (selectedProjects.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.PROJECT)) selectedProjects.push(card);
       } else if (card instanceof Way) {
-        selectedWays.push(card);
-      //} else if (card instanceof Ally) {
-      //  selectedAllies.push(card);
+        if (selectedWays.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.WAY)) selectedWays.push(card);
       } else if (card instanceof Trait) {
-        selectedTraits.push(card)
+        if (selectedTraits.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.TRAIT)) selectedTraits.push(card)
       }
       // Stop once the maximum number of addons has been reached.
       const addonCount = selectedEvents.length
@@ -239,8 +243,7 @@ export class Randomizer {
         break;
       }
     }
-    console.log("MAX_ADDONS_IN_KINGDOM", MAX_ADDONS_IN_KINGDOM())
-    console.log(selectedEvents,selectedLandmarks,  selectedProjects,selectedWays, selectedTraits)
+    console.log("in getAddons", selectedEvents, selectedLandmarks, selectedProjects, selectedWays, selectedAllies, selectedTraits)
     return {
       events: selectedEvents,
       landmarks: selectedLandmarks,

@@ -184,6 +184,21 @@ export default defineComponent({
     });
 
     const getMenuItem = ((nbEntry: number, FirstPart: boolean) => { 
+      /* allow nb entry larger than 2 if 
+       * Border 20
+       * Title Main : 385
+       * Randomizer menu : 125
+       * Recommended kigndom menu : 220
+       * Rules : 75
+       * Menu button : 80
+       * Ajustement : 75
+       */
+      // forcing only 2 menu
+      if (WindowStore.width < (20 + 385 +  125 + 220 + 75 + 80 + 75)) {
+        return FirstPart ?  
+          MENU_ITEMS.slice(0, 2):
+          MENU_ITEMS.slice(2,10);
+      }
       return FirstPart ?  
           MENU_ITEMS.slice(0, nbEntry):
           MENU_ITEMS.slice(nbEntry,10);

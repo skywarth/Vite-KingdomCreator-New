@@ -14,7 +14,7 @@ common	addon_events	Events		Ereignisse	Evénements	Eventos
 common	addon_landmarks	Landmarks		Landmarke	Repères	Hitos	
 common	addon_projects	Projects		Projekte	Projets	Proyectos	
 common	addon_ways	Ways		Wege	Voies	Sendas	
-common	addon_allies	Allies			Alliés		
+common	addon_allies	Allies		Verbündete	Alliés		
 common	addon_traits	Traits			Comportement		
 common	github_info	Source is on {source}. Feature requests and complaints go {issues}!	Source is on {source}. Feature requests and complaints go {issues}!	Quellcode ist auf {source}. Funktionsanfragen und Beschwerden bitte {issues}!	Le code source est disponible sur {source}. Pour une demande de fonctionnalité ou un problème, s’adresser {issues} !	Código fuente:  {source}. Solictudes, dudas y errores {issues}!	Kod źródłowy znajduje się w repozytorium {source}. Propozycje zmian oraz uwagi można zgłaszać {issues}!
 common	github_info_source	Github	Github	Github	Github	Github	Github
@@ -28,12 +28,12 @@ page-boxes	boxes_page_subtitle	Content of Dominion boxes	Content of Dominion box
 page-boxes	boxes_page_description	All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, hex, ...			Toutes les cartes présentés dans les boites de Dominion. Les types de cartes sont : royaunme, ruine, victoire, trésor, événement, repère, projet, aubaine, sortilèges, ...		All cards available in this dominion set. Card type are kingdom, ruin, victory, treasure, event, landmark, project, boon, Hex, ...
 page-boxes	Sets content	Sets content			Boîtes		
 page-boxes	Kingdoms Cards	Kingdoms Cards			Cartes Royaume		
-page-boxes	Events	Events			Events		
-page-boxes	Landmarks	Landmarks			Landmarks		
-page-boxes	Projects	Projects			Projects		
+page-boxes	Events	Events			Evénements		
+page-boxes	Landmarks	Landmarks			Repères		
+page-boxes	Projects	Projects			Projets		
 page-boxes	Boons	Boons			Boons		
-page-boxes	Ways	Ways			Ways		
-page-boxes	Allies	Allies			Alliés		
+page-boxes	Ways	Ways			Voies		
+page-boxes	Allies	Allies		Verbündete	Alliés		
 page-boxes	Traits	Traits			Comportements		
 page-boxes	States	States			States		
 page-boxes	Hexes	Hexes			Hexes		
@@ -87,7 +87,7 @@ page-index	Options	Options		Optionen	Options
 page-index	Replace	Replace!		Ersetzen!	Replace!		
 page-index	Randomize	Randomize!		Randomisieren!	Randomize!		
 page-index	Sort	Sort		Sortieren	Tri		
-page-index							
+page-index	Ally	Ally		Verbündete	Allié		
 page-index							
 page-index							
 page-rules	rules_page_subtitle	Original rule books of Dominion Sets	Original rule books of Dominion Sets	Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
@@ -147,6 +147,20 @@ sets	seaside	seaside	Hijs de Zeilen	Seaside	Rivages	Terramar	Przystań
 sets	seaside2	seaside2	Hijs de Zeilen II	Seaside II	Rivages (2nd ed)	Terramar 2ª Ed.	Przystań II
 sets	seaside2add	seaside2add		Seaside Updatepack	Rivages updatepack		Przystań updatepack
 sets	plunder	plunder		Plünderer	Pillage		
+							
+page-settings	settings_page_subtitle						
+page-settings	Desk Size Setting	Desk Size Setting			Paramètre relatif au nb de carte		
+page-settings	Use Custom Configuration for DeckSize	Use Custom Configuration for DeckSize			Utiliser la configuration spécifique		
+page-settings	NB of kingdom for the Game	NB of kingdom for the Game			Nb de royaume à utiliser		
+page-settings	Addons	Addons			Addons		
+page-settings	Force Addons usage	Force Addons usage			Forcer l'utilisation des addons		
+page-settings	Events	Events			Evénements		
+page-settings	Landmarks	Landmarks			Repères		
+page-settings	Ways	Ways			voies		
+page-settings	Traits	Traits			Comportements		
+page-settings	Projects	Projects			Projets		
+page-settings							
+page-settings							
 							
 cards.baseset	baseset2_harbinger	Harbinger	Voorbode	Vorbotin	Présage	Emisario	
 cards.baseset	baseset2_merchant	Merchant	Koopman	Händlerin	Marchand	Tendera	

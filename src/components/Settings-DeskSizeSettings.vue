@@ -1,10 +1,10 @@
 <template>
   <div class="DeskSize">
-    <div class="SettingTitle">Desk Size Setting</div>
+    <div class="SettingTitle">{{ $t("Desk Size Setting") }}</div>
     <div class="llevel1-div">
       <div class="llevel2-div">
         <SwitchGroup as="div" class="llevel3-Switch switchGroupcss">
-          <SwitchLabel>Use Custom Configuration for DeckSize</SwitchLabel>
+          <SwitchLabel>{{ $t("Use Custom Configuration for DeckSize") }}</SwitchLabel>
           <Switch as="button" v-model="isUsingCustom" v-slot="{ checked }" :class="isUsingCustom ? 'switch-bg-indigo-600' : 'switch-bg-gray-200'"
             class="relative-switchcss">
             <span class="SwitchSpan" :class="{ 'translate-x-5': checked, 'translate-x-0': !checked }" />
@@ -14,44 +14,44 @@
     </div>
     <div class="custom-settings">
       <div class="slider-container kingdomSize">
-        <label class="kingdomlabel-settings" for="kingdomNb">NB of kingdom for the Game</label>
+        <label class="kingdomlabel-settings" for="kingdomNb">{{ $t("NB of kingdom for the Game") }}</label>
         <input class="kingdomInput" type="number" id="kingdomNb" v-model="KingdomNb" />
       </div> 
     </div>
     <div class="custom-settings">
       <div class="slider-container">
-        <label class="label-settings" for="addons">Addons</label>
-        <input type="range" id="addons" v-model="AddonsNb" min="0" max="5" />
+        <label class="label-settings" for="addons">{{ $t("Addons") }}</label>
+        <input class="labbel-settings"  type="range" id="addons" v-model="AddonsNb" min="0" max="8" />
         <span class="addon-value">{{ AddonsNb }}</span>
       </div>
+      <div class="slider-container slidercheckbox">
+        <label class="label-settings indentedCheckbox" for="addons">{{ $t("Force Addons usage") }}</label>
+        <input class="label-settings check-settings" type="checkbox" id="addons" v-model="forceAddonsUse" />
+      </div>
 
       <div class="slider-container">
-        <label class="label-settings indented" for="events">Events</label>
-        <input type="range" id="events" v-model="EventsMax" min="0" max="5" />
+        <label class="label-settings indented" for="events">{{ $t("Events") }}</label>
+        <input class="label-settings"  type="range" id="events" v-model="EventsMax" min="0" max="8" />
         <span class="addon-value">{{ EventsMax }}</span>
       </div>
-
       <div class="slider-container">
-        <label class="label-settings indented" for="landmarks">Landmarks</label>
-        <input type="range" id="landmarks" v-model="LandmarksMax" min="0" max="5" />
+        <label class="label-settings indented" for="landmarks">{{ $t("Landmarks") }}</label>
+        <input class="label-settings" type="range" id="landmarks" v-model="LandmarksMax" min="0" max="8" />
         <span class="addon-value">{{ LandmarksMax }}</span>
       </div>
-
       <div class="slider-container">
-        <label class="label-settings indented" for="projects">Projects</label>
-        <input type="range" id="projects" v-model="ProjectsMax" min="0" max="5" />
+        <label class="label-settings indented" for="projects">{{ $t("Projects") }}</label>
+        <input class="label-settings" type="range" id="projects" v-model="ProjectsMax" min="0" max="8" />
         <span class="addon-value">{{ ProjectsMax }}</span>
       </div>
-
       <div class="slider-container">
-        <label class="label-settings indented" for="ways">Ways</label>
-        <input type="range" id="ways" v-model="WaysMax" min="0" max="5" />
+        <label class="label-settings indented" for="ways">{{ $t("Ways") }}</label>
+        <input class="label-settings" type="range" id="ways" v-model="WaysMax" min="0" max="8" />
         <span class="addon-value">{{ WaysMax }}</span>
       </div>
-<p></p>
       <div class="slider-container">
-        <label class="label-settings" for="traits">Traits</label>
-        <input type="range" id="traits" v-model="TraitsMax" min="0" max="5" style="color:blue;"/>
+        <label class="label-settings indented" for="traits">{{ $t("Traits") }}</label>
+        <input class="label-settings" type="range" id="traits" v-model="TraitsMax" min="0" max="8" style="color:blue;"/>
         <span class="addon-value">{{ TraitsMax }}</span>
 
       </div>
@@ -63,6 +63,7 @@
 import { defineComponent, ref, watch } from "vue";
 import { SwitchGroup, SwitchLabel, Switch } from "@headlessui/vue";
 import { useSettingsStore } from "../pinia/settings-store";
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: "DeskSizeSettings",
@@ -84,7 +85,28 @@ export default defineComponent({
     const TraitsMax = ref(SettingsStore.TraitsMax);
     const forceAddonsUse = ref(SettingsStore.forceAddonsUse)
 
-// force use of Addons
+    watch(AddonsNb,
+      () => {
+        if (AddonsNb.value < EventsMax.value) EventsMax.value = AddonsNb.value
+        if (AddonsNb.value < LandmarksMax.value) LandmarksMax.value = AddonsNb.value
+        if (AddonsNb.value < ProjectsMax.value) ProjectsMax.value = AddonsNb.value
+        if (AddonsNb.value < WaysMax.value) WaysMax.value = AddonsNb.value
+        if (AddonsNb.value < TraitsMax.value) TraitsMax.value = AddonsNb.value
+      },
+      { immediate: true } // Trigger calculation on initial render
+    );
+
+   // Watch for changes in Max values and update AddonsNb if needed
+   watch(
+      [EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
+      () => {
+        const minAddonsNb = Math.max(EventsMax.value, LandmarksMax.value, ProjectsMax.value, WaysMax.value, TraitsMax.value)
+        if (AddonsNb.value < minAddonsNb) {
+          AddonsNb.value = minAddonsNb; // Set to minimum allowed value
+        }
+      },
+      { immediate: true } // Trigger calculation on initial render
+    );
 
     const updateStoreValues = () => {
       SettingsStore.updateSettings({
@@ -103,12 +125,12 @@ export default defineComponent({
     watch(
       [isUsingCustom, KingdomNb, AddonsNb, forceAddonsUse, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
       updateStoreValues,
-      { deep: true } // Ensure deep watch to catch nested changes
     );
     return {
       isUsingCustom,
       KingdomNb,
       AddonsNb,
+      forceAddonsUse,
       EventsMax,
       LandmarksMax,
       ProjectsMax,
@@ -175,11 +197,24 @@ export default defineComponent({
 
 .label-settings{
   width: 75%;
+  align-self: center;
 }
+
 
 .label-settings.indented {
   margin-left: 20px; /* Indent the text to the left */
   margin-right: -20px;
+}
+
+.label-settings.indentedCheckbox {
+  margin-left: 6rem; /* Indent the text to the left */
+  margin-right: 0px;
+ /* margin-top: -10px; */
+}
+
+.label-settings.check-settings {
+  align-self: center;
+  width: 6rem;
 }
 
 .slider-container {
@@ -188,6 +223,12 @@ export default defineComponent({
   align-items: flex-start; /* Align items to the left */
   gap: 0.5rem; /* Add a small gap between label and slider */
   justify-content: flex-end;
+  margin-block: 4px;
+}
+
+.slider-container.slidercheckbox {
+  width: unset; 
+  margin-top: 0; /* Remove default margin-top */
 }
 
 .slider-container input {
@@ -195,5 +236,15 @@ export default defineComponent({
   margin-top: 0; /* Remove default margin-top */
 }
 
+/* New rule for indented container */
+.slider-container.indented {
+  justify-content: flex-start; /* Align content (including label) to the left */
+  margin-left: 20px; /* Indent the entire container to the right */
+}
+
+.slider-container.indented .label-settings {
+  /* Optionally remove indentation from the label within the indented container */
+  margin-left: 0;
+}
 
 </style>

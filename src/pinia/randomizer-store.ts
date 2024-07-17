@@ -21,6 +21,7 @@ import { EventTracker } from "../analytics/follow-activity";
 import { EventType } from "../analytics/follow-activity";
 import type { randomizerStoreState } from './randomizer-actions'
 import * as rA from './randomizer-actions'; // rA for randomizerActions
+import { USING_CUTOM } from "../settings/Settings-value";
 
 const MIN_SETS_FOR_PRIORITIZE_OPTION = rA.MIN_SETS_FOR_PRIORITIZE_OPTION;
 const MIN_CARDS_FOR_DISTRIBUTE_COST = rA.MIN_CARDS_FOR_DISTRIBUTE_COST;
@@ -123,6 +124,7 @@ export const useRandomizerStore = defineStore(
   },
   actions: {
     UPDATE_KINGDOM(kingdom: Kingdom) {
+      console.log("UPDATE_KINGDOM", kingdom)
       this.kingdom = kingdom;
     },
     CLEAR_SELECTION() {
@@ -233,7 +235,7 @@ export const useRandomizerStore = defineStore(
         return;
       }
       const selectedCards = rA.getSelectedSupplyCards(this);
-      //console.log("randomizing simple selectedCards", selectedCards)
+      console.log("randomizing simple selectedCards", selectedCards)
       //console.log(this.kingdom.supply)
       const oldSupply = this.kingdom.supply;
       const newSupply = selectedCards.length
@@ -250,7 +252,7 @@ export const useRandomizerStore = defineStore(
       rA.getSelectedTraits(this).length;
 
       const newAddons = isAddonSelected ? rA.randomizeSelectedAddons(this) : null;
-      //console.log("randomizing simple newAddons", newAddons)
+      console.log("randomizing simple newAddons", newAddons)
 
       const newEvents = newAddons
         ? Cards.getAllEvents(newAddons).concat(rA.getUnselectedEvents(this))
@@ -372,8 +374,8 @@ export const useRandomizerStore = defineStore(
       }
     },
     RANDOMIZE_UNDEFINED_ADDON() {
-      //console.log('RANDOMIZE_UNDEFINED_ADDON')
-      //console.log(this)
+      console.log('RANDOMIZE_UNDEFINED_ADDON')
+      console.log(rA.getAddons(this))
       const addons = rA.randomizeUndefinedAddon(this).concat(rA.getAddons(this));
       const kingdom = new Kingdom(
         this.kingdom.id,
