@@ -1,5 +1,5 @@
 <template>
-  <div v-show="isGameDisplayed(kingdom.name)">
+  <div v-if="isGameDisplayed(kingdom.name)">
     <a :id="kingdom.name" />
     <div class="preset-kingdom_title">
       <div class="preset-kingdom_title left-top-sign-div">

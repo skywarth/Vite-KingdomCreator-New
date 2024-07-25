@@ -335,14 +335,22 @@ export class Randomizer {
 
     // to add traits Supply
     let calculatedTraitsSupplyCard:SupplyCard[]= []
-    let onlyTraitsPossibleSupplies = supply.supplyCards.filter(card => card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_1) || 
-          card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_2));
+    let onlyTraitsPossibleSupplies = supply.supplyCards
+        .filter(card => card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_1) || card.isOfType(TRAITS_CARDTYPE_POSSIBILITY_2))
+        .filter(card => { return !oldkingdom.supply.traitsSupply.some(trait => trait.id === card.id)});
+        // remove supply for already mapped for trait
     if (Localaddons.traits.length > 0) {
       for (const trait of Localaddons.traits) {
         const index = oldkingdom.traits.findIndex((oldtrait) => oldtrait.id === trait.id);
         if (index>=0) {
-          calculatedTraitsSupplyCard.push(oldkingdom.supply.traitsSupply[index]);
-          onlyTraitsPossibleSupplies = onlyTraitsPossibleSupplies.filter((card) => card != oldkingdom.supply.traitsSupply[index]);
+          // trait unchanged
+          if (supply.supplyCards.some(card => card.id === oldkingdom.supply.traitsSupply[index].id)) {
+            calculatedTraitsSupplyCard.push(oldkingdom.supply.traitsSupply[index]);
+          } else {
+            const randomTraitCard = this.selectRandomCards(onlyTraitsPossibleSupplies, 1)[0];
+            calculatedTraitsSupplyCard.push(randomTraitCard);
+            onlyTraitsPossibleSupplies = onlyTraitsPossibleSupplies.filter((card) => card != randomTraitCard);
+            }
         } else {
           const randomTraitCard = this.selectRandomCards(onlyTraitsPossibleSupplies, 1)[0];
           calculatedTraitsSupplyCard.push(randomTraitCard);

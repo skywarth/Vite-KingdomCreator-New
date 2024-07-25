@@ -88,7 +88,8 @@ page-index	Replace	Replace!		Ersetzen!	Replace!
 page-index	Randomize	Randomize!		Randomisieren!	Randomize!		
 page-index	Sort	Sort		Sortieren	Tri		
 page-index	Ally	Ally		Verbündete	Allié		
-page-index							
+page-index	1st	1st			1st		
+page-index	2nd	2nd			2nd		
 page-index							
 page-rules	rules_page_subtitle	Original rule books of Dominion Sets	Original rule books of Dominion Sets	Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
 page-rules	rules_page_description	Below are the rulebooks published with each set of dominion. Rulebooks contain descriptions of kingdom card and how they interact with other kingdom cards.		Nachfolgend die Spielanleitungen der Erweiterungen zu Dominion auf englisch. Darin enthalten sind auch detailierte Erklärungen der einzelnen Karten.	Ci-dessous, les livrets de règles publiés avec chaque boîte de Dominion. Les livrets contiennent une description de chaque carte royaume, qui explicite leurs interactions avec les autres cartes.	A continuación se encuentran los libros de reglas (en inglés) publicados con cada juego de Dominion. Los libros de reglas conienen las descripciones de las cartas de reino y como interactúan con otras cartas de reino.	Poniżej znajdują się podręczniki opublikowane z każdym zestawem gry Dominium. Instrukcje zawierają opisy kart królestwa oraz ich interakcje z innymi kartami królestw.
@@ -148,15 +149,15 @@ sets	seaside2	seaside2	Hijs de Zeilen II	Seaside II	Rivages (2nd ed)	Terramar 2�
 sets	seaside2add	seaside2add		Seaside Updatepack	Rivages updatepack		Przystań updatepack
 sets	plunder	plunder		Plünderer	Pillage		
 							
-page-settings	settings_page_subtitle						
-page-settings	Desk Size Setting	Desk Size Setting			Paramètre relatif au nb de carte		
+page-settings	settings_page_subtitle	Customize your game experience by adjusting settings for kingdom size, add-ons, and individual card types.		Passen Sie Ihr Spielerlebnis durch Anpassen der Einstellungen für Königreichgröße, Add-Ons und einzelne Kartentypen an.	Personnalisez votre expérience de jeu en ajustant les paramètres de la taille du royaume, des extensions et des types de cartes individuels.	Personaliza tu experiencia de juego ajustando la configuración del tamaño del reino, los complementos y los tipos de cartas individuales.	
+page-settings	Desk Size Setting	Desk Size Settings			Paramètres relatif au nb de cartes		
 page-settings	Use Custom Configuration for DeckSize	Use Custom Configuration for DeckSize			Utiliser la configuration spécifique		
-page-settings	NB of kingdom for the Game	NB of kingdom for the Game			Nb de royaume à utiliser		
+page-settings	NB of kingdom for the Game	NB of kingdom for the Game			Nb de royaumes à utiliser		
 page-settings	Addons	Addons			Addons		
-page-settings	Force Addons usage	Force Addons usage			Forcer l'utilisation des addons		
+page-settings	Force Addons usage	Force Addons usage			Forcer l'utilisation des Addons		
 page-settings	Events	Events			Evénements		
 page-settings	Landmarks	Landmarks			Repères		
-page-settings	Ways	Ways			voies		
+page-settings	Ways	Ways			Voies		
 page-settings	Traits	Traits			Comportements		
 page-settings	Projects	Projects			Projets		
 page-settings							

@@ -5,7 +5,7 @@
       <div class="llevel2-div">
         <SwitchGroup as="div" class="llevel3-Switch switchGroupcss">
           <SwitchLabel>{{ $t("Use Custom Configuration for DeckSize") }}</SwitchLabel>
-          <Switch as="button" v-model="isUsingCustom" v-slot="{ checked }" :class="isUsingCustom ? 'switch-bg-indigo-600' : 'switch-bg-gray-200'"
+          <Switch as="button" v-model="isUsingCustomDesksize" v-slot="{ checked }" :class="isUsingCustomDesksize ? 'switch-bg-indigo-600' : 'switch-bg-gray-200'"
             class="relative-switchcss">
             <span class="SwitchSpan" :class="{ 'translate-x-5': checked, 'translate-x-0': !checked }" />
           </Switch>
@@ -63,7 +63,6 @@
 import { defineComponent, ref, watch } from "vue";
 import { SwitchGroup, SwitchLabel, Switch } from "@headlessui/vue";
 import { useSettingsStore } from "../pinia/settings-store";
-import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: "DeskSizeSettings",
@@ -74,12 +73,12 @@ export default defineComponent({
   },
   setup() {
     const SettingsStore = useSettingsStore();
-    const isUsingCustom = ref(SettingsStore.isUsingCustom);
+    const isUsingCustomDesksize = ref(SettingsStore.isUsingCustomDesksize);
   
     const KingdomNb = ref(SettingsStore.KingdomNb);
     const AddonsNb = ref(SettingsStore.AddonsNb);
-    const EventsMax = ref( SettingsStore.EventsMax);
-    const LandmarksMax = ref( SettingsStore.LandmarksMax);
+    const EventsMax = ref(SettingsStore.EventsMax);
+    const LandmarksMax = ref(SettingsStore.LandmarksMax);
     const ProjectsMax = ref(SettingsStore.ProjectsMax);
     const WaysMax = ref(SettingsStore.WaysMax);
     const TraitsMax = ref(SettingsStore.TraitsMax);
@@ -110,7 +109,7 @@ export default defineComponent({
 
     const updateStoreValues = () => {
       SettingsStore.updateSettings({
-        isUsingCustom: isUsingCustom.value,
+        isUsingCustomDesksize: isUsingCustomDesksize.value,
         KingdomNb: KingdomNb.value,
         AddonsNb: AddonsNb.value,
         forceAddonsUse : forceAddonsUse.value,
@@ -123,11 +122,12 @@ export default defineComponent({
     };
 
     watch(
-      [isUsingCustom, KingdomNb, AddonsNb, forceAddonsUse, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
+      [isUsingCustomDesksize, KingdomNb, AddonsNb, forceAddonsUse, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
       updateStoreValues,
     );
+
     return {
-      isUsingCustom,
+      isUsingCustomDesksize,
       KingdomNb,
       AddonsNb,
       forceAddonsUse,
@@ -143,45 +143,22 @@ export default defineComponent({
 
 <style scoped>
 .DeskSize {
-  margin-left: 50px;
+  padding-left: 2%;
+  padding-right: 2%;
   width: 35%;
-  border-right: 2px solid black; /* Replace #000 with your desired border color */
+  border-right: none;
 }
 
-.SettingTitle {
-  font-size: 24px;
-  font-weight: bold;
-  padding: 10px;
-  margin: 8px;
-  border-bottom: 1px solid #ccc;
-}
-
-.llevel1-div {
-  padding: 1rem 1rem 1rem 0.5rem;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.llevel2-div {
-  width: 100%;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.llevel3-Switch {
-  align-items: center;
-  display: flex;
-}
-
-.custom-settings {
-  padding: 0 2rem 0 1.5rem;
-  margin: 1rem 0 0.5rem 0
+@media (max-width: 768px) {
+  .DeskSize {
+    /* Adjust styles for smaller screens, if needed */
+    width: 100%; /* Adjust width for smaller devices */
+  }
 }
 
 .kingdomSize{
   display: flex;
+  gap: 4rem;
 }
 
 .kingdomSize label {
@@ -200,16 +177,18 @@ export default defineComponent({
   align-self: center;
 }
 
-
 .label-settings.indented {
-  margin-left: 20px; /* Indent the text to the left */
-  margin-right: -20px;
+  margin-left: 20px; 
+  margin-right: 0px;
 }
 
 .label-settings.indentedCheckbox {
-  margin-left: 6rem; /* Indent the text to the left */
+  margin-left: 6rem;
   margin-right: 0px;
- /* margin-top: -10px; */
+}
+
+.label-settings.input {
+  width: unset;
 }
 
 .label-settings.check-settings {

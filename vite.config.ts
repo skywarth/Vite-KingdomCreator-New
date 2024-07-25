@@ -5,7 +5,7 @@ import packageJson from './package.json';
 import VueDevTools from 'vite-plugin-vue-devtools'
 import vue from '@vitejs/plugin-vue';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
-import rollupDel from 'rollup-plugin-delete';
+import { del } from '@kineticcafe/rollup-plugin-delete';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins/vite-dominion-content';
@@ -49,7 +49,7 @@ export default defineConfig( ({ mode}) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      rollupDel({
+      del({
         targets: ['docs/*',
           '!docs/rules',
           '!docs/rules.fr',

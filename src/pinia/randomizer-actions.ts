@@ -11,7 +11,7 @@ import { DominionSets } from "../dominion/dominion-sets";
 import type { SupplyCard } from "../dominion/supply-card";
 import type { Addon } from "../dominion/addon";
 import type { Selection } from "./selection";
-import { NUM_CARDS_IN_KINGDOM, USING_CUTOM, MAX_ADDONS_IN_KINGDOM, FORCE_ADDONS_USE, MAX_ADDONS_OF_TYPE } from "../settings/Settings-value";
+import { NUM_CARDS_IN_KINGDOM, MAX_ADDONS_IN_KINGDOM, FORCE_ADDONS_USE, MAX_ADDONS_OF_TYPE, USING_CUTOM_DESKSIZE } from "../settings/Settings-value";
 import { Addons_TYPE } from "../dominion/addon";
 
 export const MIN_SETS_FOR_PRIORITIZE_OPTION = 3;
@@ -81,7 +81,7 @@ export function randomizeSelectedAddons(context: randomizerStoreState) {
       + getSelectedTraits(context).length;
   const addonIds = getAddons(context).map((addon) => addon.id);
   EventTracker.trackEvent(EventType.RANDOMIZE_EVENTS_AND_LANDMARKS);
-  if (!USING_CUTOM()) {
+  if (!USING_CUTOM_DESKSIZE()) {
     return Randomizer.getRandomAddons(getSelectedSetIds(context), addonIds, newAddonsCount);
   } else {
     const kingdom = context.kingdom;
@@ -127,7 +127,7 @@ export function randomizeSelectedAddons(context: randomizerStoreState) {
 export function randomizeUndefinedAddon(context: randomizerStoreState) :Addon[] {
   const addonIds = getAddons(context).map((addon) => addon.id);
   EventTracker.trackEvent(EventType.RANDOMIZE_EVENTS_AND_LANDMARKS);
-  if (!USING_CUTOM()) {
+  if (!USING_CUTOM_DESKSIZE()) {
     return Randomizer.getRandomAddons(getSelectedSetIds(context), addonIds, 1);
   } else {
     const kingdom = context.kingdom;

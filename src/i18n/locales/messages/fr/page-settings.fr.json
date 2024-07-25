@@ -1,12 +1,13 @@
 {
-  "Desk Size Setting": "Paramètre relatif au nb de carte",
+  "settings_page_subtitle": "Personnalisez votre expérience de jeu en ajustant les paramètres de la taille du royaume, des extensions et des types de cartes individuels.",
+  "Desk Size Setting": "Paramètres relatif au nb de cartes",
   "Use Custom Configuration for DeckSize": "Utiliser la configuration spécifique",
-  "NB of kingdom for the Game": "Nb de royaume à utiliser",
+  "NB of kingdom for the Game": "Nb de royaumes à utiliser",
   "Addons": "Addons",
-  "Force Addons usage": "Forcer l'utilisation des addons",
+  "Force Addons usage": "Forcer l'utilisation des Addons",
   "Events": "Evénements",
   "Landmarks": "Repères",
-  "Ways": "voies",
+  "Ways": "Voies",
   "Traits": "Comportements",
   "Projects": "Projets"
 }
