@@ -22,7 +22,7 @@ export default defineConfig( ({ mode}) => {
     DominionContentGenerate('docs');
     let ArgGenLocale = "Merge"
     if (process.argv.slice(3)[0] == "Gen") {
-        ArgGenLocale = "Gen&Merge"
+      ArgGenLocale = "Gen&Merge"
     }
     HandleLocaleGenerateAndMerge(ArgGenLocale, 'docs')
   }
@@ -41,7 +41,7 @@ export default defineConfig( ({ mode}) => {
     },
     plugins: [
       vue(),
-      mode === "development" && VueDevTools(),
+      // mode === "development" && VueDevTools(),
       vueI18n({
         include: path.resolve(__dirname, './docs/locales/*.json'),
         compositionOnly: true, 

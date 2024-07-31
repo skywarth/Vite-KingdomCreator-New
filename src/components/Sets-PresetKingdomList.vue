@@ -30,9 +30,11 @@ import { SetId } from "../dominion/set-id";
 
 /* import store  */
 import { useSetsStore } from "../pinia/sets-store";
+import { useSettingsStore } from '../pinia/settings-store';
 
 /* import Components */
 import PresetKingdom from "./Sets-PresetKingdom.vue";
+import type { Kingdom } from '@/randomizer/kingdom';
 
 export default defineComponent({
   name: 'PresetKingdomList',
@@ -47,21 +49,32 @@ export default defineComponent({
   },
 setup(props) {
   const setsStore = useSetsStore()
+  const settingsStore = useSettingsStore()
 
   const ListSet = ref<SetId[]>([]);
   const ShowFilterKingdom = ref(false);
+  const isUsingOnlyOwnedsets = settingsStore.isUsingOnlyOwnedsets
    
   ShowFilterKingdom.value = setsStore.showFilterKingdom;
 
   // get the selected set ID from the store and filter kingdoms accordingly
   const kingdoms = computed(() => {
     const setId:SetId = setsStore.selectedSetId;
+    const OwnedSets = new Set (settingsStore.ownedSets);
+    let returnedKingdom: DominionKingdom[] = [];
+
     if (setId === SetId.ALL) {
-      return DominionKingdoms.getAllKingdoms();
+      returnedKingdom  =  DominionKingdoms.getAllKingdoms();
+    } else if (!(setId in DominionKingdoms.kingdoms)) { 
+      return []; 
+    } else {
+      returnedKingdom =  DominionKingdoms.kingdoms[setId] as DominionKingdom[]
     }
-    if (!(setId in DominionKingdoms.kingdoms)) { return []; }
-    return DominionKingdoms.kingdoms[setId] 
-  });
+    if (isUsingOnlyOwnedsets) {
+      return returnedKingdom
+        .filter(kd => { return kd.setIds.every(setid => OwnedSets.has(setid))})
+    } else return returnedKingdom
+  })
 
   // get the number of recommended kingdoms based on the current filter settings
   const nbKingdomRecommendedSet = computed(() => {

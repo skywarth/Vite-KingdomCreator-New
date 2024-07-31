@@ -1,6 +1,8 @@
 <template>
   <div class="OwnedSize">
     <div class="SettingTitle">{{ $t("Owned sets Settings") }}</div>
+    <div class="sets-description">{{ $t("settings_subtitle_owned_sets") }}</div>
+
     <div class="llevel1-div">
       <div class="llevel2-div">
         <SwitchGroup as="div" class="llevel3-Switch switchGroupcss">
@@ -71,7 +73,6 @@ import { useI18n } from 'vue-i18n'
 /* import Dominion Objects and type*/
 import { DominionSets } from "../dominion/dominion-sets";
 import { MultipleVersionSets, HideMultipleVersionSets, Sets_To_Ignore_Regroup } from "../dominion/set-id";
-import type { SetId } from "../dominion/set-id";
 import { Year_set } from "../dominion/digital_cards/digital-cards-Illustrator"
 import type { SettingsParams } from "../settings/settings";
 
@@ -121,8 +122,6 @@ export default defineComponent({
         SetsStore.selectedBoxesSetId=ownedSetIds.value[0];
       }
       const ownedIdsSet = new Set(ownedSetIds.value);
-      console.log("owned", ownedSetIds.value)
-      console.log("rand", randomizerStore.settings.selectedSets)
       const filteredSelectedIds = randomizerStore.settings.selectedSets.filter((sid) => ownedIdsSet.has(sid) === true);
       console.log("calculated", filteredSelectedIds);
       randomizerStore.UPDATE_SETTINGS({

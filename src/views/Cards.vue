@@ -3,6 +3,7 @@
     <div class="content">
       <BoxesSidebar />
       <div class="main cardMain">
+        <!-- <card-online-editor-component :set="set" v-if="true" /> -->
         <card-online-page-component :set="set" v-if="true" />
         <card-online-page-landscape-component :set="set" v-if="true" />
         <card-online-page-othercard-component :set="set" v-if="true" />
@@ -17,6 +18,7 @@ import useBase from "./base";
 import Page, { MenuItemType } from "../components/Page.vue";
 
 
+// import CardOnlineEditorComponent from "../components/card-online-editor.vue";
 import CardOnlinePageComponent from "../components/card-online-page.vue";
 import CardOnlinePageLandscapeComponent from "../components/card-online-page-landscape.vue";
 import CardOnlinePageOthercardComponent from "../components/card-online-page-othercard.vue";
@@ -30,6 +32,7 @@ export default defineComponent({
   components: {
     Page,
     BoxesSidebar,
+    // "card-online-editor-component": CardOnlineEditorComponent,
     "card-online-page-component": CardOnlinePageComponent,
     "card-online-page-landscape-component": CardOnlinePageLandscapeComponent,
     "card-online-page-othercard-component": CardOnlinePageOthercardComponent

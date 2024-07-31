@@ -52,6 +52,7 @@ import { DominionSets } from "../dominion/dominion-sets";
 import { Sets_To_Ignore_Regroup } from "../dominion/set-id";
 import type { SetId } from "../dominion/set-id";
 import { useSetsStore } from '../pinia/sets-store';
+import { useSettingsStore } from '../pinia/settings-store';
 
 export default defineComponent({
   name: "Sets",
@@ -63,12 +64,17 @@ export default defineComponent({
   setup() {
     useBase();
     const setsStore = useSetsStore()
+    const settingsStore = useSettingsStore()
     const selectedType = MenuItemType.SETS;
     const RefreshKingdomList = ref(3)
     const ShowFilter = ref(false);
     ShowFilter.value = setsStore.showFilterSets
 
-    const setIds = DominionSets.getAllSetsIds().filter(setId => !Sets_To_Ignore_Regroup.has(setId))
+    const setIds = DominionSets.getAllSetsIds()
+        .filter(setId => {if (settingsStore.isUsingOnlyOwnedsets){
+              return settingsStore.ownedSets.indexOf(setId as never) != -1
+            } else { return true; }})
+        .filter(setId => !Sets_To_Ignore_Regroup.has(setId))
 
     const kingdoms = computed(() => {
       const setId = setsStore.selectedSetId;

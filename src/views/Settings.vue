@@ -3,7 +3,7 @@
     <div class="content main settings">
       <DeskSizeSettings />
       <OwnedExpansionsSettings />
-      <!-- <RandomizeConstraintsSettings /> -->
+      <RandomizeConstraintsSettings />
     </div>
   </Page>
 </template>
@@ -14,7 +14,7 @@ import { defineComponent } from 'vue';
 import useBase from "./base";
 import Page, { MenuItemType } from "../components/Page.vue";
 import DeskSizeSettings from "../components/Settings-DeskSizeSettings.vue";
-//import RandomizeConstraintsSettings from "../components/Settings-RandomizeConstraintsSettings.vue";
+import RandomizeConstraintsSettings from "../components/Settings-RandomizeConstraintsSettings.vue";
 import OwnedExpansionsSettings from "../components/Settings-OwnedExpansionsSettings.vue";
 
 export default defineComponent({
@@ -22,7 +22,7 @@ export default defineComponent({
   components: {
     Page,
     OwnedExpansionsSettings,
-//    RandomizeConstraintsSettings,
+    RandomizeConstraintsSettings,
     DeskSizeSettings,
   },
   setup() {

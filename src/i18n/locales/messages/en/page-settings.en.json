@@ -1,5 +1,9 @@
 {
-  "settings_page_subtitle": "Customize your game experience by adjusting settings for kingdom size, add-ons, and individual card types.",
+  "settings_page_subtitle": "Customize your game experience",
+  "settings_subtitle_desksize": "Adjust settings for kingdom size, add-ons, and individual card types.",
+  "settings_subtitle_owned_sets": "Reduce display to only onwed sets",
+  "settings_subtitle_constraint": "Remove cards from randomizer selection",
+  "settings_page_subtitle2": "Customize your game experience by adjusting settings for kingdom size, add-ons, and individual card types.",
   "Desk Size Setting": "Desk Size Settings",
   "Use Custom Configuration for DeckSize": "Use Custom Configuration for DeckSize",
   "NB of kingdom for the Game": "NB of kingdom for the Game",

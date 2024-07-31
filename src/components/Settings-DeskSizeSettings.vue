@@ -1,6 +1,8 @@
 <template>
   <div class="DeskSize">
     <div class="SettingTitle">{{ $t("Desk Size Setting") }}</div>
+    <div class="sets-description">{{ $t("settings_subtitle_desksize") }}</div>
+
     <div class="llevel1-div">
       <div class="llevel2-div">
         <SwitchGroup as="div" class="llevel3-Switch switchGroupcss">
@@ -15,7 +17,7 @@
     <div class="custom-settings">
       <div class="slider-container kingdomSize">
         <label class="kingdomlabel-settings" for="kingdomNb">{{ $t("NB of kingdom for the Game") }}</label>
-        <input class="kingdomInput" type="number" id="kingdomNb" v-model="KingdomNb" />
+        <input class="settingsInput" type="number" id="kingdomNb" v-model="KingdomNb" />
       </div> 
     </div>
     <div class="custom-settings">
@@ -170,6 +172,7 @@ export default defineComponent({
 
 .kingdomInput {
   text-align: end;
+  border: 2px solid #ccc
 }
 
 .label-settings{

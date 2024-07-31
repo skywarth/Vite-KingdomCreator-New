@@ -75,6 +75,9 @@
       </div>
     </div>
   </div>
+  <pre v-if="Cards.length=1" class="content Coef_scale12 card-rows" style="white-space: pre-wrap; font-family:Arial, Helvetica, sans-serif">
+    {{ Cards[0].text_html }}
+  </pre>
 </template>
 
 <script lang="ts">
@@ -174,6 +177,16 @@ export default defineComponent({
 
       if ( Work_Card.id !="" && setName == getCardSetById(Work_Card)) {
         LocalTemp_CardsList = Cards_list.filter(card => card.id == Work_Card.id)
+        console.log(LocalTemp_CardsList)
+        const newWork: DigitalCard = {
+            ...Work_Card, // Copy properties from Work_Card
+            // Override secific properties
+            artwork: LocalTemp_CardsList[0].artwork,
+            frenchName: LocalTemp_CardsList[0].frenchName,
+            text_html: Work_Card.text_html,
+          };
+ 
+        if (LocalTemp_CardsList.length > 0) LocalTemp_CardsList= [newWork]
         return LocalTemp_CardsList;
       }
 
@@ -268,6 +281,7 @@ export default defineComponent({
         if (card.isOfType(CardType.FATE)) { extension = " - Destin"; }
         if (card.isOfType(CardType.DOOM)) { extension = " - Fatalité"; }
         if (card.isOfType(CardType.LIAISON)) { extension = " - Liaison"; }
+        if (card.isOfType(CardType.COMMAND)) { extension = " - Ordre"; }
         if (card.isOfType(CardType.COVER)) {
           extension = " - " + t(card.id)
           return { png: "action", label: "Action" + extension };
@@ -494,6 +508,8 @@ export default defineComponent({
 
     const getCardSetById = (currentCard: DigitalCard) => {
       //return props.set.setId;
+      if (!DominionSets.cards[currentCard.id]) return SetId.TO_FORCE_RELOAD;
+
       let curr_Card_setid = DominionSets.getCardById(currentCard.id).setId;
       if (props.set.setId.substring(0, props.set.setId.length - 2) == curr_Card_setid.substring(0, props.set.setId.length - 2)) {
         return props.set.setId

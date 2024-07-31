@@ -1,5 +1,9 @@
 {
-  "settings_page_subtitle": "Personnalisez votre expérience de jeu en ajustant les paramètres de la taille du royaume, des extensions et des types de cartes individuels.",
+  "settings_page_subtitle": "Personnalisez votre expérience de jeu",
+  "settings_subtitle_desksize": "Ajuster le nombres de cartes royaume, ainsi que des addons individuellement ou collectivement.",
+  "settings_subtitle_owned_sets": "Réduiser l'affichage aux extensions que vous possédez",
+  "settings_subtitle_constraint": "Ecarter des cartes pour qu'elles ne soient pas utilisées lors de la génération",
+  "settings_page_subtitle2": "Personnalisez votre expérience de jeu en ajustant les paramètres de la taille du royaume, des extensions et des types de cartes individuels.",
   "Desk Size Setting": "Paramètres relatif au nb de cartes",
   "Use Custom Configuration for DeckSize": "Utiliser la configuration spécifique",
   "NB of kingdom for the Game": "Nb de royaumes à utiliser",
