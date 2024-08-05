@@ -17,7 +17,30 @@ export async function DominionContentGenerate(destdir:string) {
 
 export function HandleLocaleGenerateAndMerge(type: string, destdir: string) {
   if (type == "Gen&Merge") {
+    Generate_Digitalcard('Baseset')
+    Generate_Digitalcard('Alchemy')
+    Generate_Digitalcard('Seaside')
+    Generate_Digitalcard('Cornucopia')
+    Generate_Digitalcard('Prosperity')
+    Generate_Digitalcard('Intrigue')
+    Generate_Digitalcard('Guilds')
+    Generate_Digitalcard('Hinterlands')
+    Generate_Digitalcard('Darkages')
+    Generate_Digitalcard('Adventures')
+    Generate_Digitalcard('Empires')
+    Generate_Digitalcard('Nocturne')
+    Generate_Digitalcard('Renaissance')
     Generate_Digitalcard('Promo')
+    Generate_Digitalcard('Menagerie')
+    Generate_Digitalcard('Allies')
+    Generate_Digitalcard('Plunder')
+    Generate_Digitalcard('Guildscornucopia')
+
+
+
+
+
+
     Convert_to_CSV()
     mergeJSONLanguageFiles(destdir)
   }

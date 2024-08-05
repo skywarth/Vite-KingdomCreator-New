@@ -1,5 +1,5 @@
 <template>
-  <div class="content Coef_scale12 card-rows">
+  <div class="ListofcontentCard Coef_scale12 card-rows">
     <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
       <div class="card-container">
       <div class="full-card unselectable" style="z-index:0; cursor:default;

@@ -12,7 +12,7 @@ function getProcessingDir(argv) {
     console.warn("Ignoring extra arguments. Only the first argument is used for output directory.");
   }
   const processingDirArg = argv[0];
-  console.log("processingDirArg", processingDirArg)
+  //console.log("processingDirArg", processingDirArg)
   return processingDirArg ? PROCESSING_DIR.replace(PROCESSED, processingDirArg) : PROCESSING_DIR;
 }
 
@@ -121,9 +121,9 @@ function GenerateTranslation() {
   let languages = [];
   let lang = "";
   let filename = "";
-  console.log(lines[start_line]);
+  //console.log(lines[start_line]);
   if (lines[start_line].includes("sep=")) {
-    console.log("sep found");
+    //console.log("sep found");
     separator = (lines[start_line].split("="))[1];
     start_line += 1;
   }
@@ -156,7 +156,7 @@ function GenerateTranslation() {
         }
       }
       const filenamesplitted = (resultPages[i]).split('.')
-      console.log( filenamesplitted )
+      //console.log( filenamesplitted )
       for (let j = 2; j < languages.length; j++) {
         if (languages[j] != "") {
           lang = languages[j]
@@ -172,7 +172,7 @@ function GenerateTranslation() {
               filename = `${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
             } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
           } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
-          console.log(filename)
+          //console.log(filename)
           fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
         }
       }
@@ -185,5 +185,5 @@ function GenerateTranslation() {
 const argv = process.argv.slice(2); // Get arguments excluding script name and potentially the output directory
 PROCESSING_DIR = getProcessingDir(argv);
 
-usage()
+//usage()
 GenerateTranslation()

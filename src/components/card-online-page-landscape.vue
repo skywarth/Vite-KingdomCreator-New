@@ -1,6 +1,6 @@
 <template>
   <!-- for the Landscape cards -->
-  <div class="content Coef_scale12 card-rows">
+  <div class="ListofcontentCard Coef_scale12 card-rows">
     <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
       <div class="card-container-landscape">
       <div class="landscape unselectable" style="left:0px; top:0px; z-index:0;transform: scale(1); cursor:">

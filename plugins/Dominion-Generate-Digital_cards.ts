@@ -10,7 +10,7 @@ const DigitalCardDir = 'src/dominion/digital_cards'
 
 // Fonction pour convertir le fichier xlsx de messages traduit en CSV
 export function Generate_Digitalcard (setid:string) {
-  console.log("Starting Generation")
+  console.log("Starting Generation of Digital Card", setid)
   const inputfile = path.join(ArtworkFileDir, ArtworkFileName)
   const outputfile = path.join(DigitalCardDir, DigitalCardFileName + setid +'.ts')
   XLSX.set_fs(fs);
@@ -20,9 +20,15 @@ export function Generate_Digitalcard (setid:string) {
     // Sélectionner la feuille "Digital_cards"
   const worksheet = workbook.Sheets['digital_cards'];
     // Définir la plage à copier (A1:C250)
-  const range = getRange(setid);
+  const ranges = getRange(setid);
+  let allData: any[] = [];
   
-  const mydata = XLSX.utils.sheet_to_json(worksheet, { range });
+  ranges.forEach(range => {
+    const mydata = XLSX.utils.sheet_to_json(worksheet, { range });
+    // Concaténer les données de toutes les plages
+    allData = allData.concat(mydata);
+  });
+
   // Convertir les données en une chaîne de caractères, chaque ligne étant séparée par des retours à la ligne
   //const textData = mydata.map(row => Object.values(row as string ).join('\t')).join('\n');
 
@@ -30,7 +36,7 @@ export function Generate_Digitalcard (setid:string) {
 
 export const Cards_list_${setid}: DigitalCard[] = [
 
-${mydata.map(row => Object.values(row as string).join('\t')).join('\n')}
+${allData.map(row => Object.values(row as string).join('\t')).join('\n')}
 
 
 
@@ -44,16 +50,33 @@ ${mydata.map(row => Object.values(row as string).join('\t')).join('\n')}
 
 function getRange(setid:string) {
   // Tableau associatif pour mapper les valeurs de setid aux valeurs de range
-  const rangeMap: { [key: string]: string }  = {
-    'Promo': 'A1610:C1649',
-    'setid2': 'range2',
+  const rangeMap: { [key: string]: string [] }  = {
+'Baseset': [ 'A5:C83', 'A104:C122' ],
+'Alchemy': [ 'A143:C179' ],
+'Seaside': [ 'A185:C263', 'A1868:C1895' ],
+'Cornucopia': [ 'A263:C317' ],
+'Prosperity': [ 'A317:C392', 'A1895:C1922' ],
+'Intrigue': [ 'A404:C479', 'A500:C521' ],
+'Guilds': [ 'A542:C581' ],
+'Hinterlands': [ 'A581:C659', 'A1922:C1949' ],
+'Darkages': [ 'A659:C827' ],
+'Adventures': [ 'A827:C917', 'A977:C1001' ],
+'Empires': [ 'A1001:C1103', 'A1205:C1229' ],
+'Nocturne': [ 'A1229:C1328', 'A1364:C1409' ],
+'Renaissance': [ 'A1460:C1535' ],
+'Promo': [ 'A1610:C1652' ],
+'Ménagerie': [ 'A1655:C1748' ],
+'Allies': [ 'A1949:C2114' ],
+'Plunder': [ 'A2183:C2348' ],
+'Guildscornucopia': [ 'A2438:C2450' ],
+
     // ... ajoutez les autres paires ici
-    'setid10': 'range10'
+    'setid10': ['range10']
   };
 
   // Récupérer la valeur de range associée à setid
-  const range = rangeMap[setid] 
+  const ranges = rangeMap[setid];
 
-  // Si aucune valeur correspondante n'est trouvée, retourner une valeur par défaut ou gérer l'erreur
-  return range ;
+  // Si aucune valeur correspondante n'est trouvée, retourner un tableau vide
+  return ranges || [];
 }
