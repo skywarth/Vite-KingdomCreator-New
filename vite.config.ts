@@ -131,7 +131,7 @@ export default defineConfig( ({ mode}) => {
           target: 'http://localhost:' + devServerPort,
           // rewrite: (path) => path.replace(/^\/?/, '/docs/index.html?'),
           rewrite: (path) => path.replace(/^\/?/, '/index.html?'),
-        },
+        }
       },
     },
     preview: {

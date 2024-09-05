@@ -22,6 +22,20 @@ const loadFilesFromDirectory = function(directory) {
    for (const filename of files) {
       //if (filename.includes("2-add")) continue;
       const filePath = path.join(directory, filename);
+
+      // Vérifier si le fichier est un fichier régulier (et non un répertoire)
+      const stat = fs.statSync(filePath);
+      if (!stat.isFile()) {
+        console.warn(`Skipping non-file: ${filePath}`);
+        continue;
+      }
+
+      // Vérifier si le fichier a l'extension YAML
+      if (!filePath.endsWith('.yaml')) {
+        console.warn(`Skipping non-YAML file: ${filePath}`);
+        continue;
+      }
+
       const id = tokenize(path.basename(filePath, '.yaml'));
       values[id] = yaml.load(fs.readFileSync(filePath, 'utf8'));
     }
@@ -29,6 +43,8 @@ const loadFilesFromDirectory = function(directory) {
 };
 
 const loadSets = function() {
+
+   console.log(path.join(__dirname, '../sets'))
    const sets = loadFilesFromDirectory(path.join(__dirname, '../sets'));
 
    // Add the id for each set.

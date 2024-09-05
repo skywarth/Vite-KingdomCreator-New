@@ -1,9 +1,10 @@
 <template>
+  <button @click="saveCardsImage">Save Card Image</button>
   <div class="ListofcontentCard Coef_scale12 card-rows">
-    <div v-for="Card in Cards" :key="Card.id" :class="getClassCard(Card)">
+    <div v-for="Card in CardsToDisplay" :key="Card.id" :class="getClassCard(Card)">
       <div class="card-container">
       <div class="full-card unselectable" style="z-index:0; cursor:default;
-           transform: scale(1); transition:none; position: sticky;">
+           transform: scale(1); transition:none; position: sticky;" :id="Card.id">
         <!-- is a card -->
         <!-- type of card -->
         <div class="full-card-template"
@@ -75,14 +76,18 @@
       </div>
     </div>
   </div>
-  <pre v-if="Cards.length=1" class="content Coef_scale12 card-rows" style="white-space: pre-wrap; font-family:Arial, Helvetica, sans-serif">
-    {{ Cards[0].text_html }}
+  <pre :v-if="CardsToDisplay.length < 2" class="content Coef_scale12 card-rows" style="white-space: pre-wrap; font-family:Arial, Helvetica, sans-serif">
+    {{ CardsToDisplay[0].text_html }}
   </pre>
 </template>
 
 <script lang="ts">
 /* import Vue, typescript */
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, nextTick } from 'vue';
+import html2canvas from 'html2canvas';
+import * as htmlToImage from 'html-to-image';
+
+import saveAs  from 'file-saver';
 import { useI18n } from 'vue-i18n'
 
 /* import Dominion Objects and type*/
@@ -168,8 +173,7 @@ export default defineComponent({
       return SupplyCardSorter.sort(cardIds, sortOption, t);
     }
 
-
-    const Cards = computed(() => {
+    const CardsToDisplay = computed(() => {
       let setName = props.set.setId
       // console.log(Cards_list.filter(card =>
       //   props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); })));
@@ -189,7 +193,6 @@ export default defineComponent({
         if (LocalTemp_CardsList.length > 0) LocalTemp_CardsList= [newWork]
         return LocalTemp_CardsList;
       }
-
       return LocalTemp_CardsList.filter(card =>
         props.set.supplyCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); }))
         .concat(
@@ -546,11 +549,114 @@ export default defineComponent({
       return (Year_set.find(elt => elt.id == CardSetid))!.year;
     }
 
-    const getCardArtwork = (cardArtwork:String) => {
-        return cardArtwork.replace(BASEURL,'');
+    const getCardArtwork = (cardArtwork:string) => {
+        return cardArtwork
+              .replace('%', '%25')
+              .replace('http://wiki','https://wiki')
+              .replace(BASEURL,'')
+              .replace("https://wiki.dominionstrategy.com/", "http://localhost:5173/img/artworks/");
     }
+
+    const saveCardsImage =  () => {
+
+      let CardsToProcess = []
+      let setName = props.set.setId
+      // console.log(Cards_list.filter(card =>
+      //   props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); })));
+      let LocalTemp_CardsList: DigitalCard[] = Cards_list;
+
+      if ( Work_Card.id !="" && setName == getCardSetById(Work_Card)) {
+        LocalTemp_CardsList = Cards_list.filter(card => card.id == Work_Card.id)
+        console.log(LocalTemp_CardsList)
+        const newWork: DigitalCard = {
+            ...Work_Card, // Copy properties from Work_Card
+            // Override secific properties
+            artwork: LocalTemp_CardsList[0].artwork,
+            frenchName: LocalTemp_CardsList[0].frenchName,
+            text_html: Work_Card.text_html,
+          };
+ 
+        if (LocalTemp_CardsList.length > 0) LocalTemp_CardsList= [newWork]
+        CardsToProcess = LocalTemp_CardsList;
+      } else {
+
+        CardsToProcess =  LocalTemp_CardsList.filter(card =>
+        props.set.supplyCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); }))
+        .concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); }))
+        ).concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.boons.some(function (item) { return item.shortId == card.id; }))
+        ).concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.ways.some(function (item) { return item.shortId == card.id; }))
+        ).concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.events.some(function (item) { return item.shortId == card.id; }))
+        ).concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.projects.some(function (item) { return item.shortId == card.id; }))
+        ).concat(
+          LocalTemp_CardsList.filter(card =>
+            props.set.landmarks.some(function (item) { return item.shortId == card.id; }))
+        ).concat(
+          Cards_list.filter(card =>
+            props.set.allies.some(function (item) { return item.shortId == card.id; }))
+        )
+      }
+
+      for (const card of CardsToProcess) {
+        console.log(card)
+        //saveCardImagehtml2canvas(card.id)
+        saveCardImagehtmltoimage(card.id)
+      }
+    }
+
+    const saveCardImagehtml2canvas = async (cardid:string) => {
+        try {
+          const cardElement = document.getElementById(cardid);
+          console.log(cardElement)
+          console.log(cardid)
+          if (cardElement) {
+            html2canvas(cardElement)
+              .then(canvas => {
+        var img = new Image();
+        img.src = canvas.toDataURL();
+        document.body.appendChild(img);
+                
+                canvas.toBlob(function(blob) {
+                if (blob) saveAs(blob, cardid +'.jpg');
+              });
+            });
+          }      
+        } catch (error) {
+          console.error('Erreur lors de la capture de l\'image:', error);
+        }
+    };
+
+    const saveCardImagehtmltoimage = async (cardid:string) => {
+        try {
+          const cardElement = document.getElementById(cardid);
+          console.log(cardElement)
+          console.log(cardid)
+          if (cardElement) {
+            htmlToImage.toJpeg(cardElement, { quality: 1 })
+              .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = cardid +'.jpg';
+                link.href = dataUrl;
+                link.click();
+              });
+          }
+        } catch (error) {
+          console.error('Erreur lors de la capture de l\'image:', error);
+        }
+    }; 
+
+
     return {
-      Cards,
+      CardsToDisplay,
       getClassCard,
       getHost,
       getCardTypeById,
@@ -566,7 +672,8 @@ export default defineComponent({
       getCardSetYear,
       cardImageUrl,
       incaseoferror,
-      getCardArtwork
+      getCardArtwork,
+      saveCardsImage
     }
   }
 });

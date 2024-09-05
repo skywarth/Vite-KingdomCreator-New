@@ -1,21 +1,63 @@
 import sharp from 'sharp'; 
 
-function resize(filename, output) {
-  const options =
-    isHorizontal(filename)
-      ? {
-        height:296,
-        width:473,
-        fit: 'contain',
-        background: { r: 0, g: 0, b: 0, alpha: 1 }
-      } : { 
-        height:473,
-        width:296,
-        fit: 'contain',
-        background: { r: 0, g: 0, b: 0, alpha: 1 }
-      };
+const HORIZONTAL = 'horizontal';
+const VERTICAL = 'vertical'
 
-  return sharp(filename).resize(options).toFile(output);
+async function resize(inputFilename, imageType, outputFilename, imageId='') {
+  const imageSharp = sharp(inputFilename);
+
+  // Obtenir les dimensions de l'image
+  const { width, height } = await imageSharp.metadata();
+  let newHeight, newWidth;
+  let extractLeftOffset, extractTopOffset;
+
+  // Définir les ratios par défaut et les options de redimensionnement
+  const Ratios = { // width, height
+    CardImage: { horizontal: [473, 296], vertical: [296, 473] },
+    CardArtwork: { horizontal: [177, 452], vertical: [287, 209] }
+  };
+  const Options = { //option for resize 
+    CardImage: { fit: 'contain', 
+        background: { r: 0, g: 0, b: 0, alpha: 1 },
+        quality : 100
+      },
+    CardArtwork: { fit: 'cover',
+        withoutEnlargement: true,
+        withoutReduction: true,
+        quality: 100,
+      }
+  };
+
+  // Déterminer la direction de l'image en fonction du nom du fichier
+  const isIimageDirection = isHorizontal(imageId ? imageId : inputFilename);
+
+  // Calculer les nouvelles dimensions en fonction du ratio souhaité et des dimensions de l'image
+  if (Ratios[imageType][isIimageDirection][1]*width/Ratios[imageType][isIimageDirection][0] >= height) {
+    newHeight = height
+    newWidth = Math.floor(
+          height * Ratios[imageType][isIimageDirection][0]/
+          Ratios[imageType][isIimageDirection][1])
+    extractLeftOffset= Math.floor((width - newWidth+1)/2)
+  } else {
+    newWidth= width
+    newHeight = Math.floor(
+          width * Ratios[imageType][isIimageDirection][1]/
+          Ratios[imageType][isIimageDirection][0])
+    extractTopOffset = Math.floor((height - newHeight+1)/2)
+  }
+
+  const mergedOptions = {
+      height: newHeight,
+      width: newWidth,
+      ...Options[imageType]
+    };
+
+  return imageSharp.resize(mergedOptions).toFile(outputFilename);
+  sharp(inputFilename).extract(
+        { left: extractLeftOffset,  top: extractTopOffset, 
+          width: newWidth, height: newHeight })
+      .toFile(outputFilename.replace('Art.','ArtExtract.'));
+  
 }
 
 function isHorizontal(name) {
@@ -31,10 +73,10 @@ function isHorizontal(name) {
   ]
   for (let i = 0; i < horizontal.length; i++) {
     if (name.indexOf(horizontal[i]) != -1) {
-      return true;
+      return HORIZONTAL;
     }
   }
-  return false;
+  return VERTICAL;
 }
 
 export default resize;

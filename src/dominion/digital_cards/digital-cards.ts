@@ -46,6 +46,9 @@ Temp_CardsList = Temp_CardsList.concat(Cards_list_Menagerie);
 import { Cards_list_Allies } from "./digital-cards - Allies"
 Temp_CardsList = Temp_CardsList.concat(Cards_list_Allies);
 
+import { Cards_list_Guilds } from "./digital-cards - Guilds"
+Temp_CardsList = Temp_CardsList.concat(Cards_list_Guilds);
+
 import { Cards_list_Guildscornucopia } from "./digital-cards - Guildscornucopia"
 Temp_CardsList = Temp_CardsList.concat(Cards_list_Guildscornucopia);
 

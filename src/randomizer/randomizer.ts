@@ -218,8 +218,6 @@ export class Randomizer {
     const selectedAllies: Ally[] = [];
     const selectedTraits: Trait[] = [];
 
-    console.log("in getAddons", selectedEvents, selectedLandmarks, selectedProjects, selectedWays, selectedAllies, selectedTraits)
-
     for (const card of selectedCards) {
       if (card instanceof Event) {
         if (selectedEvents.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.EVENT)) selectedEvents.push(card);
@@ -243,7 +241,6 @@ export class Randomizer {
         break;
       }
     }
-    console.log("in getAddons", selectedEvents, selectedLandmarks, selectedProjects, selectedWays, selectedAllies, selectedTraits)
     return {
       events: selectedEvents,
       landmarks: selectedLandmarks,

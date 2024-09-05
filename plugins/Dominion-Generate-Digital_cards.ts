@@ -9,7 +9,7 @@ const DigitalCardFileName = 'digital-cards - '
 const DigitalCardDir = 'src/dominion/digital_cards'
 
 // Fonction pour convertir le fichier xlsx de messages traduit en CSV
-export function Generate_Digitalcard (setid:string) {
+function Generate_Digitalcard_for_set (setid:string) {
   console.log("Starting Generation of Digital Card", setid)
   const inputfile = path.join(ArtworkFileDir, ArtworkFileName)
   const outputfile = path.join(DigitalCardDir, DigitalCardFileName + setid +'.ts')
@@ -80,3 +80,30 @@ function getRange(setid:string) {
   // Si aucune valeur correspondante n'est trouvée, retourner un tableau vide
   return ranges || [];
 }
+
+
+export function Generate_Digitalcard () {
+
+  Generate_Digitalcard_for_set('Baseset')
+  Generate_Digitalcard_for_set('Alchemy')
+  Generate_Digitalcard_for_set('Seaside')
+  Generate_Digitalcard_for_set('Cornucopia')
+  Generate_Digitalcard_for_set('Prosperity')
+  Generate_Digitalcard_for_set('Intrigue')
+  Generate_Digitalcard_for_set('Guilds')
+  Generate_Digitalcard_for_set('Hinterlands')
+  Generate_Digitalcard_for_set('Darkages')
+  Generate_Digitalcard_for_set('Adventures')
+  Generate_Digitalcard_for_set('Empires')
+  Generate_Digitalcard_for_set('Nocturne')
+  Generate_Digitalcard_for_set('Renaissance')
+  Generate_Digitalcard_for_set('Promo')
+  Generate_Digitalcard_for_set('Menagerie')
+  Generate_Digitalcard_for_set('Allies')
+  Generate_Digitalcard_for_set('Plunder')
+  Generate_Digitalcard_for_set('Guildscornucopia')
+
+}
+
+
+
