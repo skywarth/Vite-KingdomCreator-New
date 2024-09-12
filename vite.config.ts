@@ -3,27 +3,27 @@ import path from 'path';
 import packageJson from './package.json';
 
 
-//import VueDevTools from 'vite-plugin-vue-devtools'
-//import { viteStaticCopy } from 'vite-plugin-static-copy';
+import VueDevTools from 'vite-plugin-vue-devtools'
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 import vue from '@vitejs/plugin-vue';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
-import rollupDel from 'rollup-plugin-delete';
+import { del } from '@kineticcafe/rollup-plugin-delete';
 
 import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins/vite-dominion-content';
 
 const devServerPort = 5173
 
+
 export default defineConfig( ({ mode}) => {
-//console.log(process.argv)
-  if (mode === "production" || mode === "development") {
-   // mergeJSONLanguageFiles();
+
+  let base_URL = './'
+  if (mode === 'production') base_URL='/Vite-KingdomCreator-New'
+  console.log ('\nbuild mode is', mode)
+  console.log('process.env.VITE_BASE_URL', process.env.VITE_BASE_URL,'\n')
+  console.log('Base_URL', base_URL ,'\n')
+  {
     DominionContentGenerate('docs');
-/*     const sourceFile = './styles/normalize-v8.css';
-    const destinationFile = './docs/normalize.css';
-    fs.copyFile(sourceFile, destinationFile, () => {
-      console.log(`Le fichier a été copié avec succès de ${sourceFile} vers ${destinationFile}`);
-    }) */
     let ArgGenLocale = "Merge"
     if (process.argv.slice(3)[0] == "Gen") {
         ArgGenLocale = "Gen&Merge"
@@ -34,6 +34,7 @@ export default defineConfig( ({ mode}) => {
   return {
     appType: 'spa',
     publicDir: 'false',
+    base: base_URL, // Utilise la variable d'environnement si elle est définie,
     /*
     Do not use publicDir feature to avoid duplcation of all image and pdf files.
     */
@@ -44,6 +45,13 @@ export default defineConfig( ({ mode}) => {
       'Pkgejson_Date': JSON.stringify(new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'numeric' }))
     },
     plugins: [
+      { name: 'add-datetime',
+        transformIndexHtml(html) {
+          const datetime = new Date().toISOString();
+          console.log('\nGenerate Date and Time: ', datetime);
+          return html.replace(/id="datetime">/, `id="datetime">${datetime}`);
+        }
+      },
       vue(),
       //VueDevTools(),
       vueI18n({
@@ -53,7 +61,7 @@ export default defineConfig( ({ mode}) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      rollupDel({
+      del({
         targets: ['docs/*',
           '!docs/rules',
           '!docs/rules.fr',
@@ -64,13 +72,15 @@ export default defineConfig( ({ mode}) => {
           '!docs/locales',
           '!docs/locales/??.json',
           '!docs/CNAME',
+          '!docs/.nojekyll',
           '!docs/ads.txt'],
         verbose: false
       }), 
-      // viteStaticCopy({
-      //   targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
-      //       /*{ src: 'docs/normalize.css', dest: 'assets/' } */ ]
-      // }),
+       viteStaticCopy({
+         targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
+      //       /*{ src: 'docs/normalize.css', dest: 'assets/' } */ 
+        ]
+       }),
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
@@ -93,6 +103,7 @@ export default defineConfig( ({ mode}) => {
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
+          format: 'es',
           entryFileNames: 'assets/[name]-[hash].js',
           chunkFileNames: 'assets/[name]-[hash].js',
           assetFileNames: 'assets/[name]-[hash][extname]'

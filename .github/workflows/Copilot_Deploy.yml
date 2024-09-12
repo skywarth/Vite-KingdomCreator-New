@@ -1,0 +1,47 @@
+name: Copilot Deploy
+
+on:
+  workflow_dispatch: # Permet de déclencher manuellement l'action
+
+permissions:
+  contents: write
+  pages: write      # to deploy to Pages
+  id-token: write 
+
+jobs:
+  build:
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set environment variable - repository name
+        run: |
+          echo "VITE_BASE_URL=/${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}/" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: List files in root directory
+        run: |
+          ls -l './docs/assets'
+          file  ./docs/assets/index*.js
+          head -10 ./docs/assets/index-*.js
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

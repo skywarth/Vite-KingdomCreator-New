@@ -30,9 +30,10 @@ https://www.dominionrandomizer.com : served through GitHub Pages and deployed at
 https://71yeti.fr: served at through my personal site. Check the `/docs` directory in **master** to see the source served.
 
 ##### Commands
- npm run Gen  - build translation file locate at src/i18n/locales/messages/{lang} based on the translation maintained in 
-                Run the development server with hot reloading 
-`npm run dev` - Run the development server with hot reloading 
+`npm run Gen`  - Generate digital cars based on design/artworks.xlsx file and then run the development server with hot reloading `npm run dev`
+
+`npm run dev` - Run the development server with hot reloading.   
+During the setup process generation of translation file locate at src/i18n/locales/messages/{lang} based on the translation maintained in process/ressources/Pages.xlsx (build step thru Pages.csv)
 
 `npm run build` - Builds the static site and outputs the assets in `/docs`
 
