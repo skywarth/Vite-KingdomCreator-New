@@ -33,7 +33,11 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-
+      - name: Build 
+        run: npm run build -- --base=$PUBLIC_BASE_PATH #${{ inputs.public_base_path }}
+      - name: Copy index.html 
+        run: |
+          cp -f './docs/index.html' './docs/404.html'
       - name: Vite Github Pages Deployer
         uses: skywarth/vite-github-pages-deployer@v1.4.0
         with:
