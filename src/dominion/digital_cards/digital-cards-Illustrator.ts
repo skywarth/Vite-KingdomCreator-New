@@ -23,6 +23,7 @@ export const Year_set:YearOfSet[]=[
 { id: "menagerie",              year: 2020, order:160 },
 { id: "allies",                 year: 2021, order:170 },
 { id: "plunder",                year: 2023, order:180 },
+{ id: "risingsun",              year: 2024, order:190 },
 
 { id: "seaside2",               year: 2022, order:42 },
 { id: "seaside2add",            year: 2022, order:43 },

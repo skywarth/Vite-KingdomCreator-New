@@ -6,7 +6,7 @@
     <div class="llevel1-div">
       <div class="llevel2-div">
         <SwitchGroup as="div" class="llevel3-Switch switchGroupcss">
-          <SwitchLabel>{{ $t("Use Custom Configuration for DeckSize") }}</SwitchLabel>
+          <SwitchLabel>{{ $t("Use Custom Configuration for Set Display") }}</SwitchLabel>
           <Switch as="button" v-model="ownedRestricted" v-slot="{ checked }" :class="ownedRestricted ? 'switch-bg-indigo-600' : 'switch-bg-gray-200'"
             class="relative-switchcss">
             <span class="SwitchSpan" :class="{ 'translate-x-5': checked, 'translate-x-0': !checked }" />

@@ -14,6 +14,7 @@ import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins
 //import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
 
 const devServerPort = 5173
+const publicationDir = 'docs'
 
 export default defineConfig( ({ mode}) => {
 //console.log(process.argv)
@@ -29,7 +30,8 @@ export default defineConfig( ({ mode}) => {
 
   return {
     appType: 'spa',
-    publicDir: 'false',
+    base: './',
+    publicDir: false, //  Do not use publicDir feature to avoid duplcation of all image and pdf files.
     /*
     Do not use publicDir feature to avoid duplcation of all image and pdf files.
     */
@@ -40,34 +42,41 @@ export default defineConfig( ({ mode}) => {
       'Pkgejson_Date': JSON.stringify(new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'numeric' }))
     },
     plugins: [
+      { name: 'add-datetime',
+        transformIndexHtml(html) {
+          const datetime = new Date().toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'medium' });
+          console.log('\nGenerate Date and Time: ', datetime);
+          return html.replace(/id="datetime">/g, `id="datetime">${datetime}`);
+        }
+      },
       vue(),
-      // mode === "development" && VueDevTools(),
+      //VueDevTools(),
       vueI18n({
-        include: path.resolve(__dirname, './docs/locales/*.json'),
+        include: path.resolve(__dirname, './'+ publicationDir +'/locales/*.json'),
         compositionOnly: true, 
         fullInstall: true,
         allowDynamic: true,
         runtimeOnly: false
       }),
       del({
-        targets: ['docs/*',
-          '!docs/rules',
-          '!docs/rules.fr',
-          '!docs/rules.de',
-          '!docs/img',
-          '!docs/favicon.ico',
-          '!docs/dominion-content.js',
-          '!docs/locales',
-          '!docs/locales/??.json',
-          '!docs/CNAME',
-          '!docs/ads.txt'],
+        targets: [publicationDir +'/*',
+          '!'+ publicationDir +'/rules',
+          '!'+ publicationDir +'/rules.fr',
+          '!'+ publicationDir +'/rules.de',
+          '!'+ publicationDir +'/img',
+          '!'+ publicationDir +'/favicon.ico',
+          '!'+ publicationDir +'/dominion-content.js',
+          '!'+ publicationDir +'/locales',
+          '!'+ publicationDir +'/locales/??.json',
+          '!'+ publicationDir +'/CNAME',
+          '!'+ publicationDir +'/.nojekyll',
+          '!'+ publicationDir +'/ads.txt'],
         verbose: false
       }), 
-      viteStaticCopy({
-        targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
-                  { src: 'styles/tailwind-ui.min.css', dest: 'assets/' }
+       viteStaticCopy({
+         targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
         ]
-      }),
+      })
     ],
     optimizeDeps: {
       include: ['vue', 'vue-i18n']
@@ -77,61 +86,60 @@ export default defineConfig( ({ mode}) => {
       alias: {
         // Alias pour les modules non-Esbuild compatibles avec Vite
         //'@': fileURLToPath(new URL('./src', import.meta.url)),
-        //'vue-i18n': 'vue-i18n/dqist/vue-i18n.esm-bundler.js',
+        //'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
         //'vue': 'vue/dist/vue.esm-bundler.js', 
       },
     },
     build: {
       minify: false,
-      outDir: 'docs',
-      // to avoid having an empty docs directory 
+      outDir: publicationDir,
       emptyOutDir: false,
       sourcemap: false,
-      chunkSizeWarningLimit: 2000,
+/*       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           entryFileNames: 'assets/[name]-[hash].js',
           chunkFileNames: 'assets/[name]-[hash].js',
           assetFileNames: 'assets/[name]-[hash][extname]'
         }
-      },
+      }, */
     },
     server: {
       open: '/',
       proxy: {
         '^/$': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => '/index.html',
+          rewrite: () => '/index.html',
         },
         '/dominion-content.js': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/dominion-content.js/, '/docs/dominion-content.js'),
+          rewrite: (path) => path.replace(/^\/dominion-content.js/, '/'+ publicationDir +'/dominion-content.js'),
         },
         '/normalize': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/normalize/, '/docs/normalize'),
+          rewrite: (path) => path.replace(/^\/normalize/, '/'+ publicationDir +'/normalize'),
         },
         '/favicon.ico': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/favicon.ico/, '/docs/favicon.ico'),
+          rewrite: (path) => path.replace(/^\/favicon.ico/, '/'+ publicationDir +'/favicon.ico'),
         },
         '/img': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/img/, '/docs/img'),
+          rewrite: (path) => path.replace(/^\/img/, '/'+ publicationDir +'/img'),
         },
         '/rules': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/rules/, '/docs/rules'),
+          rewrite: (path) => path.replace(/^\/rules/, '/'+ publicationDir +'/rules'),
         },
         '/locales': {
           target: 'http://localhost:' + devServerPort,
-          rewrite: (path) => path.replace(/^\/locales/, '/docs/locales'),
+          rewrite: (path) => path.replace(/^\/locales/, '/'+ publicationDir +'/locales'),
         },
         '/?': {
           target: 'http://localhost:' + devServerPort,
           // rewrite: (path) => path.replace(/^\/?/, '/docs/index.html?'),
           rewrite: (path) => path.replace(/^\/?/, '/index.html?'),
-        }
+        },
       },
     },
     preview: {

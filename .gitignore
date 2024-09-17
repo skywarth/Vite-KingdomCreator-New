@@ -6,30 +6,29 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
 node_modules
-.DS_Store
-dist
-dist-ssr
-coverage
-*.local
-
-/cypress/videos/
-/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*
 .vscode/extensions.json
 .vscode/settings.json
+
+docs/assets
+docs/index.html
+docs/locales/*
+process/processed/
+
+# other files anf folders
+dist-ssr
+coverage
+*.local
+/cypress/videos/
+/cypress/screenshots/
 .idea
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-package-lock.json
-components.d.ts
-docs/dominion-content.js
-docs/normalize.css
-docs/locales/
+.DS_Store
+dist

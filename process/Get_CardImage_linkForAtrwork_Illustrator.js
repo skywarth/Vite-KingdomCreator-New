@@ -3,30 +3,68 @@ import fs from 'fs/promises'; // Using promises for async/await
 import Jfs from 'fs';
 import path from 'path';
 
-import Loader from './loader.js'; // read <set>.yaml
+import { loadSets }  from './loader.js'; // read <set>.yaml
 import resize from './resize.js'; // resize an Image
 
 import select, { Separator } from '@inquirer/select';
 import checkbox from '@inquirer/checkbox';
 
-const sets = Loader.loadSets(); // Assuming loadSets is async function
+const sets = loadSets(); // Assuming loadSets is async function
 
 const WORK_DIR = "processed"
 const CARDS_DIR = "cards"
-const ARTWORK_DIR = "artworks2"
+const ARTWORK_DIR = "artworks"
 const DOC_IMG = "processed/docs/img"
 
 let Request = ""
-let matchExpr = ""
+let matchExpr
+
+
+// Structure pour stocker les relations de dépendance
+const skipMap = [
+  ['Misery', ['Miserable', 'Twice Miserable']],
+  ['Miserable', ['Twice Miserable']],
+  ['Delusion', ['Deluded']],
+  ['Envy', ['Envious']],
+  ['Sauna_Avanto', ['Sauna / Avanto - to hide split card']]
+];
+const cardsToIgnore = [
+  'Potion_2nd',
+  'Copper_2nd', 'Silver_2nd', 'Gold_2nd',
+  'Curse_2nd', 'Estate_2nd', 'Duchy_2nd', 'Province_2nd',
+  'Copper2', 'Silver2', 'Gold2',
+  'Curse2', 'Estate2', 'Duchy2', 'Province2',
+  'Copper2_2nd', 'Silver2_2nd', 'Gold2_2nd',
+  'Curse2_2nd', 'Estate2_2nd', 'Duchy2_2nd', 'Province2_2nd',
+  'Platinum_2nd', 'Colony_2nd',
+]
+
+
+// Fonction pour vérifier si une carte doit être ignorée
+function shouldSkip(cardName, presentCards) {
+  return skipMap.some(entry => entry[1].includes(cardName) && presentCards.includes(entry[0]));
+}
 
 async function getInfos(InfoType, cards) {
+  if (InfoType === 'CardArtwork') {
+    // Convertir en un ensemble basé sur la propriété "name"
+    const uniqueCards = new Set(cards.map(card => card.name));
+    // Reconstruire la liste avec les cartes uniques
+    cards = [...uniqueCards].map(name => cards.find(card => card.name === name));
+  }
   for (let i = 0; i < cards.length; i++) {
     switch (InfoType) {
       case 'Illustrator':
       case 'ArtworkInfo':
-      case 'CardImage':
       case 'CardArtwork':
-        await getCardInfo((cards[i]), InfoType)
+        if (cardsToIgnore.includes(cards[i].name)) continue; 
+        if (shouldSkip(cards[i].name, cards.map(c => c.name))) {
+          console.log(`Ignoring card: ${cards[i].name}`);
+          continue;
+        }
+
+      case 'CardImage':
+          await getCardInfo((cards[i]), InfoType)
         break;
       default:
         console.log("Invalid InfoType")
@@ -87,16 +125,17 @@ async function getCardInfo(card, type) {
 
       Jfs.mkdirSync(path.dirname(tempFilename), { recursive: true });
       Jfs.mkdirSync(path.dirname(outputFilename), { recursive: true });
-      
-      const writer = Jfs.createWriteStream(tempFilename);
-      imageResponse.data.pipe(writer);
 
-      return new Promise((resolve) => {
+      const writer = Jfs.createWriteStream(tempFilename);
+      await imageResponse.data.pipe(writer);
+
+      await new Promise((resolve) => {
         writer.on("finish", () => {
           resize(tempFilename, type, outputFilename, card.id);
           resolve(); 
         });
       });
+      return;
       break;
   }
 }
@@ -113,6 +152,7 @@ function getCards(set) {
   if (set.othercards) cards.push(...set.othercards
     .filter(card => card.type != "Mat Vertical")
     .filter(card => card.type != "Mat Horizontal")
+    .filter(card => card.type != "Mat Square")
     .filter(card => card.type != "Tokens")
     .filter(card => card.type != "advToken")
   );
@@ -154,7 +194,9 @@ function cleanCardName(card) {
     case 'hinterlands':
     case 'hinterlands2':
     case 'hinterlands2add':
-      card.name = card.name.replace("-", "");
+      const exceptionForSpace_hinterlands = ["Fool's Gold"];
+      if (exceptionForSpace_hinterlands.indexOf(card.name) >= 0) card.name = card.name.replace("'", "");
+      card.name = card.name.replace("-", "").replace("'", "%27");
       break;
     case 'alchemy':
       card.name = card.name.replace("'", "");
@@ -164,7 +206,20 @@ function cleanCardName(card) {
     case 'prosperity2add':
       card.name = card.name.replace("'", "");
       break;
-
+    case 'nocturne':
+      switch (card.name) {
+        case 'Miserable':
+        case 'Twice Miserable':
+          card.name = 'Misery';
+          break;
+        case 'Envious':
+          card.name = 'Envy';
+          break;
+        case 'Deluded':
+          card.name = 'Delusion';
+          break;
+      }
+      break;
     default:
   };
 }
@@ -196,7 +251,7 @@ const setChoices = Object.keys(sets).map(setName => ({
   value: setName
 }));
 
-const selectedSet = await select({
+const selectedSets = await checkbox({
   message: "Select a set",
   choices: [
     { name: 'All sets', value: 'ALL_SETS' },
@@ -207,25 +262,32 @@ const selectedSet = await select({
   loop: false
 });
 
-let selectedCards
-if (selectedSet.includes('ALL_SETS')) { selectedCards = getAllCards()
+let selectedCards=[]
+if (selectedSets.includes('ALL_SETS')) { selectedCards = getAllCards()
 } else {
-  /* Define Cards to query */
-  selectedCards = await checkbox({
-    message: "Select cards - no selection = Cancel",
-    choices: [
-      { name: 'All cards', value: 'ALL_CARDS' },
-      new Separator(),
-      ...getCards(sets[selectedSet]).map(card => ({
-        name: card.name,
-        value: card
-      }))
-    ],
-    pageSize: 15,
-    loop: false
-  });
-  if (selectedCards.includes('ALL_CARDS')) { selectedCards = getCards(sets[selectedSet]) }
-} 
+  if (selectedSets.length==1) {
+    /* Define Cards to query */
+    selectedCards = await checkbox({
+      message: "Select cards - no selection = Cancel",
+      choices: [
+        { name: 'All cards', value: 'ALL_CARDS' },
+        new Separator(),
+        ...getCards(sets[selectedSets[0]]).map(card => ({
+          name: card.name,
+          value: card
+        }))
+      ],
+      pageSize: 15,
+      loop: false
+    });
+    if (selectedCards.includes('ALL_CARDS')) { selectedCards = getCards(sets[selectedSets[0]]) }
+  } else {
+    for (const selectedSet of selectedSets) {
+      selectedCards.push(...getCards(sets[selectedSet]));
+    }
+  }
+}
+console.log(selectedCards.length, 'cards selected.')
 
 /* Query */
 getInfos(type, selectedCards);

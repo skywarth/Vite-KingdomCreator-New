@@ -18,7 +18,7 @@ interface RouteConfig {
 
 export function AppCreateRouterMultiple(routes: RouteConfig[]) {
   const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: routes.flatMap(route => route.paths.map(path => ({
       path,
       component: route.component

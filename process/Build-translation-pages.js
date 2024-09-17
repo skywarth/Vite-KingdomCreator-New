@@ -1,7 +1,9 @@
 import fs from "fs";
-import Loader from "./loader.js";
+import path from 'path'
+//import Loader from "./loader.js";
+import { loadSets }  from './loader.js'; // read <set>.yaml
 
-const sets = Loader.loadSets(); // Assuming loadSets is async function
+const sets = loadSets(); // Assuming loadSets is async function
 let TRANSLATION_CSV = "./resources/pages.csv"
 const PROCESSED = "processed"
 let PROCESSING_DIR = `./${PROCESSED}/src/i18n/locales/messages`
@@ -168,10 +170,13 @@ function GenerateTranslation() {
               Add2ndEditions(filenamesplitted[1],names[languages[j]]);
 
 
-              TestAndCreateDir(`${PROCESSING_DIR}/${lang}/cards`)
-              filename = `${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-            } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
-          } else filename = `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
+              TestAndCreateDir(path.join(PROCESSING_DIR, lang, 'cards'))
+              filename = path.join(PROCESSING_DIR, lang, 'cards', filenamesplitted[0]+'.'+languages[j]+ '.'+ filenamesplitted[1]+ '.json') 
+                  //`${PROCESSING_DIR}/${lang}/cards/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+            } else filename = path.join(PROCESSING_DIR, lang, filenamesplitted[0]+'.'+languages[j]+ '.'+ filenamesplitted[1]+ '.json') 
+                // `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.${filenamesplitted[1]}.json`
+          } else filename = path.join(PROCESSING_DIR, lang, filenamesplitted[0]+'.'+languages[j]+  '.json') 
+              // `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
           //console.log(filename)
           fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
         }

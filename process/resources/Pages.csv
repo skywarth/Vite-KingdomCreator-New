@@ -154,8 +154,10 @@ page-settings	settings_subtitle_desksize	Adjust settings for kingdom size, add-o
 page-settings	settings_subtitle_owned_sets	Reduce display to only onwed sets			Réduiser l'affichage aux extensions que vous possédez		
 page-settings	settings_subtitle_constraint	Remove cards from randomizer selection			Ecarter des cartes pour qu'elles ne soient pas utilisées lors de la génération		
 page-settings	settings_page_subtitle2	Customize your game experience by adjusting settings for kingdom size, add-ons, and individual card types.		Passen Sie Ihr Spielerlebnis durch Anpassen der Einstellungen für Königreichgröße, Add-Ons und einzelne Kartentypen an.	Personnalisez votre expérience de jeu en ajustant les paramètres de la taille du royaume, des extensions et des types de cartes individuels.	Personaliza tu experiencia de juego ajustando la configuración del tamaño del reino, los complementos y los tipos de cartas individuales.	
+page-settings	Owned sets Settings	Owned sets Settings			Paramètres relatif à l'affichage des extensions		
 page-settings	Desk Size Setting	Desk Size Settings			Paramètres relatif au nb de cartes		
 page-settings	Use Custom Configuration for DeckSize	Use Custom Configuration for DeckSize			Utiliser la configuration spécifique		
+page-settings	Use Custom Configuration for Set Display	Use Custom Configuration for Set Display			Utiliser la configuration spécifique		
 page-settings	NB of kingdom for the Game	NB of kingdom for the Game			Nb de royaumes à utiliser		
 page-settings	Addons	Addons			Addons		
 page-settings	Force Addons usage	Force Addons usage			Forcer l'utilisation des Addons		
