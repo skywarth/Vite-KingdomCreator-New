@@ -66,6 +66,7 @@ export default defineConfig( ({ mode}) => {
           '!'+ publicationDir +'/img',
           '!'+ publicationDir +'/favicon.ico',
           '!'+ publicationDir +'/dominion-content.js',
+          '!'+ publicationDir +'/_redirects',
           '!'+ publicationDir +'/locales',
           '!'+ publicationDir +'/locales/??.json',
           '!'+ publicationDir +'/CNAME',
