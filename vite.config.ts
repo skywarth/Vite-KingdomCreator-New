@@ -58,7 +58,7 @@ export default defineConfig( ({ mode}) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      del({
+      /* del({
         targets: [publicationDir +'/*',
           '!'+ publicationDir +'/rules',
           '!'+ publicationDir +'/rules.fr',
@@ -73,10 +73,10 @@ export default defineConfig( ({ mode}) => {
           '!'+ publicationDir +'/.nojekyll',
           '!'+ publicationDir +'/ads.txt'],
         verbose: false
-      }), 
+      }),  */
        viteStaticCopy({
-         targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' },
-        ]
+        targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' }
+          ]
       })
     ],
     optimizeDeps: {
@@ -96,14 +96,14 @@ export default defineConfig( ({ mode}) => {
       outDir: publicationDir,
       emptyOutDir: false,
       sourcemap: false,
-/*       chunkSizeWarningLimit: 2000,
+      chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           entryFileNames: 'assets/[name]-[hash].js',
           chunkFileNames: 'assets/[name]-[hash].js',
           assetFileNames: 'assets/[name]-[hash][extname]'
         }
-      }, */
+      }, 
     },
     server: {
       open: '/',
