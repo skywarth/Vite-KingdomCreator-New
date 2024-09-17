@@ -26,6 +26,7 @@ jobs:
       - name: Set environment variable - repository name
         run: |
           echo "VITE_GITHUB_BASE_URL=/${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_ENV
+          rm -f './docs/CNAME'
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -36,7 +37,7 @@ jobs:
       - name: Vite Github Pages Deployer
         uses: skywarth/vite-github-pages-deployer@v1.4.0
         with:
-          public_base_path: '/My-App'
+          public_base_path: '/Vite-KingdomCreator-New'
           build_path: './docs'
         id: deploy_to_pages
       - name: Set environment variable - repository name
