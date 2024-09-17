@@ -127,6 +127,7 @@ export default defineComponent({
     }
     
     const getHost= () => {
+      return "";
       return window.location.protocol + "//" + window.location.host;
     }
 

@@ -11,7 +11,7 @@
       </div>
       <div class="right-top-sign-div">
         <img style="width: 15px; height: 15px; cursor: pointer;"
-          :src='"/img/elements/" + isPlayFavImg(kingdom.name) + ".png"' 
+          :src='"./img/elements/" + isPlayFavImg(kingdom.name) + ".png"' 
 	  @click="onclick($event, kingdom.name)" 
 	/>
       </div>
@@ -237,11 +237,11 @@ export default defineComponent({
         /* remove it */
         PlayedGames.splice(myIndex, 1)
         setsStore.updatePlayedGames(PlayedGames)
-        ev.target.src = "/img/elements/light_blue_cross.png"
+        ev.target.src = "./img/elements/light_blue_cross.png"
       } else {
         /* add it */
         setsStore.updatePlayedGames(PlayedGames.concat(kingdomName))
-        ev.target.src = "/img/elements/check.png"
+        ev.target.src = "./img/elements/check.png"
       }
       if (setsStore.showFilterPlayGames != "PNP") {
         forceRerender()

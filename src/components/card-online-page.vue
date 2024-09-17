@@ -8,7 +8,7 @@
         <!-- is a card -->
         <!-- type of card -->
         <div class="full-card-template"
-          :style='"background-image: url(" + getHost() + "/img/Templates-card-type/" + getCardTypeById(Card).png + ".png);"'>
+          :style='"background-image: url(" + getHost() + "./img/Templates-card-type/" + getCardTypeById(Card).png + ".png);"'>
         </div>
         <!-- Card Image -->
         <div class="full-card-art"
@@ -57,7 +57,7 @@
           </div>
           <div class="bottom-right-container-full">
             <div class="expansion-icon-bottom-full"
-              :style='"background-image: url(" + getHost() + "/img/Templates-set/" + getCardSetById(Card) + "-small.png);"'>
+              :style='"background-image: url(" + getHost() + "./img/Templates-set/" + getCardSetById(Card) + "-small.png);"'>
             </div>
           </div>
 
@@ -229,6 +229,7 @@ export default defineComponent({
     }
 
     const getHost = () => {
+      return "";
       return window.location.protocol + "//" + window.location.host;
     }
     const getSupplyCard = () => {

@@ -154,6 +154,8 @@ export default defineComponent({
     }
 
     const getHost= () => {
+      return ""
+      // for github and more
       return window.location.protocol + "//" + window.location.host;
     }
 
