@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build 
-        run: npm run build -- --base=$PUBLIC_BASE_PATH #${{ inputs.public_base_path }}
+        run: npm run build -- --base=$VITE_GITHUB_BASE_URL
       - name: Copy index.html 
         run: |
           cp -f './docs/index.html' './docs/404.html'
@@ -47,3 +47,4 @@ jobs:
       - name: Set environment variable - repository name
         run: |
           cat ./docs/index.html
+          cat ./docs/404.html
