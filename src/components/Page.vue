@@ -125,7 +125,7 @@ class LocalMenuItem {
 let MENU_ITEMS = [
   new LocalMenuItem(MenuItemType.RANDOMIZER, "Randomizer", "/index"),
   new LocalMenuItem(MenuItemType.SETS, "Recommended Kingdoms", "/sets"),
-  new LocalMenuItem(MenuItemType.RULES, "Rules", "/rules"),
+  new LocalMenuItem(MenuItemType.RULES, "Rules", "/rulebooks"),
   new LocalMenuItem(MenuItemType.BOXES, "Box content", "/boxes"),
   new LocalMenuItem(MenuItemType.SETTINGS, "Settings", "/settings")
 ];

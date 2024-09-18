@@ -18,7 +18,7 @@ import '../styles/settings.styl';
 initialize(AppCreateRouterMultiple([
                 { paths: ["/index.html", "/index", "/", ""], component : Index },
                 { paths: ["/sets"], component : Sets },
-                { paths: ["/rules"], component : Rules },
+                { paths: ["/rulebooks"], component : Rules },
                 { paths: ["/boxes"], component : Boxes },
                 { paths: ["/cards"], component : Cards },
                 { paths: ["/settings"], component : Settings },
