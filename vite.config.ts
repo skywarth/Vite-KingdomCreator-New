@@ -58,7 +58,7 @@ export default defineConfig( ({ mode}) => {
         allowDynamic: true,
         runtimeOnly: false
       }),
-      /* del({
+      del({
         targets: [publicationDir +'/*',
           '!'+ publicationDir +'/rules',
           '!'+ publicationDir +'/rules.fr',
@@ -66,14 +66,12 @@ export default defineConfig( ({ mode}) => {
           '!'+ publicationDir +'/img',
           '!'+ publicationDir +'/favicon.ico',
           '!'+ publicationDir +'/dominion-content.js',
-          '!'+ publicationDir +'/_redirects',
           '!'+ publicationDir +'/locales',
           '!'+ publicationDir +'/locales/??.json',
           '!'+ publicationDir +'/CNAME',
-          '!'+ publicationDir +'/.nojekyll',
           '!'+ publicationDir +'/ads.txt'],
         verbose: false
-      }),  */
+      }),
        viteStaticCopy({
         targets: [ { src: 'styles/normalize-v8.css', dest: 'assets/' }
           ]
@@ -92,7 +90,7 @@ export default defineConfig( ({ mode}) => {
       },
     },
     build: {
-      minify: false,
+      minify: true,
       outDir: publicationDir,
       emptyOutDir: false,
       sourcemap: false,
