@@ -26,6 +26,7 @@ export enum SetId {
   PROSPERITY_2 = "prosperity2",
   PROSPERITY_2_ADD = "prosperity2add",
   RENAISSANCE = "renaissance",
+  RISING_SUN = "risingsun",
   SEASIDE = "seaside",
   SEASIDE_2 = "seaside2",
   SEASIDE_2_ADD = "seaside2add",
