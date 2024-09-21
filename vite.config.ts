@@ -36,10 +36,10 @@ export default defineConfig( ({ mode}) => {
     Do not use publicDir feature to avoid duplcation of all image and pdf files.
     */
     define: {
-      'Pkgejson_Version': JSON.stringify(packageJson.version),
-      'Pkgejson_Name': JSON.stringify(packageJson.name),
-      'Pkgejson_URL': JSON.stringify(packageJson.repository.url),
-      'Pkgejson_Date': JSON.stringify(new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'numeric' }))
+      Pkgejson_Version: JSON.stringify(packageJson.version),
+      Pkgejson_Name: JSON.stringify(packageJson.name),
+      Pkgejson_URL: JSON.stringify(packageJson.repository.url),
+      Pkgejson_Date: JSON.stringify(new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'numeric' }))
     },
     plugins: [
       { name: 'add-datetime',
@@ -51,9 +51,10 @@ export default defineConfig( ({ mode}) => {
       },
       vue(),
       //VueDevTools(),
+      //legacy({ targets: ['defaults'] }),
       vueI18n({
         include: path.resolve(__dirname, './'+ publicationDir +'/locales/*.json'),
-        compositionOnly: true, 
+        compositionOnly: true,
         fullInstall: true,
         allowDynamic: true,
         runtimeOnly: false
@@ -143,7 +144,7 @@ export default defineConfig( ({ mode}) => {
       },
     },
     preview: {
-     proxy:{}
+     proxy: { }
     }
   }
 });
