@@ -68,6 +68,7 @@ export default defineConfig( ({ mode}) => {
           '!'+ publicationDir +'/dominion-content.js',
           '!'+ publicationDir +'/locales',
           '!'+ publicationDir +'/locales/??.json',
+          '!'+ publicationDir +'/404.html',
           '!'+ publicationDir +'/CNAME',
           '!'+ publicationDir +'/ads.txt'],
         verbose: false
