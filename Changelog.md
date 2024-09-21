@@ -12,13 +12,13 @@ Feel free to propose any improvements you see fit and send me a pull request!
 it uses vue 3, vite.js, Pinia, vue-i18n and node.js v20
 
 ### Changelog
-2024/07/10 - 6.3.0
+2024/09/23 - 6.3.0
 Dev deploy on github pages
   Fix blakevanlan/KingdomCreator # 166 - Additional Cards such as Colonies/Platinum or Shelters are not displaying correctly
   Fix blakevanlan/KingdomCreator # 168 - Can't open the Recommended Kingdoms and Rules page directly
   Feat blakevanlan/KingdomCreator # 164 - Allow Customization for the Events, Ways, and Landmarks section
   Feat blakevanlan/KingdomCreator PR # 157 - Enable running from a subdirectory
-  
+
 
 2024/07/10 - 6.2.0
 New release

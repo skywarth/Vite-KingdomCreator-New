@@ -4,6 +4,7 @@ import packageJson from './package.json';
 
 import VueDevTools from 'vite-plugin-vue-devtools'
 import vue from '@vitejs/plugin-vue';
+import legacy from '@vitejs/plugin-legacy'
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { del } from '@kineticcafe/rollup-plugin-delete';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
@@ -13,17 +14,17 @@ import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins
 // On-demand components auto importing for Vue.
 //import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
 
-const devServerPort = 5173
-const publicationDir = 'docs'
+const devServerPort = 5173;
+const publicationDir = 'docs';
 
 export default defineConfig( ({ mode}) => {
 //console.log(process.argv)
-  if (mode === "production" || mode === "development") {
+  if (mode === 'production' || mode === 'development') {
    // mergeJSONLanguageFiles();
     DominionContentGenerate('docs');
-    let ArgGenLocale = "Merge"
-    if (process.argv.slice(3)[0] == "Gen") {
-      ArgGenLocale = "Gen&Merge"
+    let ArgGenLocale = 'Merge';
+    if (process.argv.slice(3)[0] == 'Gen') {
+      ArgGenLocale = 'Gen&Merge';
     }
     HandleLocaleGenerateAndMerge(ArgGenLocale, 'docs')
   }
@@ -51,7 +52,7 @@ export default defineConfig( ({ mode}) => {
       },
       vue(),
       //VueDevTools(),
-      //legacy({ targets: ['defaults'] }),
+      legacy({ targets: ['defaults'] }),
       vueI18n({
         include: path.resolve(__dirname, './'+ publicationDir +'/locales/*.json'),
         compositionOnly: true,
