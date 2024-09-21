@@ -14,7 +14,7 @@ import { DominionContentGenerate, HandleLocaleGenerateAndMerge } from './plugins
 // On-demand components auto importing for Vue.
 //import UnPluginVueComponents from 'unplugin-vue-components/vite'; 
 
-const devServerPort = 5173;
+const devServerPort = 5175;
 const publicationDir = 'docs';
 
 export default defineConfig( ({ mode}) => {
