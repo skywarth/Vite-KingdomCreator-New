@@ -3,7 +3,9 @@
     <div class="content main settings">
       <DeskSizeSettings />
       <OwnedExpansionsSettings />
-      <RandomizeConstraintsSettings />
+      <div v-if="buildType === 'development'">
+        <RandomizeConstraintsSettings  />
+      </div>
     </div>
   </Page>
 </template>
@@ -29,7 +31,10 @@ export default defineComponent({
     useBase();
     const selectedType = MenuItemType.SETTINGS;
 
+    const buildType = process.env.NODE_ENV 
+  
     return {
+      buildType,
       selectedType,
     };
   }
