@@ -39,7 +39,7 @@ export class Kingdom {
   }
 
   public isKingdomValid() {
-    if (this.supply.supplyCards.length != NUM_CARDS_IN_KINGDOM) return false;
+    if (this.supply.supplyCards.length != NUM_CARDS_IN_KINGDOM()) return false;
     if (this.supply.supplyCards.some(card => YOUNG_WITCH_IDS.includes(card.id))) {
       if (this.supply.baneCard == null) return false;
     } else {

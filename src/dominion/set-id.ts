@@ -26,6 +26,7 @@ export enum SetId {
   PROSPERITY_2 = "prosperity2",
   PROSPERITY_2_ADD = "prosperity2add",
   RENAISSANCE = "renaissance",
+  RISING_SUN = "risingsun",
   SEASIDE = "seaside",
   SEASIDE_2 = "seaside2",
   SEASIDE_2_ADD = "seaside2add",
@@ -99,7 +100,7 @@ export const MultipleVersionSets:VersionOfSet[]= [
 export const HideMultipleVersionSets :SetId[] = MultipleVersionSets.map((set) => set.idv2);
 
 // to use in randomizer.ts
-export const New_SETS_WITH_DUPLICATES: VersionOfSet[]= MultipleVersionSets.concat([
+export const SETS_WITH_DUPLICATES: VersionOfSet[]= MultipleVersionSets.concat([
     { id: SetId.BASE_SET_2_ADD,         idv2: SetId.BASE_SET_2 },
     { id: SetId.INTRIGUE_2_ADD,         idv2: SetId.INTRIGUE_2 },
     { id: SetId.SEASIDE_2_ADD,          idv2: SetId.SEASIDE_2 },

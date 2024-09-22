@@ -13,8 +13,6 @@ import { YOUNG_WITCH_IDS, BANE_MIN_COST, BANE_MAX_COST, MOUSE_WAY_ID, MOUSE_MAX_
 import { FERRYMAN_IDS, FERRYMAN_MIN_COST, FERRYMAN_MAX_COST } from "./special-need-cards";
 import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
 
-//const NUM_CARDS_IN_KINGDOM = 10;
-
 export class SupplyBuilder {
   private dividers: SupplyDivider[] = [];
   private requirements: SupplyRequirement[] = [];
@@ -61,7 +59,7 @@ export class SupplyBuilder {
   }
 
   createUnfilledDivisions(existingCards: SupplyCard[]): SupplyDivision[] {
-    let division = new SupplyDivision(this.cards, [], [], NUM_CARDS_IN_KINGDOM, new Map());
+    let division = new SupplyDivision(this.cards, [], [], NUM_CARDS_IN_KINGDOM(), new Map());
     division = this.prepareDivisionForBanning(division, existingCards);
     division = SupplyDivisions.applyBans(division, this.bans);
     division = this.addExistingCardsAsAvailable(division, existingCards);

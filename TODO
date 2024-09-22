@@ -16,14 +16,12 @@ ok Updatepack Guild/cornucipia
 ok traduction Updatepack Guild/cornucipia
 ok Modifier SETS_WITH_DUPLICATES dans randomizer.ts pour utiliser une définition dasn set-id.ts
 ok gerer le cas de duplication de guilds et cornucopia sur guildscornucopia et guildscornucopia2
-
 kingdom Guild/cornucipia ok
-
 CSS taille bandeau si taill ecran ok
 
 cartes en Francais
     Pillage
-        illustrateurs
+    Rising Sun
     Carte promo (1)
     carte Guild Cornucopia 2
 
@@ -34,12 +32,8 @@ Recherche de cartes par critères
 Settings
     liste des extensions à afficher/masquer
     nb de cartes à selectionner
-    nb de cartes par exetension
-    extensions au hasrad
+    nb de cartes par extension
+    extensions au hasard
     
 Gestion sur un cloud de mes paramètres
 
-https://medium.com/@aishwaryaparab1/deploying-vite-deploying-vite-app-to-github-pages-166fff40ffd3
-
-https://www.youtube.com/watch?v=dR9Swhw0L50
-https://github.com/sitek94/vite-deploy-demo
