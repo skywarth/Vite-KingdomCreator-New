@@ -18,7 +18,7 @@ Dev deploy on github pages
   Fix blakevanlan/KingdomCreator # 168 - Can't open the Recommended Kingdoms and Rules page directly
   Feat blakevanlan/KingdomCreator # 164 - Allow Customization for the Events, Ways, and Landmarks section
   Feat blakevanlan/KingdomCreator PR # 157 - Enable running from a subdirectory
-
+  Fix - avoid popup for site translation
 
 2024/07/10 - 6.2.0
 New release
