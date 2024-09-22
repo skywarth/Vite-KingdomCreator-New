@@ -1,0 +1,63 @@
+name: Deploy Static to GitHub Pages (Testing phase)
+
+on:
+  workflow_dispatch: # Permet de déclencher manuellement l'action
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set environment variable - repository name
+      run: |
+        echo "VITE_BASE_URL=/${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_ENV
+
+    - name: Use environment variable
+      run: |
+        echo "The value of VITE_BASE_URL is $VITE_BASE_URL"
+
+    - name: Set up Node.js with VITE_BASE_URL
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+  
+#    - name: Install dependencies
+#      run: npm install
+#      
+#    - name: Build project
+#      run: npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Upload docs directory
+        path: 'docs'
+
+  # Deploy job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      contents: read
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
