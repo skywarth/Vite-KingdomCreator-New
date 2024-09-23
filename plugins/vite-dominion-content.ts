@@ -9,8 +9,8 @@ const ProjectBaseDir = process.cwd();
 //  `DominionContentGeneration` is responsible for generating the Dominion content files.
 export async function DominionContentGenerate(destdir:string) {
 
-  const contentString = "window.DominionSets=" + JSON.stringify(loadSets()) +
-    ";window.DominionKingdoms=" + JSON.stringify(loadKingdoms()) + ";";
+  const contentString = "window.DominionSets=" + JSON.stringify(loadSets()) + ";\n" +
+    "\n" + "window.DominionKingdoms=" + JSON.stringify(loadKingdoms()) + ";\n";
   fs.writeFileSync(path.join(ProjectBaseDir, destdir + '/dominion-content.js'), 
     contentString, { encoding: 'utf8', flag: 'w', mode: 0o666 })
 };

@@ -178,7 +178,10 @@ function GenerateTranslation() {
           } else filename = path.join(PROCESSING_DIR, lang, filenamesplitted[0]+'.'+languages[j]+  '.json') 
               // `${PROCESSING_DIR}/${lang}/${filenamesplitted[0]}.${languages[j]}.json`
           //console.log(filename)
-          fs.writeFileSync(filename, JSON.stringify(names[languages[j]], null, 2));
+  
+          fs.writeFileSync(filename, 
+              JSON.stringify(names[languages[j]], null, 2)
+                  .replace(/\\\\n/g, '\\n'));
         }
       }
     }

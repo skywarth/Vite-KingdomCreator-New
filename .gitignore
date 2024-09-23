@@ -13,10 +13,14 @@ node_modules
 .vscode/extensions.json
 .vscode/settings.json
 
+# for Vite-KingdomCreator-New
 docs/assets
 docs/index.html
+docs/404.html
+docs/dominion-content.js
 docs/locales/*
 process/processed/
+package-lock.json
 
 # other files anf folders
 dist-ssr

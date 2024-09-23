@@ -19,6 +19,7 @@ Dev deploy on github pages
   Feat blakevanlan/KingdomCreator # 164 - Allow Customization for the Events, Ways, and Landmarks section
   Feat blakevanlan/KingdomCreator PR # 157 - Enable running from a subdirectory
   Fix - avoid popup for site translation
+  Feat - add alert if not able to Randomize
 
 2024/07/10 - 6.2.0
 New release

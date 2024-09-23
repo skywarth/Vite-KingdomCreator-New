@@ -15,7 +15,7 @@ common	addon_landmarks	Landmarks		Landmarke	Repères	Hitos
 common	addon_projects	Projects		Projekte	Projets	Proyectos	
 common	addon_ways	Ways		Wege	Voies	Sendas	
 common	addon_allies	Allies		Verbündete	Alliés		
-common	addon_traits	Traits			Comportement		
+common	addon_traits	Traits			Comportements		
 common	github_info	Source is on {source}. Feature requests and complaints go {issues}!	Source is on {source}. Feature requests and complaints go {issues}!	Quellcode ist auf {source}. Funktionsanfragen und Beschwerden bitte {issues}!	Le code source est disponible sur {source}. Pour une demande de fonctionnalité ou un problème, s’adresser {issues} !	Código fuente:  {source}. Solictudes, dudas y errores {issues}!	Kod źródłowy znajduje się w repozytorium {source}. Propozycje zmian oraz uwagi można zgłaszać {issues}!
 common	github_info_source	Github	Github	Github	Github	Github	Github
 common	github_info_issues	here	here	hier	ici	aquí	tu
@@ -57,8 +57,6 @@ page-boxes	Mat included in box	Mat included in box			Plateaux incluses dans la b
 page-boxes	Tokens	Tokens			Pièces		
 page-boxes	Cards	Cards			Cartes		
 page-boxes	Rules	Rules			régles		
-page-boxes							
-page-boxes	Randomizer	Randomizer			Randomizer		
 page-boxes	Recommended Kingdoms	Recommended Kingdoms			Recommended Kingdoms		
 page-boxes	Box content 	Box content			Box content		
 page-boxes							
@@ -67,6 +65,7 @@ page-index	colonies_and_platinums	Colonies & Platinums	Kolonie & Platina	Kolonie
 page-index	shelters	Shelters	Onderdak	Unterschlupf	Refuges	Refugios	Shelters (schronienia)
 page-index	3Plus_Alchemy_Cards	3+ Alchemy Cards		3+ Alchemy Cards	3+ Cartes Alchimie		
 page-index	Randomizer	Randomizer		Randomizer	jeux au hasard		
+page-index	alertRandomizeNoSets	No Set selected! \n\nSelect at least 1 set for randomize to work.			Aucun Set sélectionné ! \n\nChoississez au moins 1 set pour obtenir un résultat.		
 page-index	Recommended Kingdoms	Recommended Kingdoms		Recommended Kingdoms	jeux définis		
 page-index	Box content	Box content		Box content	contenu des boites		
 page-index	Rules	Rules		Rules	Régles		
@@ -747,7 +746,7 @@ cards.renaissance	renaissance_flag	Flag	Vaandel	Fahne	Drapeau
 cards.renaissance	renaissance_horn	Horn	Hoorn	Horn	Corne		
 cards.renaissance	renaissance_key	Key	Sleutel	Schlüssel	Clé		
 cards.renaissance	renaissance_lantern	Lantern	Lantaarn	Laterne	Lanterne		
-cards.renaissance	renaissance_treasurechest	Treasure Chest	Schatkist	Schatzkiste	Coffre		
+							
 							
 cards.menagerie	menagerie_animalfair	Animal Fair	Dierenmarkt	Viehmarkt	Foire aux bestiaux	Feria de Ganado	
 cards.menagerie	menagerie_barge	Barge	Aak	Lastkahn	Chaland	Gabarra	

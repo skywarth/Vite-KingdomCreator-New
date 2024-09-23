@@ -258,7 +258,11 @@ export default defineComponent({
     }
 
     const handleRandomize = () => {
-      emit("randomize")
+      if (selectedSetIds.value.length === 0) {
+        alert(t("alertRandomizeNoSets"))
+      } else {
+        emit("randomize")
+      }
     }
 
     const handleSetOrderTypeChange = (value: string) => {
