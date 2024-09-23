@@ -141,7 +141,8 @@ async function getCardInfo(card, type) {
 }
 // Function to get all cards from a set (including sub-categories)
 function getCards(set) {
-  const cards = set.cards || [];
+  const cards = []
+  cards.push(...set.cards);
   if (set.events) cards.push(...set.events);
   if (set.landmarks) cards.push(...set.landmarks);
   if (set.projects) cards.push(...set.projects);
@@ -149,6 +150,7 @@ function getCards(set) {
   if (set.ways) cards.push(...set.ways);
   if (set.allies) cards.push(...set.allies);
   if (set.traits) cards.push(...set.traits);
+  if (set.prophecies) cards.push(...set.prophecies);
   if (set.othercards) cards.push(...set.othercards
     .filter(card => card.type != "Mat Vertical")
     .filter(card => card.type != "Mat Horizontal")

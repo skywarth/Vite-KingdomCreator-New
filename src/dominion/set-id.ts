@@ -68,12 +68,14 @@ const Set_To_Ignore_Rules_FR =
               SetId.MENAGERIE,
               SetId.ALLIES,
               SetId.PLUNDER,
+              SetId.RISING_SUN
 ]);
 
 const Set_To_Ignore_Rules_DE =
     new Set([ SetId.PROMOS,
         SetId.GUILDSCORNUCOPIA,          
-        SetId.GUILDSCORNUCOPIA_2
+        SetId.GUILDSCORNUCOPIA_2,
+        SetId.RISING_SUN
 ]);
 
 export const Set_To_Ignore_Rules = {

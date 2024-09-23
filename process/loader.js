@@ -35,7 +35,7 @@ export function loadSets() {
       let set = sets[setId];
       const cardTypes = {
          cards: 'supply', events: 'event', landmarks: 'landmark', projects: 'project',
-         boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', othercards: 'other'
+         boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', prophecies: 'prophecy', othercards: 'other'
       };
       
       for (const cardType in set) {
@@ -75,7 +75,7 @@ export function tokenize(str) {
 
 function transform(cardType) {
    const LocalCardTypes = {
-      cards: '0 // supplies', events: '1 // event', landmarks: '2 // landmark', projects: '3 // project',
-      boons: '4 // boon', ways: '5 // way', allies: '6 // ally', traits: '7 // trait', othercards: '8 // other'}
+      cards: '00 // supplies', events: '01 // event', landmarks: '02 // landmark', projects: '03 // project',
+      boons: '04 // boon', ways: '05 // way', allies: '06 // ally', traits: '07 // trait', prophecies: '08 // prophecy', othercards: '20 // other'}
       return LocalCardTypes[cardType];
 }
