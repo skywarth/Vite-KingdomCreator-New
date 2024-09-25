@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Nocturne: DigitalCard[] = [
-
 /* Nocturne */  	{	id: "druid",  frenchName: "Druide",  artwork: "http://wiki.dominionstrategy.com/images/a/a3/DruidArt.jpg",
     		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:-5px;"><div style="font-weight: bold;"><div style="display:inline;"><div style="display:inline; font-size:28px;">+1 Achat</div></div><br></div></div><div style="position:relative; top:0px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Appliquez une des trois Aubaines</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">mises de côté (laissez-la en place).</div></div><br></div></div><div class="horizontal-line" style="width:200px; height:3px;margin-top:15px;"></div><div style="position:relative; top:7px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Mise en place : mettez de coté face</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">visible les 3 premières Aubaines.</div></div><br></div></div></div>'
     	},	
@@ -146,7 +145,5 @@ export const Cards_list_Nocturne: DigitalCard[] = [
     	{	id: "ghost",  frenchName: "Fantôme",  artwork: "http://wiki.dominionstrategy.com/images/2/2d/GhostArt.jpg",
     		text_html: '<div class="card-text" style="top:10px;"><div style="position:relative; top:15px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:18px;">Dévoilez des cartes de votre pioche</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">jusqu\'à dévoiler une carte Action.</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">Défaussez les autres carte et mettez</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">la carte Action de côté. Au début de</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">votre prochain tour, jouez-la deux fois.</div></div><br></div></div><div class="card-text" style="position:absolute; top:135px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:18px;"><div style="display: inline; font-style: italic;">(Ne fait pas partie de la réserve.)</div></div></div><br></div></div></div>'
     	},	
-
-
 
 ];

@@ -18,7 +18,7 @@ docs/assets
 docs/index.html
 docs/404.html
 docs/dominion-content.js
-docs/locales/*
+docs/locales/*.json
 process/processed/
 package-lock.json
 

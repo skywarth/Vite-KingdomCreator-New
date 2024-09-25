@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Seaside: DigitalCard[] = [
-
 /* Seaside */  	{	id: "ghostship",  frenchName: "Vaisseau Fantôme",  artwork: "http://wiki.dominionstrategy.com/images/5/5e/Ghost_ShipArt.jpg",
     		text_html: '<div class="card-text" style="top:10px;"><div style="position:relative; top:0px;"><div style="font-weight: bold;"><div style="line-height:28px;"><div style="display:inline;"><div style="display:inline; font-size:28px;">+2 Cartes</div></div><br></div></div></div><div style="position:relative; top:10px;"><div style="line-height:21px;"><div style="display:inline;"><div style="display:inline; font-size:21px;">Tous vos adversaires ayant au</div></div><br><div style="display:inline;"><div style="display:inline; font-size:21px;">moins 4 cartes en main placent</div></div><br><div style="display:inline;"><div style="display:inline; font-size:21px;">des cartes de leur main sur leur</div></div><br><div style="display:inline;"><div style="display:inline; font-size:21px;">pioche jusqu\'à avoir 3 cartes</div></div><br><div style="display:inline;"><div style="display:inline; font-size:21px;">en main.</div></div><br></div></div></div>'
     	},	
@@ -107,7 +106,5 @@ export const Cards_list_Seaside: DigitalCard[] = [
     	{	id: "seawitch",  frenchName: "Sorcière Marine",  artwork: "http://wiki.dominionstrategy.com/images/6/68/Sea_WitchArt.jpg",
     		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:10px;"><div style="line-height:30px;"><div style="display:inline;"><div style="display:inline; font-size:30px;"><div style="display: inline; font-weight: bold;">+2 Cartes</div></div></div><br></div><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:20px;">Tous vos adversaires reçoivent</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">une Malédiction. Au début de </div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">votre prochain tour, <div style="display: inline; font-size:22px; font-weight: bold;">+2 Cartes</div>,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">puis défaussez 2 cartes.</div></div><br></div></div></div>'
     	},	
-
-
 
 ];

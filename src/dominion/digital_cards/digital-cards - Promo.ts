@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Promo: DigitalCard[] = [
-
 /* Promo */  	{	id: "sauna",  frenchName: "Sauna",  artwork: "http://wiki.dominionstrategy.com/images/d/de/SaunaArt.jpg",
     		text_html: '<div class="card-text" style="top:5px;"><div style="font-weight: bold;"><div style="line-height:27px;"><div style="display:inline;"><div style="display:inline; font-size:27px;">+1 Carte</div></div><br><div style="display:inline;"><div style="display:inline; font-size:27px;">+1 Action</div></div><br></div></div><div style="position:relative; top:3px;"><div style="line-height:17px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Vous pouvez jouer un Trou dans</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">la glace de votre main.</div></div><br></div></div><div class="horizontal-line" style="width:200px; height:2px;margin-top:8px;"></div><div style="position:relative; top:0px;"><div style="line-height:17px;"><div style="display:inline;"><div style="display:inline; font-size:18px;">Lorsque cette carte est en jeu, quand</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">vous jouez un Argent, vous pouvez</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">écarter une carte de votre main.</div></div><br></div></div></div>'
     	},	
@@ -44,7 +43,5 @@ export const Cards_list_Promo: DigitalCard[] = [
     	{	id: "saunaavanto",  frenchName: "Sauna/Trou dans la glace",  artwork: "http://wiki.dominionstrategy.com/images/9/99/Sauna_AvantoArt.jpg",
     		text_html: '<div class="card-text" style="top:29px;"><div style="position:relative; top:-2px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Cette pile démarre la partie avec</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">5 cartes <b>Sauna</b> au dessus, puis</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">5 cartes <b>Trou dans la glace</b>. </div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">Seule la carte du dessus de la pile</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">peut être achetée ou reçue.</div></div><br></div></div></div>'
     	},	
-
-
 
 ];

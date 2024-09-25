@@ -116,7 +116,7 @@ export default defineComponent({
     const windowStore = useWindowStore();
 
     const Cards = computed(() => {
-      return Cards_list.filter(card =>
+      const filteredCards = Cards_list.filter(card =>
         props.set.supplyCards.some(function (item) { return item.shortId == card.id; }))
         .concat(
           Cards_list.filter(card =>
@@ -140,6 +140,9 @@ export default defineComponent({
           Cards_list.filter(card =>
             props.set.allies.some(function (item) { return item.shortId == card.id; }))
         )
+        const uniqueCards = new Set(filteredCards);
+      console.log(uniqueCards)
+      return Array.from(uniqueCards) 
     });
 
     const cardImageUrl = (card: DigitalCard) => {

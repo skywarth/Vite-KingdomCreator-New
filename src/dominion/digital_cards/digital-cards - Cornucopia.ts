@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Cornucopia: DigitalCard[] = [
-
 /* Cornucopia */  	{	id: "harvest",  frenchName: "Récolte",  artwork: "http://wiki.dominionstrategy.com/images/1/15/HarvestArt.jpg",
     		text_html: '<div class="card-text" style="top:29px;"><div style="position:relative; top:5px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Dévoilez les 4 premières cartes</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">de votre pioche, puis défaussez-les.</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">+      par carte dévoilée de</div></div><br><div style="display:inline;"><div style="display:inline; font-size:19px;">nom différent.</div></div><br></div></div><div class="card-text-coin-icon" style="transform:scale(0.19); top:52px; display: inline;left:55px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">1</div></div></div></div>'
     	},	
@@ -56,7 +55,5 @@ export const Cards_list_Cornucopia: DigitalCard[] = [
 /* Cornucopia */  	{	id: "bagofgold",  frenchName: "Sac d'or",  artwork: "http://wiki.dominionstrategy.com/images/5/5a/Bag_Of_GoldArt.jpg",
     		text_html: '<div class="card-text" style="top:23px;"><div style="position:relative; top:-5px;"><div style="font-weight: bold;"><div style="display:inline;"><div style="display:inline; font-size:26px;">+1 Action</div></div><br></div></div><div style="position:relative; top:10px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:19px;">Recevez un Or sur votre pioche.</div></div><br></div></div><div class="card-text" style="position:absolute; top:124px;"><div style="line-height:19px;"><div style="display:inline;"><div style="display: inline; font-size:16px; font-style: italic;">(Ne fait pas partie de la réserve.)</div></div><br></div></div></div>'
     	},	
-
-
 
 ];

@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Plunder: DigitalCard[] = [
-
 /* plunder *//* t */	{	id: "Abundance",  frenchName: "Abondance",  artwork: "http://wiki.dominionstrategy.com/images/8/8f/AbundanceArt.jpg",
   /* t */		text_html: ''
   /* t */	},	
@@ -167,7 +166,5 @@ export const Cards_list_Plunder: DigitalCard[] = [
   /* t */	{	id: "Sword",  frenchName: "Épée",  artwork: "http://wiki.dominionstrategy.com/images/d/d1/SwordArt.jpg",
   /* t */		text_html: ''
   /* t */	},	
-
-
 
 ];

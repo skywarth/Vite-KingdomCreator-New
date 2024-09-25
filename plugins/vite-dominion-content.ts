@@ -22,6 +22,7 @@ export function HandleLocaleGenerateAndMerge(type: string, destdir: string) {
     mergeJSONLanguageFiles(destdir)
   }
   if (type =="Merge") {
+    Convert_to_CSV()
     mergeJSONLanguageFiles(destdir)
   }
 }

@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Darkages: DigitalCard[] = [
-
 /* Darkages */  	{	id: "armory",  frenchName: "Armurerie",  artwork: "http://wiki.dominionstrategy.com/images/9/91/ArmoryArt.jpg",
     		text_html: '<div class="card-text" style="top:55px;"><div style="position:relative; top:5px;"><div style="line-height:22px;"><div style="display:inline;"><div style="display:inline; font-size:22px;">Recevez sur votre pioche</div></div><br><div style="display:inline;"><div style="display:inline; font-size:22px;">une carte coûtant jusqu\'à      .</div></div><br></div></div><div class="card-text-coin-icon" style="transform:scale(0.19); top:32px; display: inline;left:236px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">4</div></div></div></div>'
     	},	
@@ -170,7 +169,5 @@ export const Cards_list_Darkages: DigitalCard[] = [
     	{	id: "sirvander",  frenchName: "Sir Vander",  artwork: "http://wiki.dominionstrategy.com/images/1/1d/Sir_VanderArt.jpg",
     		text_html: '<div class="card-text" style="top:5px;"><div style="position:relative; top:10px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:18px;">Tous vos adversaires dévoilent les</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">deux cartes du haut de leur pioche, en</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">écartent une coûtant entre       et       ,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">et défaussent le reste. Si un Chevalier</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">a été écarté, écartez cette carte.</div></div><br></div></div><div class="horizontal-line" style="width:200px; height:2px;margin-top:15px;"></div><div style="position:relative; top:0px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:18px;">Quand vous écartez cette carte,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:18px;">recevez un Or.</div></div><br></div></div><div class="card-text-coin-icon" style="transform:scale(0.18); top:54px; display: inline;left:197px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">3</div></div></div><div class="card-text-coin-icon" style="transform:scale(0.18); top:54px; display: inline;left:245px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">6</div></div></div></div>'
     	},	
-
-
 
 ];

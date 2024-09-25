@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Prosperity: DigitalCard[] = [
-
 /* Prosperity *//* t */	{	id: "contraband",  frenchName: "Contrebande",  artwork: "http://wiki.dominionstrategy.com/images/0/0a/ContrabandArt.jpg",
   /* t */		text_html: '<div class="card-text" style="top:29px;"><div style="position: relative; left:-35px;top:-20px;"><div class="card-text-coin-icon" style="transform:scale(0.5); top:0px; display: inline;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">3</div></div></div></div><div style="position:relative; top:47px;"><div style="font-weight: bold;"><div style="line-height:19px;"><div style="display:inline;"><div style="display:inline; font-size:23px;">+1 Achat</div></div><br></div></div></div><div style="position:relative; top:50px;"><div style="line-height:16px;"><div style="display:inline;"><div style="display:inline; font-size:16px;">Quand vous jouez cette carte, le joueur</div></div><br><div style="display:inline;"><div style="display:inline; font-size:16px;">à votre gauche nomme une carte. Vous</div></div><br><div style="display:inline;"><div style="display:inline; font-size:16px;">ne pouvez pas acheter cette carte à ce tour.</div></div><br></div></div></div>'
   /* t */	},	
@@ -104,7 +103,5 @@ export const Cards_list_Prosperity: DigitalCard[] = [
   /* t */	{	id: "warchest",  frenchName: "Trésor de Guerre",  artwork: "http://wiki.dominionstrategy.com/images/0/09/War_ChestArt.jpg",
   /* t */		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:10px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-size:20px;">Le joueur à votre gauche nomme</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">une carte. Recevez une carte</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">coûtant jusqu\'à      qui</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">n\'a pas été nommée à ce tour</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">pour les Trésors de guerre.</div></div><br></div><div class="card-text-coin-icon" style="transform:scale(0.15); top:48px; display: inline;left:180px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">5</div></div></div></div></div>'
   /* t */	},	
-
-
 
 ];

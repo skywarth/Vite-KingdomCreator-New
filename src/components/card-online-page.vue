@@ -177,7 +177,24 @@ export default defineComponent({
       let setName = props.set.setId
       // console.log(Cards_list.filter(card =>
       //   props.set.otherCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); })));
-      let LocalTemp_CardsList: DigitalCard[] = Cards_list;
+
+      let LocalTemp_CardsList: DigitalCard[] = Cards_list.filter(card => {
+    return (
+      // Check for Work_Card
+      (Work_Card.id !== "" && setName === getCardSetById(Work_Card) && card.id === Work_Card.id) ||
+      // Check for supply cards
+      props.set.supplyCards.some(item => (setName === item.setId && item.shortId === card.id)) ||
+      // Check for other categories
+      (props.set.otherCards.some(item => (setName === item.setId && item.shortId === card.id)) ||
+        props.set.boons.some(item => item.shortId === card.id) ||
+        props.set.ways.some(item => item.shortId === card.id) ||
+        props.set.events.some(item => item.shortId === card.id) ||
+        props.set.projects.some(item => item.shortId === card.id) ||
+        props.set.landmarks.some(item => item.shortId === card.id) ||
+        props.set.allies.some(item => item.shortId === card.id))
+    );
+  });
+
 
       if ( Work_Card.id !="" && setName == getCardSetById(Work_Card)) {
         LocalTemp_CardsList = Cards_list.filter(card => card.id == Work_Card.id)
@@ -193,7 +210,7 @@ export default defineComponent({
         if (LocalTemp_CardsList.length > 0) LocalTemp_CardsList= [newWork]
         return LocalTemp_CardsList;
       }
-      return LocalTemp_CardsList.filter(card =>
+      const filteredCards = LocalTemp_CardsList.filter(card =>
         props.set.supplyCards.some(function (item) { return ((setName == item.setId) && (item.shortId == card.id)); }))
         .concat(
           LocalTemp_CardsList.filter(card =>
@@ -217,6 +234,9 @@ export default defineComponent({
           Cards_list.filter(card =>
             props.set.allies.some(function (item) { return item.shortId == card.id; }))
         )
+      const uniqueCards = new Set(filteredCards);
+      console.log(uniqueCards)
+      return Array.from(uniqueCards)  
     })
 
     const cardImageUrl = (card: DigitalCard) => {

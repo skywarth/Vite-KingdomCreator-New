@@ -15,7 +15,7 @@
       <header>
        <div class="title-container">
           <h1 class="title">
-            <a class="title_link" :href="getCurrentMenuItemUrl">Dominion Randomizer</a>
+            <router-link class="title_link" :to="getCurrentMenuItemUrl">Dominion Randomizer</router-link>
           </h1>
           <h2 class="tagline">{{ subtitle }}</h2>
         </div> 
@@ -36,11 +36,6 @@
                       <MenuItem as="div"> {{ $t(mymenuItem.title) }} </MenuItem>
               </div>
             </router-link>
-<!--               <div class="extended-menu_item" v-for="mymenuItem in getMenuItem(3, false)" :key="mymenuItem.title">
-                    <router-link class="extended-menu_item_link" :to="getMenuItemUrl(mymenuItem.url)">
-                      <MenuItem as="div"> {{ $t(mymenuItem.title) }} </MenuItem>
-                    </router-link>
-                  </div> -->
             </MenuItems>
             </Menu>
             </li>
@@ -180,7 +175,10 @@ export default defineComponent({
       };
 
     const getCurrentMenuItemUrl = computed(() =>{
-      return window.location.href 
+      return {
+          path: '/',
+          query: {...route.query }
+        };      
     });
 
     const getMenuItem = ((nbEntry: number, FirstPart: boolean) => { 

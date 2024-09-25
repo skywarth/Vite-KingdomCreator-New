@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Empires: DigitalCard[] = [
-
 /* Empires */  	{	id: "engineer",  frenchName: "Ingénieur",  artwork: "http://wiki.dominionstrategy.com/images/2/2b/EngineerArt.jpg",
     		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:10px;"><div style="line-height:22px;"><div style="display:inline;"><div style="display:inline; font-size:22px;">Recevez une carte coûtant</div></div><br><div style="display:inline;"><div style="display:inline; font-size:22px;">jusqu\'à       . Vous pouvez</div></div><br><div style="display:inline;"><div style="display:inline; font-size:22px;">écarter cette carte.</div></div><br><div style="display:inline;"><div style="display:inline; font-size:22px;">Dans ce cas, recevez une</div></div><br><div style="display:inline;"><div style="display:inline; font-size:22px;">carte coûtant jusqu\'à      .</div></div><br></div></div><div class="card-text-coin-icon" style="transform:scale(0.22); top:107px; display: inline;left:218px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">4</div></div></div><div class="card-text-coin-icon" style="transform:scale(0.22); top:34px; display: inline;left:99px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">4</div></div></div></div>'
     	},	
@@ -128,7 +127,5 @@ export const Cards_list_Empires: DigitalCard[] = [
     	{	id: "kingscastle",  frenchName: "Château royal",  artwork: "http://wiki.dominionstrategy.com/images/c/c1/King%27s_CastleArt.jpg",
     		text_html: '<div class="card-text" style="top:55px;"><div style="position:relative; top:12px;"><div style="line-height:20px;"><div style="display:inline;"><div style="display:inline; font-size:20px;">Vaut         par Château</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">que vous avez.</div></div><br></div></div><div class="card-text-vp-icon-container" style="display:inline; transform:scale(0.18); top:15px;left:107px;"><div class="card-text-vp-text-container"><div class="card-text-vp-text" style="top:8px;">2</div></div><div class="card-text-vp-icon"></div></div></div>'
     	},	
-
-
 
 ];

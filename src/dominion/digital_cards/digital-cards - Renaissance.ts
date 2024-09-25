@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Renaissance: DigitalCard[] = [
-
 /* Renaissance */  	{	id: "borderguard",  frenchName: "Garde-frontière",  artwork: "http://wiki.dominionstrategy.com/images/1/13/Border_GuardArt.jpg",
     		text_html: '<div class="card-text" style="top:10px;"><div style="position:relative; top:5px;"><div style="font-weight: bold;"><div style="display:inline;"><div style="display:inline; font-size:28px;">+1 Action</div></div><br></div></div><div style="position:relative; top:10px;"><div style="line-height:20px;"><div style="display:inline;"><div style="display:inline; font-size:20px;">Dévoilez les 2 premières cartes</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">de votre pioche. Prenez-en une</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">en main et défaussez l\'autre. Si</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">les deux étaient des cartes Action,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">prenez la Lanterne ou la Corne.</div></div><br></div></div></div>'
     	},	
@@ -77,7 +76,5 @@ export const Cards_list_Renaissance: DigitalCard[] = [
     	{	id: "villain",  frenchName: "Scélérat",  artwork: "http://wiki.dominionstrategy.com/images/1/1c/VillainArt.jpg",
     		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:10px;"><div style="font-weight: bold;"><div style="line-height:28px;"><div style="display:inline;"><div style="display:inline; font-size:28px;">+2 Coffres</div></div><br></div></div></div><div style="position:relative; top:20px;"><div style="line-height:20px;"><div style="display:inline;"><div style="display:inline; font-size:20px;">Tous vos adversaires ayant au</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">moins 5 cartes en main défaussent</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">une carte coûtant      ou plus (ou</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">à défaut, dévoilent leur main).</div></div><br></div></div><div class="card-text-coin-icon" style="transform:scale(0.2); top:96px; display: inline;left:152px;"><div class="card-text-coin-text-container" style="display:inline;"><div class="card-text-coin-text" style="color: black; display:inline; top:8px;">2</div></div></div></div>'
     	},	
-
-
 
 ];

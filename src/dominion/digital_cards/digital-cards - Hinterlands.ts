@@ -1,7 +1,6 @@
 import type { DigitalCard } from "./digital-cards-type";
 
 export const Cards_list_Hinterlands: DigitalCard[] = [
-
 /* Hinterlands */  	{	id: "bordervillage",  frenchName: "Village frontalier",  artwork: "http://wiki.dominionstrategy.com/images/2/2b/Border_VillageArt.jpg",
     		text_html: '<div class="card-text" style="top:29px;"><div style="position:relative; top:0px;"><div style="font-weight: bold;"><div style="line-height:28px;"><div style="display:inline;"><div style="display:inline; font-size:28px;">+1 Carte</div></div><br><div style="display:inline;"><div style="display:inline; font-size:28px;">+2 Actions</div></div><br></div></div></div><div class="horizontal-line" style="width:200px; height:3px;margin-top:10px;"></div><div style="position:relative; top:5px;"><div style="line-height:21px;"><div style="display:inline;"><div style="display:inline; font-size:21px;">Quand vous recevez cette carte,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:21px;">recevez une carte moins chère.</div></div><br></div></div></div>'
     	},	
@@ -107,7 +106,5 @@ export const Cards_list_Hinterlands: DigitalCard[] = [
     	{	id: "witchshut",  frenchName: "Cabane de Sorcière",  artwork: "http://wiki.dominionstrategy.com/images/2/21/Witch%27s_HutArt.jpg",
     		text_html: '<div class="card-text" style="top:20px;"><div style="position:relative; top:10px;"><div style="line-height:18px;"><div style="display:inline;"><div style="display:inline; font-weight:bold;"><div style="display:inline; font-size:28px;">+4 Cartes</div></div></div><br><br><div style="display:inline;"><div style="display:inline; font-size:20px;">Défaussez 2 cartes, dévoilées.</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">Si les deux sont des Actions,</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">tous vos adversaires</div></div><br><div style="display:inline;"><div style="display:inline; font-size:20px;">reçoivent une Malédiction.</div></div><br></div></div></div>'
     	},	
-
-
 
 ];
