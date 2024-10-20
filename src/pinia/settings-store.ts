@@ -13,6 +13,7 @@ export interface SettingsState {
   ProjectsMax: number,
   WaysMax: number,
   TraitsMax: number,
+  PropheciesMax: number,
 
   isUsingOnlyOwnedsets: boolean,
   ownedSets : SetId[],
@@ -30,6 +31,7 @@ export const useSettingsStore = defineStore(
     ProjectsMax: 2,
     WaysMax: 2,
     TraitsMax: 2,
+    PropheciesMax: 2,
     isUsingOnlyOwnedsets: false,
     ownedSets: [] as SetId[]
   }),

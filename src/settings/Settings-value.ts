@@ -70,6 +70,7 @@ export function MAX_ADDONS_OF_TYPE(addontype: string) : number {
                 case Addons_TYPE.PROJECT: return settingStore.ProjectsMax
                 case Addons_TYPE.WAY: return settingStore.WaysMax;
                 case Addons_TYPE.TRAIT: return settingStore.TraitsMax;
+                case Addons_TYPE.PROPHECY: return settingStore.PropheciesMax;
             }
         // isUsingCustomDesksize is false
     } 

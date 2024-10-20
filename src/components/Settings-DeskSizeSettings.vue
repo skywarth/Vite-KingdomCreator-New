@@ -55,7 +55,11 @@
         <label class="label-settings indented" for="traits">{{ $t("Traits") }}</label>
         <input class="label-settings" type="range" id="traits" v-model="TraitsMax" min="0" max="8" style="color:blue;"/>
         <span class="addon-value">{{ TraitsMax }}</span>
-
+      </div>
+      <div class="slider-container">
+        <label class="label-settings indented" for="prophecies">{{ $t("Prophecies") }}</label>
+        <input class="label-settings" type="range" id="prophecies" v-model="PropheciesMax" min="0" max="8" style="color:blue;"/>
+        <span class="addon-value">{{ PropheciesMax }}</span>
       </div>
     </div>
   </div>
@@ -84,6 +88,7 @@ export default defineComponent({
     const ProjectsMax = ref(SettingsStore.ProjectsMax);
     const WaysMax = ref(SettingsStore.WaysMax);
     const TraitsMax = ref(SettingsStore.TraitsMax);
+    const PropheciesMax = ref(SettingsStore.PropheciesMax);
     const forceAddonsUse = ref(SettingsStore.forceAddonsUse)
 
     watch(AddonsNb,
@@ -93,15 +98,17 @@ export default defineComponent({
         if (AddonsNb.value < ProjectsMax.value) ProjectsMax.value = AddonsNb.value
         if (AddonsNb.value < WaysMax.value) WaysMax.value = AddonsNb.value
         if (AddonsNb.value < TraitsMax.value) TraitsMax.value = AddonsNb.value
+        if (AddonsNb.value < PropheciesMax.value) PropheciesMax.value = AddonsNb.value
       },
       { immediate: true } // Trigger calculation on initial render
     );
 
    // Watch for changes in Max values and update AddonsNb if needed
    watch(
-      [EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
+      [EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax, PropheciesMax],
       () => {
-        const minAddonsNb = Math.max(EventsMax.value, LandmarksMax.value, ProjectsMax.value, WaysMax.value, TraitsMax.value)
+        const minAddonsNb = Math.max(EventsMax.value, LandmarksMax.value, ProjectsMax.value, 
+              WaysMax.value, TraitsMax.value, PropheciesMax.value)
         if (AddonsNb.value < minAddonsNb) {
           AddonsNb.value = minAddonsNb; // Set to minimum allowed value
         }
@@ -120,11 +127,14 @@ export default defineComponent({
         ProjectsMax: ProjectsMax.value,
         WaysMax: WaysMax.value,
         TraitsMax: TraitsMax.value,
+        PropheciesMax: PropheciesMax.value
       });
     };
 
     watch(
-      [isUsingCustomDesksize, KingdomNb, AddonsNb, forceAddonsUse, EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
+      [isUsingCustomDesksize, KingdomNb, AddonsNb, forceAddonsUse, 
+        EventsMax, LandmarksMax, ProjectsMax, WaysMax, 
+        TraitsMax, PropheciesMax],
       updateStoreValues,
     );
 
@@ -137,7 +147,8 @@ export default defineComponent({
       LandmarksMax,
       ProjectsMax,
       WaysMax,
-      TraitsMax
+      TraitsMax,
+      PropheciesMax
     };
   },
 });

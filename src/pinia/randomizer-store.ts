@@ -16,6 +16,7 @@ import { SetId } from "../dominion/set-id";
 import { CostType } from "../dominion/cost-type";
 import { Boon } from "../dominion/boon";
 import { Ally } from "../dominion/ally";
+import { Prophecy } from "../dominion/prophecy";
 import { Randomizer } from "../randomizer/randomizer";
 import { EventTracker } from "../analytics/follow-activity";
 import { EventType } from "../analytics/follow-activity";
@@ -64,7 +65,8 @@ export const useRandomizerStore = defineStore(
         state.kingdom.landmarks as Addon[],
         state.kingdom.projects as Addon[],
         state.kingdom.ways as Addon[],
-        state.kingdom.traits as Addon[]);
+        state.kingdom.traits as Addon[]
+      );
     },
     canHaveEvents: (state: randomizerStoreState) => {
       if (state.kingdom.events.length > 0) return true;
@@ -173,14 +175,14 @@ export const useRandomizerStore = defineStore(
         let addonsForAdjustement ={ 
           events: initialKingdom.events, landmarks: initialKingdom.landmarks, 
           projects: initialKingdom.projects, ways: initialKingdom.ways, 
-          allies: [], traits: initialKingdom.traits 
+          allies: [], prophecy: [], traits: initialKingdom.traits
         } as unknown as Addons;
         if (supply) {
           EventTracker.trackEvent(EventType.LOAD_PARTIAL_KINGDOM_FROM_URL);
           let kingdom
           if (initialKingdom.events.length + initialKingdom.landmarks.length +
             initialKingdom.projects.length + initialKingdom.ways.length +
-            initialKingdom.traits.length == 0) {
+            initialKingdom.traits.length == 0 ) {
             const Tempkingdom = Randomizer.createKingdom(options);
             let addonslength = 0
             const regeneratedEvents = initialKingdom.events.concat(Tempkingdom.events).slice(0, 2);
@@ -197,21 +199,21 @@ export const useRandomizerStore = defineStore(
             addonsForAdjustement ={ 
               events: regeneratedEvents, landmarks: regeneratedLandmarks, 
               projects: regeneratedProjects, ways: regeneratedWays, 
-              allies: [], traits: regeneratedTraits 
+              allies: [], prophecy: [], traits: regeneratedTraits
             } as unknown as Addons;
             const regeneratedAdjustedSupplyCards = Randomizer.adjustSupplyBasedOnAddons(supply, addonsForAdjustement, initialKingdom);
 
             kingdom = new Kingdom(
               Date.now(), regeneratedAdjustedSupplyCards, regeneratedEvents, regeneratedLandmarks,
               regeneratedProjects, regeneratedWays, initialKingdom.boons,
-              initialKingdom.ally, regeneratedTraits, initialKingdom.metadata);
+              initialKingdom.ally, initialKingdom.prophecy, regeneratedTraits, initialKingdom.metadata);
           } else {
             const adjustedSupplyCards = Randomizer.adjustSupplyBasedOnAddons(supply, addonsForAdjustement, initialKingdom );
 
             kingdom = new Kingdom(
               Date.now(), adjustedSupplyCards, initialKingdom.events, initialKingdom.landmarks,
               initialKingdom.projects, initialKingdom.ways, initialKingdom.boons,
-              initialKingdom.ally, initialKingdom.traits, initialKingdom.metadata);
+              initialKingdom.ally, initialKingdom.prophecy, initialKingdom.traits, initialKingdom.metadata);
           }
           //console.log("LOAD_PARTIAL_KINGDOM_FROM_URL", kingdom)
           this.CLEAR_SELECTION();
@@ -266,14 +268,16 @@ export const useRandomizerStore = defineStore(
         ? Cards.getAllWays(newAddons).concat(rA.getUnselectedWays(this))
         : this.kingdom.ways;
       const newAlly = rA.randomizeSelectedAlly(this, newSupply);
+      const newProphecy = rA.randomizeSelectedProphecy(this, newSupply);
       const newBoons = rA.randomizeSelectedBoons(this, newSupply);
       const newTraits = newAddons
         ? Cards.getAllTraits(newAddons).concat(rA.getUnselectedTraits(this))
         : this.kingdom.traits;
+
       const addonsForAdjustement ={ 
             events: newEvents, landmarks: newLandmarks, 
             projects: newProjects, ways: newWays, 
-            allies: [], traits: newTraits 
+            allies: [], prophecies: [], traits: newTraits 
           } as unknown as Addons;
       const adjustedSupplyCards = Randomizer.adjustSupplyBasedOnAddons(newSupply, 
             addonsForAdjustement, this.kingdom );
@@ -281,7 +285,7 @@ export const useRandomizerStore = defineStore(
       EventTracker.trackEvent(EventType.RANDOMIZE);
       const kingdom = new Kingdom(
         this.kingdom.id, adjustedSupplyCards, newEvents, newLandmarks, newProjects,
-        newWays, newBoons, newAlly, newTraits, this.kingdom.metadata);
+        newWays, newBoons, newAlly, newProphecy, newTraits, this.kingdom.metadata);
       this.CLEAR_SELECTION();
       this.UPDATE_KINGDOM(kingdom);
     },
@@ -363,7 +367,8 @@ export const useRandomizerStore = defineStore(
         const kingdom = new Kingdom(
           oldKingdom.id, supply, oldKingdom.events, oldKingdom.landmarks, oldKingdom.projects,
           oldKingdom.ways, rA.randomizeSelectedBoons(this, supply),
-          rA.randomizeSelectedAlly(this, supply), oldKingdom.traits, oldKingdom.metadata);
+          rA.randomizeSelectedAlly(this, supply), rA.randomizeSelectedProphecy(this, supply), 
+          oldKingdom.traits, oldKingdom.metadata);
         this.CLEAR_SELECTION();
         this.UPDATE_KINGDOM(kingdom);
         EventTracker.trackEvent(EventType.RANDOMIZE_SINGLE);
@@ -384,6 +389,7 @@ export const useRandomizerStore = defineStore(
         Cards.getAllWays(addons),
         this.kingdom.boons,
         this.kingdom.ally,
+        this.kingdom.prophecy,
         Cards.getAllTraits(addons),
         this.kingdom.metadata);
       this.UPDATE_KINGDOM(kingdom);

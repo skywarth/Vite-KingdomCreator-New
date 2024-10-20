@@ -5,7 +5,7 @@
       <SortableSupplyCards />
       <Addons />
       <Boons />
-      <AllySection />
+      <AllyProphecySection />
       <Modifiers />
       <div style="margin-top: 4px;">
         <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
@@ -34,7 +34,7 @@ import { deserializeKingdom, serializeKingdom } from "../randomizer/serializer";
 
 /* import Components */
 import Addons from "./Addons.vue";
-import AllySection from "./AllySection.vue";
+import AllyProphecySection from "./AllyProphecySection.vue";
 import Boons from "./Boons.vue";
 import CopyButton from "./CopyButton.vue";
 import FullScreenButton from "./FullScreenButton.vue";
@@ -46,7 +46,7 @@ export default defineComponent({
   name: "Randomizer",
   components: {
     Addons,
-    AllySection,
+    AllyProphecySection,
     Boons,
     CopyButton,
     FullScreenButton,
@@ -86,8 +86,9 @@ export default defineComponent({
           kingdom.value.ways,
           kingdom.value.boons,
           kingdom.value.ally ? [kingdom.value.ally] : [],
-          kingdom.value.traits
-        ).map((card) => t(card.id)).join(', ')
+          kingdom.value.prophecy ? [kingdom.value.prophecy] : [],
+          kingdom.value.traits,
+        ).map((card) => card.id).join(', ')
       )
     })
 

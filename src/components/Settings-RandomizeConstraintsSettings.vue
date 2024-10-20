@@ -153,7 +153,8 @@
         return (Set.supplyCards as Card[]).concat(Set.events,
                 Set.landmarks, Set.projects, 
                 Set.boons, Set.ways, 
-                Set.allies, Set.traits);
+                Set.allies, Set.traits, 
+                Set.prophecies);
       }
 
     const selectedSetMinCounts = ref<{ [setId: string]: number }>({});

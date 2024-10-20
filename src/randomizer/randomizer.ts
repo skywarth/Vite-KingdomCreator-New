@@ -27,6 +27,7 @@ import type { Boon } from "../dominion/boon";
 import { Way } from "../dominion/way";
 import { Ally } from "../dominion/ally";
 import { Trait } from "../dominion/trait";
+import { Prophecy } from "../dominion/prophecy";
 import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "./special-need-cards";
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
@@ -54,9 +55,10 @@ export class Randomizer {
     const addons = this.getAddons(randomizerOptions.setIds);
     const boons = this.getRandomBoons(supply, []);
     const ally = this.getRandomAlly(supply);
+    const prophecy = this.getRandomProphecy(supply);
     const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons, 
       new Kingdom(0, new Supply([], null, null, null, null, [], Replacements.empty()),
-          [], [], [], [], [], null, [], new KingdomMetadata(false, false)));
+          [], [], [], [], [], null, null, [], new KingdomMetadata(false, false)));
     const metadata = this.getMetadata(randomizerOptions.setIds);
     return new Kingdom(
       Date.now(),          /* id: number,  */
@@ -66,7 +68,8 @@ export class Randomizer {
       addons.projects,     /* projects: Project[], */
       addons.ways,         /* ways: Way[], */
       boons,               /* boons: Boon[], */
-      ally,                /* allies: Ally | null, */
+      ally,                /* ally: Ally | null, */
+      prophecy,            /* prophecy: Propehcy | null, */
       addons.traits,       /* Traits: Trait */
       metadata);           /* metadata: Metadata */
   }
@@ -206,7 +209,8 @@ export class Randomizer {
     return supply;
   }
 
-  private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[], ways: Way[], allies: Ally[], traits: Trait[] } {
+  private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[],
+         ways: Way[], allies: Ally[], prophecies: Prophecy[], traits: Trait[]  } {
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
     const cards = Cards.getAllCardsFromSets(setsToUse);
     const selectedCards = FORCE_ADDONS_USE() ? 
@@ -219,6 +223,7 @@ export class Randomizer {
     const selectedWays: Way[] = [];
     const selectedAllies: Ally[] = [];
     const selectedTraits: Trait[] = [];
+    const selectedProphecies: Prophecy[] = [];
 
     for (const card of selectedCards) {
       if (card instanceof Event) {
@@ -231,7 +236,7 @@ export class Randomizer {
         if (selectedWays.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.WAY)) selectedWays.push(card);
       } else if (card instanceof Trait) {
         if (selectedTraits.length < MAX_ADDONS_OF_TYPE(Addons_TYPE.TRAIT)) selectedTraits.push(card)
-      }
+      } 
       // Stop once the maximum number of addons has been reached.
       const addonCount = selectedEvents.length
         + selectedLandmarks.length
@@ -249,7 +254,8 @@ export class Randomizer {
       projects: selectedProjects,
       ways: selectedWays,
       allies: selectedAllies,
-      traits: selectedTraits
+      prophecies: selectedProphecies,
+      traits: selectedTraits,
     };
   }
 
@@ -267,8 +273,9 @@ export class Randomizer {
     const ways = Cards.getAllWays(cards) as Addon[];
     const allies = Cards.getAllAllies(cards) as Addon[];
     const traits = Cards.getAllTraits(cards) as Addon[];
+    const prophecies = Cards.getAllProphecies(cards) as Addon[];
 
-    return events.concat(landmarks, projects, ways, allies, traits);
+    return events.concat(landmarks, projects, ways, allies, prophecies, traits);
   }
 
   static getRandomBoons(supply: Supply, keepBoons: Boon[]) {
@@ -288,6 +295,15 @@ export class Randomizer {
     const cards = Cards.getAllCardsFromSets(DominionSets.getAllSets());
     const allies = Cards.getAllAllies(cards).filter(Cards.filterByExcludedIds(skipAllyId ? [skipAllyId] : []));
     return selectRandomN(allies, 1)[0];
+  }
+
+  static getRandomProphecy(supply: Supply, skipProphecyId: string | null = null): Prophecy | null {
+    if (supply.supplyCards.every((s) => !s.isOmen)) {
+      return null;
+    }
+    const cards = Cards.getAllCardsFromSets(DominionSets.getAllSets());
+    const prophecies = Cards.getAllProphecies(cards).filter(Cards.filterByExcludedIds(skipProphecyId ? [skipProphecyId] : []));
+    return selectRandomN(prophecies, 1)[0];
   }
 
   static getMetadata(setIds: SetId[]) {

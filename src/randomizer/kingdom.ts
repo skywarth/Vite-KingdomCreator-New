@@ -5,6 +5,7 @@ import type { Project } from "../dominion/project";
 import type { Way } from "../dominion/way";
 import type { Ally } from "../dominion/ally";
 import type { Trait } from "../dominion/trait";
+import type { Prophecy } from "../dominion/prophecy";
 import { Supply } from "../randomizer/supply";
 import { YOUNG_WITCH_IDS, FERRYMAN_IDS, OBELISK_LANDMARK_ID, MOUSE_WAY_ID } from "./special-need-cards";
 import { DominionSets } from "../dominion/dominion-sets";
@@ -20,6 +21,7 @@ export class Kingdom {
     readonly ways: Way[],
     readonly boons: Boon[],
     readonly ally: Ally | null,
+    readonly prophecy: Prophecy | null,
     readonly traits: Trait[],
     readonly metadata: Metadata) {
   }
@@ -33,7 +35,8 @@ export class Kingdom {
       [],               /* projects: Project[], */
       [],               /* ways: Way[], */
       [],               /* boons: Boon[], */
-      null,             /* allies: Ally|null, */
+      null,             /* ally: Ally|null, */
+      null,             /* prophecy: Prophecy|null*/
       [],               /* traits: Trait[]*/
       new Metadata(false, false));   /* metadata: Metadata */
   }

@@ -15,7 +15,9 @@ common	addon_landmarks	Landmarks		Landmarke	Repères	Hitos
 common	addon_projects	Projects		Projekte	Projets	Proyectos	
 common	addon_ways	Ways		Wege	Voies	Sendas	
 common	addon_allies	Allies		Verbündete	Alliés		
+common	addon_ally	Ally		Verbündete	Allié		
 common	addon_traits	Traits			Comportements		
+common	addon_prophecy	Prophecy			Prophétie		
 common	github_info	Source is on {source}. Feature requests and complaints go {issues}!	Source is on {source}. Feature requests and complaints go {issues}!	Quellcode ist auf {source}. Funktionsanfragen und Beschwerden bitte {issues}!	Le code source est disponible sur {source}. Pour une demande de fonctionnalité ou un problème, s’adresser {issues} !	Código fuente:  {source}. Solictudes, dudas y errores {issues}!	Kod źródłowy znajduje się w repozytorium {source}. Propozycje zmian oraz uwagi można zgłaszać {issues}!
 common	github_info_source	Github	Github	Github	Github	Github	Github
 common	github_info_issues	here	here	hier	ici	aquí	tu
