@@ -9,6 +9,14 @@ As I became a maintainer for Kingdom Creator, https://www.dominionrandomizer.com
 Feel free to propose any improvements you see fit and send me a pull request!
 
 ### Changelog
+2024/10/21 - 6.4.0
+Dev deploy on github pages
+Dev deploy on 71yeti.fr
+  Feat - include RisingSun and prophecies
+  Feat - add option to exclude cards from randomization
+    To do : handle minCards and maxCards
+  Fix & Feat (see [Changelog.md](./Changelog.md))
+
 2024/09/24 - 6.3.1
   Fix blakevanlan/KingdomCreator # 169 - Bug: Copy does not work anymore like it used to
   
