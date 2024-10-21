@@ -20,46 +20,54 @@
         <input class="settingsInput" type="number" id="kingdomNb" v-model="KingdomNb" />
       </div> 
     </div>
+
     <div class="custom-settings">
       <div class="slider-container">
         <label class="label-settings" for="addons">{{ $t("Addons") }}</label>
-        <input class="labbel-settings"  type="range" id="addons" v-model="AddonsNb" min="0" max="8" />
-        <span class="addon-value">{{ AddonsNb }}</span>
+        <div class="range-wrapper">
+          <input type="range" id="addons" v-model="AddonsNb" min="0" max="8" />
+          <span class="addon-value">{{ AddonsNb }}</span>
+        </div>
       </div>
       <div class="slider-container slidercheckbox">
-        <label class="label-settings indentedCheckbox" for="addons">{{ $t("Force Addons usage") }}</label>
-        <input class="label-settings check-settings" type="checkbox" id="addons" v-model="forceAddonsUse" />
+        <label class="label-settings indentedCheckbox" for="forceAddons">{{ $t("Force Addons usage") }}</label>
+        <input type="checkbox" id="forceAddons" v-model="forceAddonsUse" />
       </div>
 
       <div class="slider-container">
         <label class="label-settings indented" for="events">{{ $t("Events") }}</label>
-        <input class="label-settings"  type="range" id="events" v-model="EventsMax" min="0" max="8" />
-        <span class="addon-value">{{ EventsMax }}</span>
+        <div class="range-wrapper">
+          <input type="range" id="events" v-model="EventsMax" min="0" max="8" />
+          <span class="addon-value">{{ EventsMax }}</span>
+        </div>
       </div>
       <div class="slider-container">
         <label class="label-settings indented" for="landmarks">{{ $t("Landmarks") }}</label>
-        <input class="label-settings" type="range" id="landmarks" v-model="LandmarksMax" min="0" max="8" />
-        <span class="addon-value">{{ LandmarksMax }}</span>
+        <div class="range-wrapper">
+        <input type="range" id="landmarks" v-model="LandmarksMax" min="0" max="8" />
+          <span class="addon-value">{{ LandmarksMax }}</span>
+        </div>
       </div>
       <div class="slider-container">
         <label class="label-settings indented" for="projects">{{ $t("Projects") }}</label>
-        <input class="label-settings" type="range" id="projects" v-model="ProjectsMax" min="0" max="8" />
-        <span class="addon-value">{{ ProjectsMax }}</span>
+        <div class="range-wrapper">
+          <input type="range" id="projects" v-model="ProjectsMax" min="0" max="8" />
+          <span class="addon-value">{{ ProjectsMax }}</span>
+        </div>
       </div>
       <div class="slider-container">
         <label class="label-settings indented" for="ways">{{ $t("Ways") }}</label>
-        <input class="label-settings" type="range" id="ways" v-model="WaysMax" min="0" max="8" />
-        <span class="addon-value">{{ WaysMax }}</span>
+        <div class="range-wrapper">
+          <input type="range" id="ways" v-model="WaysMax" min="0" max="8" />
+          <span class="addon-value">{{ WaysMax }}</span>
+        </div>
       </div>
       <div class="slider-container">
         <label class="label-settings indented" for="traits">{{ $t("Traits") }}</label>
-        <input class="label-settings" type="range" id="traits" v-model="TraitsMax" min="0" max="8" style="color:blue;"/>
-        <span class="addon-value">{{ TraitsMax }}</span>
-      </div>
-      <div class="slider-container">
-        <label class="label-settings indented" for="prophecies">{{ $t("Prophecies") }}</label>
-        <input class="label-settings" type="range" id="prophecies" v-model="PropheciesMax" min="0" max="8" style="color:blue;"/>
-        <span class="addon-value">{{ PropheciesMax }}</span>
+        <div class="range-wrapper">
+          <input type="range" id="traits" v-model="TraitsMax" min="0" max="8" />
+          <span class="addon-value">{{ TraitsMax }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -83,12 +91,11 @@ export default defineComponent({
   
     const KingdomNb = ref(SettingsStore.KingdomNb);
     const AddonsNb = ref(SettingsStore.AddonsNb);
-    const EventsMax = ref(SettingsStore.EventsMax);
-    const LandmarksMax = ref(SettingsStore.LandmarksMax);
-    const ProjectsMax = ref(SettingsStore.ProjectsMax);
-    const WaysMax = ref(SettingsStore.WaysMax);
-    const TraitsMax = ref(SettingsStore.TraitsMax);
-    const PropheciesMax = ref(SettingsStore.PropheciesMax);
+    const EventsMax = ref(SettingsStore.addonMax.Events);
+    const LandmarksMax = ref(SettingsStore.addonMax.Landmarks);
+    const ProjectsMax = ref(SettingsStore.addonMax.Projects);
+    const WaysMax = ref(SettingsStore.addonMax.Ways);
+    const TraitsMax = ref(SettingsStore.addonMax.Traits);
     const forceAddonsUse = ref(SettingsStore.forceAddonsUse)
 
     watch(AddonsNb,
@@ -98,17 +105,16 @@ export default defineComponent({
         if (AddonsNb.value < ProjectsMax.value) ProjectsMax.value = AddonsNb.value
         if (AddonsNb.value < WaysMax.value) WaysMax.value = AddonsNb.value
         if (AddonsNb.value < TraitsMax.value) TraitsMax.value = AddonsNb.value
-        if (AddonsNb.value < PropheciesMax.value) PropheciesMax.value = AddonsNb.value
       },
       { immediate: true } // Trigger calculation on initial render
     );
 
    // Watch for changes in Max values and update AddonsNb if needed
    watch(
-      [EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax, PropheciesMax],
+      [EventsMax, LandmarksMax, ProjectsMax, WaysMax, TraitsMax],
       () => {
         const minAddonsNb = Math.max(EventsMax.value, LandmarksMax.value, ProjectsMax.value, 
-              WaysMax.value, TraitsMax.value, PropheciesMax.value)
+              WaysMax.value, TraitsMax.value)
         if (AddonsNb.value < minAddonsNb) {
           AddonsNb.value = minAddonsNb; // Set to minimum allowed value
         }
@@ -122,19 +128,20 @@ export default defineComponent({
         KingdomNb: KingdomNb.value,
         AddonsNb: AddonsNb.value,
         forceAddonsUse : forceAddonsUse.value,
-        EventsMax: EventsMax.value,
-        LandmarksMax: LandmarksMax.value,
-        ProjectsMax: ProjectsMax.value,
-        WaysMax: WaysMax.value,
-        TraitsMax: TraitsMax.value,
-        PropheciesMax: PropheciesMax.value
+        addonMax: {
+          Events: EventsMax.value,
+          Landmarks: LandmarksMax.value,
+          Projects: ProjectsMax.value,
+          Ways: WaysMax.value,
+          Traits: TraitsMax.value
+        }
       });
     };
 
     watch(
       [isUsingCustomDesksize, KingdomNb, AddonsNb, forceAddonsUse, 
         EventsMax, LandmarksMax, ProjectsMax, WaysMax, 
-        TraitsMax, PropheciesMax],
+        TraitsMax],
       updateStoreValues,
     );
 
@@ -147,8 +154,7 @@ export default defineComponent({
       LandmarksMax,
       ProjectsMax,
       WaysMax,
-      TraitsMax,
-      PropheciesMax
+      TraitsMax
     };
   },
 });
@@ -212,32 +218,61 @@ export default defineComponent({
 
 .slider-container {
   display: flex;
-  flex-direction: row; /* Stack items vertically */
-  align-items: flex-start; /* Align items to the left */
-  gap: 0.5rem; /* Add a small gap between label and slider */
-  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
   margin-block: 4px;
 }
 
 .slider-container.slidercheckbox {
   width: unset; 
-  margin-top: 0; /* Remove default margin-top */
+  margin-top: 0;
 }
 
-.slider-container input {
-  width: 100%; /* Make the input span the full width of the container */
-  margin-top: 0; /* Remove default margin-top */
+.slider-container input[type="range"] {
+  width: 200px; /* Increased width for range inputs */
+  margin-top: 0;
 }
 
-/* New rule for indented container */
+.slider-container input[type="checkbox"] {
+  width: auto;
+  margin-right: 60px;
+}
+
 .slider-container.indented {
-  justify-content: flex-start; /* Align content (including label) to the left */
-  margin-left: 20px; /* Indent the entire container to the right */
+  justify-content: flex-start;
+  margin-left: 20px;
 }
 
 .slider-container.indented .label-settings {
-  /* Optionally remove indentation from the label within the indented container */
   margin-left: 0;
 }
 
+/* New styles for right alignment */
+.range-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align contents to the right */
+  flex: 0 0 250px; /* Increased width for the wrapper */
+}
+
+.addon-value {
+  min-width: 30px; /* Slightly increased to accommodate larger numbers */
+  text-align: right;
+}
+
+/* New styles for label and value alignment */
+.label-settings {
+  flex: 1;
+  min-width: 120px; /* Ensure labels have a minimum width */
+}
+
+/* Adjusted styles for right alignment and larger range */
+.range-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 250px; /* Increased width for the wrapper */
+}
 </style>
