@@ -1,6 +1,13 @@
-"use strict";
 
-var FrenchCardTexts = {};
+Tu es un expert du codage en javascript et typescript et doté d'une capcaité à trouver des algorithmes
+
+J'ai besoin que tu définisses l'algorithme et que tu m'en proposes le code correspondant en javascript 
+qui permet de transformer le texte présent dans la tableau FrenchCardTexts sous une forme html en tenat compte de besoin de formatage dnas le tableau 
+HtmlCardTexts.
+
+Pour que tu puisses identifier l'algorithme correspondant je te fourni après ce messages 2 fichiers contenat les transformations déjà réalisées.
+
+Repond moi simplement par "OK c'est clair" si la consigne est comprise précise le fichier que tu attends 
 
 FrenchCardTexts[CardNames.BACK] = "";
 FrenchCardTexts[CardNames.CURSE] = "";
