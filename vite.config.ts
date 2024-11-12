@@ -49,7 +49,7 @@ export default defineConfig( ({ mode}) => {
         https://vitejs.dev/guide/api-plugin#universal-hooks */
         transformIndexHtml(html) {
           const datetime = new Date().toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'medium' });
-          console.log('\nGenerate Date and Time: ', datetime);
+          //console.log('\nGenerate Date and Time: ', datetime);
           return html.replace(/id="datetime">/g, `id="datetime">${datetime}`);
         }
       },

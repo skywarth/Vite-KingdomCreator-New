@@ -31,7 +31,7 @@ export function loadSets() {
     // Create an id for each card.
     let set = sets[setId];
     const cardTypes: { [key: string]: string } = { cards: 'cards', events: 'event', landmarks: 'landmark', projects: 'project', 
-                        boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', prophecies: 'prophecy', othercards: 'other'};
+                        boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', prophecies: 'prophecy', othercards: 'cards'};
     for (const cardType in set) {
       if (cardTypes[cardType]) {
         for (let i = 0; i < set[cardType].length; i++) {
