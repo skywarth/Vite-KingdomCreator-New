@@ -1,7 +1,6 @@
 // Pinia Store
 import { defineStore } from 'pinia';
 import type { SetId } from '../dominion/set-id';
-import { NUM_CARDS_IN_KINGDOM } from '../settings/Settings-value';
 
 interface SetConstraints {
   isSelected: boolean;

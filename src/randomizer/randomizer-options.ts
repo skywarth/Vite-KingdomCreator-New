@@ -27,7 +27,7 @@ export class RandomizerOptions {
   }
 }
 
-const initializeExcludedCardIds = (setIds: SetId[], initialExcludedCardIds: string[]): string[] => {
+export const initializeExcludedCardIds = (setIds: SetId[], initialExcludedCardIds: string[]): string[] => {
   const settingsStore = useSettingsStore();
   const useConstraints = settingsStore.useConstraintOnRandomization;
   if (!useConstraints) {
@@ -102,7 +102,6 @@ export class RandomizerOptionsBuilder {
     this.requireCardProvider = requireCardProvider;
     return this;
   }
-
 
   setRequireBuyProvider(requireBuyProvider: boolean) {
     this.requireBuyProvider = requireBuyProvider;

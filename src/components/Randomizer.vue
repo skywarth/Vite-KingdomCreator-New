@@ -11,6 +11,7 @@
         <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
         <FullScreenButton v-if="!isCondensed" :text="supplyCardsCopyText" class="randomizer-copy-button" />
       </div>
+      <KingdomNotValid />
     </div>
     <div class="clearfix"></div>
   </div>
@@ -41,6 +42,7 @@ import FullScreenButton from "./FullScreenButton.vue";
 import Modifiers from "./Modifiers.vue";
 import RandomizerSidebar from "./RandomizerSidebar.vue";
 import SortableSupplyCards from "./SortableSupplyCards.vue";
+import KingdomNotValid from "./KingdomNotValid.vue";
 
 export default defineComponent({
   name: "Randomizer",
@@ -53,6 +55,7 @@ export default defineComponent({
     Modifiers,
     RandomizerSidebar,
     SortableSupplyCards,
+    KingdomNotValid
   },
   setup() {
     const randomizerStore = useRandomizerStore();

@@ -221,6 +221,19 @@ function deserializeMetadata(serializedKingdom: any): KingdomMetadata {
 
 function findByIds<T>(ids: string[], lookupFn: (id: string) => T, ext?: string, filteredSet?: string[])  : T[] {
   const results = [];
+  for (const id of ids) {
+    try {
+      results.push(lookupFn(id));
+    } catch (e) {
+      // Silently catch failed lookups.
+    }
+  }
+  return results;
+}
+
+
+function findByIdsAndSets<T>(ids: string[], lookupFn: (id: string) => T, ext?: string, filteredSet?: string[])  : T[] {
+  const results = [];
   if (typeof filteredSet !== 'undefined' ) {
     for (const id of ids) {
       try {

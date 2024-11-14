@@ -13,6 +13,7 @@ import { Landmark } from "../dominion/landmark"
 import { Metadata as KingdomMetadata } from "./kingdom";
 import { Project } from "../dominion/project"
 import type { RandomizerOptions } from "./randomizer-options";
+import { initializeExcludedCardIds } from './randomizer-options'
 import { SetId, SETS_WITH_DUPLICATES } from "../dominion/set-id";
 import { SetSupplyBan } from "./set-supply-ban";
 import { SetSupplyDivider } from "./set-supply-divider";
@@ -212,7 +213,10 @@ export class Randomizer {
   private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[],
          ways: Way[], allies: Ally[], prophecies: Prophecy[], traits: Trait[]  } {
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
-    const cards = Cards.getAllCardsFromSets(setsToUse);
+    // ajout des exclusions/
+    const excludedCardIds = initializeExcludedCardIds(setIds, []);
+    const cards = Cards.getAllCardsFromSets(setsToUse)
+        .filter(card => !excludedCardIds.includes(card.id)); 
     const selectedCards = FORCE_ADDONS_USE() ? 
         this.selectRandomCards(cards.filter(card => (card instanceof Event)||(card instanceof Landmark)||
         (card instanceof Project)||(card instanceof Way)||(card instanceof Trait)), NUM_CARDS_IN_KINGDOM())

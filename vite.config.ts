@@ -69,7 +69,7 @@ export default defineConfig( ({ mode}) => {
         },
       },
       vue(),
-      // VueDevTools(),
+      mode == 'development' ? VueDevTools() : "",
       legacy({ targets: ['defaults'] }),
       vueI18n({
         include: path.resolve(__dirname, './'+ publicationDir +'/locales/*.json'),

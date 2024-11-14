@@ -45,7 +45,7 @@
             </div>
             <div class="listbox-container  top-16 w-72">
               <Listbox v-model="selectedCards[setId]" multiple>
-                <div class="settingsInput" style="position:relative;">
+                <div class="settingsInput" style="position:relative; width:240px">
                   <ListboxButton class="listboxCard">
                     <span class="truncate-block"> {{ textForlistbox(selectedCards[setId], setId) }} {{ $t("cards_removed") }} </span>
                     <span class="chevronlistbox">
@@ -58,7 +58,7 @@
                       <ListboxOption v-slot="{ active, selected }" v-for="card in getCardsForSet(setId)" :key="card.id"
                         :value="card.id" as="template">
                         <li class="listboxOption">
-                          <span class="truncate-block">{{ card.name }}</span>
+                          <span class="truncate-block">{{ $t(card.id) }}</span>
                           <span v-if="selected" class="listboxOptionSelected">
                             <CheckIcon class="chevronlistboxIcon" aria-hidden="true" />
                           </span>

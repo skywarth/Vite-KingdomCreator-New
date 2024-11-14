@@ -22,7 +22,8 @@ import { EventTracker } from "../analytics/follow-activity";
 import { EventType } from "../analytics/follow-activity";
 import type { randomizerStoreState } from './randomizer-actions'
 import * as rA from './randomizer-actions'; // rA for randomizerActions
-import { USING_CUTOM_DESKSIZE } from "../settings/Settings-value";
+import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
+
 
 const MIN_SETS_FOR_PRIORITIZE_OPTION = rA.MIN_SETS_FOR_PRIORITIZE_OPTION;
 const MIN_CARDS_FOR_DISTRIBUTE_COST = rA.MIN_CARDS_FOR_DISTRIBUTE_COST;
@@ -152,16 +153,17 @@ export const useRandomizerStore = defineStore(
     LOAD_INITIAL_KINGDOM(initialKingdom: Kingdom | null) {
       console.log('LOAD_INITIAL_KINGDOM ', initialKingdom)
       if (initialKingdom) {
-        // Use the kingdom as-is if it contains 10 supply cards.
-        // if (initialKingdom.supply.supplyCards.length == 10) {
-        if ( initialKingdom.isKingdomValid() ) {
-          console.log("kingdom is valid")
+        // Use the kingdom as-is if it contains the correct number of supply cards.
+        //if (initialKingdom.supply.supplyCards.length == 10) {
+        if (initialKingdom.supply.supplyCards.length == NUM_CARDS_IN_KINGDOM()) {
+          console.log("kingdom is valid : ", NUM_CARDS_IN_KINGDOM())
           EventTracker.trackEvent(EventType.LOAD_FULL_KINGDOM_FROM_URL);
           this.UPDATE_KINGDOM(initialKingdom);
           return;
         }
-        console.log ("kingdom is not valid")
+        console.log ("kingdom is not valid", initialKingdom.supply.supplyCards.length, NUM_CARDS_IN_KINGDOM())
         // Randomize the rest of the set if there are less than 10 cards.
+        // test if all cards are allowed
         const options =
           rA.createRandomizerOptionsBuilder(this)
             .setSetIds(rA.getSelectedSetIds(this))
