@@ -221,28 +221,26 @@ function deserializeMetadata(serializedKingdom: any): KingdomMetadata {
 
 function findByIds<T>(ids: string[], lookupFn: (id: string) => T, ext?: string, filteredSet?: string[])  : T[] {
   const results = [];
-  for (const id of ids) {
-    try {
-      results.push(lookupFn(id));
-    } catch (e) {
-      // Silently catch failed lookups.
-    }
-  }
-  return results;
-}
-
-
-function findByIdsAndSets<T>(ids: string[], lookupFn: (id: string) => T, ext?: string, filteredSet?: string[])  : T[] {
-  const results = [];
+  let launch2ndRequest= true
   if (typeof filteredSet !== 'undefined' ) {
     for (const id of ids) {
       try {
+        launch2ndRequest=true
         for (const set of filteredSet) {
           try {
             results.push(lookupFn(set+'_'+ ext + id));
+            launch2ndRequest=false
             break;
           } catch (e) {
             // Silently catch failed lookups of 'set'_'id'
+          }
+        }
+        // this is to handle multiple version of sets
+        if (launch2ndRequest) {
+          try {
+            results.push(lookupFn(id));
+          } catch (e) {
+            // Silently catch failed lookups.
           }
         }
       } catch (e) {

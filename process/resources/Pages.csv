@@ -91,11 +91,39 @@ page-index	Sort	Sort		Sortieren	Tri
 page-index	Ally	Ally		Verbündete	Allié		
 page-index	1st	1st			1st		
 page-index	2nd	2nd			2nd		
-page-index							
-page-rules	rules_page_subtitle	Original rule books of Dominion Sets	Original rule books of Dominion Sets	Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
+page-index	Warning	Warning:			Avertissement :		
+page-index	Constraint_violated	kingdom not folowing setting constraints			Royaume ne respectant pas les contraintes de paramétrage		
+page-index	Cards_not_in_sets	Card not present in selected sets			Carte non présente dans les extensions sélectionnées		
+page-index	Cards_excluded	Excluded card according to settings			Carte exclue selon les paramètres de configuration		
+page-index	Card_rule_problem	Card rule problem			Problème de suivi de régles		
+page-index	YW_needs_bane	"""Young Witch"" requires a bane card"			"""Jeune Sorcière"" nécessite une Carte Fléau."		
+page-index	Bane_needs_YW	"The presence of a bane card requires a ""young Witch"""			"La présence d'une carte fléau (bane card) nécessite une ""Jeune Sorcière"""		
+page-index	Bane_Cost	The bane card must have a cost between  {MIN_COST} and {MAX_COST}			La carte fléau (bane card) doit avoir un coût entre {MIN_COST} et {MAX_COST}		
+page-index	FM_needs_ferrymancard	"""Ferryman"" requires a ferryman gain card"			"""Passeur"" nécessite une carte ferryman"		
+page-index	Ferrymancard_needs_FM	"The presence of a ferryman gain card requires a ""Ferryman"""			"La présence d'une carte ferryman nécessite un ""Passeur"""		
+page-index	Ferryman_Cost	The ferryman gain card must have a cost between  {MIN_COST} and {MAX_COST}			La carte ferryman doit avoir un coût entre {MIN_COST} et {MAX_COST}		
+page-index	MW_needs_mousewaycard	"""Mouse Way"" requires a mouseway  card"			"""Voie de la souris"" nécessite une Carte mouseway"		
+page-index	mousewaycard_needs_MW	"The presence of a mouse way card requires a ""Mouse Way"""			"La présence d'une carte mouseway nécessite la ""Voie de la Souris"""		
+page-index	Mouseway_Cost	The mouse way card must have a cost between  {MIN_COST} and {MAX_COST}			La carte mouseway doit avoir un coût entre {MIN_COST} et {MAX_COST}		
+page-index	OBE_needs_obeliskcard	"""Obelisk"" landmark requires an obeliskAction  card"			"Le repère ""Obélisque"" nécessite une carte obeliskAction"		
+page-index	obeliskcard_needs_OBE	"The presence of an obeliskAction card requires an ""Obelisk"" landmark"			"La présence d'une carte obeliskAction nécessite le repère ""Obélisque"""		
+page-index	obelisk_Cardtype	obeliskAction card must have be type Action			"La carte obeliskAction doit être de type ""Action"""		
+page-index	TooMany_Traits	Too many traits provided			Trop de comportement fournis		
+page-index	EachTrait_has_TraitSupply	Each Trait should have a traitsupply			Chaque Comportement doit avoir une action comportementale (traitsupply)		
+page-index	EachTraitSupply_has_Trait	Each traitsupply should have a Trait			chaque action comportementale (traitsupply) doit être liée à un comportement		
+page-index	invalid_trait_type	traitsupply must be of type Actioin or Treasure 			Les actions comportementales doivent être de type Action ou Trésor		
+page-index	Liaison_needs_Ally	Liaison in supplies needs an Ally			une ou plusieurs liaisons nécessitent un Allié		
+page-index	Ally_needs_Liaison	An Ally needs at least one Liaison			Un Allié nécessite une ou des Liaisons		
+page-index	Omen_needs_Prophecy	One or more Omens need a Prophecy 			Un ou des présages (Omen) impliquent une Prophétie		
+page-index	Prophecy_needs_Omen	A Prophecy needs at least one Omen			Une Prophétie nécéssite au moins un présage (Omen)		
+page-index	DRUID_needs_boons	Druid needs boons			"""Druide"" nécéssite des aubaines (boons)"		
+page-index	NB_of_Boons	3 boons are required for Druid			"3 aubaines (boons sont nécessaires au ""Druide"""		
+page-index	boons_for_DRUID	Boons are for Druid			"les aubaines nécessitent le ""Druide"""		
+							
+page-rules	rules_page_subtitle	Original rule books of Dominion Sets		Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
 page-rules	rules_page_description	Below are the rulebooks published with each set of dominion. Rulebooks contain descriptions of kingdom card and how they interact with other kingdom cards.		Nachfolgend die Spielanleitungen der Erweiterungen zu Dominion auf englisch. Darin enthalten sind auch detailierte Erklärungen der einzelnen Karten.	Ci-dessous, les livrets de règles publiés avec chaque boîte de Dominion. Les livrets contiennent une description de chaque carte royaume, qui explicite leurs interactions avec les autres cartes.	A continuación se encuentran los libros de reglas (en inglés) publicados con cada juego de Dominion. Los libros de reglas conienen las descripciones de las cartas de reino y como interactúan con otras cartas de reino.	Poniżej znajdują się podręczniki opublikowane z każdym zestawem gry Dominium. Instrukcje zawierają opisy kart królestwa oraz ich interakcje z innymi kartami królestw.
 page-rules							
-page-sets	sets_page_subtitle	Recommended Sets of 10	Recommended Sets of 10	Empfohlene Königreiche / Kartensätze	Ensembles de 10 cartes Royaume recommandés,	Ideas de Partidas	Rekomendowane zestawy po 10
+page-sets	sets_page_subtitle	Recommended Sets of 10		Empfohlene Königreiche / Kartensätze	Ensembles de 10 cartes Royaume recommandés,	Ideas de Partidas	Rekomendowane zestawy po 10
 page-sets	sets_page_description	Players can play Dominion with any set of 10 Kingdom cards, but these sets have been specially picked out to be entertaining and show off card interactions and strategies.		Diese Kartensätze wurden händisch zusammengestellt, um ein besonders unterhaltsames Spielerlebnis zu bieten und verschiedene Karten-Interaktionen und Strategien vorzustellen.	Vous pouvez jouer à Dominion avec n’importe quelle combinaison de 10 cartes Royaume. Les ensembles suivants mettent en valeur certaines combinaisons de cartes et différentes stratégies.	Se puede jugar a Dominion con cualquier grupo de 10 cartas de Reino, pero estos grupos están pensados para resaltar ciertas combinaciones interesantes de cartas y estrategias de juego.	Gracze Dominion mogą brać z dowolnym zestawem 10 kart królestwa, jednak poniższe zestawy zostały przygotowane z myślą o rozrywce oraz demonstracji interakcji pomiędzy kartami i strategii użycia kart.
 page-sets	sets_page Sets	Sets			Extensions		
 page-sets	Use Platinums/Colonies	Use Platinums/Colonies			Utiliser Platines/Colonies		
@@ -167,7 +195,7 @@ page-settings	Landmarks	Landmarks			Repères
 page-settings	Ways	Ways			Voies		
 page-settings	Traits	Traits			Comportements		
 page-settings	Projects	Projects			Projets		
-page-settings	cards_removed	cards removed			cartes à ne pas utiliser		
+page-settings	cards_removed	card removed|cards removed			carte à ne pas utiliser|carte à ne pas utiliser|cartes à ne pas utiliser		
 page-settings							
 							
 cards.baseset	baseset2_harbinger	Harbinger	Voorbode	Vorbotin	Présage	Emisario	
@@ -1039,53 +1067,53 @@ cards.guildscornucopia	guildscornucopia2_housecarl	Housecarl			Housecarl
 cards.guildscornucopia	guildscornucopia2_hugeturnip	Huge Turnip			Navet géant		
 cards.guildscornucopia	guildscornucopia2_renown	Renow			Renommée		
 							
-cards.risingsun	risingsun_alley.jpg	Alley			Ruelle		
-cards.risingsun	risingsun_aristocrat.jpg	Aristocrat			Aristocrate		
-cards.risingsun	risingsun_artist.jpg	Artist			Artiste		
-cards.risingsun	risingsun_change.jpg	Change			Changement		
-cards.risingsun	risingsun_craftsman.jpg	Craftsman			Ouvrier		
-cards.risingsun	risingsun_daimyo.jpg	Daimyo			Daimyo		
-cards.risingsun	risingsun_fishmonger.jpg	Fishmonger			Poissonnière		
-cards.risingsun	risingsun_goldmine.jpg	Gold Mine			Mine d'or		
-cards.risingsun	risingsun_imperialenvoy.jpg	Imperial Envoy			Délégué impérial		
-cards.risingsun	risingsun_kitsune.jpg	Kitsune			Kitsune		
-cards.risingsun	risingsun_litter.jpg	Litter			Chaise à porteurs		
-cards.risingsun	risingsun_mountainshrine.jpg	Mountain Shrine			Sanctuaire de la montagne		
-cards.risingsun	risingsun_ninja.jpg	Ninja			Ninja		
-cards.risingsun	risingsun_poet.jpg	Poet			Poétesse		
-cards.risingsun	risingsun_rice.jpg	Rice			Riz		
-cards.risingsun	risingsun_ricebroker.jpg	Rice Broker			Courtier en riz		
-cards.risingsun	risingsun_riverboat.jpg	River Shrine			Sanctuaire de la rivière		
-cards.risingsun	risingsun_rivershrine.jpg	Riverboat			Bateau fluvial		
-cards.risingsun	risingsun_ronin.jpg	Ronin			Ronin		
-cards.risingsun	risingsun_rootcellar.jpg	Root Cellar			Cellier à légumes		
-cards.risingsun	risingsun_rusticvillage.jpg	Rustic Village			Village rustique		
-cards.risingsun	risingsun_samurai.jpg	Samurai			Samouraï		
-cards.risingsun	risingsun_snakewitch.jpg	Snake Witch			Sorcière aux serpents		
-cards.risingsun	risingsun_tanuki.jpg	Tanuki			Tanuki		
-cards.risingsun	risingsun_teahouse.jpg	Tea House			Salon de thé		
-cards.risingsun	risingsun_event_amass.jpg	Amass			Amassement		
-cards.risingsun	risingsun_event_asceticism.jpg    	Asceticism			Ascèse		
-cards.risingsun	risingsun_event_continue.jpg      	Continue			Prolongation		
-cards.risingsun	risingsun_event_credit.jpg        	Credit			Crédit		
-cards.risingsun	risingsun_event_foresight.jpg     	Foresight			Prévoyance		
-cards.risingsun	risingsun_event_gather.jpg        	Gather			Cueillette		
-cards.risingsun	risingsun_event_kintsugi.jpg      	Kintsugi			Kintsugi		
-cards.risingsun	risingsun_event_practice.jpg      	Practice			Entraînement		
-cards.risingsun	risingsun_event_receivetribute.jpg	Receive Tribute			Hommage rendu		
-cards.risingsun	risingsun_event_seatrade.jpg	Sea Trade			Commerce maritime		
-cards.risingsun	risingsun_prophecy_approachingarmy.jpg	Approaching Army			Armée en approche		
-cards.risingsun	risingsun_prophecy_bidingtime.jpg	Biding Time			Attendre son heure		
-cards.risingsun	risingsun_prophecy_bureaucracy.jpg	Bureaucracy			Bureaucratie		
-cards.risingsun	risingsun_prophecy_divinewind.jpg	Divine Wind			Vent divin		
-cards.risingsun	risingsun_prophecy_enlightenment.jpg	Enlightenment			Illumination		
-cards.risingsun	risingsun_prophecy_flourishingtrade.jpg	Flourishing Trade			Commerce florissant		
-cards.risingsun	risingsun_prophecy_goodharvest.jpg	Good Harvest			Bonne récolte		
-cards.risingsun	risingsun_prophecy_greatleader.jpg	Great Leader			Grand dirigeant		
-cards.risingsun	risingsun_prophecy_growth.jpg	Growth			Croissance		
-cards.risingsun	risingsun_prophecy_harshwinter.jpg	Harsh Winter			Hiver rude		
-cards.risingsun	risingsun_prophecy_kindemperor.jpg	Kind Emperor			Bon empereur		
-cards.risingsun	risingsun_prophecy_panic.jpg	Panic			Panique		
-cards.risingsun	risingsun_prophecy_progress.jpg	Progress			Progrès		
-cards.risingsun	risingsun_prophecy_rapidexpansion.jpg	Rapid Expansion			Expansion rapide		
-cards.risingsun	risingsun_prophecy_sickness.jpg	Sickness			Maladie		
+cards.risingsun	risingsun_alley	Alley			Ruelle		
+cards.risingsun	risingsun_aristocrat	Aristocrat			Aristocrate		
+cards.risingsun	risingsun_artist	Artist			Artiste		
+cards.risingsun	risingsun_change	Change			Changement		
+cards.risingsun	risingsun_craftsman	Craftsman			Ouvrier		
+cards.risingsun	risingsun_daimyo	Daimyo			Daimyo		
+cards.risingsun	risingsun_fishmonger	Fishmonger			Poissonnière		
+cards.risingsun	risingsun_goldmine	Gold Mine			Mine d'or		
+cards.risingsun	risingsun_imperialenvoy	Imperial Envoy			Délégué impérial		
+cards.risingsun	risingsun_kitsune	Kitsune			Kitsune		
+cards.risingsun	risingsun_litter	Litter			Chaise à porteurs		
+cards.risingsun	risingsun_mountainshrine	Mountain Shrine			Sanctuaire de la montagne		
+cards.risingsun	risingsun_ninja	Ninja			Ninja		
+cards.risingsun	risingsun_poet	Poet			Poétesse		
+cards.risingsun	risingsun_rice	Rice			Riz		
+cards.risingsun	risingsun_ricebroker	Rice Broker			Courtier en riz		
+cards.risingsun	risingsun_riverboat	River Shrine			Sanctuaire de la rivière		
+cards.risingsun	risingsun_rivershrine	Riverboat			Bateau fluvial		
+cards.risingsun	risingsun_ronin	Ronin			Ronin		
+cards.risingsun	risingsun_rootcellar	Root Cellar			Cellier à légumes		
+cards.risingsun	risingsun_rusticvillage	Rustic Village			Village rustique		
+cards.risingsun	risingsun_samurai	Samurai			Samouraï		
+cards.risingsun	risingsun_snakewitch	Snake Witch			Sorcière aux serpents		
+cards.risingsun	risingsun_tanuki	Tanuki			Tanuki		
+cards.risingsun	risingsun_teahouse	Tea House			Salon de thé		
+cards.risingsun	risingsun_event_amass	Amass			Amassement		
+cards.risingsun	risingsun_event_asceticism    	Asceticism			Ascèse		
+cards.risingsun	risingsun_event_continue      	Continue			Prolongation		
+cards.risingsun	risingsun_event_credit        	Credit			Crédit		
+cards.risingsun	risingsun_event_foresight     	Foresight			Prévoyance		
+cards.risingsun	risingsun_event_gather        	Gather			Cueillette		
+cards.risingsun	risingsun_event_kintsugi      	Kintsugi			Kintsugi		
+cards.risingsun	risingsun_event_practice      	Practice			Entraînement		
+cards.risingsun	risingsun_event_receivetribute	Receive Tribute			Hommage rendu		
+cards.risingsun	risingsun_event_seatrade	Sea Trade			Commerce maritime		
+cards.risingsun	risingsun_prophecy_approachingarmy	Approaching Army			Armée en approche		
+cards.risingsun	risingsun_prophecy_bidingtime	Biding Time			Attendre son heure		
+cards.risingsun	risingsun_prophecy_bureaucracy	Bureaucracy			Bureaucratie		
+cards.risingsun	risingsun_prophecy_divinewind	Divine Wind			Vent divin		
+cards.risingsun	risingsun_prophecy_enlightenment	Enlightenment			Illumination		
+cards.risingsun	risingsun_prophecy_flourishingtrade	Flourishing Trade			Commerce florissant		
+cards.risingsun	risingsun_prophecy_goodharvest	Good Harvest			Bonne récolte		
+cards.risingsun	risingsun_prophecy_greatleader	Great Leader			Grand dirigeant		
+cards.risingsun	risingsun_prophecy_growth	Growth			Croissance		
+cards.risingsun	risingsun_prophecy_harshwinter	Harsh Winter			Hiver rude		
+cards.risingsun	risingsun_prophecy_kindemperor	Kind Emperor			Bon empereur		
+cards.risingsun	risingsun_prophecy_panic	Panic			Panique		
+cards.risingsun	risingsun_prophecy_progress	Progress			Progrès		
+cards.risingsun	risingsun_prophecy_rapidexpansion	Rapid Expansion			Expansion rapide		
+cards.risingsun	risingsun_prophecy_sickness	Sickness			Maladie		

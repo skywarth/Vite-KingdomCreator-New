@@ -29,6 +29,7 @@ import { Way } from "../dominion/way";
 import { Ally } from "../dominion/ally";
 import { Trait } from "../dominion/trait";
 import { Prophecy } from "../dominion/prophecy";
+import { DRUID_ID, BOONS_NB_FROM_DRUID } from "./special-need-cards";
 import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "./special-need-cards";
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
@@ -91,18 +92,24 @@ export class Randomizer {
 
   static createSupplyWithRetries(randomizerOptions: RandomizerOptions): Supply {
     let retries = MAX_RETRIES;
+    let localError:string [] = []
     while (retries > 0) {
       try {
         return this.createSupply(randomizerOptions);
       } catch (error) {
-        if (typeof error === 'object' && error !== null)
+        if (typeof error === 'object' && error !== null) {
           console.log(`Error when trying to select cards: \n${error.toString()}`);
+          if (!localError.includes(error.toString()))
+            localError.push(error.toString())
+        }
         else
           console.log(`Error when trying to select cards: \n error is not an object`);
         retries -= 1;
       }
     }
-    throw new Error("Failed to select cards that satisfied all requirements.");
+    if (localError.length) 
+      throw new Error(`Failed to create Supply that satisfied all requirements: \n${localError.join("\n")}`);
+    throw new Error("Failed to create Supply that satisfied all requirements.");
   }
 
   static createSupply(randomizerOptions: RandomizerOptions): Supply {
@@ -212,6 +219,7 @@ export class Randomizer {
 
   private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[],
          ways: Way[], allies: Ally[], prophecies: Prophecy[], traits: Trait[]  } {
+    console.log("getAddons for randomizing")
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
     // ajout des exclusions/
     const excludedCardIds = initializeExcludedCardIds(setIds, []);
@@ -283,13 +291,13 @@ export class Randomizer {
   }
 
   static getRandomBoons(supply: Supply, keepBoons: Boon[]) {
-    if (!supply.supplyCards.some((s) => s.id == "nocturne_druid")) {
+    if (!supply.supplyCards.some((s) => s.id == DRUID_ID)) {
       return [];
     }
     const excludeIds = Cards.extractIds(keepBoons);
     const cards = Cards.getAllCardsFromSets(DominionSets.getAllSets());
     const boons = Cards.getAllBoons(cards).filter(Cards.filterByExcludedIds(excludeIds));
-    return selectRandomN(boons, 3 - excludeIds.length).concat(keepBoons);
+    return selectRandomN(boons, BOONS_NB_FROM_DRUID - excludeIds.length).concat(keepBoons);
   }
 
   static getRandomAlly(supply: Supply, skipAllyId: string | null = null): Ally | null {
@@ -465,18 +473,23 @@ export class Randomizer {
 
   private static buildSupplyWithRetries(supplyBuilder: SupplyBuilder, existingCards: SupplyCard[]) {
     let retries = MAX_RETRIES;
+    let localError:string [] = []
     while (retries > 0) {
       try {
         return supplyBuilder.createSupply(existingCards);
       } catch (error) {
-        if (typeof error === 'object' && error !== null)
+        if (typeof error === 'object' && error !== null) {
           console.log(`Error when trying to select cards: \n${error.toString()}`);
-        else
+          if (!localError.includes(error.toString()))
+            localError.push(error.toString())
+        } else
           console.log(`Error when trying to select cards: \n error is not an object`);
         retries -= 1;
       }
     }
-    throw new Error("Failed to select cards that satisfied all requirements.");
+    if (localError.length)
+      throw new Error(`Failed to build Supply that satisfied all requirements: \n${localError.join("\n")}`);
+    throw new Error("Failed to build Supply that satisfied all requirements.");
   }
 
   private static getNumberOfAlchemyCardsToUse(

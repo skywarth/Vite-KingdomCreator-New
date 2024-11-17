@@ -2,7 +2,7 @@ import { EventTracker } from "../analytics/follow-activity";
 import { EventType } from "../analytics/follow-activity";
 import type { Settings } from "../settings/settings";
 import { CardType } from "../dominion/card-type";
-import { RandomizerOptionsBuilder } from "../randomizer/randomizer-options";
+import { RandomizerOptionsBuilder, initializeExcludedCardIds } from "../randomizer/randomizer-options";
 import { Randomizer } from "../randomizer/randomizer";
 import type { Kingdom } from "../randomizer/kingdom";
 import type { Card } from "../dominion/card";
@@ -79,7 +79,8 @@ export function randomizeSelectedAddons(context: randomizerStoreState) {
       + getSelectedProjects(context).length
       + getSelectedWays(context).length
       + getSelectedTraits(context).length;
-  const addonIds = getAddons(context).map((addon) => addon.id);
+  const addonIds = initializeExcludedCardIds(getSelectedSetIds(context), []);
+  addonIds.push(...getAddons(context).map((addon) => addon.id));
   EventTracker.trackEvent(EventType.RANDOMIZE_EVENTS_AND_LANDMARKS);
   if (!USING_CUTOM_DESKSIZE()) {
     return Randomizer.getRandomAddons(getSelectedSetIds(context), addonIds, newAddonsCount);
@@ -127,7 +128,8 @@ export function randomizeSelectedAddons(context: randomizerStoreState) {
 }
 
 export function randomizeUndefinedAddon(context: randomizerStoreState) :Addon[] {
-  const addonIds = getAddons(context).map((addon) => addon.id);
+  const addonIds = initializeExcludedCardIds(getSelectedSetIds(context), []);
+  addonIds.push(...getAddons(context).map((addon) => addon.id));
   EventTracker.trackEvent(EventType.RANDOMIZE_EVENTS_AND_LANDMARKS);
   if (!USING_CUTOM_DESKSIZE()) {
     return Randomizer.getRandomAddons(getSelectedSetIds(context), addonIds, 1);
@@ -247,6 +249,7 @@ export function getCardsToExclude(context: randomizerStoreState) {
 
 export function getAddons(context: randomizerStoreState) {
   const kingdom = context.kingdom;
+  console.log("getAddons from RActions")
   return (kingdom.events as Addon[])
       .concat(
         kingdom.landmarks as Addon[], 

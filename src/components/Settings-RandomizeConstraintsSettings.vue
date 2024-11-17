@@ -47,7 +47,7 @@
               <Listbox v-model="selectedCards[setId]" multiple>
                 <div class="settingsInput" style="position:relative; width:240px">
                   <ListboxButton class="listboxCard">
-                    <span class="truncate-block"> {{ textForlistbox(selectedCards[setId], setId) }} {{ $t("cards_removed") }} </span>
+                    <span class="truncate-block"> {{ textForlistbox(selectedCards[setId], setId) }} {{ $t("cards_removed", lenghtcount(selectedCards[setId])) }} </span>
                     <span class="chevronlistbox">
                       <ChevronUpDownIcon class="chevronlistboxIcon" />
                     </span>
@@ -150,6 +150,8 @@ export default defineComponent({
     const textForlistbox = (cards: string[], setid: SetId) => {
       return (cards ? cards.length : 0) + " / " + getCardsForSet(setid).length;
     }
+    const lenghtcount= (cards: string[]) => { return cards ? cards.length : 0 }
+
     // Initialiser les valeurs depuis le store
     const initializeSetConstraints = () => {
       listedSetids.value.forEach(setId => {
@@ -245,7 +247,8 @@ export default defineComponent({
       updateSetConstraints,
       selectedCards,
       getCardsForSet,
-      textForlistbox
+      textForlistbox,
+      lenghtcount
 
     };
   },

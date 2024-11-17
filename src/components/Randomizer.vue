@@ -2,6 +2,7 @@
   <div class="content">
     <RandomizerSidebar @randomize="handleRandomize" />
     <div class="main">
+      <KingdomNotValid />
       <SortableSupplyCards />
       <Addons />
       <Boons />
@@ -11,7 +12,6 @@
         <CopyButton :text="supplyCardsCopyText" class="randomizer-copy-button" />
         <FullScreenButton v-if="!isCondensed" :text="supplyCardsCopyText" class="randomizer-copy-button" />
       </div>
-      <KingdomNotValid />
     </div>
     <div class="clearfix"></div>
   </div>

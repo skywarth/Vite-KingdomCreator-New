@@ -17,8 +17,9 @@ Dev deploy on github pages
 Dev deploy on 71yeti.fr
   Feat - include RisingSun and prophecies
   Feat - add option to exclude cards from randomization
-    To do : handle minCards and maxCards
-  Fix & Feat (see [Changelog.md](./Changelog.md))
+    To do : handle minCards and maxCards in supplies selection
+  Feat - allow not valid kingdoms and add information about coherence issues
+  Feat - Clarify message when not able to randomize
 
 2024/09/24 - 6.3.1
   Fix blakevanlan/KingdomCreator # 169 - Bug: Copy does not work anymore like it used to

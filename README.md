@@ -14,7 +14,6 @@ Dev deploy on github pages
 Dev deploy on 71yeti.fr
   Feat - include RisingSun and prophecies
   Feat - add option to exclude cards from randomization
-    To do : handle minCards and maxCards
   Fix & Feat (see [Changelog.md](./Changelog.md))
 
 2024/09/24 - 6.3.1

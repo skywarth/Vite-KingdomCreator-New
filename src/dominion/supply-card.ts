@@ -173,7 +173,7 @@ export class SupplyCard implements Card {
       json["isOmen"] || false,
       
   // Promos
-  json["isCommand"] || false,
+      json["isCommand"] || false,
 
     )
   }

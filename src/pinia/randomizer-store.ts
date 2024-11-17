@@ -246,8 +246,8 @@ export const useRandomizerStore = defineStore(
       const newSupply = selectedCards.length
         ? rA.randomizeSelectedCards(this) || oldSupply
         : oldSupply;
-      //console.log("newsupply", newSupply)
-      //console.log(oldSupply)
+      console.log("newsupply", newSupply)
+      console.log(oldSupply)
       //if (oldSupply.mouseWay) newSupply.mouseWay= oldSupply.mouseWay
       const isAddonSelected =
       rA.getSelectedEvents(this).length ||
@@ -257,6 +257,7 @@ export const useRandomizerStore = defineStore(
       rA.getSelectedTraits(this).length;
 
       const newAddons = isAddonSelected ? rA.randomizeSelectedAddons(this) : null;
+      console.log("newAddons",newAddons)
       const newEvents = newAddons
         ? Cards.getAllEvents(newAddons).concat(rA.getUnselectedEvents(this))
         : this.kingdom.events;
@@ -380,7 +381,6 @@ export const useRandomizerStore = defineStore(
     },
     RANDOMIZE_UNDEFINED_ADDON() {
       console.log('RANDOMIZE_UNDEFINED_ADDON')
-      console.log(rA.getAddons(this))
       const addons = rA.randomizeUndefinedAddon(this).concat(rA.getAddons(this));
       const kingdom = new Kingdom(
         this.kingdom.id,

@@ -3,6 +3,7 @@ import { useSettingsStore } from '../pinia/settings-store';
 import { Addons_TYPE } from '../dominion/addon';
 
 const Default_NUM_CARDS_IN_KINGDOM = 10
+const Default_MAX_ADDONS_IN_KINGDOM = 2;
 
 // Changez cette ligne pour exporter explicitement la fonction
 export const NUM_CARDS_IN_KINGDOM = () : number => {
@@ -28,9 +29,7 @@ export const USING_CUTOM_DESKSIZE = () : boolean => {
     return false
 }
 
-
 // Addon constants.
-const Default_MAX_ADDONS_IN_KINGDOM = 2;
 export const MAX_ADDONS_IN_KINGDOM = () : number => {
     const activePinia = getActivePinia();
     if (activePinia) {
