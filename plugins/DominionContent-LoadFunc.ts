@@ -31,7 +31,7 @@ export function loadSets() {
     // Create an id for each card.
     let set = sets[setId];
     const cardTypes: { [key: string]: string } = { cards: 'cards', events: 'event', landmarks: 'landmark', projects: 'project', 
-                        boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', prophecies: 'prophecy', othercards: 'cards'};
+                        boons: 'boon', ways: 'way', allies: 'ally', traits: 'trait', prophecies: 'prophecy', othercards: 'other'};
     for (const cardType in set) {
       if (cardTypes[cardType]) {
         for (let i = 0; i < set[cardType].length; i++) {
@@ -81,6 +81,9 @@ function convertToCardId(setId:string, name:string, type:string) {
     case '':
     case 'cards' :
       convert = `${setId}_${tokenize(name)}`
+      break;
+    case 'other' : 
+      convert = `${setId}_${name.replace(/[\s'-\/]/g, '')}`
       break;
     default:
       convert = `${setId}_${type}_${tokenize(name)}`
