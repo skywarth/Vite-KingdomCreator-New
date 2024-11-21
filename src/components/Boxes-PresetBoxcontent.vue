@@ -152,8 +152,11 @@ export default defineComponent({
       return Shape.SQUARE
     };
 
-    const getCards = (cardIds: any[], origine = "unset") => {
-      return SupplyCardSorter.sort(cardIds as SupplyCard[], setsStore.sortBoxesSet, t);
+    const getCards = (cardIds: any[], origine = SortOption.SET) => {
+      if (origine == SortOption.SET) 
+        return SupplyCardSorter.sort(cardIds as SupplyCard[], setsStore.sortBoxesSet, t);
+      else 
+        return SupplyCardSorter.sort(cardIds as SupplyCard[], origine, t);
     };
 
     const getOtherCards = (usingSet: DominionSet, typeRequested: string) => {
@@ -171,6 +174,7 @@ export default defineComponent({
       if (typeRequested == 'squareMat') return OTHER_CARD_TYPES_MAT_SQUARE;
       return OTHER_CARD_TYPES;
     };
+
     const challenge_sortBoxesSet = (mycard_type: string) => {
       if (mycard_type == "Travellers Page" || mycard_type == "Travellers Peasant") return SortOption.COST;
       if (mycard_type == "Split Cards") return SortOption.ORDERSTRING;
