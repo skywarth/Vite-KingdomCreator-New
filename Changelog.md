@@ -22,7 +22,8 @@ Dev deploy on 71yeti.fr
   Feat - Clarify message when not able to randomize
   Fix - order for boxes display of special cards 
       Travellers, Split Cards, Castle
-  Fix - rename othercard jpg with (set)_other_(name) - and cleanup for old and used cards jpg
+  Fix - rename othercard jpg with (set)_other_(name)
+      and cleanup for old and used cards jpg
 
 2024/09/24 - 6.3.1
   Fix blakevanlan/KingdomCreator # 169 - Bug: Copy does not work anymore like it used to
