@@ -2,7 +2,7 @@
   <div>
     <transition name="slow-fade">
       <div class="addons-header">
-      <AddonTitle :has-ally="ally !== null" :has-prophecy="prophecy !== null"/>
+      <AddonTitle :has-ally="ally !== null" :has-prophecies="prophecy !== null"/>
       </div>
     </transition>
     <transition name="slow-fade">

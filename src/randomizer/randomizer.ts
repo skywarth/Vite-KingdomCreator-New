@@ -122,7 +122,6 @@ export class Randomizer {
     // Set the bane card, the ferryman card, the mouseway card , the riverboat card
     //if supplyed in the options and remove it from the pool of 
     // available cards.
-    console.log("availabel cards",supplyBuilder)
     if (randomizerOptions.baneCardId) {
       supplyBuilder.setBaneCard(
         DominionSets.getSupplyCardById(randomizerOptions.baneCardId));
@@ -148,7 +147,6 @@ export class Randomizer {
         DominionSets.getSupplyCardById(randomizerOptions.obeliskCardId));
       supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.obeliskCardId]));
     }
-    console.log("available cards no special",supplyBuilder)
 
     // Configure bans.
     if (randomizerOptions.excludeCardIds.length) {

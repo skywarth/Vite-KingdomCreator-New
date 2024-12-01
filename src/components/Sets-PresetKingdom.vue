@@ -87,6 +87,10 @@
       :text="copyText"
       class="preset-kingdom-copy-button"
     />
+    <RandomizeLinkButton
+      :kingdom="kingdom"
+      class="preset-kingdom-copy-button"
+    />
   </div>
 </template>
 
@@ -113,6 +117,7 @@ import GridLayout from "./GridLayout.vue";
 import StaticCardWithSet from "./StaticCardWithSet.vue";
 import BaneCardCover from "./BaneCardCover.vue";
 import CopyButton from "./CopyButton.vue";
+import RandomizeLinkButton from './RandomizeLinkButton.vue';
 
 const FOUR_COLUMN_SUPPLY_CARD_WIDTH = 450;
 const TWO_COLUMN_ADDON_WIDTH = 525;
@@ -124,7 +129,8 @@ export default defineComponent({
     GridLayout,
     StaticCardWithSet,
     BaneCardCover,
-    CopyButton
+    CopyButton,
+    RandomizeLinkButton
   },
   props: {
     kingdom: {
@@ -212,8 +218,6 @@ export default defineComponent({
     const traitsTitle = (index: number) => {
       return "trait#"+ props.kingdom.traitIds[index];
     };
-
-
 
     const isPlayFavImg = (kingdomName: string) => {
       let PlayedGames = setsStore.playedGames;

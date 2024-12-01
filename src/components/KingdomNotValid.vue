@@ -54,10 +54,10 @@ export default defineComponent({
     const { t } = useI18n();
     const randomizerStore = useRandomizerStore();
     const kingdom = computed(()=> randomizerStore.kingdom);
-    const settings = ref(randomizerStore.settings);
+    const settings = computed(()=> randomizerStore.settings);
     const settingsStore= useSettingsStore();
   
-    const allKingdomCards =  [
+    const allKingdomCards = computed(()=>  [
         ...kingdom.value.supply.supplyCards,
         ...(kingdom.value.supply.baneCard ? [kingdom.value.supply.baneCard] : []),
         ...(kingdom.value.supply.ferrymanCard ? [kingdom.value.supply.ferrymanCard] : []),
@@ -73,10 +73,8 @@ export default defineComponent({
         ...(kingdom.value.ally ? [kingdom.value.ally] : []),
         ...(kingdom.value.prophecy ? [kingdom.value.prophecy]  : []),
         ...kingdom.value.traits as Card[]
-      ];
+      ]);
    
-    const selectedSets = settings.value.selectedSets;
-
     const hasInvalidCards = computed(() => { 
       const invalidCards = [];
             // Check for cards not belonging to selected sets
@@ -87,23 +85,23 @@ export default defineComponent({
 
     const containsNotValidCards = (kingdomCards: Card[], selectedSets: SetId[]) : Card[]=> {
       const selectedCards = kingdomCards.filter(card =>
-        selectedSets.includes(card.setId)
+          settings.value.selectedSets.includes(card.setId)
       );
       return kingdomCards.filter(card => !selectedCards.includes(card));
     };
 
     const invalidCardsFromNonSelectedSets = computed(() => { 
       const  invalidCardsFromNonSelectedSets = containsNotValidCards(
-        allKingdomCards, selectedSets
+        allKingdomCards.value, settings.value.selectedSets
       );
       return invalidCardsFromNonSelectedSets
     })
 
     const invalidCardsFromExcludedList = computed(() => { 
       if (settingsStore.useConstraintOnRandomization) {
-        const excludedCardIds = initializeExcludedCardIds(selectedSets, []);
+        const excludedCardIds = initializeExcludedCardIds(settings.value.selectedSets, []);
         const invalidCardsFromExcludedList = 
-            allKingdomCards.filter(
+            allKingdomCards.value.filter(
                 card => excludedCardIds.includes(card.id)
             );
         return invalidCardsFromExcludedList

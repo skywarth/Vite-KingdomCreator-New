@@ -75,7 +75,6 @@ export default defineComponent({
       if (props.hasTraits) addons.push("addon_traits");
       if (props.hasAlly) addons.push("addon_ally");
       if (props.hasProphecies) addons.push("addon_prophecy");
-console.log(addons);
       return addons;
     });
 
