@@ -101,6 +101,8 @@ const OTHER_CARD_TYPES: genericCardTypes[] = [
   { cardType: "Prize", title: "Non-Supply Cards" },
   { cardType: "Heirloom", title: "Non-Supply Cards - Heirlooms" }, /*nocturne */
   { cardType: "Loot", title: "Loot Cards" },
+  { cardType: "version", title: "Multiples versions of Cards" },
+
 ];
 
 const OTHER_CARD_TYPES_HORIZONTAL: genericCardTypes[] = [

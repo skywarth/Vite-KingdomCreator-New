@@ -22,6 +22,9 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
   if (kingdom.supply.ferrymanCard) {
     result.ferryman = serializeCards([kingdom.supply.ferrymanCard]);
   } 
+  if (kingdom.supply.riverboatCard) {
+    result.riverboat = serializeCards([kingdom.supply.riverboatCard]);
+  } 
   if (kingdom.events.length) {
     result.events = serializeCards(kingdom.events);
   }
@@ -105,6 +108,7 @@ export function serializeKingdom(kingdom: Kingdom): {[index: string]: string} {
       supply=coven,youngwitch,gatekeeper,ferryman,huntinglodge,livery,mastermind,paddock,stockpile,supplies
       &bane=hamlet
       &ferryman=village
+      &riverboat=alley
       &events=populate
       &landmarks=obelisk(coven)
       //&obeliskCard=coven
@@ -126,6 +130,7 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
 
   const baneIds = parseCommaSeparatedValues(serializedKingdom.bane) || [];
   const ferrymanIds = parseCommaSeparatedValues(serializedKingdom.ferryman) || [];
+  const riverboatIds = parseCommaSeparatedValues(serializedKingdom.riverboat) || [];
   const eventIds = parseCommaSeparatedValues(serializedKingdom.events) || [];
   // const  landmarkIds = parseCommaSeparatedValues(serializedKingdom.landmarks) || [];
   const [obeliskCardIds, landmarkIds] = extractStringParenthesis(parseCommaSeparatedValues(serializedKingdom.landmarks) || [])
@@ -164,6 +169,10 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   if (mouseWayCardIds.length) {
     mouseWayCard = findByIds(mouseWayCardIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;
   }
+  let riverboatCard: SupplyCard | null = null;
+  if (riverboatIds.length) {
+    riverboatCard = findByIds(riverboatIds, DominionSets.getSupplyCardById, "", selectedSets)[0] || null;
+  }
 
   const traits =  /* transform pious(masterpiece) => pious */
       findByIds(traitIds.map((traitId) => traitId.replace(/\(.*\)/,''))
@@ -177,7 +186,7 @@ export function deserializeKingdom(serializedKingdom: any, selectedSets: string[
   const allies = findByIds(allyIds, DominionSets.getAllyById, "ally_", selectedSets).slice(0, 1);
   const prophecies = findByIds(prophecyIds, DominionSets.getProphecyById, "prophecy_", selectedSets).slice(0, 1);
   const boons = findByIds(boonIds, DominionSets.getBoonById, "boon_", selectedSets).slice(0, 3);
-  const supply = new Supply(supplyCards, baneCard, ferrymanCard, obeliskCard, mouseWayCard, traitSupplyCards, Replacements.empty());
+  const supply = new Supply(supplyCards, baneCard, ferrymanCard, obeliskCard, mouseWayCard, riverboatCard, traitSupplyCards, Replacements.empty());
 
   return new Kingdom(
                Date.now(),                                /* id: number,  */

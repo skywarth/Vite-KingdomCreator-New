@@ -9,6 +9,12 @@ As I became a maintainer for Kingdom Creator, https://www.dominionrandomizer.com
 Feel free to propose any improvements you see fit and send me a pull request!
 
 ### Changelog
+2024/12/01 - 6.4.1
+Dev deploy on github pages
+Dev deploy on 71yeti.fr
+  Feat - finalizing Rising Sun
+  Fix & Feat (see [Changelog.md](./Changelog.md))
+
 2024/10/21 - 6.4.0
 Dev deploy on github pages
 Dev deploy on 71yeti.fr

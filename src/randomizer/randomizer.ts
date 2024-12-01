@@ -59,7 +59,7 @@ export class Randomizer {
     const ally = this.getRandomAlly(supply);
     const prophecy = this.getRandomProphecy(supply);
     const adjustedSupplyCards = this.adjustSupplyBasedOnAddons(supply, addons, 
-      new Kingdom(0, new Supply([], null, null, null, null, [], Replacements.empty()),
+      new Kingdom(0, new Supply([], null, null, null, null, null, [], Replacements.empty()),
           [], [], [], [], [], null, null, [], new KingdomMetadata(false, false)));
     const metadata = this.getMetadata(randomizerOptions.setIds);
     return new Kingdom(
@@ -119,9 +119,10 @@ export class Randomizer {
       this.removeDuplicateCards(
         allSupplyCards.filter(Cards.filterByIncludedSetIds(randomizerOptions.setIds)), []);
     let supplyBuilder = new SupplyBuilder(allSupplyCardsToUse);
-    // Set the bane card, the ferryman card, the mouseway card 
+    // Set the bane card, the ferryman card, the mouseway card , the riverboat card
     //if supplyed in the options and remove it from the pool of 
     // available cards.
+    console.log("availabel cards",supplyBuilder)
     if (randomizerOptions.baneCardId) {
       supplyBuilder.setBaneCard(
         DominionSets.getSupplyCardById(randomizerOptions.baneCardId));
@@ -137,12 +138,18 @@ export class Randomizer {
         DominionSets.getSupplyCardById(randomizerOptions.mousewayCardId));
       supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.mousewayCardId]));
     }
+    if (randomizerOptions.riverboatCardId) {
+      supplyBuilder.setRiverboatard(
+        DominionSets.getSupplyCardById(randomizerOptions.riverboatCardId));
+      supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.riverboatCardId]));
+    }
     if (randomizerOptions.obeliskCardId) {
       supplyBuilder.setObeliskCard(
         DominionSets.getSupplyCardById(randomizerOptions.obeliskCardId));
       supplyBuilder.addBan(new CardSupplyBan([randomizerOptions.obeliskCardId]));
     }
-    
+    console.log("available cards no special",supplyBuilder)
+
     // Configure bans.
     if (randomizerOptions.excludeCardIds.length) {
       supplyBuilder.addBan(new CardSupplyBan(randomizerOptions.excludeCardIds));
@@ -219,7 +226,6 @@ export class Randomizer {
 
   private static getAddons(setIds: SetId[]): { events: Event[], landmarks: Landmark[], projects: Project[],
          ways: Way[], allies: Ally[], prophecies: Prophecy[], traits: Trait[]  } {
-    console.log("getAddons for randomizing")
     const setsToUse = Cards.filterSetsByAllowedSetIds(DominionSets.getAllSets(), setIds);
     // ajout des exclusions/
     const excludedCardIds = initializeExcludedCardIds(setIds, []);
@@ -391,6 +397,7 @@ export class Randomizer {
       supply.ferrymanCard,    /* ferryman carrd to add if needed */
       calculatedObeliskCard,  /* obeliskCard if needed */
       calculatedmouseWayCard, /* mouseWayCard if needed */
+      supply.riverboatCard,   /* riverboatCard if needed */
       calculatedTraitsSupplyCard,   /* supply for traits */
       localReplacements
     )

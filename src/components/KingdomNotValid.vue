@@ -40,6 +40,7 @@ import { FERRYMAN_IDS, FERRYMAN_MIN_COST, FERRYMAN_MAX_COST } from "../randomize
 import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "../randomizer/special-need-cards";
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "../randomizer/special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "../randomizer/special-need-cards";
+import { RIVERBOAT_IDS, RIVERBOAT_CARDTYPE_REQUESTED, RIVERBOAT_CARDTYPE_NOTREQUESTED } from "../randomizer/special-need-cards";
 
 /* import store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
@@ -62,6 +63,7 @@ export default defineComponent({
         ...(kingdom.value.supply.ferrymanCard ? [kingdom.value.supply.ferrymanCard] : []),
         ...(kingdom.value.supply.obeliskCard ? [kingdom.value.supply.obeliskCard] : []),
         ...(kingdom.value.supply.mouseWay ? [kingdom.value.supply.mouseWay] : []),
+        ...(kingdom.value.supply.riverboatCard ? [kingdom.value.supply.riverboatCard] : []),
         ...kingdom.value.supply.traitsSupply,
         ...kingdom.value.events,
         ...kingdom.value.landmarks,
@@ -116,6 +118,7 @@ export default defineComponent({
       invalidSpecialCardRules.push(...OBELISKRule())
       invalidSpecialCardRules.push(...DRUIDRule())
       invalidSpecialCardRules.push(...MOUSEWAYRule())
+      invalidSpecialCardRules.push(...RIVERBOATRule())
       invalidSpecialCardRules.push(...TRAITRule())
       invalidSpecialCardRules.push(...ALLYRule())
       invalidSpecialCardRules.push(...PROPHECYRule())
@@ -189,6 +192,23 @@ export default defineComponent({
       } else
         if (kingdom.value.supply.obeliskCard)
           invalidSpecialCardRules.push(t("obeliskcard_needs_OBE"));
+      return invalidSpecialCardRules;
+    }
+
+    const RIVERBOATRule = () => {
+      const invalidSpecialCardRules = [];
+      if (kingdom.value.supply.supplyCards.some(card => RIVERBOAT_IDS.includes(card.id))) {
+        if (!kingdom.value.supply.riverboatCard) {
+          invalidSpecialCardRules.push(t("RB_needs_riverboatcard"));
+        } else {
+          if (!kingdom.value.supply.riverboatCard.isOfType(RIVERBOAT_CARDTYPE_REQUESTED) || 
+                kingdom.value.supply.riverboatCard.isOfType(RIVERBOAT_CARDTYPE_NOTREQUESTED))
+          invalidSpecialCardRules.push(t("riverboat_Cardtype"));
+        }
+      } else {
+        if (kingdom.value.supply.riverboatCard)
+          invalidSpecialCardRules.push(t("Riverboatcard_needs_RB"));
+      }
       return invalidSpecialCardRules;
     }
 

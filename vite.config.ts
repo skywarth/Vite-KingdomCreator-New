@@ -66,10 +66,10 @@ export default defineConfig( ({ mode}) => {
             if (err) throw err;
             console.log('index.html copied successfully');
           }
-        },
+        }
       },
       vue(),
-      mode == 'development' ? VueDevTools() : "",
+      mode == 'development' ? VueDevTools() : [],
       legacy({ targets: ['defaults'] }),
       vueI18n({
         include: path.resolve(__dirname, './'+ publicationDir +'/locales/*.json'),

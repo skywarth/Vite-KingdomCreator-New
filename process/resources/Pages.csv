@@ -37,6 +37,7 @@ page-boxes	Boons	Boons			Boons
 page-boxes	Ways	Ways			Voies		
 page-boxes	Allies	Allies		Verbündete	Alliés		
 page-boxes	Traits	Traits			Comportements		
+page-boxes	Prophecies	Prophecies			Prophéties		
 page-boxes	States	States			States		
 page-boxes	Hexes	Hexes			Hexes		
 page-boxes	Artifacts	Artifacts			Artifacts		
@@ -119,6 +120,9 @@ page-index	Prophecy_needs_Omen	A Prophecy needs at least one Omen			Une Prophét
 page-index	DRUID_needs_boons	Druid needs boons			"""Druide"" nécéssite des aubaines (boons)"		
 page-index	NB_of_Boons	3 boons are required for Druid			"3 aubaines (boons sont nécessaires au ""Druide"""		
 page-index	boons_for_DRUID	Boons are for Druid			"les aubaines nécessitent le ""Druide"""		
+page-index	RB_needs_riverboatcard	"""Riverboat"" requires a riverboat carry card"			"""Bateau fluvial"" nécessite une carte riverboat"		
+page-index	riverboat_Cardtype	the riverboat carry card must have be type Action and is a non-Duration card 			"La carte riverboat doit être de type ""Action"" et n'est pas de type Durée"		
+page-index	Riverboatcard_needs_RB	"The presence of a riverboat carry card requires a ""Riverboat"""			"La présence d'une carte riveboat nécessite un ""Bateau fluvial"""		
 							
 page-rules	rules_page_subtitle	Original rule books of Dominion Sets		Originale Regelbücher der Dominion Erweiterungen	Livrets de règles officiels des jeux Dominion	Libros de reglas originales de Dominion	Oryginalne instrukcje zestawów Dominion
 page-rules	rules_page_description	Below are the rulebooks published with each set of dominion. Rulebooks contain descriptions of kingdom card and how they interact with other kingdom cards.		Nachfolgend die Spielanleitungen der Erweiterungen zu Dominion auf englisch. Darin enthalten sind auch detailierte Erklärungen der einzelnen Karten.	Ci-dessous, les livrets de règles publiés avec chaque boîte de Dominion. Les livrets contiennent une description de chaque carte royaume, qui explicite leurs interactions avec les autres cartes.	A continuación se encuentran los libros de reglas (en inglés) publicados con cada juego de Dominion. Los libros de reglas conienen las descripciones de las cartas de reino y como interactúan con otras cartas de reino.	Poniżej znajdują się podręczniki opublikowane z każdym zestawem gry Dominium. Instrukcje zawierają opisy kart królestwa oraz ich interakcje z innymi kartami królestw.
@@ -1083,8 +1087,8 @@ cards.risingsun	risingsun_ninja	Ninja			Ninja
 cards.risingsun	risingsun_poet	Poet			Poétesse		
 cards.risingsun	risingsun_rice	Rice			Riz		
 cards.risingsun	risingsun_ricebroker	Rice Broker			Courtier en riz		
-cards.risingsun	risingsun_riverboat	River Shrine			Sanctuaire de la rivière		
-cards.risingsun	risingsun_rivershrine	Riverboat			Bateau fluvial		
+cards.risingsun	risingsun_riverboat	Riverboat			Bateau fluvial		
+cards.risingsun	risingsun_rivershrine	River Shrine			Sanctuaire de la rivière		
 cards.risingsun	risingsun_ronin	Ronin			Ronin		
 cards.risingsun	risingsun_rootcellar	Root Cellar			Cellier à légumes		
 cards.risingsun	risingsun_rusticvillage	Rustic Village			Village rustique		
