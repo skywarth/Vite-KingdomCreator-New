@@ -246,8 +246,8 @@ export const useRandomizerStore = defineStore(
       const newSupply = selectedCards.length
         ? rA.randomizeSelectedCards(this) || oldSupply
         : oldSupply;
-      console.log("newsupply", newSupply)
-      console.log(oldSupply)
+      // console.log("newsupply", newSupply)
+      // console.log(oldSupply)
       //if (oldSupply.mouseWay) newSupply.mouseWay= oldSupply.mouseWay
       const isAddonSelected =
       rA.getSelectedEvents(this).length ||
@@ -257,7 +257,6 @@ export const useRandomizerStore = defineStore(
       rA.getSelectedTraits(this).length;
 
       const newAddons = isAddonSelected ? rA.randomizeSelectedAddons(this) : null;
-      console.log("newAddons",newAddons)
       const newEvents = newAddons
         ? Cards.getAllEvents(newAddons).concat(rA.getUnselectedEvents(this))
         : this.kingdom.events;
@@ -348,9 +347,10 @@ export const useRandomizerStore = defineStore(
         .setExcludeTypes(excludeTypes)
         .setExcludeCosts(excludeCosts)
         .setUseAlchemyRecommendation(randomizerSettings.isAlchemyRecommendationEnabled)
-        .setBaneCardId(this.kingdom.supply.baneCard
-          ? this.kingdom.supply.baneCard.id
-          : null);
+        .setBaneCardId(this.kingdom.supply.baneCard ? this.kingdom.supply.baneCard.id : null)
+        .setFerrymanCardId(this.kingdom.supply.ferrymanCard ? this.kingdom.supply.ferrymanCard.id : null)
+        .setMousewayCardId(this.kingdom.supply.mouseWay ? this.kingdom.supply.mouseWay.id : null)
+        .setRiverboatCardId(this.kingdom.supply.riverboatCard ? this.kingdom.supply.riverboatCard.id : null);
 
       // Either set a specific card type or add supply card requirements if one isn't selected.
       if (params.selectedCardType) {

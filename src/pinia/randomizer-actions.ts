@@ -26,14 +26,13 @@ export interface randomizerStoreState {
 }
 
 export function randomizeSelectedCards(context: randomizerStoreState): Supply | null {
-  //console.log("randomizeSelectedCards")
-  //console.log(context)
   const excludeCardIds = getSelectedSupplyCards(context).map((card) => card.id);
   const isBaneSelected = isBaneCardSelected(context);
   const isFerrymanSelected = isFerrymanCardSelected(context);
   const isMousewaySelected = isMousewayCardSelected(context);
   const isObeliskSelected = isObeliskCardSelected(context);
-  // handle special case where bane, ferryman, obeliskCard, mousewayCard is selected
+  const isRiverboatSelected = isRiverboatCardSelected(context);
+  // handle special case where bane, ferryman, obeliskCard, mousewayCard, riverboatCard is selected
   if (isBaneSelected) {
     excludeCardIds.push(context.kingdom.supply.baneCard?.id ?? "");
   }
@@ -45,6 +44,9 @@ export function randomizeSelectedCards(context: randomizerStoreState): Supply | 
   }
   if (isObeliskSelected) {
     excludeCardIds.push(context.kingdom.supply.obeliskCard?.id ?? "");
+  }
+  if (isRiverboatSelected) {
+    excludeCardIds.push(context.kingdom.supply.riverboatCard?.id ?? "");
   }
   const optionsBuilder = createRandomizerOptionsBuilder(context)
       .setSetIds(getSelectedSetIds(context))
@@ -63,6 +65,9 @@ export function randomizeSelectedCards(context: randomizerStoreState): Supply | 
   }
   if (!isObeliskSelected && context.kingdom.supply.obeliskCard) {
     optionsBuilder.setObeliskCardId(context.kingdom.supply.obeliskCard?.id ?? false)
+  }
+  if (!isRiverboatSelected && context.kingdom.supply.riverboatCard) {
+    optionsBuilder.setRiverboatCardId(context.kingdom.supply.riverboatCard?.id ?? false)
   }
   const supply = Randomizer.createSupplySafe(optionsBuilder.build());
   if (supply) {
@@ -249,7 +254,6 @@ export function getCardsToExclude(context: randomizerStoreState) {
 
 export function getAddons(context: randomizerStoreState) {
   const kingdom = context.kingdom;
-  console.log("getAddons from RActions")
   return (kingdom.events as Addon[])
       .concat(
         kingdom.landmarks as Addon[], 
@@ -375,4 +379,10 @@ export function isObeliskCardSelected(context: randomizerStoreState) {
   const selection = context.selection;
   const obeliskCard = context.kingdom.supply.obeliskCard;
   return Boolean(obeliskCard && selection.contains(obeliskCard.id));
+}
+
+export function isRiverboatCardSelected(context: randomizerStoreState) {
+  const selection = context.selection;
+  const riverboatCard = context.kingdom.supply.riverboatCard;
+  return Boolean(riverboatCard && selection.contains(riverboatCard.id));
 }
