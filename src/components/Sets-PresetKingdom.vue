@@ -55,9 +55,9 @@
           :has-landmarks="kingdom.landmarkIds.length > 0"
           :has-projects="kingdom.projectIds.length > 0"
           :has-ways="kingdom.wayIds.length > 0"
-          :has-allies="kingdom.allyIds.length > 0"
+          :has-ally="kingdom.allyIds.length > 0"
           :has-traits="kingdom.traitIds.length > 0"
-          :has-prophecies="kingdom.prophecyIds.length > 0"
+          :has-prophecy="kingdom.prophecyIds.length > 0"
         />
       </div>
       <GridLayout
@@ -183,6 +183,9 @@ export default defineComponent({
       }
       if (props.kingdom.riverboatActionCardId) {
         Cards.push(getCards([props.kingdom.riverboatActionCardId])[0]);
+      }
+      if (props.kingdom.approachingArmyCardId) {
+        Cards.push(getCards([props.kingdom.approachingArmyCardId])[0]);
       }
       return Cards;
     };

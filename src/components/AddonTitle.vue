@@ -59,7 +59,7 @@ export default defineComponent({
       type: Boolean as PropType<Boolean> | null,
         default:false
     },
-    hasProphecies: {
+    hasProphecy: {
       type: Boolean as PropType<Boolean>,
         default:false
     }
@@ -74,7 +74,7 @@ export default defineComponent({
       if (props.hasWays) addons.push("addon_ways");
       if (props.hasTraits) addons.push("addon_traits");
       if (props.hasAlly) addons.push("addon_ally");
-      if (props.hasProphecies) addons.push("addon_prophecy");
+      if (props.hasProphecy) addons.push("addon_prophecy");
       return addons;
     });
 

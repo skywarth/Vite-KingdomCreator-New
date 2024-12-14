@@ -1,8 +1,8 @@
 {
     "terminal.integrated.env.windows": {
-        "PATH": "${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;C:\\Users\\grosg\\AppData\\Local\\Programs\\PortableGit\\cmd;${execPath}\\..\\..\\PortableGit;C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;"
+        "PATH": "${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd;C:\\Users\\grosg\\AppData\\Local\\Programs\\PortableGit\\cmd;C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;"
         
-        //"PATH": "${env:PATH};C:\\Liberkey\\PortableApps\\node-v22-win-x64;C:\\Liberkey\\PortableApps\\PortableGit;"
+        //"PATH": "${env:PATH};C:\\Liberkey\\PortableApps\\node-v22-win-x64;C:\\Liberkey\\PortableApps\\PortableGit\\cmd;"
         
         //C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;
         //D:\\Carte 32 Go\\# Portable App\\bun\\bin;
@@ -15,6 +15,6 @@
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "editor.multiCursorModifier": "ctrlCmd",
     //"workbench.colorTheme": "Default Dark Modern",
-    "files.eol": "\n",
+    "files.eol": "\n"
 
 }

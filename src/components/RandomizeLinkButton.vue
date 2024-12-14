@@ -57,6 +57,7 @@ export default defineComponent({
               props.kingdom.obeliskCardId ? DominionSets.getSupplyCardById(props.kingdom.obeliskCardId) : null,
               props.kingdom.wayofthemouseCardId ? DominionSets.getSupplyCardById(props.kingdom.wayofthemouseCardId) : null,
               props.kingdom.riverboatActionCardId ? DominionSets.getSupplyCardById(props.kingdom.riverboatActionCardId) : null,
+              props.kingdom.approachingArmyCardId ? DominionSets.getSupplyCardById(props.kingdom.approachingArmyCardId) : null,
               props.kingdom.traitSupplyIds.map(Id => DominionSets.getSupplyCardById(Id)),
               Replacements.empty()),
           props.kingdom.eventIds.map(Id => DominionSets.getEventById(Id)), 
@@ -68,6 +69,7 @@ export default defineComponent({
           props.kingdom.prophecyIds.map(Id => DominionSets.getProphecyById(Id))[0],
           props.kingdom.traitIds.map(Id => DominionSets.getTraitById(Id)),
           props.kingdom.metadata)
+console.log(serializeKingdom(redirectedKingdom))
 
       const newquery = {  
           ...serializeKingdom(redirectedKingdom)

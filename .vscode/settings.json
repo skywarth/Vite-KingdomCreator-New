@@ -1,11 +1,20 @@
 {
     "terminal.integrated.env.windows": {
-        "PATH": "${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd;C:\\Users\\grosg\\AppData\\Local\\Programs\\PortableGit\\cmd;C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;"
-        
-        //"PATH": "${env:PATH};C:\\Liberkey\\PortableApps\\node-v22-win-x64;C:\\Liberkey\\PortableApps\\PortableGit\\cmd;"
+        // node v22 + PortableGit ; Sacem AppData\\Local\\Programs\\PortableGit + Documents\\Personnel\\# Portable App
+        //"PATH": "${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd;C:\\Users\\grosg\\AppData\\Local\\Programs\\PortableGit\\cmd;C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;"
+
+        //"PATH": "${env:PATH};"
+
+        // node v22 + PortableGit  près de VsCode
+        // ${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd
+
+        // buns + PortableGit  près de VsCode
+        // ${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd
+        // F:\\Carte 32 Go\\# Portable App\\bun\\bin;
+        "PATH": "${env:PATH};${execPath}\\..\\..\\node-v22-win-x64;${execPath}\\..\\..\\PortableGit\\cmd;F:\\Carte 32 Go\\# Portable App\\bun\\bin"
         
         //C:\\Users\\grosg\\Documents\\Personnel\\# Portable App\\node-v22-win-x64;
-        //D:\\Carte 32 Go\\# Portable App\\bun\\bin;
+        //F:\\Carte 32 Go\\# Portable App\\bun\\bin;
         //D:\\Carte 32 Go\\# Portable App\\node-v22-win-x64;
         //${execPath}\\..\\..\\PortableGit\\cmd;${execPath}\\..\\..\\PortableGit;
         //C:\\Liberkey\\PortableApps\\
@@ -15,6 +24,6 @@
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "editor.multiCursorModifier": "ctrlCmd",
     //"workbench.colorTheme": "Default Dark Modern",
-    "files.eol": "\n",
+    "files.eol": "\n"
 
 }
