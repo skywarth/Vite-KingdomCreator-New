@@ -137,6 +137,7 @@ export const useRandomizerStore = defineStore(
   actions: {
     UPDATE_KINGDOM(kingdom: Kingdom) {
       console.log(new Date().toLocaleTimeString(), "UPDATE_KINGDOM", kingdom)
+      EventTracker.trackEvent(EventType.UPDATE_KINGDOM, kingdom)
       this.kingdom = kingdom;
     },
     CLEAR_SELECTION() {

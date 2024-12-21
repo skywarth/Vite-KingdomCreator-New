@@ -1,7 +1,4 @@
-Lors de la creation d'un kingdom les cartes à exclure ne sont pas considérer pour ally, prophecy
-
-
-CSS taille bandeau si taill ecran ok
+ok Lors de la creation d un kingdom les cartes à exclure ne sont pas considérer pour ally, prophecy
 
 cartes en Francais
     Pillage
@@ -15,10 +12,11 @@ Recherche de cartes par critères
 
 Settings
     ok liste des extensions à afficher/masquer
-    nb de cartes à selectionner
-    nb de cartes par extension
-    extensions au hasard
+            nb de cartes à selectionner
+            nb de cartes par extension
+            extensions au hasard
     
 Gestion sur un cloud de mes paramètres
 
 Gérer const devServerPort = 5173; si dejà utilisé.
+ok tracer les requetes utilisateurs

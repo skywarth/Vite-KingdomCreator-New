@@ -41,6 +41,7 @@ import { OBELISK_LANDMARK_ID, OBELISK_CARDTYPE_REQUESTED } from "../randomizer/s
 import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "../randomizer/special-need-cards";
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "../randomizer/special-need-cards";
 import { RIVERBOAT_IDS, RIVERBOAT_CARDTYPE_REQUESTED, RIVERBOAT_CARDTYPE_NOTREQUESTED } from "../randomizer/special-need-cards";
+import { APPROACHINGARMY_ID, APPROACHINGARMY_CARDTYPE_REQUESTED } from "../randomizer/special-need-cards";
 
 /* import store  */
 import { useRandomizerStore } from "../pinia/randomizer-store";
@@ -64,6 +65,7 @@ export default defineComponent({
         ...(kingdom.value.supply.obeliskCard ? [kingdom.value.supply.obeliskCard] : []),
         ...(kingdom.value.supply.mouseWay ? [kingdom.value.supply.mouseWay] : []),
         ...(kingdom.value.supply.riverboatCard ? [kingdom.value.supply.riverboatCard] : []),
+        ...(kingdom.value.supply.approachingArmyCard ? [kingdom.value.supply.approachingArmyCard] : []),
         ...kingdom.value.supply.traitsSupply,
         ...kingdom.value.events,
         ...kingdom.value.landmarks,
@@ -120,8 +122,8 @@ export default defineComponent({
       invalidSpecialCardRules.push(...TRAITRule())
       invalidSpecialCardRules.push(...ALLYRule())
       invalidSpecialCardRules.push(...PROPHECYRule())
+      invalidSpecialCardRules.push(...APPROACHINGARMYRule())
       
-
       return invalidSpecialCardRules;
     })
 
@@ -259,6 +261,25 @@ export default defineComponent({
       } else
         if (kingdom.value.prophecy)
           invalidSpecialCardRules.push(t("Prophecy_needs_Omen"));
+      return invalidSpecialCardRules;
+    }
+
+    const APPROACHINGARMYRule = () => {
+      const invalidSpecialCardRules = [];
+      if (kingdom.value.prophecy) {
+        if (kingdom.value.prophecy.id == DominionSets.getProphecyById(APPROACHINGARMY_ID).id) {
+          if (!kingdom.value.supply.approachingArmyCard) {
+            invalidSpecialCardRules.push(t("APA_needs_aApproachingarmycard"));
+          } else {
+            if (!kingdom.value.supply.approachingArmyCard.isOfType(APPROACHINGARMY_CARDTYPE_REQUESTED))
+            invalidSpecialCardRules.push(t("approachingarmycard_Cardtype"));
+          }
+        } else
+          if (kingdom.value.supply.approachingArmyCard)
+            invalidSpecialCardRules.push(t("approachingarmy_needs_APA"));
+      } else 
+        if (kingdom.value.supply.approachingArmyCard)
+          invalidSpecialCardRules.push(t("approachingarmy_needs_APA"));
       return invalidSpecialCardRules;
     }
 

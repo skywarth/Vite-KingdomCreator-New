@@ -9,16 +9,17 @@ As I became a maintainer for Kingdom Creator, https://www.dominionrandomizer.com
 Feel free to propose any improvements you see fit and send me a pull request!
 
 ## Development
-it uses vue 3, vite.js, Pinia, vue-i18n and node.js v20
+it uses vue 3, vite.js, Pinia, vue-i18n and node.js v22
 
 ### Changelog
-2024/12/14 - 6.4.2
+2024/12/21 - 6.4.2
 Dev deploy on github pages
 Dev deploy on 71yeti.fr
   Feat - RisingSun: handle riverboat Action card Request
-  Feat - Add kingdom for Rising Sun
-  Feat - Add in recommended kingdoms a link to start building a randomized deck based on it
-  Feat - Add ApprochingArmy supply selection
+  Feat - RisingSun: kingdoms
+  Feat - RisingSun: Add ApprochingArmy supply selection
+  Feat - Recommended kingdoms: Add a link to start building a randomized deck based on it
+  Feat - Usage of Dominion Randomizer made accessible : https://suivi.71yeti.fr/
 
 2024/12/01 - 6.4.1
 Dev deploy on github pages
