@@ -112,6 +112,9 @@ export default defineComponent({
       if (kingdom.value.supply.riverboatCard) {
         cards.push(kingdom.value.supply.riverboatCard);
       }
+      if (kingdom.value.supply.approachingArmyCard) {
+        cards.push(kingdom.value.supply.approachingArmyCard);
+      }
       return cards;
     });
 
@@ -156,7 +159,8 @@ export default defineComponent({
     watch(numberOfColumns, handleNumberOfColumnsChanged)
     const isSpecialCard = (supplyCard: SupplyCard) => {
       return isBaneCard(supplyCard) || isFerrymanCard (supplyCard) || 
-          isObeliskCard (supplyCard) || isMouseWayCard (supplyCard) || isRiverboatCard (supplyCard)
+          isObeliskCard (supplyCard) || isMouseWayCard (supplyCard) || 
+          isRiverboatCard (supplyCard) || isApproachingArmyCard (supplyCard)
     }
     const isBaneCard = (supplyCard: SupplyCard) => {
       return kingdom.value.supply.baneCard &&
@@ -177,6 +181,10 @@ export default defineComponent({
     const isRiverboatCard = (supplyCard: SupplyCard) => {
       return kingdom.value.supply.riverboatCard &&
         kingdom.value.supply.riverboatCard.id == supplyCard.id;
+    }
+    const isApproachingArmyCard = (supplyCard: SupplyCard) => {
+      return kingdom.value.supply.approachingArmyCard &&
+        kingdom.value.supply.approachingArmyCard.id == supplyCard.id;
     }
     const isTraitsCard = (supplyCard: SupplyCard) => {
       const index = kingdom.value.supply.traitsSupply.indexOf(supplyCard)
@@ -367,6 +375,7 @@ export default defineComponent({
       isObeliskCard,
       isMouseWayCard,
       isRiverboatCard,
+      isApproachingArmyCard,
       isTraitsCard,
       traitsTitle,
       handleSpecify

@@ -23,6 +23,7 @@ export class RandomizerOptions {
     readonly mousewayCardId: string | null,
     readonly obeliskCardId: string | null,
     readonly riverboatCardId: string | null,
+    readonly approachingArmyCardId: string | null,
     readonly useAlchemyRecommendation: boolean,) {
     this.excludeCardIds = initializeExcludedCardIds(setIds, excludeCardIds);
   }
@@ -63,6 +64,7 @@ export class RandomizerOptionsBuilder {
   mousewayCardId: string | null = null;
   obeliskCardId: string | null = null;
   riverboatCardId: string | null = null;
+  approachingArmyCardId: string | null = null;
   useAlchemyRecommendation = true;
 
   setSetIds(setIds: SetId[]) {
@@ -145,13 +147,18 @@ export class RandomizerOptionsBuilder {
     return this;
   }
 
+  setObeliskCardId(obeliskCardId: string | null) {
+    this.obeliskCardId = obeliskCardId;
+    return this;
+  }
+
   setRiverboatCardId(riverboatCardId: string | null) {
     this.riverboatCardId = riverboatCardId;
     return this;
   }
 
-  setObeliskCardId(obeliskCardId: string | null) {
-    this.obeliskCardId = obeliskCardId;
+  setApproachingArmyCardId(approachingArmyCardId: string | null) {
+    this.approachingArmyCardId = approachingArmyCardId;
     return this;
   }
 
@@ -180,6 +187,7 @@ export class RandomizerOptionsBuilder {
         this.mousewayCardId,
         this.obeliskCardId,
         this.riverboatCardId,
+        this.approachingArmyCardId,
         this.useAlchemyRecommendation);
   }
 }

@@ -122,14 +122,14 @@ kingdoms:
       - risingsun_ninja
       - risingsun_ricebroker
       - risingsun_riverboat
+      - risingsun_alley
       - seaside2_outpost
       - seaside2_salvager
       - seaside2_treasuremap
       - seaside2_blockade
-      - seaside2_corsair
       - seaside2_seachart
     riverboatActionCard: seaside2_bazaar
-    approachingarmy : risingsun_alley
+    approachingArmy : seaside2_corsair
     prophecies:
       - risingsun_prophecy_approachingarmy
 
@@ -341,13 +341,13 @@ kingdoms:
       - darkages_forager
       - darkages_hermit
       - darkages_huntinggrounds
-      - darkages_knights
       - darkages_squire
+      - risingsun_poet
       - risingsun_rice
       - risingsun_ronin
       - risingsun_samurai
-      - risingsun_snakewitch
-    approachingarmy : risingsun_poet
+      - risingsun_snakewitch 
+    approachingArmy : darkages_knights
     events:
       - risingsun_event_asceticism
     prophecies:
