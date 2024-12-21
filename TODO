@@ -1,23 +1,4 @@
-ok gestion de Guild/cornucipia 
-ok randomize specify not reactive
-ok Régle sur nb colonnes variable  
-ok Carte promo EN
-ok convert excel transalte to csv
-ok build translation from vite and merge
-ok Ordre des sets (date ou alpha) 
-        - randomizer OK Store info in settings ok
-        - set OK Store info in settings ok
-        - boxes ok
-        - Cards ok
-        - Rules ok
-
-ok liste cartes Guild/cornucipia 2
-ok Updatepack Guild/cornucipia
-ok traduction Updatepack Guild/cornucipia
-ok Modifier SETS_WITH_DUPLICATES dans randomizer.ts pour utiliser une définition dasn set-id.ts
-ok gerer le cas de duplication de guilds et cornucopia sur guildscornucopia et guildscornucopia2
-ok kingdom Guild/cornucipia
-CSS taille bandeau si taill ecran ok
+ok Lors de la creation d un kingdom les cartes à exclure ne sont pas considérer pour ally, prophecy
 
 cartes en Francais
     Pillage
@@ -30,11 +11,12 @@ Cartes des boites avec overlay si pas FR ou EN
 Recherche de cartes par critères 
 
 Settings
-   ok liste des extensions à afficher/masquer
-    nb de cartes à selectionner
-    nb de cartes par extension
-    extensions au hasard
+    ok liste des extensions à afficher/masquer
+            nb de cartes à selectionner
+            nb de cartes par extension
+            extensions au hasard
     
 Gestion sur un cloud de mes paramètres
 
 Gérer const devServerPort = 5173; si dejà utilisé.
+ok tracer les requetes utilisateurs

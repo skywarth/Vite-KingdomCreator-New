@@ -9,7 +9,7 @@ import type {SupplyRequirement} from "./supply-requirement";
 import {Supply, Replacements} from "./supply";
 import {getRandomInt, selectRandom} from "../utils/rand";
 import { SupplyDivisions } from "./supply-divisions";
-import { YOUNG_WITCH_IDS, BANE_MIN_COST, BANE_MAX_COST, MOUSE_WAY_ID, MOUSE_MAX_COST, MOUSE_MIN_COST, OBELISK_LANDMARK_ID, RIVERBOAT_CARDTYPE_REQUESTED, RIVERBOAT_CARDTYPE_NOTREQUESTED, RIVERBOAT_IDS } from "./special-need-cards";
+import { YOUNG_WITCH_IDS, BANE_MIN_COST, BANE_MAX_COST, MOUSE_WAY_ID, MOUSE_MAX_COST, MOUSE_MIN_COST, OBELISK_LANDMARK_ID, RIVERBOAT_CARDTYPE_REQUESTED, RIVERBOAT_CARDTYPE_NOTREQUESTED, RIVERBOAT_IDS, APPROACHINGARMY_ID } from "./special-need-cards";
 import { FERRYMAN_IDS, FERRYMAN_MIN_COST, FERRYMAN_MAX_COST } from "./special-need-cards";
 import { NUM_CARDS_IN_KINGDOM } from "../settings/Settings-value";
 
@@ -23,6 +23,7 @@ export class SupplyBuilder {
   private forceMousewayCard: SupplyCard | null = null;
   private forceObeliskCard: SupplyCard | null = null;
   private forceRiverboatCard: SupplyCard | null = null;
+  private forceApproachingArmyCard : SupplyCard | null = null;
 
   constructor(private readonly cards: SupplyCard[]) {
   }
@@ -59,8 +60,12 @@ export class SupplyBuilder {
     this.forceObeliskCard = obeliskCard;
   }
 
-  setRiverboatard(riverboatCard: SupplyCard) {
+  setRiverboatCard(riverboatCard: SupplyCard) {
     this.forceRiverboatCard = riverboatCard;
+  }
+
+  setApproachningArmyCard(approachingArmyCard: SupplyCard) {
+    this.forceApproachingArmyCard = approachingArmyCard;
   }
 
   createUnfilledDivisions(existingCards: SupplyCard[]): SupplyDivision[] {
@@ -86,7 +91,8 @@ export class SupplyBuilder {
     const mousewayCard = this.selectMousewayCard(divisions);
     const obeliskCard = this.selectObeliskCard(divisions);
     const riverboatCard = this.selectRiverboatCard(divisions);
-    return this.gatherCardsIntoSupply(divisions, baneCard, ferrymanCard, mousewayCard, obeliskCard, riverboatCard);
+    const approachingArmyCard = this.selectApproachingArmyCard(divisions);
+    return this.gatherCardsIntoSupply(divisions, baneCard, ferrymanCard, mousewayCard, obeliskCard, riverboatCard, approachingArmyCard);
   }
 
   clone() {
@@ -268,10 +274,11 @@ export class SupplyBuilder {
   }
   
   private requiresObeliskCard(divisions: SupplyDivision[]) {
-    // should not be used because supplyCards do not contains ways
+    // should not be used because supplyCards do not contains landmarks
     const supplyCards = SupplyDivisions.getLockedAndSelectedCards(divisions);
-    return supplyCards.some(s => OBELISK_LANDMARK_ID== s.id);
+    return supplyCards.some(s => OBELISK_LANDMARK_ID == s.id);
   }
+  
   private selectRiverboatCard(divisions: SupplyDivision[]) {
     if (!this.requiresRiverboatCard(divisions)) {
       return null;
@@ -295,10 +302,26 @@ export class SupplyBuilder {
     return supplyCards.some(s => RIVERBOAT_IDS.includes(s.id));
   }
 
+  private selectApproachingArmyCard(divisions: SupplyDivision[]) {
+    /*if (!this.requiresObeliskCard(divisions)) {
+      return null;
+    }*/
+    if (this.forceApproachingArmyCard) {
+      return this.forceApproachingArmyCard;
+    } 
+    return null; 
+  }
+
+  private requiresApproachingArmyCard(divisions: SupplyDivision[]) {
+    // should not be used because supplyCards do not contains prophecies
+    const supplyCards = SupplyDivisions.getLockedAndSelectedCards(divisions);
+    return supplyCards.some(s => APPROACHINGARMY_ID == s.id);
+  }
+
   private gatherCardsIntoSupply(divisions: SupplyDivision[], 
         baneCard: SupplyCard | null, ferrymanCard: SupplyCard | null, 
         mousewayCard: SupplyCard | null, obeliskCard: SupplyCard | null,
-        riverboatCard: SupplyCard | null) {
+        riverboatCard: SupplyCard | null, approachingArmyCard: SupplyCard | null) {
     const replacements: Map<string, SupplyCard[]> = new Map();
     const cards: SupplyCard[] = [];
     for (const division of divisions) {
@@ -307,7 +330,7 @@ export class SupplyBuilder {
         replacements.set(card.id, division.getReplacements(card.id));
       }
     }
-    return new Supply(cards, baneCard, ferrymanCard, obeliskCard, mousewayCard, riverboatCard, [], new Replacements(replacements));
+    return new Supply(cards, baneCard, ferrymanCard, obeliskCard, mousewayCard, riverboatCard, approachingArmyCard, [], new Replacements(replacements));
   }
 
   private orderRequirementsForDivisions(divisions: SupplyDivision[]): SupplyRequirement[] {
