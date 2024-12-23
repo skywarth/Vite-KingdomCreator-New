@@ -36,6 +36,8 @@ import { MOUSE_WAY_ID, MOUSE_MIN_COST, MOUSE_MAX_COST } from "./special-need-car
 import { TRAITS_CARDTYPE_POSSIBILITY_1, TRAITS_CARDTYPE_POSSIBILITY_2 } from "./special-need-cards";
 import { NUM_CARDS_IN_KINGDOM, MAX_ADDONS_IN_KINGDOM, FORCE_ADDONS_USE, MAX_ADDONS_OF_TYPE } from "../settings/Settings-value";
 
+import { EventTracker, EventType } from "../analytics/follow-activity";
+
 import { getActivePinia } from 'pinia'; // Import Pinia
 import { useRandomizerStore } from '../pinia/randomizer-store';
 
@@ -112,6 +114,7 @@ export class Randomizer {
     } catch (error) {
       if (typeof error === 'object' && error !== null) {
         console.log(`Failed to create supply: \n${error.toString()}`);
+        EventTracker.trackError(EventType.RANDOMIZE_MULTIPLE_SUPPLY, { message: error.toString() });
         alert(`Failed to create supply: \n${error.toString()}`)
       }
       else
@@ -128,7 +131,7 @@ export class Randomizer {
         return this.createSupply(randomizerOptions);
       } catch (error) {
         if (typeof error === 'object' && error !== null) {
-          console.log(`Error when trying to select cards: \n${error.toString()}`);
+          //console.log(`Error when trying to select cards: \n${error.toString()}`);
           if (!localError.includes(error.toString()))
             localError.push(error.toString())
         }
@@ -429,7 +432,6 @@ export class Randomizer {
     }
 
     // add ATTACK if approachingArmy prophecy is included
-    console.log(Localaddons.prophecies)
     let calculateApproachingArmyCard = null;
     if (Localaddons.prophecies.some(prophecy => DominionSets.getProphecyById(APPROACHINGARMY_ID).id === prophecy.id)) {     
       if (!supply.approachingArmyCard) {
@@ -542,7 +544,7 @@ export class Randomizer {
         return supplyBuilder.createSupply(existingCards);
       } catch (error) {
         if (typeof error === 'object' && error !== null) {
-          console.log(`Error when trying to select cards: \n${error.toString()}`);
+          //console.log(`Error when trying to select cards: \n${error.toString()}`);
           if (!localError.includes(error.toString()))
             localError.push(error.toString())
         } else
