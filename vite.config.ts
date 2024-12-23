@@ -29,10 +29,11 @@ export default defineConfig( ({ mode}) => {
     }
     HandleLocaleGenerateAndMerge(ArgGenLocale, 'docs')
   }
+  let baseDir = './'
 
   return {
     appType: 'spa',
-    base: './',
+    base: baseDir,
     publicDir: false, //  Do not use publicDir feature to avoid duplcation of all image and pdf files.
     /*
     Do not use publicDir feature to avoid duplcation of all image and pdf files.

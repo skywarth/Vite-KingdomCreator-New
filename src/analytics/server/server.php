@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Vérifier si l'utilisateur veut la liste des sources
+// Récupèrer la liste des sources
 if (isset($_GET['listSources'])) {
     $directory = __DIR__ . '/databases';
     $sources = array_diff(scandir($directory), ['.', '..']);
@@ -31,7 +31,7 @@ if (isset($_GET['listSources'])) {
     exit;
 }
 
-// Vérifier si une source est fournie
+// une source doit être fournie
 $source = $_GET['source'] ?? null;
 if (!$source) {
     http_response_code(400);
@@ -57,7 +57,8 @@ try {
         CREATE TABLE IF NOT EXISTS RequestLog (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             date TEXT NOT NULL,
-            url TEXT NOT NULL,
+            eventOrError TEXT NOT NULL,
+            eventType TEXT NOT NULL,
             params TEXT
         )
     ");
@@ -73,21 +74,25 @@ $method = $_SERVER['REQUEST_METHOD'];
 if ($method === 'POST') {
     // Lire les données POST
     $input = json_decode(file_get_contents('php://input'), true);
-    if (!isset($input['url']) || !isset($input['params'])) {
+    if (!isset($input['eventOrError']) ||
+        !isset($input['eventType']) ||
+        !isset($input['params'])) {
         http_response_code(400);
-        echo json_encode(['error' => 'Données manquantes : "url" ou "params".']);
+        echo json_encode(['error' => 'Données manquantes : "EventorError", "eventType" ou "params".']);
         exit;
     }
 
-    $url = $input['url'];
+    $eventOrError = $input['eventOrError'];
+    $eventType = $input['eventType'];
     $params = json_encode($input['params']);
     $date = date('Y-m-d H:i:s');
 
     try {
-        $stmt = $db->prepare("INSERT INTO RequestLog (date, url, params) VALUES (:date, :url, :params)");
+        $stmt = $db->prepare("INSERT INTO RequestLog (date, eventOrError, eventType, params) VALUES (:date, :eventOrError, :eventType, :params)");
         $stmt->execute([
             ':date' => $date,
-            ':url' => $url,
+            ':eventOrError' => $eventOrError,
+            ':eventType' => $eventType,
             ':params' => $params
         ]);
         echo json_encode(['message' => 'Requête enregistrée avec succès.']);
@@ -101,13 +106,13 @@ if ($method === 'POST') {
     $endDate = $_GET['endDate'] ?? null;     // Date de fin
     $search = $_GET['search'] ?? null;       // Mot-clé pour les paramètres
     $page = $_GET['page'] ?? 1;              // Numéro de la page
-    $perPage = 10;                           // Nombre de résultats par page
+    $perPage = 50;                           // Nombre de résultats par page
 
     // Conversion des dates au format attendu par SQLite
     if ($startDate) $startDate = str_replace('T', ' ', $startDate); // Remplacer "T" par espace
     if ($endDate) $endDate = str_replace('T', ' ', $endDate); // Remplacer "T" par espace
     // Construction de la requête SQL
-    $query = "SELECT date, url, params FROM RequestLog WHERE 1=1";
+    $query = "SELECT date, eventOrError, eventType, params FROM RequestLog WHERE 1=1";
     $params = [];
 
     // Ajouter les filtres de date et heure
@@ -166,9 +171,9 @@ if ($method === 'POST') {
             header('Content-Disposition: attachment; filename="logs.csv"');
 
             $output = fopen('php://output', 'w');
-            fputcsv($output, ['Date', 'URL', 'Params']); // En-têtes du CSV
+            fputcsv($output, ['Date', 'eventType', 'Params']); // En-têtes du CSV
             foreach ($logs as $log) {
-                fputcsv($output, [$log['date'], $log['url'], $log['params']]);
+                fputcsv($output, [$log['date'], $log['eventType'], $log['params']]);
             }
             fclose($output);
             exit;
@@ -209,18 +214,22 @@ if ($method === 'POST') {
     <table>
         <thead>
             <tr>
-                <th style='width:20%;'>Date</th>
-                <th style='width:20%;'>URL</th>
-                <th>Paramètres</th>
+                <th >Date</th>
+                <th >type</th>
+                <th >eventType</th>
+                <th >Paramètres</th>
             </tr>
         </thead>
         <tbody>";
             
             foreach ($logs as $log) {
-                echo "            <tr>
-                <td>{$log['date']}</td>
-                <td>{$log['url']}</td>
-                <td><pre>{$log['params']}</pre></td>
+                $paramsWithSpaces = preg_replace('/"(.*?)",/', '"$1", ', $log['params']);
+                $paramsFormatted = str_replace("\\n", "<br>", $paramsWithSpaces);
+                echo "<tr style='font-family: monospace;'>
+        <td><pre>{$log['date']}</pre></td>
+        <td>{$log['eventOrError']}</td>
+        <td>{$log['eventType']}</td>
+        <td>{$paramsFormatted}</td>
             </tr>";
             }
 

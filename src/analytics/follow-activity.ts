@@ -42,15 +42,14 @@ export class EventTracker {
     }
   }
 
-  static trackError(errorType: EventType) {
-    EventTracker.attemptToSend(Category.ERROR, errorType);
+  static trackError(errorType: EventType, additionalData: Record<string, unknown> = {}) {
+    EventTracker.attemptToSend(Category.ERROR, errorType, additionalData);
   }
 
   private static attemptToSend(category: Category, eventType: EventType, additionalData: Record<string, unknown> = {}) {
     try {
-		console.log(`${category}: ${eventType}`, additionalData);
+	  //console.log(`${category}: ${eventType}`, additionalData);
     EventTracker.walkstep(category, eventType, additionalData);
-		//ga("send", "event", category, eventType);
     } catch (e) {
       console.log(`ERROR in attempting to send event: ${category}: ${eventType}`);
     }
@@ -58,39 +57,33 @@ export class EventTracker {
 
   /**
  * Fonction walkstep : Envoie des données de traçage au serveur
- * @param {string} path - Chemin de l'URL à sauvegarder
+ * @param {string} type - Event ou erreur
  * @param {Object} query - Paramètres associés sous forme d'objet
  * @param {Record<string, unknown>} additionalData - Données supplémentaires associées
  */
-private static walkstep(path : Category, query : EventType, additionalData: Record<string, unknown> = {}) {
-  const sourceValue= window.location.hostname;
-  const endpoint = `https://suivi.71yeti.fr/server.php?source=${sourceValue}`
+  private static walkstep(type : Category, query : EventType, additionalData: Record<string, unknown> = {}) {
+    const sourceValue= window.location.hostname;
+    const endpoint = `https://suivi.71yeti.fr/server.php?source=${sourceValue}`
+  
+    if (!endpoint) {
+      console.error('Erreur : l\'adresse d\'enregistrement est obligatoire.');
+      return;
+    }
+    let data
+    // Construction des données
+    data = {
+      eventOrError: type,
+      eventType: query, // Type d'événement
+      params: { ...additionalData },  // données supplémentaires
+    };
 
-  if (!endpoint) {
-    console.error('Erreur : l\'adresse d\'enregistrement est obligatoire.');
-    return;
-  }
-
-  // Construction des données
-  const data = {
-    url: path, // URL à sauvegarder
-    params: { eventType: query, ...additionalData }, // Type d'événement + données supplémentaires
-  };
-
-  // Envoi de la requête
-  fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Réponse du serveur :', JSON.stringify(data, null, 2));
+    // Envoi de la requête
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     })
-    .catch((error) => {
-      console.error('Erreur lors de l\'envoi des données :', error);
-    });
-}
+  }
 }
