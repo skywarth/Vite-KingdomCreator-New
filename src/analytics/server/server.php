@@ -105,32 +105,39 @@ if ($method === 'POST') {
     $startDate = $_GET['startDate'] ?? null; // Date de début
     $endDate = $_GET['endDate'] ?? null;     // Date de fin
     $search = $_GET['search'] ?? null;       // Mot-clé pour les paramètres
+    $eventOrError = $_GET['eventOrError'] ?? null;           // Filtre sur le champ type
+    $eventType = $_GET['eventType'] ?? null; // Filtre sur le champ eventType
     $page = $_GET['page'] ?? 1;              // Numéro de la page
     $perPage = 50;                           // Nombre de résultats par page
 
-    // Conversion des dates au format attendu par SQLite
-    if ($startDate) $startDate = str_replace('T', ' ', $startDate); // Remplacer "T" par espace
-    if ($endDate) $endDate = str_replace('T', ' ', $endDate); // Remplacer "T" par espace
     // Construction de la requête SQL
     $query = "SELECT date, eventOrError, eventType, params FROM RequestLog WHERE 1=1";
     $params = [];
 
     // Ajouter les filtres de date et heure
     if ($startDate) {
+        $startDate = str_replace('T', ' ', $startDate); // Remplacer "T" par espace
         $query .= " AND date >= :startDate";
         $params[':startDate'] = $startDate;
     }
     if ($endDate) {
+        $endDate = str_replace('T', ' ', $endDate); // Remplacer "T" par espace
         $query .= " AND date <= :endDate";
         $params[':endDate'] = $endDate;
     }
-
     // Ajouter le filtre de recherche dans les paramètres
     if ($search) {
         $query .= " AND params LIKE :search";
         $params[':search'] = '%' . $search . '%';
     }
-
+    if ($eventOrError) {
+        $query .= " AND eventOrError = :eventOrError";
+        $params[':eventOrError'] = $tyeventOrErrorpe;
+    }
+    if ($eventType) {
+        $query .= " AND eventType = :eventType";
+        $params[':eventType'] = $eventType;
+    }
     // Ajouter la pagination
     $offset = ($page - 1) * $perPage;
     $query .= " ORDER BY date DESC LIMIT :perPage OFFSET :offset";
@@ -157,6 +164,12 @@ if ($method === 'POST') {
         if ($search) {
             $countQuery .= " AND params LIKE :search";
         }
+        if ($eventOrError) {
+            $countQuery .= " AND eventOrError = :eventOrError";
+        }
+        if ($eventType) {
+            $countQuery .= " AND eventType = :eventType";
+        }
         $countStmt = $db->prepare($countQuery);
         foreach ($params as $key => $value) {
             $countStmt->bindValue($key, $value);
@@ -171,9 +184,9 @@ if ($method === 'POST') {
             header('Content-Disposition: attachment; filename="logs.csv"');
 
             $output = fopen('php://output', 'w');
-            fputcsv($output, ['Date', 'eventType', 'Params']); // En-têtes du CSV
+            fputcsv($output, ['Date', 'eventOrError', 'eventType', 'Params']); // En-têtes du CSV
             foreach ($logs as $log) {
-                fputcsv($output, [$log['date'], $log['eventType'], $log['params']]);
+                fputcsv($output, [$log['date'], $log['eventOrError'], $log['eventType'], $log['params']]);
             }
             fclose($output);
             exit;
@@ -208,6 +221,10 @@ if ($method === 'POST') {
         <input type='datetime-local' name='endDate' value='" . htmlspecialchars($endDate) . "'>
         <label for='search'>Recherche : </label>
         <input type='text' name='search' placeholder='Mot-clé' value='" . htmlspecialchars($search) . "'>
+        <label for='eventOrError'>Type : </label>
+        <input type='text' name='type' placeholder='eventOrError' value='" . htmlspecialchars($eventOrError) . "'>
+        <label for='eventType'>EventType : </label>
+        <input type='text' name='eventType' placeholder='EventType' value='" . htmlspecialchars($eventType) . "'>
         <button type='submit'>Filtrer</button>
         <button type='submit' name='download' value='csv'>Télécharger</button>
     </form>
