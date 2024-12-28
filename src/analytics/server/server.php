@@ -105,13 +105,14 @@ if ($method === 'POST') {
     $startDate = $_GET['startDate'] ?? null; // Date de début
     $endDate = $_GET['endDate'] ?? null;     // Date de fin
     $search = $_GET['search'] ?? null;       // Mot-clé pour les paramètres
-    $eventOrError = $_GET['eventOrError'] ?? null;           // Filtre sur le champ type
+    $eventOrError = $_GET['type'] ?? null;           // Filtre sur le champ type
     $eventType = $_GET['eventType'] ?? null; // Filtre sur le champ eventType
     $page = $_GET['page'] ?? 1;              // Numéro de la page
     $perPage = 50;                           // Nombre de résultats par page
 
     // Construction de la requête SQL
     $query = "SELECT date, eventOrError, eventType, params FROM RequestLog WHERE 1=1";
+    $allLogsQuery = "";
     $params = [];
 
     // Ajouter les filtres de date et heure
@@ -132,7 +133,7 @@ if ($method === 'POST') {
     }
     if ($eventOrError) {
         $query .= " AND eventOrError = :eventOrError";
-        $params[':eventOrError'] = $tyeventOrErrorpe;
+        $params[':eventOrError'] = $eventOrError;
     }
     if ($eventType) {
         $query .= " AND eventType = :eventType";
@@ -140,6 +141,7 @@ if ($method === 'POST') {
     }
     // Ajouter la pagination
     $offset = ($page - 1) * $perPage;
+    $allLogsQuery .= $query;
     $query .= " ORDER BY date DESC LIMIT :perPage OFFSET :offset";
 
     try {
@@ -154,22 +156,24 @@ if ($method === 'POST') {
         $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Total des résultats pour le compteur
-        $countQuery = "SELECT COUNT(*) as count FROM RequestLog WHERE 1=1";
+        $countQuery = "SELECT COUNT(*) as count ";
+        $Query= " FROM RequestLog WHERE 1=1";
         if ($startDate) {
-            $countQuery .= " AND date >= :startDate";
+            $Query .= " AND date >= :startDate";
         }
         if ($endDate) {
-            $countQuery .= " AND date <= :endDate";
+            $Query .= " AND date <= :endDate";
         }
         if ($search) {
-            $countQuery .= " AND params LIKE :search";
+            $Query .= " AND params LIKE :search";
         }
         if ($eventOrError) {
-            $countQuery .= " AND eventOrError = :eventOrError";
+            $Query .= " AND eventOrError = :eventOrError";
         }
         if ($eventType) {
-            $countQuery .= " AND eventType = :eventType";
+            $Query .= " AND eventType = :eventType";
         }
+        $countQuery .= $Query;
         $countStmt = $db->prepare($countQuery);
         foreach ($params as $key => $value) {
             $countStmt->bindValue($key, $value);
@@ -183,9 +187,18 @@ if ($method === 'POST') {
             header('Content-Type: text/csv');
             header('Content-Disposition: attachment; filename="logs.csv"');
 
+            //$allLogsQuery .= $Query;
+            $allLogsStmt = $db->prepare($allLogsQuery);
+            foreach ($params as $key => $value) {
+                $allLogsStmt->bindValue($key, $value);
+            }
+            $allLogsStmt->execute();
+            $allLogs = $allLogsStmt->fetchAll(PDO::FETCH_ASSOC);
+
             $output = fopen('php://output', 'w');
             fputcsv($output, ['Date', 'eventOrError', 'eventType', 'Params']); // En-têtes du CSV
-            foreach ($logs as $log) {
+            
+            foreach ($allLogs as $log) {
                 fputcsv($output, [$log['date'], $log['eventOrError'], $log['eventType'], $log['params']]);
             }
             fclose($output);
@@ -212,6 +225,7 @@ if ($method === 'POST') {
     </style>
 </head>
 <body>
+<!--" .  htmlspecialchars($allLogsQuery)  .  "-->
     <h1>Logs de suivi</h1>
     <form method='get'>
         <input type='hidden' name='source' value='" . htmlspecialchars($source) . "'>
