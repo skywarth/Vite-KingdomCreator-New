@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Vite Github Pages Deployer
-        uses: skywarth/vite-github-pages-deployer@master
+        uses: skywarth/vite-github-pages-deployer@separate-dependency-to-working-dir
         with:
           public_base_path: '/Vite-KingdomCreator-New'
           build_path: './docs'
